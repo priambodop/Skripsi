@@ -10,11 +10,19 @@
 %Bagian lain juga akan dilengkapi, untuk sementara diisi dengan lorem ipsum versi bahasa inggris.
 Websocket adalah teknologi canggih yang memungkinkan browser pengguna dan server membuka sesi komunikasi interaktif satu sama lain. Teknologi websocket didesain untuk diimplementasikan pada web browser dan web server, tetapi dapat juga digunakan oleh setiap aplikasi client maupun server. Websocket memiliki standar yang menyediakan cara agar server dapat mengirim konten ke browser tanpa diminta oleh client, dan memungkinkan agar pesan dikirimkan berulang-ulang dengan tetap menjaga koneksi yang terbuka. Oleh karena itu, protokol websocket memungkinkan interaksi antara web browser dan web server dengan biaya overhead yang rendah, dan juga memfasilitasi transfer data real-time dari server maupun menuju server.
 
+Salah satu teknologi yang memanfaatkan protokol Websockets adalah Socket.io. Teknologi ini memungkinkan untuk melakukan komunikasi secara realtime, dan dua arah antara web client dan server. Socket.io memiliki dua bagian: library client-side yang berjalan didalam browser, dan library server-side yang berjalan pada Node.js. Socket.io memiliki fitur-fitur yang beragam, seperti melakukan broadcast ke beberapa sockets, dan menyimpan data yang berhubungan dengan masing-masing client. Teknologi ini sangat berguna untuk membantu membangun sebuah aplikasi yang membutuhkan koneksi realtime seperti dalam aplikasi chatting maupun game.
+
+Pada skripsi ini, akan dibuat sebuah aplikasi permainan yang memanfaatkan protokol Websockets, dimana dalam penggunaan protokol tersebut akan dibantu dengan teknologi Socket.io. Aplikasi permainan yang dibuat akan menggunakan smartphone dan Personal Computer (PC). Oleh karena itu, protokol Websockets akan digunakan sebagai koneksi antara smartphone dan PC dalam aplikasi permainan yang akan dibangun.
+
 \dtext{5-10}
 
 \section{Rumusan Masalah}
 \label{sec:rumusan}
-Bagian ini akan diisi dengan penajaman dari masalah-masalah yang sudah diidentifikasi di bagian sebelumnya. 
+%Bagian ini akan diisi dengan penajaman dari masalah-masalah yang sudah diidentifikasi di bagian sebelumnya.
+\begin{itemize}
+	\item Bagaimana memanfaatkan protokol Websocket untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web ?
+	\item Berapa latency yang dihasilkan berdasarkan penggunaan protokol websocket ? 
+\end{itemize}
 
 \dtext{6}
 
