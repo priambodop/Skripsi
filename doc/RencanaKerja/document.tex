@@ -47,24 +47,24 @@
 %Perangkat lunak akan dibuat dengan bantuan {\it framework} OpenSteer. Sebagai studi kasus, museum yang digunakan untuk melakukan simulasi adalah Museum Geologi Bandung.
 
 %Dst, dst, dst, \ldots\ldots\ldots 
-Websocket adalah teknologi yang memungkinkan \textit{browser} pengguna dan \textit{server} membuka sesi komunikasi interaktif satu sama lain. Teknologi websocket didesain untuk diimplementasikan pada web browser dan web server, tetapi dapat juga digunakan oleh setiap aplikasi \textit{client} maupun \textit{server}. Websocket memiliki standar yang menyediakan cara agar \textit{server} dapat mengirim konten ke \textit{browser} tanpa diminta oleh \textit{client}, dan memungkinkan agar pesan dikirimkan berulang-ulang dengan tetap menjaga koneksi yang terbuka. Oleh karena itu, protokol websocket memungkinkan interaksi antara web \textit{browser} dan web \textit{server} dengan biaya \textit{overhead} yang rendah, dan juga memfasilitasi transfer data \textit{realtime} dari \textit{server} maupun menuju \textit{server}.
+\textit{WebSockets} adalah teknologi yang memungkinkan \textit{web browser} pengguna dan \textit{web server} membuka sesi komunikasi interaktif satu sama lain. Teknologi \textit{WebSockets}  didesain untuk diimplementasikan pada \textit{web browser} dan \textit{web server}, tetapi dapat juga digunakan oleh setiap aplikasi \textit{client} maupun \textit{server}. \textit{WebSockets} memiliki standar yang menyediakan cara agar \textit{web server} dapat mengirim konten ke \textit{web browser} tanpa diminta oleh \textit{client}, dan memungkinkan agar pesan dikirimkan berulang-ulang dengan tetap menjaga koneksi yang terbuka. Oleh karena itu, protokol \textit{WebSockets} memungkinkan interaksi antara \textit{web browser} dan \textit{web server} dengan \textit{overhead} yang rendah, dan juga memfasilitasi transfer data \textit{realtime} dari \textit{server} maupun menuju \textit{server}.
 
-Salah satu teknologi yang memanfaatkan protokol Websockets adalah Socket.io. Teknologi ini memungkinkan untuk melakukan komunikasi secara realtime, dan dua arah antara web client dan server. Socket.io memiliki dua bagian: \textit{library client-side} yang berjalan didalam browser, dan \textit{library server-side} yang berjalan pada Node.js. Socket.io memiliki fitur-fitur yang beragam, seperti melakukan broadcast ke beberapa sockets, dan menyimpan data yang berhubungan dengan masing-masing client. Teknologi ini sangat berguna untuk membantu membangun sebuah aplikasi yang membutuhkan koneksi realtime seperti dalam aplikasi chatting maupun \textit{game}.
+Salah satu teknologi yang memanfaatkan protokol \textit{WebSockets} adalah \textit{Socket.io}. Teknologi ini memungkinkan untuk melakukan komunikasi secara \textit{realtime}, dan dua arah antara \textit{client} dan \textit{server}. Socket.io memiliki dua bagian: \textit{client-side library} yang berjalan didalam \textit{web browser}, dan \textit{server-side library} yang berjalan pada \textit{Node.js}. \textit{Socket.io} memiliki fitur-fitur yang beragam, seperti melakukan broadcast ke beberapa \textit{sockets}, dan menyimpan data yang berhubungan dengan masing-masing \textit{client}. Teknologi ini sangat berguna untuk membantu membangun sebuah aplikasi yang membutuhkan koneksi \textit{realtime} seperti dalam aplikasi \textit{chatting} maupun \textit{game}.
 
-Pada skripsi ini, akan dibuat sebuah aplikasi permainan yang memanfaatkan protokol Websockets, dimana dalam penggunaan protokol tersebut akan dibantu dengan teknologi Socket.io. Aplikasi permainan yang dibuat akan menggunakan \textit{smartphone} dan Personal Computer (PC). Oleh karena itu, protokol Websockets akan digunakan sebagai koneksi antara smartphone dan PC dalam aplikasi permainan yang akan dibangun. Aplikasi permainan akan menggunakan teknologi berbasis web, sehingga untuk memainkannya, \textit{client} bisa mengakses melalui \textit{browser} dimanapun dan kapanpun.
+Pada skripsi ini, akan dibuat sebuah aplikasi permainan yang memanfaatkan protokol \textit{WebSockets}, dimana dalam penggunaan protokol tersebut akan dibantu dengan teknologi \textit{Socket.io}. Aplikasi permainan yang dibuat akan menggunakan \textit{smartphone} dan \textit{Personal Computer (PC)}. Oleh karena itu, protokol \textit{WebSockets} akan digunakan sebagai koneksi antara \textit{smartphone} dan \textit{PC} dalam aplikasi permainan yang akan dibangun. Aplikasi permainan akan menggunakan teknologi berbasis web, sehingga untuk memainkannya, \textit{client} bisa mengakses melalui \textit{web browser} tanpa harus berada di satu jaringan lokal yang sama.
 
 \section{Rumusan Masalah}
 %Tuliskan rumusan dari masalah yang akan anda bahas pada skripsi ini. Rumusan masalah biasanya berupa kalimat pertanyaan. Gunakan itemize seperti contoh di bagian Deskripsi Perangkat Lunak.
 \begin{itemize}
-	\item Bagaimana memanfaatkan protokol websocket untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web ?
-	\item Berapa latency yang dihasilkan berdasarkan penggunaan protokol websocket ? 
+	\item Bagaimana membangun aplikasi permainan berbasis web dengan memanfaatkan protokol \textit{WebSockets} untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web ?
+	\item Berapa \textit{latency} yang dihasilkan berdasarkan penggunaan protokol \textit{WebSockets} ? 
 \end{itemize}
 
 \section{Tujuan}
 %Tuliskan tujuan dari topik skripsi yang anda ajukan. Tujuan penelitian biasanya berkaitan erat dengan pertanyaan yang diajukan di bagian rumusan masalah. Gunakan itemize seperti contoh di bagian Deskripsi Perangkat Lunak.
 \begin{itemize}
-	\item Mengetahui cara memanfaatkan protokol websocket untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web.
-	\item Mengetahui jumlah latency yang dihasilkan berdasarkan penggunaan protokol websocket.
+	\item Mengetahui cara membangun aplikasi permainan berbasis web dengan memanfaatkan protokol \textit{WebSockets} untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web.
+	\item Mengetahui jumlah \textit{latency} yang dihasilkan berdasarkan pemanfaatan protokol \textit{WebSockets}.
 \end{itemize}
 
 \section{Deskripsi Perangkat Lunak}
@@ -82,7 +82,7 @@ Pada skripsi ini, akan dibuat sebuah aplikasi permainan yang memanfaatkan protok
 	%\item Jenis {\it flow tiles} yang digunakan dapat diubah-ubah pada saat simulasi sedang berlangsung
 		
 %\end{itemize}
-Pada skripsi ini akan dibuat aplikasi permainan berbasis web yang akan memanfaatkan \textit{smartphone} dan PC.
+Pada skripsi ini akan dibuat aplikasi permainan berbasis web yang akan memanfaatkan \textit{smartphone} dan \textit{PC}.
 
 Aplikasi yang akan dibuat memiliki fitur minimal sebagai berikut:
 \begin{itemize}
@@ -109,12 +109,13 @@ Bagian-bagian pekerjaan skripsi ini adalah sebagai berikut :
 		%\item Menulis dokumen skripsi
 	%\end{enumerate}
 	\begin{enumerate}
-		\item Melakukan studi literatur mengenai Websocket, Socket.io, Node.js, HTMLCanvas.
-		\item Mempelajari cara kerja program Websocket.
+		\item Melakukan studi literatur mengenai \textit{WebSockets}, \textit{Socket.io}, \textit{Node.js}, \textit{HTMLCanvas}.
+		\item Mempelajari cara kerja program \textit{WebSockets}.
 		\item Menganalisis aplikasi sejenis.
 		\item Merancang antarmuka permainan pada \textit{PC} dan \textit{smartphone}.
 		\item Menyusun cara bermain aplikasi permainan yang dibangun.
-		\item Menganalisis latency yang dihasilkan pada aplikasi.
+		\item Mengimplementasi program aplikasi permainan berbasis web.
+		\item Menganalisis \textit{latency} yang dihasilkan pada aplikasi.
 		\item Melakukan eksperimen dan pengujian yang melibatkan responden untuk menilai hasil simulasi secara kualitatif
 		\item Menulis dokumen skripsi
 	\end{enumerate}
@@ -138,14 +139,15 @@ Tuliskan rencana anda untuk menyelesaikan skripsi. Rencana kerja dibagi menjadi 
     %9   & 15  & 3  & 12  & {\footnotesize menulis dokumen skripsi dari bab1 hingga bab3 di S1}\\ \hline
     %Total  & 100  & 40  & 60 &  \\ \hline
     1 & 5 & 5 & & \\ \hline
-    2 & 10 & 7 & 3 & \\ \hline
+    2 & 10 & 5 & 5 & \\ \hline
     3 & 5 & 5 & & \\ \hline
     4 & 15 & 5 & 10 & \\ \hline
-    5 & 15 & 7 & 8 & \\ \hline
-    6 & 15 & 5 & 10 & \\ \hline
-    7 & 15 & 5 & 10 & \\ \hline
-    8 & 20 & 10 & 10 & {\footnotesize menulis dokumen skripsi dari bab1 hingga bab3 di S1} \\ \hline
-    Total & 100 & 49 & 51 & \\ \hline
+    5 & 15 & 5 & 10 & \\ \hline
+    6 & 20 & 5 & 15 & \\ \hline
+    7 & 5 &  & 5 & \\ \hline
+    8 & 10 &  & 10 & \\ \hline
+    9 & 15 & 5 & 10 & {\footnotesize menulis dokumen skripsi dari bab1 hingga bab3 di S1} \\ \hline
+    Total & 100 & 40 & 60 & \\ \hline
                           \end{tabular}
 \end{center}
 
@@ -154,7 +156,7 @@ Keterangan (*)\\
 2 : Persentase total \\
 3 : Persentase yang akan diselesaikan di Skripsi 1 \\
 4 : Persentase yang akan diselesaikan di Skripsi 2 \\
-5 : Penjelasan singkat apa yang dilakukan di S1 (Skripsi 1) atau S2 (skripsi 2)
+5 : Penjelasan singkat apa yang dilakukan di S1 (Skripsi 1) atau S2 (Skripsi 2)
 
 \vspace{1cm}
 \centering Bandung, \tanggal\\
