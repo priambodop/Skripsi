@@ -51,17 +51,16 @@
 
 Salah satu teknologi yang memanfaatkan protokol \textit{WebSockets} adalah \textit{Socket.io}. Teknologi ini memungkinkan untuk melakukan komunikasi secara \textit{realtime}, dan dua arah antara \textit{client} dan \textit{server}. Socket.io memiliki dua bagian: \textit{client-side library} yang berjalan didalam \textit{web browser}, dan \textit{server-side library} yang berjalan pada \textit{Node.js}. \textit{Socket.io} memiliki fitur-fitur yang beragam, seperti melakukan broadcast ke beberapa \textit{sockets}, dan menyimpan data yang berhubungan dengan masing-masing \textit{client}. Teknologi ini sangat berguna untuk membantu membangun sebuah aplikasi yang membutuhkan koneksi \textit{realtime} seperti dalam aplikasi \textit{chatting} maupun \textit{game}.
 
-%Aplikasi permainan yang dibangun akan menggunakan \textit{smartphone} dan \textit{Personal Computer (PC)}.
 Pada skripsi ini, akan dibuat sebuah aplikasi permainan yang memanfaatkan protokol \textit{WebSockets}, dimana dalam penggunaan protokol tersebut akan dibantu dengan teknologi \textit{Socket.io}. Nama permainan yang akan dibangun adalah \textit{Finger For Life}. Permainan tersebut merupakan adu balap lari yang dapat dilakukan oleh dua orang pemain, dimana para pemain akan memiliki karakter untuk dimainkan pada trek lari yang berbentuk huruf S di layar \textit{PC}.
 
-%Untuk dapat memainkan permainan yang akan dibangun, dibutuhkan \textit{smartphone} dan \textit{PC}. Pemain akan mengkoneksikan \textit{smartphone} miliknya pada suatu \textit{PC}, dimana \textit{smartphone} tersebut akan berfungsi sebagai \textit{controller} untuk memainkan permainannya. 
-
-Agar dapat memainkan permainan tersebut, para pemain harus memiliki \textit{smartphone} dan \textit{PC} beserta koneksi internet yang stabil. Apabila hal-hal tersebut terpenuhi, pemain dapat membuka \textit{web browser} pada \textit{PC} untuk mengakses alamat web yang akan menuju ke permainan \textit{Finger For Life}. Pemain akan diminta untuk melakukan dua hal agar dapat memainkan permainan tersebut bersama seorang rekan yang akan menjadi lawan mainnya, yaitu : 
+Agar dapat memainkan permainan tersebut, para pemain harus memiliki \textit{smartphone} dan \textit{PC} beserta koneksi internet yang stabil. Apabila hal-hal tersebut terpenuhi, pemain dapat membuka \textit{web browser} pada \textit{PC} untuk mengakses alamat web yang akan menuju ke permainan \textit{Finger For Life}. Para pemain akan diminta untuk melakukan dua hal agar dapat memainkan permainan tersebut bersama seorang rekan yang akan menjadi lawan mainnya, yaitu : 
 
 \begin{itemize}
 	\item Membuka \textit{web browser} pada \textit{smartphone} untuk mengakses alamat web permainan \textit{Finger For Life}.
 	\item Memasukan kode tertentu pada \textit{web browser} di \textit{smartphone} untuk sesi permainan saat ini.
 \end{itemize}
+
+Kedua hal tersebut bertujuan untuk melakukan koneksi antara \textit{smartphone} dan \textit{PC}, dimana \textit{smartphone} akan berfungsi sebagai \textit{controller} dalam permainan. Apabila kedua hal diatas telah dilakukan, maka kedua pemain akan dapat mulai memainkan permainannya.  Permainan akan diawali dengan pemilihan karakter oleh kedua pemain, dimana karakter tersebut akan berfungsi sebagai representasi masing-masing pemain dalam permainan \textit{Finger For Life}. Setelah pemilihan karakter selesai, maka para pemain akan dibawa ke halaman selanjutnya yang berupa halaman \textit{test drive}. Pada halaman ini, para pemain diminta untuk memegang \textit{smartphone} masing-masing untuk mencoba memainkan permainannya dengan cara menekan tombol-tombol yang muncul pada \textit{smartphone}. Hal tersebut bertujuan agar para pemain terbiasa terlebih dahulu dengan cara bermainnya. Setelah hal itu dilakukan, maka para pemain dapat memulai memainkan permainannya.
 
 Para pemain akan mengkoneksikan \textit{smartphone} miliknya pada suatu \textit{PC}, dimana \textit{smartphone} tersebut akan berfungsi sebagai \textit{controller} untuk memainkan permainannya. Oleh karena itu, protokol \textit{WebSockets} akan digunakan sebagai koneksi antara \textit{smartphone} dan \textit{PC} dalam aplikasi permainan yang akan dibangun. Aplikasi permainan akan menggunakan teknologi berbasis web, sehingga untuk memainkannya, \textit{client} bisa mengakses melalui \textit{web browser} tanpa harus berada di satu jaringan lokal yang sama.
 
@@ -126,7 +125,6 @@ Bagian-bagian pekerjaan skripsi ini adalah sebagai berikut :
 	%\end{enumerate}
 	\begin{enumerate}
 		\item Melakukan studi literatur mengenai \textit{WebSockets}, \textit{Socket.io}, \textit{Node.js}, \textit{HTMLCanvas}.
-		\item Mempelajari cara kerja program \textit{WebSockets}.
 		\item Menganalisis aplikasi sejenis.
 		\item Merancang antarmuka permainan pada \textit{PC} dan \textit{smartphone}.
 		\item Menyusun cara bermain aplikasi permainan yang dibangun.
@@ -137,7 +135,7 @@ Bagian-bagian pekerjaan skripsi ini adalah sebagai berikut :
 	\end{enumerate}
 
 \section{Rencana Kerja}
-Tuliskan rencana anda untuk menyelesaikan skripsi. Rencana kerja dibagi menjadi dua bagian yaitu yang akan dilakukan pada saat mengambil kuliah AIF401 Skripsi 1 dan pada saat mengambil kuliah AIF402 Skripsi 2. Perhatikan contoh berikut ini :
+%Tuliskan rencana anda untuk menyelesaikan skripsi. Rencana kerja dibagi menjadi dua bagian yaitu yang akan dilakukan pada saat mengambil kuliah AIF401 Skripsi 1 dan pada saat mengambil kuliah AIF402 Skripsi 2. Perhatikan contoh berikut ini :
 
 
 \begin{center}
@@ -155,14 +153,13 @@ Tuliskan rencana anda untuk menyelesaikan skripsi. Rencana kerja dibagi menjadi 
     %9   & 15  & 3  & 12  & {\footnotesize menulis dokumen skripsi dari bab1 hingga bab3 di S1}\\ \hline
     %Total  & 100  & 40  & 60 &  \\ \hline
     1 & 5 & 5 & & \\ \hline
-    2 & 10 & 5 & 5 & \\ \hline
-    3 & 5 & 5 & & \\ \hline
+    2 & 5 & 5 & & \\ \hline
+    3 & 15 & 5 & 10 & \\ \hline
     4 & 15 & 5 & 10 & \\ \hline
-    5 & 15 & 5 & 10 & \\ \hline
-    6 & 20 & 5 & 15 & \\ \hline
-    7 & 5 &  & 5 & \\ \hline
-    8 & 10 &  & 10 & \\ \hline
-    9 & 15 & 5 & 10 & {\footnotesize menulis dokumen skripsi dari bab1 hingga bab3 di S1} \\ \hline
+    5 & 20 & 5 & 15 & \\ \hline
+    6 & 10 & 5  & 5 & \\ \hline
+    7 & 10 &  & 10 & \\ \hline
+    8 & 20 & 10 & 10 & {\footnotesize menulis dokumen skripsi dari bab1 hingga bab3 di S1} \\ \hline
     Total & 100 & 40 & 60 & \\ \hline
                           \end{tabular}
 \end{center}
