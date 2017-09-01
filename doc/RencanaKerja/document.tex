@@ -30,23 +30,12 @@
 \newcommand{\@npm}{2013730055}
 \newcommand{\@judultopik}{Pemanfaatan Smartphone Sebagai Pengendali Permainan Berbasis Web} % Judul/topik anda
 \newcommand{\jumpemb}{1} % Jumlah pembimbing, 1 atau 2
-\newcommand{\tanggal}{01/01/1900}
+\newcommand{\tanggal}{04/09/2017}
 \maketitle
 
 \pagenumbering{arabic}
 
-\section{Deskripsi}
-%Tuliskan deskripsi dari topik skripsi yang akan anda ajukan. Di sini dapat dituliskan latar belakang, seperti apa penelitian yang sudah ada sebelumnya dan apa yang akan anda kerjakan. Sertakan gambar agar penjelasan anda menjadi lebih baik.
-
-%Pada skripsi ini, akan dibuat sebuah perangkat lunak yang dapat menampilkan visualisasi dan simulasi kerumunan orang yang berkunjung ke sebuah museum. Dengan menggunakan perangkat lunak tersebut, pengelola museum dapat mengatur tempat peletakan objek sehingga tidak terjadi kerumunan yang terlalu padat.
-
-%Dari berbagai macam teknik yang dapat digunakan untuk melakukan simulasi kerumunan, dipilih dua buah teknik yaitu teknik {\it flow tiles} dan {\it social force model (steering behaviour)}.
-
-%Dst, dst, dst, \ldots\ldots\ldots 
-
-%Perangkat lunak akan dibuat dengan bantuan {\it framework} OpenSteer. Sebagai studi kasus, museum yang digunakan untuk melakukan simulasi adalah Museum Geologi Bandung.
-
-%Dst, dst, dst, \ldots\ldots\ldots 
+\section{Deskripsi} 
 \textit{WebSockets} adalah teknologi yang memungkinkan \textit{web browser} pengguna dan \textit{web server} membuka sesi komunikasi interaktif satu sama lain. Teknologi \textit{WebSockets}  didesain untuk diimplementasikan pada \textit{web browser} dan \textit{web server}, tetapi dapat juga digunakan oleh setiap aplikasi \textit{client} maupun \textit{server}. \textit{WebSockets} memiliki standar yang menyediakan cara agar \textit{web server} dapat mengirim konten ke \textit{web browser} tanpa diminta oleh \textit{client}, dan memungkinkan agar pesan dikirimkan berulang-ulang dengan tetap menjaga koneksi yang terbuka. Oleh karena itu, protokol \textit{WebSockets} memungkinkan interaksi antara \textit{web browser} dan \textit{web server} dengan \textit{overhead} yang rendah, dan juga memfasilitasi transfer data \textit{realtime} dari \textit{server} maupun menuju \textit{server}.
 
 Salah satu teknologi yang memanfaatkan protokol \textit{WebSockets} adalah \textit{Socket.io}. Teknologi ini memungkinkan untuk melakukan komunikasi secara \textit{realtime}, dan dua arah antara \textit{client} dan \textit{server}. Socket.io memiliki dua bagian: \textit{client-side library} yang berjalan didalam \textit{web browser}, dan \textit{server-side library} yang berjalan pada \textit{Node.js}. \textit{Socket.io} memiliki fitur-fitur yang beragam, seperti melakukan broadcast ke beberapa \textit{sockets}, dan menyimpan data yang berhubungan dengan masing-masing \textit{client}. Teknologi ini sangat berguna untuk membantu membangun sebuah aplikasi yang membutuhkan koneksi \textit{realtime} seperti dalam aplikasi \textit{chatting} maupun \textit{game}.
@@ -65,43 +54,25 @@ Kedua hal tersebut bertujuan untuk melakukan koneksi antara \textit{smartphone} 
 Para pemain akan mengkoneksikan \textit{smartphone} miliknya pada suatu \textit{PC}, dimana \textit{smartphone} tersebut akan berfungsi sebagai \textit{controller} untuk memainkan permainannya. Oleh karena itu, protokol \textit{WebSockets} akan digunakan sebagai koneksi antara \textit{smartphone} dan \textit{PC} dalam aplikasi permainan yang akan dibangun. Aplikasi permainan akan menggunakan teknologi berbasis web, sehingga untuk memainkannya, \textit{client} bisa mengakses melalui \textit{web browser} tanpa harus berada di satu jaringan lokal yang sama.
 
 \section{Rumusan Masalah}
-%Tuliskan rumusan dari masalah yang akan anda bahas pada skripsi ini. Rumusan masalah biasanya berupa kalimat pertanyaan. Gunakan itemize seperti contoh di bagian Deskripsi Perangkat Lunak.
+
 \begin{itemize}
 	\item Bagaimana membangun aplikasi permainan berbasis web dengan memanfaatkan protokol \textit{WebSockets} untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web ?
 	\item Berapa \textit{latency} yang dihasilkan berdasarkan penggunaan protokol \textit{WebSockets} ? 
 \end{itemize}
 
 \section{Tujuan}
-%Tuliskan tujuan dari topik skripsi yang anda ajukan. Tujuan penelitian biasanya berkaitan erat dengan pertanyaan yang diajukan di bagian rumusan masalah. Gunakan itemize seperti contoh di bagian Deskripsi Perangkat Lunak.
+
 \begin{itemize}
 	\item Mengetahui cara membangun aplikasi permainan berbasis web dengan memanfaatkan protokol \textit{WebSockets} untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web.
 	\item Mengetahui jumlah \textit{latency} yang dihasilkan berdasarkan pemanfaatan protokol \textit{WebSockets}.
 \end{itemize}
 
 \section{Deskripsi Perangkat Lunak}
-%Tuliskan deksripsi dari perangkat lunak yang akan anda hasilkan. Apa saja fitur yang disediakan oleh PL tersebut dan apa saja kemampuan dari PL tersebut. Perhatikan contoh di bawah ini:
 
-%Perangkat lunak akhir yang akan dibuat memiliki fitur minimal sebagai berikut:
-%\begin{itemize}
-	%\item Pengguna dapat melihat denah Musem Geologi Bandung dalam bidang dua dimensi. Sedangkan pengunjung direpresentasikan menggunakan lingkaran-lingkaran kecil (tidak menggunakan gambar manusia yang diambil dari atas)
-	%\item Pengguna dapat memunculkan atau menghilangkan gambar {\it flow tiles} pada denah museum. 
-	%\item Pengguna dapat mengatur jalannya simulasi: memulai(start) simulasi, menunda(pause) simulasi, melanjutkan(continue) simulasi, maupun menghentikan(stop) simulasi
-	%\item Pengguna dapat mengatur banyaknya pengunjung di dalam museum, baik melalui perubahan frekuensi kedatangan pengunjung maupun menambahkan dan menghapus pengunjung satu-persatu secara manual.
-	%\item Posisi kamera dapat diubah (pergerakan di bidang tiga dimensi) sehingga pengguna dapat melihat simulasi di museum dari berbagai arah. 
-	%\item Posisi kamera dapat diubah untuk emngikuti perjalanan seorang pengunjung di dalam 
-	%\item Pengguna dapat memilih apakah akan menggunakan teknik {\it flow tiles} atau tidak pada saat simulasi berlangsung
-	%\item Jenis {\it flow tiles} yang digunakan dapat diubah-ubah pada saat simulasi sedang berlangsung
-		
-%\end{itemize}
 Pada skripsi ini akan dibuat aplikasi permainan berbasis web yang akan memanfaatkan \textit{smartphone} dan \textit{PC}.
 
 Aplikasi yang akan dibuat memiliki fitur minimal sebagai berikut:
 \begin{itemize}
-	%\item Aplikasi dapat diakses melalui web \textit{browser} milik pengguna yang ada di \textit{smartphone} dan \textit{PC}.
-	%\item Pengguna dapat menggunakan \textit{smartphone} miliknya sebagai pengendali permainan.
-	%\item  Pengguna dapat mengakses permainan melalui web \textit{browser} miliknya.
-	%\item Aplikasi dapat dimainkan lebih dari satu orang dalam satu waktu, dengan jumlah maksimal pemain sebanyak tiga orang.
-	%\item Pengguna-pengguna yang memainkan permainan ini dapat berada ditempat yang berbeda satu sama lain selama ada koneksi internet yang stabil. 
 	\item Aplikasi dijalankan dengan cara mengakses alamat web pada \textit{web browser} yang ada di \textit{smartphone} dan \textit{PC}, yang kemudian \textit{smartphone} akan dikoneksikan dengan \textit{PC}.
 	\item \textit{Smartphone} digunakan sebagai \textit{controller} dalam permainan.
 	\item \textit{PC} digunakan sebagai layar yang memperlihatkan permainan yang sedang dimainkan.
@@ -109,20 +80,10 @@ Aplikasi yang akan dibuat memiliki fitur minimal sebagai berikut:
 \end{itemize}
 
 \section{Detail Pengerjaan Skripsi}
-%Tuliskan bagian-bagian pengerjaan skripsi secara detail. Bagian pekerjaan tersebut mencakup awal hingga akhir skripsi, termasuk di dalamnya pengerjaan dokumentasi skripsi, pengujian, survei, dll.
+
 
 Bagian-bagian pekerjaan skripsi ini adalah sebagai berikut :
-	%\begin{enumerate}
-		%\item Melakukan survei ke Museum Geologi Bandung untuk mendapatkan denah serta mengetahui perilaku pengunjung museum secara umum (arah perjalanan, kecepatan, lama melihat objek, dll)
-		%\item Melakukan analisis pada hasil survei terhadap pergerakan pengunjung di museum dan membuat rancangan denah di komputer yang dilengkapi dengan penghalang dan objek di museum.
-		%\item Melakukan studi literatur mengenai sifat kolektif suatu kerumunan, teknik {\it social force model} dan teknik {\it flow tiles}
-		%\item Mempelajari bahasa pemrograman C++ dan cara menggunakan framework OpenSteer
-		%\item Merancang pergerakan kerumunan di dalam museum menggunakan teknik {\it social force model} dan {\it flow tiles} serta menggunakan teknik lainnya seperti konsep pathway dan waypoints. Selain itu, dirancang pula adanya waktu tunggu (pada saat pengunjung melihat objek di museum) dan cara pembuatan jalur bagi setiap individu pengunjung
-		%\item Melakukan analisa dan merancang struktur data yang cocok untuk menyimpan penghalang (obstacle)
-		%\item Mengimplementasikan keseluruhan algoritma dan struktur data yang dirancang, dengan menggunakan framework OpenSteer 
-		%\item Melakukan pengujian (dan eksperimen) yang melibatkan responde untuk menilai hasil simulasi secara kualitatif
-		%\item Menulis dokumen skripsi
-	%\end{enumerate}
+	
 	\begin{enumerate}
 		\item Melakukan studi literatur mengenai \textit{WebSockets}, \textit{Socket.io}, \textit{Node.js}, \textit{HTMLCanvas}.
 		\item Menganalisis aplikasi sejenis.
@@ -135,23 +96,11 @@ Bagian-bagian pekerjaan skripsi ini adalah sebagai berikut :
 	\end{enumerate}
 
 \section{Rencana Kerja}
-%Tuliskan rencana anda untuk menyelesaikan skripsi. Rencana kerja dibagi menjadi dua bagian yaitu yang akan dilakukan pada saat mengambil kuliah AIF401 Skripsi 1 dan pada saat mengambil kuliah AIF402 Skripsi 2. Perhatikan contoh berikut ini :
-
 
 \begin{center}
   \begin{tabular}{ | c | c | c | c | l |}
     \hline
     1*  & 2*(\%) & 3*(\%) & 4*(\%) &5*\\ \hline \hline
-    %1   & 5  & 5  &  &  \\ \hline
-    %2   & 5 & 5  &   & \\ \hline
-    %3   & 10  & 7  & 3 & {\footnotesize sebagian kecil teknik {\it flow tiles} di S2}  \\ \hline
-    %4   & 15  & 10  &  5 & {\footnotesize teknik lanjut OOP di C++ di S2} \\ \hline
-    %5   & 20  & 5  & 15 & {\footnotesize perancangan awal SFM, pathway dan waypoint di S1} \\ \hline
-    %6   & 5 &   & 5  & \\ \hline
-    %7   & 20  & 5  & 15 &  {\footnotesize implementasi denah dan rancangan awal SFM di S1}\\ \hline
-    %8   & 5  &   &  5  & \\ \hline
-    %9   & 15  & 3  & 12  & {\footnotesize menulis dokumen skripsi dari bab1 hingga bab3 di S1}\\ \hline
-    %Total  & 100  & 40  & 60 &  \\ \hline
     1 & 5 & 5 & & \\ \hline
     2 & 5 & 5 & & \\ \hline
     3 & 15 & 5 & 10 & \\ \hline
