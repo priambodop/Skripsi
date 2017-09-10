@@ -5,42 +5,54 @@
 \section{Latar Belakang}
 \label{sec:label}
 
-%Bagian ini akan diisi dengan apa yang melatarbelakangi pembuatan template skripsi ini.
-%Termasuk juga masalah-masalah yang akan dihadapi untuk membuatnya, termasuk kurangnya kemampuan penguasaan \LaTeX{} sehingga template ini dibuat dengan mengandalkan berbagai contoh yang tersebar di dunia maya, yang digabung-gabung menjadi satu jua.
-%Bagian lain juga akan dilengkapi, untuk sementara diisi dengan lorem ipsum versi bahasa inggris.
-Websocket adalah teknologi canggih yang memungkinkan browser pengguna dan server membuka sesi komunikasi interaktif satu sama lain. Teknologi websocket didesain untuk diimplementasikan pada web browser dan web server, tetapi dapat juga digunakan oleh setiap aplikasi client maupun server. Websocket memiliki standar yang menyediakan cara agar server dapat mengirim konten ke browser tanpa diminta oleh client, dan memungkinkan agar pesan dikirimkan berulang-ulang dengan tetap menjaga koneksi yang terbuka. Oleh karena itu, protokol websocket memungkinkan interaksi antara web browser dan web server dengan biaya overhead yang rendah, dan juga memfasilitasi transfer data real-time dari server maupun menuju server.
+\textit{WebSockets} adalah teknologi yang memungkinkan \textit{web browser} pengguna dan \textit{web server} membuka sesi komunikasi interaktif satu sama lain. Teknologi \textit{WebSockets}  didesain untuk diimplementasikan pada \textit{web browser} dan \textit{web server}, tetapi dapat juga digunakan oleh setiap aplikasi \textit{client} maupun \textit{server}. \textit{WebSockets} memiliki standar yang menyediakan cara agar \textit{web server} dapat mengirim konten ke \textit{web browser} tanpa diminta oleh \textit{client}, dan memungkinkan agar pesan dikirimkan berulang-ulang dengan tetap menjaga koneksi yang terbuka. Oleh karena itu, protokol \textit{WebSockets} memungkinkan interaksi antara \textit{web browser} dan \textit{web server} dengan \textit{overhead} yang rendah, dan juga memfasilitasi transfer data \textit{realtime} dari \textit{server} maupun menuju \textit{server}.
 
-Salah satu teknologi yang memanfaatkan protokol Websockets adalah Socket.io. Teknologi ini memungkinkan untuk melakukan komunikasi secara realtime, dan dua arah antara web client dan server. Socket.io memiliki dua bagian: library client-side yang berjalan didalam browser, dan library server-side yang berjalan pada Node.js. Socket.io memiliki fitur-fitur yang beragam, seperti melakukan broadcast ke beberapa sockets, dan menyimpan data yang berhubungan dengan masing-masing client. Teknologi ini sangat berguna untuk membantu membangun sebuah aplikasi yang membutuhkan koneksi realtime seperti dalam aplikasi chatting maupun game.
+Salah satu teknologi yang memanfaatkan protokol \textit{WebSockets} adalah \textit{Socket.io}. Teknologi ini memungkinkan untuk melakukan komunikasi secara \textit{realtime}, dan dua arah antara \textit{client} dan \textit{server}. Socket.io memiliki dua bagian: \textit{client-side library} yang berjalan didalam \textit{web browser}, dan \textit{server-side library} yang berjalan pada \textit{Node.js}. \textit{Socket.io} memiliki fitur-fitur yang beragam, seperti melakukan broadcast ke beberapa \textit{sockets}, dan menyimpan data yang berhubungan dengan masing-masing \textit{client}. Teknologi ini sangat berguna untuk membantu membangun sebuah aplikasi yang membutuhkan koneksi \textit{realtime} seperti dalam aplikasi \textit{chatting} maupun \textit{game}.
 
-Pada skripsi ini, akan dibuat sebuah aplikasi permainan yang memanfaatkan protokol Websockets, dimana dalam penggunaan protokol tersebut akan dibantu dengan teknologi Socket.io. Aplikasi permainan yang dibuat akan menggunakan smartphone dan Personal Computer (PC). Oleh karena itu, protokol Websockets akan digunakan sebagai koneksi antara smartphone dan PC dalam aplikasi permainan yang akan dibangun.
+Pada skripsi ini, akan dibuat sebuah aplikasi permainan yang memanfaatkan protokol \textit{WebSockets}, dimana dalam penggunaan protokol tersebut akan dibantu dengan teknologi \textit{Socket.io}. Selain itu, aplikasi yang dibuat akan memanfaatkan \textit{personal computer (PC)} dan \textit{smartphone} untuk pengembangan aplikasinya. Kedua teknologi tersebut merupakan teknologi yang sudah dimiliki oleh banyak orang. Oleh karena itu, aplikasi permainan yang akan dibangun akan memanfaatkan \textit{PC} dan \textit{smartphone}.
 
-\dtext{5-10}
+Para pemain akan mengkoneksikan \textit{smartphone} miliknya pada suatu \textit{PC}, dimana \textit{smartphone} tersebut akan berfungsi sebagai \textit{controller} untuk memainkan permainannya. Oleh karena itu, protokol \textit{WebSockets} akan digunakan sebagai koneksi antara \textit{smartphone} dan \textit{PC} dalam aplikasi permainan yang akan dibangun. Aplikasi permainan akan menggunakan teknologi berbasis web, sehingga untuk memainkannya, \textit{client} bisa mengakses melalui \textit{web browser} tanpa harus berada di satu jaringan lokal yang sama.
 
 \section{Rumusan Masalah}
 \label{sec:rumusan}
-%Bagian ini akan diisi dengan penajaman dari masalah-masalah yang sudah diidentifikasi di bagian sebelumnya.
+
 \begin{itemize}
-	\item Bagaimana memanfaatkan protokol Websocket untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web ?
-	\item Berapa latency yang dihasilkan berdasarkan penggunaan protokol websocket ? 
+	\item Bagaimana membangun aplikasi permainan berbasis web dengan memanfaatkan protokol \textit{WebSockets} untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web ?
+	\item Berapa \textit{latency} yang dihasilkan berdasarkan penggunaan protokol \textit{WebSockets} ? 
 \end{itemize}
 
-\dtext{6}
 
 \section{Tujuan}
 \label{sec:tujuan}
-Akan dipaparkan secara lebih terperinci dan tersturkur apa yang menjadi tujuan pembuatan template skripsi ini
+\begin{itemize}
+	\item Mengetahui cara membangun aplikasi permainan berbasis web dengan memanfaatkan protokol \textit{WebSockets} untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web.
+	\item Mengetahui jumlah \textit{latency} yang dihasilkan berdasarkan pemanfaatan protokol \textit{WebSockets}.
+\end{itemize}
 
-\dtext{7}
 
 \section{Batasan Masalah}
 \label{sec:batasan}
-Untuk mempermudah pembuatan template ini, tentu ada hal-hal yang harus dibatasi, misalnya saja bahwa template ini bukan berupa style \LaTeX{} pada umumnya (dengan alasannya karena belum mampu jika diminta membuat seperti itu)
 
-\dtext{8}
+Batasan masalah yang dibuat terkait dengan pengerjaan skripsi ini adalah sebagai berikut:
+
+\begin{itemize}
+	\item Aplikasi permainan yang dibuat merupakan permainan \textit{multiplayer} yang hanya bisa dimainkan oleh dua orang saja.
+\end{itemize}
+
 
 \section{Metodologi}
 \label{sec:metlit}
-Tentunya akan diisi dengan metodologi yang serius sehingga templatenya terkesan lebih serius.
+Metodologi yang dilakukan dalam pengerjaan skripsi ini adalah sebagai berikut:
+
+\begin{itemize}
+	\item Studi literatur mengenai :
+		\begin{itemize}
+			\item \textit{WebSockets} yang akan digunakan untuk koneksi antara \textit{smartphone} dan \textit{PC}.
+			\item \textit{Socket.io} sebagai teknologi yang akan menggunakan \textit{WebSockets} dalam pembangunan aplikasi.
+			\item \textit{HTML5 Canvas} yang akan digunakan untuk antarmuka permainan.
+			\item \textit{NodeJs} sebagai \textit{server} dalam pembangunan aplikasi 	
+		\end{itemize}
+\end{itemize}
 
 \dtext{9}
 
