@@ -16,18 +16,18 @@ Para pemain akan mengkoneksikan \textit{smartphone} miliknya pada suatu \textit{
 \section{Rumusan Masalah}
 \label{sec:rumusan}
 
-\begin{itemize}
+\begin{enumerate}
 	\item Bagaimana membangun aplikasi permainan berbasis web dengan memanfaatkan protokol \textit{WebSockets} untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web ?
 	\item Berapa \textit{latency} yang dihasilkan berdasarkan penggunaan protokol \textit{WebSockets} ? 
-\end{itemize}
+\end{enumerate}
 
 
 \section{Tujuan}
 \label{sec:tujuan}
-\begin{itemize}
+\begin{enumerate}
 	\item Mengetahui cara membangun aplikasi permainan berbasis web dengan memanfaatkan protokol \textit{WebSockets} untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web.
 	\item Mengetahui jumlah \textit{latency} yang dihasilkan berdasarkan pemanfaatan protokol \textit{WebSockets}.
-\end{itemize}
+\end{enumerate}
 
 
 \section{Batasan Masalah}
@@ -35,31 +35,51 @@ Para pemain akan mengkoneksikan \textit{smartphone} miliknya pada suatu \textit{
 
 Batasan masalah yang dibuat terkait dengan pengerjaan skripsi ini adalah sebagai berikut:
 
-\begin{itemize}
+\begin{enumerate}
 	\item Aplikasi permainan yang dibuat merupakan permainan \textit{multiplayer} yang hanya bisa dimainkan oleh dua orang saja.
-\end{itemize}
+\end{enumerate}
 
 
 \section{Metodologi}
 \label{sec:metlit}
 Metodologi yang dilakukan dalam pengerjaan skripsi ini adalah sebagai berikut:
 
-\begin{itemize}
+\begin{enumerate}
 	\item Studi literatur mengenai :
 		\begin{itemize}
 			\item \textit{WebSockets} yang akan digunakan untuk koneksi antara \textit{smartphone} dan \textit{PC}.
 			\item \textit{Socket.io} sebagai teknologi yang akan menggunakan \textit{WebSockets} dalam pembangunan aplikasi.
 			\item \textit{HTML5 Canvas} yang akan digunakan untuk antarmuka permainan.
-			\item \textit{NodeJs} sebagai \textit{server} dalam pembangunan aplikasi 	
+			\item \textit{NodeJs} sebagai \textit{web server} dalam pembangunan aplikasi. 	
 		\end{itemize}
-\end{itemize}
-
-\dtext{9}
+	\item Menganalisis aplikasi sejenis.
+	\item Merancang antarmuka permainan pada \textit{PC} dan \textit{smartphone}. Antarmuka pada \textit{PC} akan berbeda dengan yang ada di \textit{smartphone}, karena \textit{smartphone} akan bekerja sebagai \textit{controller} dan \textit{PC} akan bekerja sebagai \textit{console}.
+	\item Menyusun cara bermain aplikasi permainan yang dibangun.
+	\item Mengimplementasi program aplikasi permainan berbasis web.
+	\item Menganalisis \textit{latency} yang dihasilkan pada aplikasi.
+	\item Melakukan eksperimen dan pengujian yang melibatkan responden.
+\end{enumerate}
 
 \section{Sistematika Pembahasan}
 \label{sec:sispem}
-Rencananya Bab 2 akan berisi petunjuk penggunaan template dan dasar-dasar \LaTeX.
-Mungkin bab 3,4,5 dapt diisi oleh ketiga jurusan, misalnya peraturan dasar skripsi atau pedoman penulisan, tentu jika berkenan.
-Bab 6 akan diisi dengan kesimpulan, bahwa membuat template ini ternyata sungguh menghabiskan banyak waktu.
+Setiap bab dalam skripsi ini memiliki sistematika penulisan yang dijelaskan kedalam poin-poin sebagai berikut:
 
-\dtext{10}
+\begin{enumerate}
+	\item Bab 1 : Pendahuluan \\
+	Bab 1 membahas mengenai gambaran umum penelitian ini. Berisi tentang latar belakang, rumusan masalah, tujuan, batasan masalah, metode penelitian, dan sistematika penulisan.
+	
+	\item Bab 2 : Dasar Teori \\
+	Bab 2 membahas mengenai teori-teori yang mendukung berjalannya penelitian ini. Berisi tentang \textit{WebSockets}, \textit{Socket.io}, \textit{NodeJs}, dan \textit{HTML5Canvas}.
+	
+	\item Bab 3 : Analisis \\
+	Bab 3 membahas mengenai analisa masalah.
+	
+	\item Bab 4 : Perancangan \\
+	Bab 4 membahas mengenai perancangan yang dilakukan sebelum melakukan tahapan implementasi.
+	
+	\item Bab 5 : Implementasi dan Pengujian \\
+	Bab 5 membahas mengenai implementasi dan pengujian yang telah dilakukan.
+	
+	\item Bab 6 : Kesimpulan dan Saran
+	Bab 6 membahas hasil kesimpulan dari keseluruhan penelitian ini dan saran-saran yang dapat diberikan untuk penelitian berikutnya.
+\end{enumerate}
