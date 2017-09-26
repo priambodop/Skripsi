@@ -2,24 +2,58 @@
 \chapter{Landasan Teori}
 \label{chap:teori}
 
-\section{Skripsi}
-\label{sec:skripsi} 
+Pada bab ini akan dijelaskan landasan teori mengenai \textit{WebSockets API}, \textit{Socket.io}, \textit{Node.js}, \textit{Express.js}, dan \textit{Canvas API}.
 
- 
-Rencananya akan diisi dengan penjelasan umum mengenai buku skripsi.
+\section{WebSockets}
+\label{sec:WebSockets} 
 
-\dtext{11-12} 
+\subsection{Interface}
+	\begin{itemize}
+		\item \textit{Websocket}
+	\end{itemize}
 
-\section{\LaTeX}
-\label{sec:latex}
+\subsection{WebSocket Events}
+
+\textit{WebSockets API} bekerja berdasarkan \textit{events}(kejadian). Kode-kode yang ada pada aplikasi akan memperhatikan suatu \textit{events} pada objek \textit{WebSocket} untuk mengatasi apabila ada data-data yang masuk dan perubahan pada status koneksi. Aplikasi pada \textit{client} tidak perlu melakukan \textit{poll} terhadap \textit{server} untuk memperbarui data. \textit{Events} dan pesan-pesan lainnya akan diterima secara bersamaan saat server mengirimnya.
+
+Sebuah objek \textit{WebSocket} dapat mengirimkan empat \textit{events} yang berbeda, yaitu : 
+	
+	\begin{itemize}
+		\item Open
+		\item Message
+		\item Error
+		\item Close
+	\end{itemize}
+
+\subsection{WebSocket Methods}
+Suatu objek \textit{WebSocket} memiliki dua \textit{method}, yaitu \textit{send()} dan \textit{close()}.
+
+\begin{itemize}
+	\item send() \\
+	Setelah aplikasi melakukan koneksi menggunakan \textit{WebSocket}, maka aplikasi tersebut dapat mengirimkan metode \textit{send()} selama koneksi tetap terbuka. Sebuah aplikasi akan menggunakan \textit{send()} untuk mengirimkan pesan dari \textit{client} menuju \textit{server}. 
+	
+	
+	\item close()
+	
+	
+\end{itemize}
+
+\section{Socket.io}
+\label{sec:Socket.io}
 
 Mengapa menggunakan \LaTeX{} untuk buku skripsi dan apa keunggulan/kerugiannya bagi mahasiswa dan pembuat template. 
 
 \dtext{13-14}
 
+\section{Node.js}
+\label{sec:Node.js}
 
-\section{Template Skripsi FTIS UNPAR}
-\label{sec:template}
+
+\section{Express.js}
+\label{sec:Express.js}
+
+\section{Canvas API}
+\label{sec:Canvas API}
  
 Akan dipaparkan bagaimana menggunakan template ini, termasuk petunjuk singkat membuat referensi, gambar dan tabel.
 Juga hal-hal lain yang belum terpikir sampai saat ini. 
