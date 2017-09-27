@@ -70,13 +70,38 @@ Format yang sudah dispesifikasi oleh \textit{socket.io} bertujuan untuk menentuk
 \section{Express.js}
 \label{sec:Express.js}
 
+Express.js merupakan sebuah \textit{framework} aplikasi web untuk \textit{Node.js}. Express.js menyediakan fitur-fitur yang membuat pengembangan aplikasi web dapat bertahan lama. Teknologi ini pun merupakan modul \textit{node package manager (npm)} yang menjadi ketergantungan dalam suatu aplikasi. Agar dapat berjalan, seluruh \textit{file} yang dimiliki oleh \textit{framework} ini harus berada pada \textit{node\_modules} lokal dalam suatu projek tertentu. 
+
+
 \section{Canvas API}
 \label{sec:Canvas API}
  
-Akan dipaparkan bagaimana menggunakan template ini, termasuk petunjuk singkat membuat referensi, gambar dan tabel.
-Juga hal-hal lain yang belum terpikir sampai saat ini. 
- 
-\dtext{15-16}
+Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web. Teknologi ini memiliki fitur untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processiong} atau \textit{rendering}. Untuk dapat menggunakan elemen \textit{canvas} harus menambahkan \textit{tag} <canvas> pada suatu halaman \textit{HTML}. \textit{Tag} <canvas> memiliki tiga atribut utama dimana atribut tersebut terdapat didalam kurung lancip pada \textit{HTML tag}. Atribut-atribut tersebut yaitu : 
+
+\begin{itemize}
+	\item id \\
+	Merupakan nama yang akan digunakan sebagai referensi dalam kode JavaScript. Dimana nantinya nama tersebut akan merujuk ke \textit{tag} <canvas> yang memiliki nama yang sama.
+	\item width \\
+	Merupakan lebar dari \textit{canvas} yang dibuat.
+	\item height \\
+	Merupakan tinggi dari \textit{canvas} yang dibuat.
+\end{itemize}
+
+Menggunakan \textit{Canvas API} membutuhkan dasar yang kuat dalam menggambar , dan merubah bentuk-bentuk dasar dua dimensi. Berikut merupakan bentuk-bentuk dasar dua dimensi yang dapat digambar pada \textit{canvas}.
+
+\begin{itemize}
+	\item Rectangle \\
+	Untuk menggambar suatu \textit{rectangle} (persegi), \textit{canvas} menyediakan tiga \textit{method} yaitu sebagai berikut:
+	\begin{itemize}
+		\item fillRect(x,y,width,height) \\
+		Menggambar persegi dengan warna yang penuh mengisi bagian dalam persegi pada posisi x,y dengan ukuran persegi \textit{width} dan \textit{height}.
+		\item strokeRect(x,y,width,height) \\
+		Menggambar garis luar persegi pada posisi x,y dengan ukuran persegi \textit{width} dan \textit{height}.
+		\item clearRect(x,y,width,height) \\
+		Mengosongkan area tertentu dan membuat area tersebut transparan pada posisi x,y dengan ukuran persegi \textit{width} dan \textit{height}.
+	\end{itemize}
+
+\end{itemize}
 
 \subsection{Tabel}  
 Berikut adalah contoh pembuatan tabel. 
