@@ -41,12 +41,30 @@ Suatu objek \textit{WebSocket} memiliki dua \textit{method}, yaitu \textit{send(
 \section{Socket.io}
 \label{sec:Socket.io}
 
-Mengapa menggunakan \LaTeX{} untuk buku skripsi dan apa keunggulan/kerugiannya bagi mahasiswa dan pembuat template. 
+\textit{Socket.io} merupakan \textit{JavaScript library} yang digunakan pada aplikasi web untuk melakukan koneksi secara \textit{realtime}. Teknologi ini memiliki dua bagian \textit{library}: bagian \textit{client} yang dijalankan pada \textit{web browser}, dan bagian \textit{server} yang jalankan untuk \textit{Node.js}. \textit{Socket.io} memiliki fitur-fitur yang beragam, seperti melakukan \textit{broadcast} ke beberapa \textit{sockets}, dan menyimpan data yang berhubungan dengan masing-masing \textit{client}.
 
-\dtext{13-14}
+\subsection{Connection}
+Koneksi yang dimulai oleh \textit{Socket.io} dilakukan dengan cara \textit{handshake}. Hal tersebut merupakan bagian yang penting dalam protokol. \textit{Handshake} hanya dilakukan hanya pada saat memulai koneksi, pesan-pesan atau hal lain dalam protokol akan dikirimkan melalui \textit{socket}. 
+
+
+\subsection{Messages}
+Apabila koneksi telah dilakukan, seluruh komunikasi antara \textit{client} dan \textit{server} akan menggunakan pesan(\textit{message}) melalui \textit{socket}. Pesan yang akan dikirimkan harus diubah kedalam format yang sudah dispesifikasi oleh \textit{socket.io}.
+
+Format yang sudah dispesifikasi oleh \textit{socket.io} bertujuan untuk menentukan jenis pesan dan data yang dikirimkan dalam pesan tersebut. Format pesan yang sudah dispesifikasi yaitu seperti berikut : 
+
+[type] : [id] : [endpoint] (: [data])
+
+\begin{itemize}
+	\item \textit{type}, merupakan satu digit angka integer yang menunjukan jenis pesan yang akan dikirim.
+	\item \textit{id}, merupakan identitas pesan yang terdiri dari beberapa digit angka.
+	\item \textit{endpoint}, merupakan \textit{socket} tujuan yang akan menerima pesan yang sedang dikirim. Apabila tidak ada \textit{endpoint}, maka pesan akan dikirimkan ke \textit{default socket}.
+	\item \textit{data}, merupakan data yang akan dikirim ke \textit{socket} tertentu. Pada kasus \textit{messages}, data akan dikirimkan dalam bentuk \textit{plain text}, sementara pada kasus \textit{events} akan dikirimkan dalam bentuk \textit{JSON}.
+\end{itemize}
 
 \section{Node.js}
 \label{sec:Node.js}
+
+
 
 
 \section{Express.js}
