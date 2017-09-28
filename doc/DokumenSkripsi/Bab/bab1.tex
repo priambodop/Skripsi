@@ -9,7 +9,7 @@
 
 Salah satu teknologi yang memanfaatkan protokol \textit{WebSockets} adalah \textit{Socket.io}. Teknologi ini memungkinkan untuk melakukan komunikasi secara \textit{realtime}, dan dua arah antara \textit{client} dan \textit{server}. Socket.io memiliki dua bagian: \textit{client-side library} yang berjalan didalam \textit{web browser}, dan \textit{server-side library} yang berjalan pada \textit{Node.js}. \textit{Socket.io} memiliki fitur-fitur yang beragam, seperti melakukan broadcast ke beberapa \textit{sockets}, dan menyimpan data yang berhubungan dengan masing-masing \textit{client}. Teknologi ini sangat berguna untuk membantu membangun sebuah aplikasi yang membutuhkan koneksi \textit{realtime} seperti dalam aplikasi \textit{chatting} maupun \textit{game}.
 
-Untuk memanfaatkan protokol \textit{WebSockets} dalam membangun aplikasi permainan, akan dibutuhkan beberapa teknologi yang dapat membantu pembangunan aplikasinya. Salah satu teknologi tersebut yaitu \textit{HTML5 Canvas}. Teknologi ini merupakan bagian dari \textit{HTML5 element} yang dapat digunakan untuk menggambar suatu grafis melalui \textit{JavaScript} secara \textit{on the fly}. \textit{HTML5 Canvas} dapat juga digunakan untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processing} atau \textit{rendering}. Oleh karena itu, fungsi-fungsi yang ada pada \textit{HTML5 Canvas} akan membantu pembangunan aplikasi permainan terutama pada bagian pengembangan grafis pada aplikasinya.
+Untuk memanfaatkan protokol \textit{WebSockets} dalam membangun aplikasi permainan, akan dibutuhkan beberapa teknologi yang dapat membantu pembangunan aplikasinya. Salah satu teknologi tersebut yaitu \textit{Canvas API}. Teknologi ini merupakan bagian dari \textit{HTML5 element} yang dapat digunakan untuk menggambar suatu grafis melalui \textit{JavaScript} secara \textit{on the fly}. \textit{Canvas API} dapat juga digunakan untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processing} atau \textit{rendering}. Oleh karena itu, fungsi-fungsi yang ada pada \textit{Canvas API} akan membantu pembangunan aplikasi permainan terutama pada bagian pengembangan grafis pada aplikasinya.
 
 Teknologi lain yang dapat membantu membangun aplikasi permainan dalam memanfaatkan protokol \textit{WebSockets} yaitu \textit{Node.js}. Teknologi ini merupakan sebuah \textit{platform} yang didesain untuk mengembangkan aplikasi berbasis web pada bagian \textit{web server}. \textit{Node.js} ditulis dalam sintaks bahasa pemrograman \textit{JavaScript} dan menggunakan \textit{V8} yang merupakan \textit{engine JavaScript} milik perusahaan \textit{Google} untuk mengeksekusi \textit{JavaScript} pada \textit{web server}. \textit{Node.js} memiliki sifat \textit{non-blocking}, yang berarti \textit{Node.js} tidak akan menunggu untuk mengerjakan \textit{request} selanjutnya. \textit{Node.js} pun sangat cepat dalam mengeksekusi suatu kode karena menggunakan \textit{engine JavaScript V8}. Fitur-fitur yang dimiliki oleh \textit{Node.js} akan sangat membantu untuk membangun aplikasi permainan yang membutuhkan koneksi \textit{real-time}.
 
@@ -57,8 +57,9 @@ Metodologi yang dilakukan dalam pengerjaan skripsi ini adalah sebagai berikut:
 		\begin{itemize}
 			\item \textit{WebSockets} yang akan digunakan untuk koneksi antara \textit{smartphone} dan \textit{PC}.
 			\item \textit{Socket.io} sebagai teknologi yang akan menggunakan \textit{WebSockets} dalam pembangunan aplikasi.
-			\item \textit{HTML5 Canvas} yang akan digunakan untuk antarmuka permainan.
-			\item \textit{NodeJs} sebagai \textit{web server} dalam pembangunan aplikasi. 	
+			\item \textit{Canvas API} yang akan digunakan untuk antarmuka permainan.
+			\item \textit{Node.js} sebagai \textit{web server} dalam pembangunan aplikasi. 	
+			\item \textit{Express.js} sebagai \textit{Node.js framework} yang akan digunakan untuk mengatur penyimpanan data dalam \textit{Node.js}
 		\end{itemize}
 	\item Menganalisis aplikasi sejenis.
 	\item Merancang antarmuka permainan pada \textit{PC} dan \textit{smartphone}. Antarmuka pada \textit{PC} akan berbeda dengan yang ada di \textit{smartphone}, karena \textit{smartphone} akan bekerja sebagai \textit{controller} dan \textit{PC} akan bekerja sebagai \textit{console}.
@@ -77,7 +78,7 @@ Setiap bab dalam skripsi ini memiliki sistematika penulisan yang dijelaskan keda
 	Membahas mengenai gambaran umum penelitian ini. Berisi tentang latar belakang, rumusan masalah, tujuan, batasan masalah, metode penelitian, dan sistematika penulisan.
 	
 	\item Bab 2 : Dasar Teori \\
-	Membahas mengenai teori-teori yang mendukung berjalannya penelitian ini. Berisi tentang \textit{WebSockets}, \textit{Socket.io}, \textit{NodeJs}, dan \textit{HTML5Canvas}.
+	Membahas mengenai teori-teori yang mendukung berjalannya penelitian ini. Berisi tentang \textit{WebSockets}, \textit{Socket.io}, \textit{Node.js},  \textit{Express.js}, dan \textit{Canvas API}.
 	
 	\item Bab 3 : Analisis \\
 	Membahas mengenai analisa masalah.

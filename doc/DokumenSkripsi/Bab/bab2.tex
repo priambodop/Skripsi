@@ -2,15 +2,12 @@
 \chapter{Landasan Teori}
 \label{chap:teori}
 
-Pada bab ini akan dijelaskan landasan teori mengenai \textit{WebSockets API}, \textit{Socket.io}, \textit{Node.js}, \textit{Express.js}, dan \textit{Canvas API}.
+Pada bab ini akan dijelaskan landasan teori mengenai \textit{WebSockets}, \textit{Socket.io}, \textit{Node.js}, \textit{Express.js}, dan \textit{Canvas API}.
 
 \section{WebSockets}
 \label{sec:WebSockets} 
 
-\subsection{Interface}
-	\begin{itemize}
-		\item \textit{Websocket}
-	\end{itemize}
+\textit{WebSockets} merupakan \textit{Application Programming Interface (API)} yang memungkinkan sebuah aplikasi mengirim pesan kepada \textit{server} dan mendapatkan \textit{response} tanpa harus melakukan \textit{polling} terlebih dahulu. \textit{WebSockets} ditulis dalam sintaks bahasa pemrograman \textit{JavaScript}. \textit{WebSockets} memiliki beberapa fitur yang akan membantu pembangunan sebuah aplikasi yang membutuhkan koneksi \textit{real-time}. Fitur-fitur tersebut akan dijelaskan sebagai berikut.
 
 \subsection{WebSocket Events}
 
@@ -19,10 +16,14 @@ Pada bab ini akan dijelaskan landasan teori mengenai \textit{WebSockets API}, \t
 Sebuah objek \textit{WebSocket} dapat mengirimkan empat \textit{events} yang berbeda, yaitu : 
 	
 	\begin{itemize}
-		\item Open
-		\item Message
-		\item Error
-		\item Close
+		\item Open \\
+		Setelah \textit{WebSocket server} memberikan respon pada \textit{connection request}, sebuah \textit{open event} akan berjalan dan koneksi akan dibuat. Setelah hal tersebut terjadi, maka \textit{server} telah berhasil melakukan koneksi dan siap untuk mengirim atau menerima suatu pesan dari aplikasi \textit{client}.
+		\item Message \\
+		Setelah berhasil melakukan koneksi pada \textit{WebSocket server}, maka sudah bisa mengirim atau menerima pesan tertentu. \textit{WebSocket API} akan menyediakan suatu fungsi \textit{onmessage} untuk mengolah pesan yang utuh untuk dikirimkan.
+		\item Error \\
+		Saat terjadi kesalahan yang disebabkan oleh suatu hal, \textit{error event} akan dieksekusi. Saat kesalahan terjadi, dapat diasumsikan bahwa koneksi \textit{WebSocket} akan tertutup dan \textit{close event} akan dieksekusi.
+		\item Close \\
+		\textit{Event} ini akan dieksekusi pada saat sebuah koneksi \textit{WebSocket} akan ditutup. Setelah koneksi ditutup, maka komunikasi antara \textit{client} serta \textit{server} tidak akan berlanjut.
 	\end{itemize}
 
 \subsection{WebSocket Methods}
@@ -32,9 +33,8 @@ Suatu objek \textit{WebSocket} memiliki dua \textit{method}, yaitu \textit{send(
 	\item send() \\
 	Setelah aplikasi melakukan koneksi menggunakan \textit{WebSocket}, maka aplikasi tersebut dapat mengirimkan metode \textit{send()} selama koneksi tetap terbuka. Sebuah aplikasi akan menggunakan \textit{send()} untuk mengirimkan pesan dari \textit{client} menuju \textit{server}. 
 	
-	
 	\item close()
-	
+	Koneksi \textit{WebSocket} dapat dihentikan dengan menggunakan \textit{close() method}. Setelah \textit{method} ini dipanggil, tidak akan ada data yang dikirim atau diterima dari koneksi tersebut. Dalam menutup sebuah koneksi, \textit{close() method} dapat menerima parameter berupa indikasi kepada server yang menunjukan mengapa koneksi tersebut ditutup. Hal itu dilakukan agar dapat lebih mudah dibaca oleh pengguna.
 	
 \end{itemize}
 
@@ -64,7 +64,9 @@ Format yang sudah dispesifikasi oleh \textit{socket.io} bertujuan untuk menentuk
 \section{Node.js}
 \label{sec:Node.js}
 
-\textit{Node.js} merupakan sebuah platform yang didesain untuk mengembangkan aplikasi berbasis web pada bagian \textit{web server}. \textit{Node.js} ditulis dalam sintaks bahasa pemrograman \textit{JavaScript} dan memiliki sifat \textit{non-blocking} yang berarti \textit{Node.js} tidak akan menunggu untuk mengerjakan \textit{request} selanjutnya. Agar dapat menggunakan \textit{Node.js}, 
+\textit{Node.js} merupakan sebuah platform yang didesain untuk mengembangkan aplikasi berbasis web pada bagian \textit{web server}. \textit{Node.js} ditulis dalam sintaks bahasa pemrograman \textit{JavaScript} dan memiliki sifat \textit{non-blocking} yang berarti \textit{Node.js} tidak akan menunggu untuk mengerjakan \textit{request} selanjutnya. \textit{Node.js} dapat berjalan pada berbagai sistem operasi, seperti \textit{OS X}, \textit{Windows}, dan \textit{Linux}. Dengan begitu, tidak ada batasan dan perbedaan dalam menjalankan fungsi-fungsi yang ada pada berbagai sistem operasi.
+
+
 
 
 \section{Express.js}
