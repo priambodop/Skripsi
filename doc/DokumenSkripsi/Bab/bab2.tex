@@ -63,30 +63,105 @@ Beberapa properti yang dimiliki oleh kelas ini yaitu :
 \end{itemize}
 
 
-%-------------REVISED LIMIT OF WEBSOCKETS---------%
+%-------------REVISED LIMIT OF WEBSOCKETS---------
 
 \section{Socket.io}
 \label{sec:Socket.io}
 
-\textit{Socket.io} merupakan \textit{JavaScript library} yang digunakan pada aplikasi web untuk melakukan koneksi secara \textit{realtime}. Teknologi ini memiliki dua bagian \textit{library}: bagian \textit{client} yang dijalankan pada \textit{web browser}, dan bagian \textit{server} yang jalankan untuk \textit{Node.js}. \textit{Socket.io} memiliki fitur-fitur yang beragam, seperti melakukan \textit{broadcast} ke beberapa \textit{sockets}, dan menyimpan data yang berhubungan dengan masing-masing \textit{client}.
+\textit{Socket.io} merupakan salah satu teknologi yang memanfaatkan protokol \textit{WebSockets}. Teknologi ini memungkinkan sebuah aplikasi untuk melakukan komunikasi dua arah secara \textit{real-time}. \textit{Socket.io} dapat dijalankan di setiap \textit{platform, browser}, dan gawai.
 
-\subsection{Connection}
-Koneksi yang dimulai oleh \textit{Socket.io} dilakukan dengan cara \textit{handshake}. Hal tersebut merupakan bagian yang penting dalam protokol. \textit{Handshake} hanya dilakukan hanya pada saat memulai koneksi, pesan-pesan atau hal lain dalam protokol akan dikirimkan melalui \textit{socket}. 
+\textit{Socket.io} dibagi menjadi dua \textit{API}, yaitu \textit{Server API} dan \textit{Client API}. Subbab-subbab berikut menjelaskan kelas-kelas yang dimiliki \textit{Socket.io}.
 
+\subsection{Server API}
+Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi dalam \textit{server}. Berikut kelas-kelas yang ada pada \textit{Server API}.
 
-\subsection{Messages}
-Apabila koneksi telah dilakukan, seluruh komunikasi antara \textit{client} dan \textit{server} akan menggunakan pesan(\textit{message}) melalui \textit{socket}. Pesan yang akan dikirimkan harus diubah kedalam format yang sudah dispesifikasi oleh \textit{socket.io}.
-
-Format yang sudah dispesifikasi oleh \textit{socket.io} bertujuan untuk menentukan jenis pesan dan data yang dikirimkan dalam pesan tersebut. Format pesan yang sudah dispesifikasi yaitu seperti berikut : 
-
-[type] : [id] : [endpoint] (: [data])
+\subsubsection{Server}
+Kelas ini memiliki \textit{constructor} sebagai berikut : \\ \textbf{Server(httpServer[, options])}
+	\begin{itemize}
+		\item \textbf{httpServer}, merupakan \textit{server} yang akan dituju.
+		\item \textbf{options}, merupakan parameter pilihan yang dapat berisi objek-objek seperti : 
+			\begin{itemize}
+				\item \textbf{path}, sebuah \textit{string} yang merepresentasikan nama dari \textit{path} yang akan dituju.
+				\item \textbf{serveClient}, sebuah \textit{boolean} yang menunjukan apakah menangani \textit{files} dari \textit{client}.
+			\end{itemize}
+	\end{itemize}
+	
+Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu : 
 
 \begin{itemize}
-	\item \textit{type}, merupakan satu digit angka integer yang menunjukan jenis pesan yang akan dikirim.
-	\item \textit{id}, merupakan identitas pesan yang terdiri dari beberapa digit angka.
-	\item \textit{endpoint}, merupakan \textit{socket} tujuan yang akan menerima pesan yang sedang dikirim. Apabila tidak ada \textit{endpoint}, maka pesan akan dikirimkan ke \textit{default socket}.
-	\item \textit{data}, merupakan data yang akan dikirim ke \textit{socket} tertentu. Pada kasus \textit{messages}, data akan dikirimkan dalam bentuk \textit{plain text}, sementara pada kasus \textit{events} akan dikirimkan dalam bentuk \textit{JSON}.
+	\item \textbf{path([value])} \\ \textit{Method} ini memiliki parameter \textit{value} yang berupa \textit{string}, dan akan mengembalikan \textit{path} dari server yang akan dituju.
+	\item \textbf{close([callback])} \\ \textit{Method} ini berfungsi untuk menutup koneksi pada \textit{socket.io server}. 
 \end{itemize}
+	
+\subsubsection{Namespace}
+Kelas ini merepresentasikan kumpulan dari \textit{sockets} yang terhubung dalam lingkup tertentu, yang diidentifikasi oleh sebuah \textit{pathname}. \textit{Client} selalu terhubung ke \textit{/} (\textit{namespace} utama), kemudian dapat terhubung ke \textit{namespace} lainnya ketika menggunakan koneksi yang sama.
+
+Beberapa properti yang dimiliki oleh kelas ini yaitu : 
+\begin{itemize}
+	\item \textbf{namespace.name} \\ Sebuah \textit{string} yang merupakan \textit{identifier} pada \textit{namespace}.
+	\item \textbf{namespace.connected} \\ Sebuah \textit{hash} dari objek \textit{Socket} yang terhubung pada \textit{namespace} saat ini.
+	\item \textbf{namespace.adapter} \\ Sebuah adaptor yang digunakan untuk \textit{namespace} tertentu.
+\end{itemize}
+
+\subsubsection{Socket}
+Kelas ini merupakan kelas yang sangat mendasar untuk melakukan interaksi dengan \textit{browser} milik \textit{client}. Sebuah \textit{Socket} dimiliki oleh \textit{Namespace} tertentu (secara \textit{default} menggunakan \textbf{/}).
+
+Beberapa properti yang dimiliki oleh kelas ini yaitu : 
+\begin{itemize}
+	\item \textbf{socket.id} \\ Merupakan tanda pengenal yang unik untuk sesi tertentu.
+	\item \textbf{socket.client} \\ Merupakan \textit{reference} ke objek \textit{Client} tertentu.
+	\item \textbf{socket.request} \\ Merupakan \textit{getter proxy} yang mengembalikan referensi ke \textit{request} yang berasal dari \textit{Client} tertentu.
+\end{itemize}
+
+Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu : 
+\begin{itemize}
+	\item \textbf{socket.send([...args[, ack]])} \\ Berfungsi untuk mengirimkan pesan tertentu.
+	\item \textbf{socket.emit(eventName[, ...args][, ack])} \\ Berfungsi untuk mengeluarkan suatu \textit{event} kepada \textit{socket} yang diidentifikasi oleh nama \textit{event} tersebut.
+	\item \textbf{socket.disconnect(close)} \\ Berfungsi untuk mengakhiri koneksi milik \textit{client} saat ini.
+\end{itemize}
+
+\subsubsection{Client}
+Kelas ini merepresentasikan koneksi \textit{transport} yang masuk. \textit{Client} dapat terhubung dengan beberapa \textit{Sockets} yang termasuk dalam \textit{Namespaces} yang berbeda.
+
+Atribut-atribut yang dimiliki oleh kelas ini yaitu : 
+
+\begin{itemize}
+	\item \textbf{client.conn} \\ Merupakan referensi kepada koneksi \textit{Socket}.
+	\item \textbf{client.request} \\ Berfungsi untuk mengakses \textit{header} dari \textit{request} seperti \textit{Cookie} atau \textit{User-Agent}.
+\end{itemize}
+
+\subsection{Client API}
+Kelas-kelas yang ada pada \textit{Client API} digunakan untuk menangani proses-proses yang terjadi pada bagian \textit{client}. 
+
+Kelas-kelas yang ada pada \textit{Client API} yaitu : 
+
+\subsubsection{Manager}
+Kelas ini memiliki \textit{constructor} sebagai berikut : \\
+
+\textbf{Manager(url[, options])}
+
+\begin{itemize}
+	\item \textbf{url} , merupakan sebuah \textit{string} yang merepresentasikan suatu \textit{url} yang akan dituju.
+	\item \textbf{options}, merupakan suatu objek yang dapat berupa : 
+		\begin{itemize}
+			\item \textbf{path}, merupakan sebuah \textit{string} yang merepresentasikan suatu \textit{path} yang akan dituju dalam bagian \textit{server}.
+			\item \textbf{reconnection}, merupakan sebuah \textit{boolean} yang menunjukan apakah dapat melakukan koneksi ulang secara otomatis atau tidak.
+			\item \textbf{timeout}, merupakan angka yang menunjukan koneksi sudah mencapai \textit{timeout} sebelum terjadi error pada koneksi.
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Socket}
+Kelas ini memiliki atribut \textbf{id}, yang merupakan tanda pengenal unik untuk sesi saat ini.
+
+Beberapa \textit{method} yang dimiliki oleh kelas \textit{Socket} yaitu : 
+
+\begin{itemize}
+	\item \textbf{socket.open()} \\ Berfungsi untuk membuka suatu koneksi \textit{socket} tertentu.
+	\item \textbf{socket.emit(eventName[, ...args][, ack])} \\ Berfungsi untuk mengeluarkan suatu \textit{event} kepada \textit{socket} yang diidentifikasi oleh nama \textit{event} tersebut.
+	\item \textbf{socket.close()} \\ Berfungsi untuk menutup koneksi suatu \textit{socket} secara manual. 
+\end{itemize}
+
+%--------------------- END OF SOCKET.IO -----------------
 
 \section{Node.js}
 \label{sec:Node.js}
