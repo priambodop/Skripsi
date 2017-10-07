@@ -7,36 +7,63 @@ Pada bab ini akan dijelaskan landasan teori mengenai \textit{WebSockets}, \texti
 \section{WebSockets}
 \label{sec:WebSockets} 
 
-\textit{WebSockets} merupakan \textit{Application Programming Interface (API)} yang memungkinkan sebuah aplikasi mengirim pesan kepada \textit{server} dan mendapatkan \textit{response} tanpa harus melakukan \textit{polling} terlebih dahulu. \textit{WebSockets} ditulis dalam sintaks bahasa pemrograman \textit{JavaScript}. \textit{WebSockets} memiliki beberapa fitur yang akan membantu pembangunan sebuah aplikasi yang membutuhkan koneksi \textit{real-time}. Fitur-fitur tersebut akan dijelaskan sebagai berikut.
+\textit{WebSockets} merupakan \textit{Application Programming Interface (API)} yang memungkinkan sebuah aplikasi membuka sesi komunikasi interaktif antara \textit{browser} pengguna dan \textit{server}. Dengan API ini, pengguna dapat mengirim pesan ke \textit{server} dan menerima respon tanpa harus melakukan \textit{polling} pada \textit{server} terlebih dahulu.
 
-\subsection{WebSocket Events}
+Subbab-subbab berikut menjelaskan beberapa kelas dari \textit{WebSockets}.
 
-\textit{WebSockets API} bekerja berdasarkan \textit{events}(kejadian). Kode-kode yang ada pada aplikasi akan memperhatikan suatu \textit{events} pada objek \textit{WebSocket} untuk mengatasi apabila ada data-data yang masuk dan perubahan pada status koneksi. Aplikasi pada \textit{client} tidak perlu melakukan \textit{poll} terhadap \textit{server} untuk memperbarui data. \textit{Events} dan pesan-pesan lainnya akan diterima secara bersamaan saat server mengirimnya.
+\subsection{WebSocket}
+Sebuah objek dari kelas \textit{WebSocket} menyediakan \textit{API} untuk membuat dan mengelola koneksi \textit{WebSocket} ke \textit{server}, dan juga untuk mengirim dan menerima data pada koneksi. Konstruktor pada kelas \textit{WebSocket} menerima satu parameter wajib dan satu parameter pilihan:
 
-Sebuah objek \textit{WebSocket} dapat mengirimkan empat \textit{events} yang berbeda, yaitu : 
-	
-	\begin{itemize}
-		\item Open \\
-		Setelah \textit{WebSocket server} memberikan respon pada \textit{connection request}, sebuah \textit{open event} akan berjalan dan koneksi akan dibuat. Setelah hal tersebut terjadi, maka \textit{server} telah berhasil melakukan koneksi dan siap untuk mengirim atau menerima suatu pesan dari aplikasi \textit{client}.
-		\item Message \\
-		Setelah berhasil melakukan koneksi pada \textit{WebSocket server}, maka sudah bisa mengirim atau menerima pesan tertentu. \textit{WebSocket API} akan menyediakan suatu fungsi \textit{onmessage} untuk mengolah pesan yang utuh untuk dikirimkan.
-		\item Error \\
-		Saat terjadi kesalahan yang disebabkan oleh suatu hal, \textit{error event} akan dieksekusi. Saat kesalahan terjadi, dapat diasumsikan bahwa koneksi \textit{WebSocket} akan tertutup dan \textit{close event} akan dieksekusi.
-		\item Close \\
-		\textit{Event} ini akan dieksekusi pada saat sebuah koneksi \textit{WebSocket} akan ditutup. Setelah koneksi ditutup, maka komunikasi antara \textit{client} serta \textit{server} tidak akan berlanjut.
-	\end{itemize}
+\textbf{WebSocket WebSocket(in DOMString url, in optional DOMString protocols);}
 
-\subsection{WebSocket Methods}
-Suatu objek \textit{WebSocket} memiliki dua \textit{method}, yaitu \textit{send()} dan \textit{close()}.
+\textbf{url}, merupakan parameter wajib yang menunjukan URL mana yang akan direspon oleh \textit{WebSocket server}.
+
+\textbf{protocols}, merupakan parameter pilihan yang dapat berupa satu protokol dengan tipe \textit{string}, atau beberapa protokol dengan tipe \textit{array of strings}. Apabila protokol spesifik tidak dimasukan pada parameter, maka akan diasumsikan sebagai \textit{string} kosong.
+
+Beberapa atribut yang dimiliki oleh kelas \textit{WebSocket} yaitu sebagai berikut :
 
 \begin{itemize}
-	\item send() \\
-	Setelah aplikasi melakukan koneksi menggunakan \textit{WebSocket}, maka aplikasi tersebut dapat mengirimkan metode \textit{send()} selama koneksi tetap terbuka. Sebuah aplikasi akan menggunakan \textit{send()} untuk mengirimkan pesan dari \textit{client} menuju \textit{server}. 
-	
-	\item close()
-	Koneksi \textit{WebSocket} dapat dihentikan dengan menggunakan \textit{close() method}. Setelah \textit{method} ini dipanggil, tidak akan ada data yang dikirim atau diterima dari koneksi tersebut. Dalam menutup sebuah koneksi, \textit{close() method} dapat menerima parameter berupa indikasi kepada server yang menunjukan mengapa koneksi tersebut ditutup. Hal itu dilakukan agar dapat lebih mudah dibaca oleh pengguna.
-	
+	\item \textbf{readyState} \\ Atribut ini menunjukan status dari sebuah koneksi.
+	\item \textbf{onclose} \\ Atribut ini merupakan \textit{event listener} yang akan dipanggil pada saat status koneksi \textit{WebSocket} berubah menjadi CLOSED.
+	\item \textbf{onerror} \\ Atribut ini merupakan \textit{event listener} yang akan dipanggil apabila terjadi \textit{error}.
+	\item \textbf{onmessage} \\ Atribut ini merupakan \textit{event listener} yang akan dipanggil apabila pesan dari server telah diterima.
+	\item \textbf{onopen} \\ Atribut ini merupakan \textit{event listener} yang akan dipanggil pada saat status koneksi \textit{WebSocket} berubah menjadi OPEN.
 \end{itemize}
+
+Kelas \textit{WebSocket} memiliki dua buah \textit{method}, yaitu : 
+
+\begin{itemize}
+	\item close() \\ Berfungsi untuk menutup koneksi \textit{WebSocket} atau menghentikan apabila sedang ada proses koneksi. \textit{Method} ini memiliki tipe kembalian \textit{void}, sehingga tidak akan mengembalikan apapun.
+	\item send() \\ Berfungsi untuk mengirim data ke \textit{server} melalui koneksi \textit{WebSocket}. \textit{Method} ini memiliki parameter \textbf{data} yang merupakan sebuah \textit{string} yang akan dikirimkan ke \textit{server}.
+\end{itemize}
+
+\subsection{CloseEvent}
+\textit{CloseEvent} akan dikirim ke \textit{client} menggunakan protokol \textit{WebSockets} ketika koneksi sudah tertutup. \textit{Constructor} dari kelas ini yaitu : \\
+
+\textbf{CloseEvent()} \\
+
+Properti yang dimiliki oleh kelas ini yaitu : 
+
+\begin{itemize}
+	\item \textbf{CloseEvent.code} \\ Mengembalikan sebuah kode untuk menutup koneksi yang dikirimkan oleh \textit{server}.
+	\item \textbf{CloseEvent.reason} \\ Mengembalikan alasan dari koneksi yang telah ditutup oleh \textit{server}
+	\item \textbf{CloseEvent.wasClean} \\ Mengembalikan \textit{boolean} yang mengindikasi apakah sebuah koneksi sudah tertutup sepenuhnya atau belum.
+\end{itemize}
+
+\subsection{MessageEvent}
+Kelas ini merepresentasikan pesan yang diterima oleh suatu objek tertentu. \textit{Constructor} dari kelas ini yaitu : \\
+
+\textbf{MessageEvent()} \\
+
+Beberapa properti yang dimiliki oleh kelas ini yaitu : 
+
+\begin{itemize}
+	\item \textbf{MessageEvent.data} \\ Merupakan data yang telah dikirimkan oleh pengirim.
+	\item \textbf{MessageEvent.lastEventId} \\ Merepresentasikan \textit{ID} yang unik untuk sebuah \textit{Event}.
+\end{itemize}
+
+
+%-------------REVISED LIMIT OF WEBSOCKETS---------%
 
 \section{Socket.io}
 \label{sec:Socket.io}
