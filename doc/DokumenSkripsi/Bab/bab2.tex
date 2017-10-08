@@ -166,16 +166,104 @@ Beberapa \textit{method} yang dimiliki oleh kelas \textit{Socket} yaitu :
 \section{Node.js}
 \label{sec:Node.js}
 
-\textit{Node.js} merupakan sebuah platform yang didesain untuk mengembangkan aplikasi berbasis web pada bagian \textit{web server}. \textit{Node.js} ditulis dalam sintaks bahasa pemrograman \textit{JavaScript} dan memiliki sifat \textit{non-blocking} yang berarti \textit{Node.js} tidak akan menunggu untuk mengerjakan \textit{request} selanjutnya. \textit{Node.js} dapat berjalan pada berbagai sistem operasi, seperti \textit{OS X}, \textit{Windows}, dan \textit{Linux}. Dengan begitu, tidak ada batasan dan perbedaan dalam menjalankan fungsi-fungsi yang ada pada berbagai sistem operasi.
+\textit{Node.js} adalah \textit{JavaScript runtime} yang dibangun berdasarkan \textit{V8} yang merupakan \textit{JavaScript engine} milik perusahaan \textit{Google}. \textit{Node.js} memiliki model \textit{event-driven}, dan \textit{non-blocking I/O} yang membuat teknologi tersebut efisien dalam implementasinya. Teknologi ini menyediakan beberapa modul atau kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
+
+Beberapa kelas yang terdapat pada \textit{Node.js} yaitu sebagai berikut : 
+
+\subsection{Console}
+\textit{Console} merupakan perangkat \textit{debugging} yang memiliki persamaan dengan mekanisme \textit{JavaScript} yang disediakan oleh \textit{web browsers}. Kelas ini dapat digunakan untuk membuat \textit{logger} sederhana dengan \textit{output streams} yang dapat dikonfigurasi. Agar dapat menggunakan kelas ini, dapat dilakukan langkah berikut : 
+
+\begin{itemize}
+	\item \textbf{require('console').Console} atau
+	\item \textbf{console.Console}
+\end{itemize}
+
+Salah satu \textit{method} yang dimiliki oleh kelas ini yaitu : 
+
+\begin{itemize}
+	\item \textbf{console.log()} \\ Akan mengeluarkan beberapa argumen pada \textit{stdout (standard output)}.
+\end{itemize}
+
+\subsection{File System}
+Modul ini berfungsi untuk menangani proses pengaturan \textit{file} pada \textit{server}. Untuk dapat menggunakan modul ini diperlukan \textbf{require('fs')} agar dapat mengakses fitur-fitur yang ada.
+
+Salah satu kelas yang terdapat pada \textit{File System} yaitu : 
+
+\subsubsection{fs.WriteStream}
+Kelas ini memiliki beberapa \textit{method} sebagai berikut : 
+
+\begin{itemize}
+	\item \textbf{fs.appendFile(file, data[, options],callback)} \\ Berfungsi untuk menambahkan suatu data kedalam \textit{file}, dan membuat \textit{file} baru apabila \textit{file} yang dituju belum tersedia.
+	\item \textbf{fs.readFile(file[, options], callback)} \\ Berfungsi untuk membaca seluruh konten dari suatu \textit{file}.
+\end{itemize}
+
+\subsection{HTTP}
+\textit{HTTP} dalam \textit{Node.js} berfungsi untuk mendukung berbagai fitur dari protokol tersebut yang sulit untuk digunakan. 
+
+Salah satu kelas yang terdapat pada \textit{HTTP} yaitu : 
+
+\subsubsection{http.Server}
+Kelas ini memiliki beberapa \textit{method} sebagai berikut : 
+
+\begin{itemize}
+	\item \textbf{server.close([callback])} \\ Berfungsi untuk menghentikan \textit{server} dalam menerima koneksi-koneksi baru.
+	\item \textbf{server.listen(handle[, callback])} \\ Berfungsi agar \textit{server} dapat menerima koneksi baru dari objek \textit{handle}.
+\end{itemize}
 
 
-
-
+%------------- END OF NODE.JS -------------- 
 \section{Express.js}
 \label{sec:Express.js}
 
-Express.js merupakan sebuah \textit{framework} aplikasi web untuk \textit{Node.js}. Express.js menyediakan fitur-fitur yang membuat pengembangan aplikasi web dapat bertahan lama. Teknologi ini pun merupakan modul \textit{node package manager (npm)} yang menjadi ketergantungan dalam suatu aplikasi. Agar dapat berjalan, seluruh \textit{file} yang dimiliki oleh \textit{framework} ini harus berada pada \textit{node\_modules} lokal dalam suatu projek tertentu. 
+\textit{Express.js} merupakan \textit{framework} aplikasi web untuk \textit{Node.js}. \textit{Express.js} menyediakan fitur-fitur untuk web dan aplikasi \textit{mobile} agar dapat bertahan lama. Untuk dapat menggunakan \textit{Express.js}, dapat dilakukan langkah sebagai berikut : 
+\begin{itemize}
+	\item \textbf{var express = require('express')}
+\end{itemize}
 
+Dengan begitu, fitur-fitur yang terdapat pada \textit{Express.js} dapat digunakan untuk pengembangan aplikasi tertentu.
+
+subbab-subbab berikut akan menjelaskan kelas-kelas yang terdapat pada \textit{Express.js}.
+
+\subsection{Application}
+Sebuah objek dari kelas \textit{Application} akan dapat menangani masalah aplikasi dalam pengembangannya. 
+
+Beberapa \textit{method} yang terdapat pada kelas ini yaitu : 
+\begin{itemize}
+	\item \textbf{app.get()} \\ Berfungsi untuk mengembalikan nama dari sebuah aplikasi tertentu.
+	\item \textbf{app.listen(path, [callback])} \\ Berfungsi untuk melakukan koneksi ke suatu \textit{path} yang diberikan.
+	\item \textbf{app.path()} \\ Berfungsi untuk mengembalikan \textit{path} tertentu yang dituju.
+\end{itemize}
+
+\subsection{Request}
+Sebuah objek dari kelas \textit{Request} akan merepresentasikan \textit{HTTP request} dan memiliki properti untuk \textit{request query} seperti \textit{body, HTTP headers} dan \textit{parameters}. 
+
+Beberapa \textit{method} yang ada pada kelas \textit{Request} yaitu : 
+\begin{itemize}
+	\item \textbf{req.accepts(types)} \\ Berfungsi untuk memeriksa apakah tipe konten tertentu dapat diterima atau tidak.
+	\item \textbf{req.get(field)} \\ Berfungsi untuk mengembalikan \textit{HTTP request header} tertentu.
+	\item \textbf{req.is(type)} \\ Berfungsi untuk mengembalikan apakah benar atau salah \textit{type} pada parameter sama dengan status \textit{Content-Type} pada \textit{HTTP header}.
+\end{itemize}
+
+\subsection{Response}
+Sebuah objek dari kelas \textit{Response} akan merepresentasikan respon \textit{HTTP} yang dikirim oleh \textit{Express} pada saat menerima \textit{HTTP request}.
+
+Beberapa \textit{method} yang terdapat pada kelas \textit{Response} yaitu : 
+
+\begin{itemize}
+	\item \textbf{res.append(field[, value])} \\ Berfungsi untuk menambahkan \textit{value} tertentu pada \textit{HTTP response header}.
+	\item \textbf{res.get(field)} \\ Berfungsi untuk mengembalikan \textit{HTTP response header} yang dispesifikasikan oleh \textit{field}.
+\end{itemize}
+
+\subsection{Router}
+Objek dari kelas \textit{Router} merupakan \textit{instance} dari \textit{middleware} dan \textit{routes}. Setiap aplikasi \textit{Express} memiliki \textit{router} secara \textit{built-in}. 
+
+Salah satu \textit{method} yang dimiliki oleh kelas \textit{Router} yaitu : 
+
+\begin{itemize}
+	\item \textbf{router.route(path)} \\ Berfungsi untuk mengembalikan sebuah \textit{instance} dari satu \textit{route} yang dapat digunakan untuk menangani \textit{HTTP verbs} dengan sebuah \textit{middleware} opsional.
+\end{itemize}
+
+%------------- END OF EXPRESS.JS--------------- 
 
 \section{Canvas API}
 \label{sec:Canvas API}
