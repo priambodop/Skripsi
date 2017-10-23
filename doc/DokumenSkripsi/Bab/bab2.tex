@@ -12,13 +12,17 @@ Pada bab ini akan dijelaskan landasan teori mengenai \textit{WebSockets}, \texti
 Subbab-subbab berikut menjelaskan beberapa kelas dari \textit{WebSockets}.
 
 \subsection{WebSocket}
-Sebuah objek dari kelas \textit{WebSocket} menyediakan \textit{API} untuk membuat dan mengelola koneksi \textit{WebSocket} ke \textit{server}, dan juga untuk mengirim dan menerima data pada koneksi. Konstruktor pada kelas \textit{WebSocket} menerima satu parameter wajib dan satu parameter pilihan:
+Sebuah objek dari kelas \textit{WebSocket} menyediakan \textit{API} untuk membuat dan mengelola koneksi \textit{WebSocket} ke \textit{server}, dan juga untuk mengirim dan menerima data pada koneksi. \textit{Constructor} pada kelas \textit{WebSocket} menerima satu parameter wajib dan satu parameter pilihan. 
+
+Berikut merupakan \textit{constructor} dari kelas \textit{WebSocket} : 
 
 \textbf{WebSocket WebSocket(in DOMString url, in optional DOMString protocols);}
-
-\textbf{url}, merupakan parameter wajib yang menunjukan URL mana yang akan direspon oleh \textit{WebSocket server}.
-
-\textbf{protocols}, merupakan parameter pilihan yang dapat berupa satu protokol dengan tipe \textit{string}, atau beberapa protokol dengan tipe \textit{array of strings}. Apabila protokol spesifik tidak dimasukan pada parameter, maka akan diasumsikan sebagai \textit{string} kosong.
+\begin{itemize}
+	\item \textbf{url}, merupakan parameter wajib yang menunjukan URL mana yang akan direspon oleh \textit{WebSocket server}.
+	
+	\item \textbf{protocols}, merupakan parameter pilihan yang dapat berupa satu protokol dengan tipe \textit{string}, atau beberapa protokol dengan tipe \textit{array of strings}. Apabila protokol spesifik tidak dimasukan pada parameter, maka akan diasumsikan sebagai \textit{string} kosong.
+	
+\end{itemize}
 
 Beberapa atribut yang dimiliki oleh kelas \textit{WebSocket} yaitu sebagai berikut :
 
