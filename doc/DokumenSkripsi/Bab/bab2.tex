@@ -272,53 +272,102 @@ Salah satu \textit{method} yang dimiliki oleh kelas \textit{Router} yaitu :
 \section{Canvas API}
 \label{sec:Canvas API}
  
-Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web. Teknologi ini memiliki fitur untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processiong} atau \textit{rendering}. Untuk dapat menggunakan elemen \textit{canvas} harus menambahkan \textit{tag} <canvas> pada suatu halaman \textit{HTML}. \textit{Tag} <canvas> memiliki tiga atribut utama dimana atribut tersebut terdapat didalam kurung lancip pada \textit{HTML tag}. Atribut-atribut tersebut yaitu : 
+Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web. Teknologi ini memiliki fitur untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processiong} atau \textit{rendering}. 
+
+Subbab-subbab berikut menjelaskan tentang beberapa \textit{interface} dari \textit{Canvas}.
+
+\subsection{HTMLCanvasElement}
+\textit{Interface} ini menyediakan beberapa properti dan \textit{method} untuk memanipulasi tata letak dan tampilan dari elemen \textit{canvas}.
+
+Beberapa properti yang dimiliki oleh \textit{HTMLCanvasElement} yaitu : 
 
 \begin{itemize}
-	\item id \\
-	Merupakan nama yang akan digunakan sebagai referensi dalam kode JavaScript. Dimana nantinya nama tersebut akan merujuk ke \textit{tag} <canvas> yang memiliki nama yang sama.
-	\item width \\
-	Merupakan lebar dari \textit{canvas} yang dibuat.
-	\item height \\
-	Merupakan tinggi dari \textit{canvas} yang dibuat.
+	\item \textbf{HTMLCanvasElement.height} \\ Merupakan bilangan integer positif yang merepresentasikan tinggi dari atribut \textit{HTML} pada elemen \textit{canvas} yang diinterpretasikan dalam piksel \textit{CSS}. Apabila atribut tidak didefinisikan, atau atribut diisi dengan nilai negatif, maka akan digunakan nilai \textit{default} yaitu 150.
+	\item \textbf{HTMLCanvasElement.width} \\ Merupakan bilangan integer positif yang merepresentasikan lebar dari atribut \textit{HTML} pada elemen \textit{canvas} yang diinterpretasikan dalam piksel \textit{CSS}. Apabila atribut tidak didefinisikan, atau atribut diisi dengan nilai negatif, maka akan digunakan nilai \textit{default} yaitu 300.
 \end{itemize}
 
-Menggunakan \textit{Canvas API} membutuhkan dasar yang kuat dalam menggambar , dan merubah bentuk-bentuk dasar dua dimensi. Berikut merupakan bentuk-bentuk dasar dua dimensi yang dapat digambar pada \textit{canvas}.
+Beberapa \textit{method} yang dimiliki oleh \textit{HTLMCanvasElement} yaitu : 
 
 \begin{itemize}
-	\item Rectangle \\
-	Untuk menggambar suatu \textit{rectangle} (persegi), \textit{canvas} menyediakan tiga \textit{method} yaitu sebagai berikut:
-	\begin{itemize}
-		\item fillRect(x,y,width,height) \\
-		Menggambar persegi dengan warna yang penuh mengisi bagian dalam persegi pada posisi x,y dengan ukuran persegi \textit{width} dan \textit{height}.
-		\item strokeRect(x,y,width,height) \\
-		Menggambar garis luar persegi pada posisi x,y dengan ukuran persegi \textit{width} dan \textit{height}.
-		\item clearRect(x,y,width,height) \\
-		Mengosongkan area tertentu dan membuat area tersebut transparan pada posisi x,y dengan ukuran persegi \textit{width} dan \textit{height}.
-	\end{itemize}
+	\item \textbf{HTMLCanvasElement.getContext()} \\ \textit{Method} ini akan mengembalikan konteks \textit{drawing} pada \textit{canvas}, atau mengembalikan \textit{null} apabila konteks \textit{ID} tidak tersedia. Konteks \textit{drawing} berfungsi untuk dapat menggambar pada \textit{canvas}.
+	\item \textbf{HTMLCanvasElemen.toBlob()} \\ \textit{Method} ini akan membuat objek \textit{Blob} yang merepresentasikan gambar yang ada pada \textit{canvas}. 
 	
-	\item Paths\\
-	Paths merupakan \textit{method} yang digunakan untuk menggambar seluruh bentuk pada \textit{canvas}. Path merupakan kumpulan titik, dan garis yang digambar diantara titik-titik tersebut. Untuk menggunakan path pada \textit{canvas}, dibutuhkan dua fungsi utama. Fungsi tersebut yaitu beginPath(), yang akan mulai membuka suatu path pada canvas, fungsi lainnya yaitu closePath(), yang akan menutup suatu path pada canvas.
-	
-	\item Arcs \\
-	Sebuah \textit{arc} (garis lengkung) dapat berupa suatu lingkaran utuh atau bagian dari lingkaran tertentu. Untuk menggambar sebuah garis lengkung, \textit{Canvas API} menyediakan beberapa fungsi yang dapat digunakan. Salah satu fungsi tersebut yaitu: 
-	
-	arc(x, y, radius, startAngle, endAngle, anticlockwise).
-	
-	Nilai x dan y merupakan titik pusat dari lingkaran, dan radius merupakan jarak dari titik pusat ke suatu titik tertentu dimana garis lengkung akan digambar.\textit{startAngle} dan \textit{endAngle} ada dalam satuan radian, bukan derajat. \textit{anticlockwise} merupakan suatu \textit{boolean} yang menandakan apakah garis lengkung tersebut akan searah jarum jam atau tidak.
 \end{itemize}
 
-Selain menggambar suatu bentuk tertentu, pada \textit{canvas} pun dapat memberi warna pada bentuk yang sudah dibuat. \textit{Canvas API} memiliki properti yang digunakan untuk memberi warna dasar pada bagian dalam suatu bentuk di \textit{canvas} yang bernama fillStyle. Contoh penggunaan properti tersebut sebagai berikut:
 
-context.fillStyle = ''red'';
+\subsection{CanvasRenderingContext2D}
+\textit{Interface} ini digunakan untuk menggambar persegi panjang, teks, gambar, dan objek-objek lain kedalam elemen \textit{canvas}. \textit{CanvasRenderingContext2D} menyediakan konteks \textit{2D rendering} untuk suatu elemen \textit{<canvas>}.
+Untuk mendapatkan objek dari \textit{interface} ini, harus memanggil \textit{getContext()} didalam elemen \textit{<canvas>}, dengan memberi ''2d'' sebagai argumen. Berikut contoh penggunaannya :
 
-Langkah tersebut akan memberikan warna merah pada suatu bentuk tertentu. Selain itu, ada beberapa cara yang dapat dilakukan untuk memberikan warna dasar pada suatu bentuk. Cara tersebut dijelaskan sebagai berikut:
+\begin{lstlisting}
+	var canvas = document.getElementById('myCanvas');
+	var ctx = canvas.getContext('2d');
+\end{lstlisting}
 
-context.fillStyle = ''rgb(255,0,0)'';\\
-\textit{Method} rgb() akan menggunakan nilai RGB 24-bit pada saat memberikan warna pada suatu bentuk tertentu.\\
+\subsubsection{Rectangles}
+Ada tiga \textit{method} yang dapat digunakan untuk menggambar bentuk persegi panjang:
 
-context.fillStyle = ''\#ff0000'';\\
-Properti ini dapat menerima bilangan hex dalam bentuk \textit{string}.\\
+\begin{itemize}
+	\item \textbf{CanvasRenderingContext2D.clearRect()} \\ Berfungsi untuk mengatur semua piksel dalam persegi panjang yang didefinisikan dengan titik awal (x,y) dan ukuran (lebar, tinggi) menjadi hitam transparan, dan menghapus semua konten yang telah digambar sebelumnya.
+	\item \textbf{CanvasRenderingContext2D.fillRect()} \\ Berfungsi untuk menggambar persegi panjang dengan berisi warna tertentu, pada posisi (x,y) dengan ukuran yang ditentukan dari \textit{width} dan \textit{height}.
+	\item \textbf{CanvasRenderingContext2D.strokeRect()} \\ Berfungsi untuk menggambar hanya garis luar dari persegi panjang, pada posisi (x,y) dengan ukuran yang ditentukan dari \textit{width} dan \textit{height}.
+\end{itemize}
 
-context.fillStyle = ''rgba(255,0,0,1)'';\\
-\textit{Method} rgba() akan menggunakan nilai 32-bit dengan nilai 8 bit di akhir yang merepresentasikan nilai \textit{alpha} pada suatu warna. 
+\subsubsection{Text}
+Berikut merupakan beberapa \textit{method} yang digunakan untuk menggambar suatu teks:
+
+\begin{itemize}
+	\item \textbf{CanvasRenderingContext2D.fillText()} \\ Menggambar teks tertentu pada posisi (x,y).
+	\item \textbf{CanvasRenderingContext2D.strokeText()} \\ Menggambar garis luar dari suatu teks pada posisi (x,y).
+\end{itemize}
+
+\subsubsection{Line Styles}
+Berikut merupakan beberapa properti yang digunakan untuk mengatur bagaimana sebuah garis akan digambar:
+
+\begin{itemize}
+	\item \textbf{CanvasRenderingContext2D.lineWidth} \\ Properti yang merepresentasikan tebal dari suatu garis. Nilai \textit{default} dari properti ini yaitu 1.0.
+	\item \textbf{CanvasRenderingContext2D.lineCap} \\ Berfungsi untuk menentukan jenis ujung dari suatu garis. Nilai dari properti ini dapat berupa \textit{round}, \textit{square}, atau \textit{butt}. 
+\end{itemize}
+
+\subsubsection{Text Styles}
+Berikut merupakan beberapa properti yang digunakan untuk mengatur bagaimana suatu teks digambar.
+
+\begin{itemize}
+	\item \textbf{CanvasRenderingContext2D.font} \\ Berfungsi untuk mengatur jenis \textit{font} yang akan digunakan. Nilai \textit{default} dari properti ini yaitu 10px \textit{sans-serif}.
+	\item \textbf{CanvasRenderingContext2D.textAlign} \\ Berfungsi untuk mengatur penjajaran dari suatu teks.
+	\item \textbf{CanvasRenderingContext2D.direction} \\  Berfungsi untuk mengatur arah dari teks tertentu. Nilai dari properti ini dapat berupa kiri-ke-kanan, atau kanan-ke-kiri.
+\end{itemize}
+
+\subsubsection{Fill and Stroke Styles}
+\textit{Fill style} digunakan untuk memanipulasi warna dan \textit{style} pada suatu bentuk, dan \textit{stroke style} digunakan untuk memanipulasi garis luar pada suatu bentuk.
+
+\begin{itemize}
+	\item \textbf{CanvasRenderingContext2D.fillStyle} \\ Berfungsi untuk memberi warna yang akan digunakan didalam suatu bentuk tertentu.
+	\item \textbf{CanvasRenderingContext2D.strokeStyle} \\ Berfungsi untuk memberi warna yang akan digunakan pada garis luar suatu bentuk tertentu.
+\end{itemize}
+
+\subsubsection{Gradients and Patterns}
+
+\begin{itemize}
+	\item \textbf{CanvasRenderingContext2D.createLinearGradient()} \\ Berfungsi untuk membuat \textit{linear gradient} sepanjang garis pada koordinat tertentu.
+	\item \textbf{CanvasRenderingContext2D.createRadialGradient()} \\ Berfungsi untuk membuat \textit{radial gradient} pada koordinat tertentu.
+	\item \textbf{CanvasRenderingContext2D.createPattern()} \\ Berfungsi untuk membuat pola dengan menggunakan gambar yang sudah didefinisikan sebelumnya.
+\end{itemize}
+
+\subsubsection{Paths}
+Beberapa \textit{method} berikut ini dapat digunakan untuk memanipulasi \textit{path} dari suatu objek:
+
+\begin{itemize}
+	\item \textbf{CanvasRenderingContext2D.beginPath()} \\ Berfungsi untuk memulai \textit{path} baru dengan mengosongkan daftar dari \textit{sub-paths}.
+	\item \textbf{CanvasRenderingContext2D.closePath()} \\ Berfungsi untuk memindahkan posisi ujung \textit{pen} ke titik awal dari \textit{sub-path} saat ini.
+	\item \textbf{CanvasRenderingContext2D.moveTo()} \\ Berfungsi untuk memindahkan posisi ujung \textit{pen} saat ini ke koordinat (x,y).
+	\item \textbf{CanvasRenderingContext2D.lineTo()} \\ Berfungsi untuk menghubungkan titik terakhir pada \textit{sub-path} ke koordinat (x,y).
+	\item \textbf{CanvasRenderingContext2D.arc()} \\ Berfungsi untuk menambahkan garis lengkung ke \textit{path} yang berpusat pada posisi (x,y) dengan radius \textit{r}, dimulai dari \textit{startAngle} dan berakhir pada \textit{endAngle} dengan arah gambar garis lengkung yang didefinisikan oleh \textit{anticlockwise}.
+	\item \textbf{CanvasRenderingContext2D.rect()} \\ Berfungsi untuk membuat \textit{path} persegi panjang pada posisi (x,y) dengan ukuran yang didefinisikan oleh \textit{width} dan \textit{height}.
+\end{itemize}
+
+\subsubsection{Transformations}
+
+
+
+
