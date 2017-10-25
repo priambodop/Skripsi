@@ -14,9 +14,11 @@ Subbab-subbab berikut menjelaskan beberapa kelas dari \textit{WebSockets}.
 \subsection{WebSocket}
 Sebuah objek dari kelas \textit{WebSocket} menyediakan \textit{API} untuk membuat dan mengelola koneksi \textit{WebSocket} ke \textit{server}, dan juga untuk mengirim dan menerima data pada koneksi. \textit{Constructor} pada kelas \textit{WebSocket} menerima satu parameter wajib dan satu parameter pilihan. 
 
-Berikut merupakan \textit{constructor} dari kelas \textit{WebSocket} : 
+Berikut merupakan \textit{constructor} dari kelas \textit{WebSocket}: 
+\begin{lstlisting}
+	WebSocket WebSocket(in DOMString url, in optional DOMString protocols);
+\end{lstlisting}
 
-\textbf{WebSocket WebSocket(in DOMString url, in optional DOMString protocols);}
 \begin{itemize}
 	\item \textbf{url}, merupakan parameter wajib yang menunjukan URL mana yang akan direspon oleh \textit{WebSocket server}.
 	
@@ -24,7 +26,7 @@ Berikut merupakan \textit{constructor} dari kelas \textit{WebSocket} :
 	
 \end{itemize}
 
-Beberapa atribut yang dimiliki oleh kelas \textit{WebSocket} yaitu sebagai berikut :
+Beberapa atribut yang dimiliki oleh kelas \textit{WebSocket} yaitu sebagai berikut:
 
 \begin{itemize}
 	\item \textbf{readyState} \\ Atribut ini menunjukan status dari sebuah koneksi.
@@ -34,12 +36,40 @@ Beberapa atribut yang dimiliki oleh kelas \textit{WebSocket} yaitu sebagai berik
 	\item \textbf{onopen} \\ Atribut ini merupakan \textit{event listener} yang akan dipanggil pada saat status koneksi \textit{WebSocket} berubah menjadi OPEN.
 \end{itemize}
 
+Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
+
+\begin{lstlisting}
+	//onopen
+	exampleSocket.onopen = function (event) {
+	exampleSocket.send("Here's some text that the server is urgently awaiting!"); 
+	};
+	
+	//onmessage
+	exampleSocket.onmessage = function (event) {
+	console.log(event.data);
+	}
+	
+	
+\end{lstlisting}
+
 Kelas \textit{WebSocket} memiliki dua buah \textit{method}, yaitu : 
 
 \begin{itemize}
 	\item close() \\ Berfungsi untuk menutup koneksi \textit{WebSocket} atau menghentikan apabila sedang ada proses koneksi. \textit{Method} ini memiliki tipe kembalian \textit{void}, sehingga tidak akan mengembalikan apapun.
 	\item send() \\ Berfungsi untuk mengirim data ke \textit{server} melalui koneksi \textit{WebSocket}. \textit{Method} ini memiliki parameter \textbf{data} yang merupakan sebuah \textit{string} yang akan dikirimkan ke \textit{server}.
 \end{itemize}
+
+Berikut merupakan contoh implementasi dari \textit{method-method} tersebut : 
+
+\begin{lstlisting}
+	//close
+	exampleSocket.close();
+
+	//send
+	socket.addEventListener('open', function (event) {
+	socket.send('Hello Server!');
+	});
+\end{lstlisting}
 
 \subsection{CloseEvent}
 \textit{CloseEvent} akan dikirim ke \textit{client} menggunakan protokol \textit{WebSockets} ketika koneksi sudah tertutup. \textit{Constructor} dari kelas ini yaitu : \\
@@ -54,17 +84,38 @@ Properti yang dimiliki oleh kelas ini yaitu :
 	\item \textbf{CloseEvent.wasClean} \\ Mengembalikan \textit{boolean} yang mengindikasi apakah sebuah koneksi sudah tertutup sepenuhnya atau belum.
 \end{itemize}
 
+
+
 \subsection{MessageEvent}
-Kelas ini merepresentasikan pesan yang diterima oleh suatu objek tertentu. \textit{Constructor} dari kelas ini yaitu : \\
+Kelas ini merepresentasikan pesan yang diterima oleh suatu objek tertentu. \textit{Constructor} dari kelas ini yaitu: 
 
-\textbf{MessageEvent()} \\
+\begin{lstlisting}
+	MessageEvent()
+\end{lstlisting}
 
-Beberapa properti yang dimiliki oleh kelas ini yaitu : 
+Beberapa properti yang dimiliki oleh kelas ini yaitu: 
 
 \begin{itemize}
 	\item \textbf{MessageEvent.data} \\ Merupakan data yang telah dikirimkan oleh pengirim.
 	\item \textbf{MessageEvent.lastEventId} \\ Merepresentasikan \textit{ID} yang unik untuk sebuah \textit{Event}.
 \end{itemize}
+
+Contoh penggunaan dari beberapa properti tersebut sebagai berikut:
+
+\begin{lstlisting}
+	//MessageEvent.data
+	myWorker.onmessage = function(e) {
+	result.textContent = e.data;
+	console.log('Message received from worker');
+	};
+	
+	//MessageEvent.lastEventId
+	myWorker.onmessage = function(e) {
+	result.textContent = e.data;
+	console.log('Message received from worker');
+	console.log(e.lastEventId);
+	};
+\end{lstlisting}
 
 
 %-------------REVISED LIMIT OF WEBSOCKETS---------
@@ -77,35 +128,77 @@ Beberapa properti yang dimiliki oleh kelas ini yaitu :
 \textit{Socket.io} dibagi menjadi dua \textit{API}, yaitu \textit{Server API} dan \textit{Client API}. Subbab-subbab berikut menjelaskan kelas-kelas yang dimiliki \textit{Socket.io}.
 
 \subsection{Server API}
-Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi dalam \textit{server}. Berikut kelas-kelas yang ada pada \textit{Server API}.
+Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi dalam \textit{server}\cite{socketioserver}. Berikut kelas-kelas yang ada pada \textit{Server API}.
 
 \subsubsection{Server}
-Kelas ini memiliki \textit{constructor} sebagai berikut : \\ \textbf{Server(httpServer[, options])}
+Kelas ini memiliki \textit{constructor} sebagai berikut:
+\begin{lstlisting}
+	Server(httpServer[, options]
+\end{lstlisting}
+ 
 	\begin{itemize}
 		\item \textbf{httpServer}, merupakan \textit{server} yang akan dituju.
-		\item \textbf{options}, merupakan parameter pilihan yang dapat berisi objek-objek seperti : 
+		\item \textbf{options}, merupakan parameter pilihan yang dapat berisi objek-objek seperti: 
 			\begin{itemize}
 				\item \textbf{path}, sebuah \textit{string} yang merepresentasikan nama dari \textit{path} yang akan dituju.
 				\item \textbf{serveClient}, sebuah \textit{boolean} yang menunjukan apakah menangani \textit{files} dari \textit{client}.
 			\end{itemize}
 	\end{itemize}
 	
-Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu : 
+Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu: 
 
 \begin{itemize}
 	\item \textbf{path([value])} \\ \textit{Method} ini memiliki parameter \textit{value} yang berupa \textit{string}, dan akan mengembalikan \textit{path} dari server yang akan dituju.
 	\item \textbf{close([callback])} \\ \textit{Method} ini berfungsi untuk menutup koneksi pada \textit{socket.io server}. 
 \end{itemize}
+
+Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
+
+\begin{lstlisting}
+	const io = require('socket.io')();
+	io.path('/myownpath');
+	
+	// client-side
+	const socket = io({
+	path: '/myownpath'
+	});
+	
+	//close
+	io.close(); // Close current server
+\end{lstlisting}
 	
 \subsubsection{Namespace}
 Kelas ini merepresentasikan kumpulan dari \textit{sockets} yang terhubung dalam lingkup tertentu, yang diidentifikasi oleh sebuah \textit{pathname}. \textit{Client} selalu terhubung ke \textit{/} (\textit{namespace} utama), kemudian dapat terhubung ke \textit{namespace} lainnya ketika menggunakan koneksi yang sama.
 
-Beberapa properti yang dimiliki oleh kelas ini yaitu : 
+Beberapa properti yang dimiliki oleh kelas ini yaitu: 
 \begin{itemize}
 	\item \textbf{namespace.name} \\ Sebuah \textit{string} yang merupakan \textit{identifier} pada \textit{namespace}.
 	\item \textbf{namespace.connected} \\ Sebuah \textit{hash} dari objek \textit{Socket} yang terhubung pada \textit{namespace} saat ini.
 	\item \textbf{namespace.adapter} \\ Sebuah adaptor yang digunakan untuk \textit{namespace} tertentu.
 \end{itemize}
+
+Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu:
+
+\begin{itemize}
+	\item \textbf{namespace.emit(eventName[, ...args])} \\ Akan menyebarkan suatu \textit{event} ke semua \textit{clients} yang sedang melakukan koneksi.
+	
+	\item \textbf{namespace.client(callback)} \\ Akan mendapatkan daftar para \textit{clients} yang sedang terkoneksi dengan \textit{namespace} ini.
+\end{itemize}
+
+Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
+
+\begin{lstlisting}
+	//namespace.emit
+	const io = require('socket.io')();
+	io.emit('an event sent to all connected clients');
+	
+	//namespace.client
+	const io = require('socket.io')();
+	io.of('/chat').clients((error, clients) => {
+	if (error) throw error;
+	console.log(clients); // => [PZDoMHjiu8PYfRiKAAAF, Anw2LatarvGVVXEIAAAD]
+	});
+\end{lstlisting}
 
 \subsubsection{Socket}
 Kelas ini merupakan kelas yang sangat mendasar untuk melakukan interaksi dengan \textit{browser} milik \textit{client}. Sebuah \textit{Socket} dimiliki oleh \textit{Namespace} tertentu (secara \textit{default} menggunakan \textbf{/}).
@@ -124,10 +217,22 @@ Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu :
 	\item \textbf{socket.disconnect(close)} \\ Berfungsi untuk mengakhiri koneksi milik \textit{client} saat ini.
 \end{itemize}
 
-\subsubsection{Client}
-Kelas ini merepresentasikan koneksi \textit{transport} yang masuk. \textit{Client} dapat terhubung dengan beberapa \textit{Sockets} yang termasuk dalam \textit{Namespaces} yang berbeda.
+Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
 
-Atribut-atribut yang dimiliki oleh kelas ini yaitu : 
+\begin{lstlisting}
+	//emit
+	socket.emit('hello', 'world');
+	
+	//disconnect
+	io.on('connection', (socket) => {
+	setTimeout(() => socket.disconnect(true), 5000);
+	});
+\end{lstlisting}
+
+\subsubsection{Client}
+Kelas ini merepresentasikan koneksi \textit{transport} yang masuk\cite{socketioclient}. \textit{Client} dapat terhubung dengan beberapa \textit{Sockets} yang termasuk dalam \textit{Namespaces} yang berbeda.
+
+Atribut-atribut yang dimiliki oleh kelas ini yaitu: 
 
 \begin{itemize}
 	\item \textbf{client.conn} \\ Merupakan referensi kepada koneksi \textit{Socket}.
@@ -137,12 +242,15 @@ Atribut-atribut yang dimiliki oleh kelas ini yaitu :
 \subsection{Client API}
 Kelas-kelas yang ada pada \textit{Client API} digunakan untuk menangani proses-proses yang terjadi pada bagian \textit{client}. 
 
-Kelas-kelas yang ada pada \textit{Client API} yaitu : 
+Kelas-kelas yang ada pada \textit{Client API} yaitu: 
 
 \subsubsection{Manager}
-Kelas ini memiliki \textit{constructor} sebagai berikut : \\
+Kelas ini memiliki \textit{constructor} sebagai berikut: 
 
-\textbf{Manager(url[, options])}
+\begin{lstlisting}
+	Manager(url[, options]
+\end{lstlisting}
+
 
 \begin{itemize}
 	\item \textbf{url} , merupakan sebuah \textit{string} yang merepresentasikan suatu \textit{url} yang akan dituju.
@@ -157,7 +265,7 @@ Kelas ini memiliki \textit{constructor} sebagai berikut : \\
 \subsubsection{Socket}
 Kelas ini memiliki atribut \textbf{id}, yang merupakan tanda pengenal unik untuk sesi saat ini.
 
-Beberapa \textit{method} yang dimiliki oleh kelas \textit{Socket} yaitu : 
+Beberapa \textit{method} yang dimiliki oleh kelas \textit{Socket} yaitu: 
 
 \begin{itemize}
 	\item \textbf{socket.open()} \\ Berfungsi untuk membuka suatu koneksi \textit{socket} tertentu.
@@ -170,59 +278,97 @@ Beberapa \textit{method} yang dimiliki oleh kelas \textit{Socket} yaitu :
 \section{Node.js}
 \label{sec:Node.js}
 
-\textit{Node.js} adalah \textit{JavaScript runtime} yang dibangun berdasarkan \textit{V8} yang merupakan \textit{JavaScript engine} milik perusahaan \textit{Google} \cite{Nodejs}. \textit{Node.js} memiliki model \textit{event-driven}, dan \textit{non-blocking I/O} yang membuat teknologi tersebut efisien dalam implementasinya. Teknologi ini menyediakan beberapa modul atau kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
+\textit{Node.js} adalah \textit{JavaScript runtime} yang dibangun berdasarkan \textit{V8} yang merupakan \textit{JavaScript engine} milik perusahaan \textit{Google} \cite{nodejs}. \textit{Node.js} memiliki model \textit{event-driven}, dan \textit{non-blocking I/O} yang membuat teknologi tersebut efisien dalam implementasinya. Teknologi ini menyediakan beberapa modul atau kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
 
-Beberapa kelas yang terdapat pada \textit{Node.js} yaitu sebagai berikut : 
+Beberapa kelas yang terdapat pada \textit{Node.js} yaitu sebagai berikut: 
 
 \subsection{Console}
-\textit{Console} merupakan perangkat \textit{debugging} yang memiliki persamaan dengan mekanisme \textit{JavaScript} yang disediakan oleh \textit{web browsers}. Kelas ini dapat digunakan untuk membuat \textit{logger} sederhana dengan \textit{output streams} yang dapat dikonfigurasi. Agar dapat menggunakan kelas ini, dapat dilakukan langkah berikut : 
+\textit{Console} merupakan perangkat \textit{debugging} yang memiliki persamaan dengan mekanisme \textit{JavaScript} yang disediakan oleh \textit{web browsers}. Kelas ini dapat digunakan untuk membuat \textit{logger} sederhana dengan \textit{output streams} yang dapat dikonfigurasi. Agar dapat menggunakan kelas ini, dapat dilakukan langkah berikut: 
 
-\begin{itemize}
-	\item \textbf{require('console').Console} atau
-	\item \textbf{console.Console}
-\end{itemize}
+\begin{lstlisting}
+	const Console = require('console').Console;
+\end{lstlisting}
 
-Salah satu \textit{method} yang dimiliki oleh kelas ini yaitu : 
+Salah satu \textit{method} yang dimiliki oleh kelas ini yaitu: 
 
 \begin{itemize}
 	\item \textbf{console.log()} \\ Akan mengeluarkan beberapa argumen pada \textit{stdout (standard output)}.
 \end{itemize}
 
+Berikut merupakan contoh implementasi dari \textit{method} tersebut:
+
+\begin{lstlisting}
+	const count = 5;
+	console.log('count: %d', count);
+	// Prints: count: 5, to stdout
+\end{lstlisting}
+
 \subsection{File System}
 Modul ini berfungsi untuk menangani proses pengaturan \textit{file} pada \textit{server}. Untuk dapat menggunakan modul ini diperlukan \textbf{require('fs')} agar dapat mengakses fitur-fitur yang ada.
 
-Salah satu kelas yang terdapat pada \textit{File System} yaitu : 
+Salah satu kelas yang terdapat pada \textit{File System} yaitu: 
 
 \subsubsection{fs.WriteStream}
-Kelas ini memiliki beberapa \textit{method} sebagai berikut : 
+Kelas ini memiliki beberapa \textit{method} sebagai berikut: 
 
 \begin{itemize}
 	\item \textbf{fs.appendFile(file, data[, options],callback)} \\ Berfungsi untuk menambahkan suatu data kedalam \textit{file}, dan membuat \textit{file} baru apabila \textit{file} yang dituju belum tersedia.
 	\item \textbf{fs.readFile(file[, options], callback)} \\ Berfungsi untuk membaca seluruh konten dari suatu \textit{file}.
 \end{itemize}
 
+Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
+
+\begin{lstlisting}
+	//appendFile
+	fs.appendFile('message.txt', 'data to append', (err) => {
+	if (err) throw err;
+	console.log('The "data to append" was appended to file!');
+	});
+	
+	//readFile
+	fs.readFile('/etc/passwd', (err, data) => {
+	if (err) throw err;
+	console.log(data);
+	});
+\end{lstlisting}
+
 \subsection{HTTP}
 \textit{HTTP} dalam \textit{Node.js} berfungsi untuk mendukung berbagai fitur dari protokol tersebut yang sulit untuk digunakan. 
 
-Salah satu kelas yang terdapat pada \textit{HTTP} yaitu : 
+Salah satu kelas yang terdapat pada \textit{HTTP} yaitu: 
 
 \subsubsection{http.Server}
-Kelas ini memiliki beberapa \textit{method} sebagai berikut : 
+Kelas ini memiliki beberapa \textit{method} sebagai berikut: 
 
 \begin{itemize}
 	\item \textbf{server.close([callback])} \\ Berfungsi untuk menghentikan \textit{server} dalam menerima koneksi-koneksi baru.
-	\item \textbf{server.listen(handle[, callback])} \\ Berfungsi agar \textit{server} dapat menerima koneksi baru dari objek \textit{handle}.
+	\item \textbf{server.listen([port][, hostname][, backlog][, callback])} \\ Berfungsi agar \textit{server} dapat menerima koneksi baru \textit{port} dan \textit{hostname} tertentu.
 \end{itemize}
+
+Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut: 
+
+\begin{lstlisting}
+	//close
+	server.close();
+	
+	//listen
+	server.listen(port, hostname, () => {
+		console.log('connected');
+	});
+\end{lstlisting}
+
+
 
 
 %------------- END OF NODE.JS -------------- 
 \section{Express.js}
 \label{sec:Express.js}
 
-\textit{Express.js} merupakan \textit{framework} aplikasi web untuk \textit{Node.js}. \textit{Express.js} menyediakan fitur-fitur untuk web dan aplikasi \textit{mobile} agar dapat bertahan lama. Untuk dapat menggunakan \textit{Express.js}, dapat dilakukan langkah sebagai berikut : 
-\begin{itemize}
-	\item \textbf{var express = require('express')}
-\end{itemize}
+\textit{Express.js} merupakan \textit{framework} aplikasi web untuk \textit{Node.js} \cite{expressjs}. \textit{Express.js} menyediakan fitur-fitur untuk web dan aplikasi \textit{mobile} agar dapat bertahan lama. Untuk dapat menggunakan \textit{Express.js}, dapat dilakukan langkah sebagai berikut: 
+\begin{lstlisting}
+	var express = require('express');
+	var app = express();
+\end{lstlisting}
 
 Dengan begitu, fitur-fitur yang terdapat pada \textit{Express.js} dapat digunakan untuk pengembangan aplikasi tertentu.
 
@@ -234,19 +380,109 @@ Sebuah objek dari kelas \textit{Application} akan dapat menangani masalah aplika
 Beberapa \textit{method} yang terdapat pada kelas ini yaitu : 
 \begin{itemize}
 	\item \textbf{app.get()} \\ Berfungsi untuk mengembalikan nama dari sebuah aplikasi tertentu.
+	
 	\item \textbf{app.listen(path, [callback])} \\ Berfungsi untuk melakukan koneksi ke suatu \textit{path} yang diberikan.
+	
 	\item \textbf{app.path()} \\ Berfungsi untuk mengembalikan \textit{path} tertentu yang dituju.
+	
+	\item \textbf{app.delete(path, callback [, callback ...])} \\ Berfungsi untuk menghapus \textit{request} pada \textit{path} tertentu.
+	
+	\item \textbf{app.path()} \\ Berfungsi untuk mengembalikan \textit{path} resmi dari sebuah \textit{app} berupa \textit{string}.
+	
+	
 \end{itemize}
+
+Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
+
+\begin{lstlisting}
+	var express = require('express');
+	var app = express();
+	
+	app.get('/', function(req, res){
+	res.send('hello world');
+	});
+	
+	app.listen(3000);
+	
+	//delete
+	app.delete('/', function (req, res) {
+	res.send('DELETE request to homepage');
+	});
+	
+	//path
+	console.log(app.path());
+	
+\end{lstlisting}
 
 \subsection{Request}
-Sebuah objek dari kelas \textit{Request} akan merepresentasikan \textit{HTTP request} dan memiliki properti untuk \textit{request query} seperti \textit{body, HTTP headers} dan \textit{parameters}. 
+Sebuah objek dari kelas \textit{Request} akan merepresentasikan \textit{HTTP request} dan memiliki properti untuk \textit{request query} seperti \textit{body, HTTP headers} dan \textit{parameters}.
 
-Beberapa \textit{method} yang ada pada kelas \textit{Request} yaitu : 
+Beberapa properti yang ada pada kelas ini yaitu:
+
+\begin{itemize}
+	\item \textbf{req.app} \\ Memiliki referensi ke suatu \textit{instance} dari aplikasi yang menggunakan \textit{middleware}.
+	
+	\item \textbf{req.baseURL} \\ \textit{Path} URL dimana \textit{router} terpasang pada suatu \textit{instance}.
+	
+	\item \textbf{req.route} \\ Berisi \textit{route} yang cocok saat ini.
+	
+\end{itemize} 
+
+Berikut merupakan contoh implementasi dari beberapa properti tersebut:
+
+\begin{lstlisting}
+	//app
+	module.exports = function (req, res) {
+	res.send('The views directory is ' + req.app.get('views'));
+	});
+	
+	//baseURL
+	var greet = express.Router();
+	
+	greet.get('/jp', function (req, res) {
+	console.log(req.baseUrl); // /greet
+	res.send('Konichiwa!');
+	});
+	
+	//route
+	app.get('/user/:id?', function userIdHandler(req, res) {
+	console.log(req.route);
+	res.send('GET');
+	});
+\end{lstlisting}
+
+Beberapa \textit{method} yang ada pada kelas \textit{Request} yaitu: 
 \begin{itemize}
 	\item \textbf{req.accepts(types)} \\ Berfungsi untuk memeriksa apakah tipe konten tertentu dapat diterima atau tidak.
+	
 	\item \textbf{req.get(field)} \\ Berfungsi untuk mengembalikan \textit{HTTP request header} tertentu.
+	
 	\item \textbf{req.is(type)} \\ Berfungsi untuk mengembalikan apakah benar atau salah \textit{type} pada parameter sama dengan status \textit{Content-Type} pada \textit{HTTP header}.
 \end{itemize}
+
+Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
+
+\begin{lstlisting}
+	// Accept: text/*, application/json
+	req.accepts('html');
+	// => "html"
+	req.accepts('text/html');
+	// => "text/html"
+	req.accepts(['json', 'text']);
+	// => "json"
+	req.accepts('application/json');
+	// => "application/json"
+	
+	//get
+	req.get('Content-Type');
+	// => "text/plain"
+	
+	//is
+	// With Content-Type: text/html; charset=utf-8
+	req.is('html');       // => 'html'
+	req.is('text/html');  // => 'text/html'
+	req.is('text/*');     // => 'text/*'
+\end{lstlisting}
 
 \subsection{Response}
 Sebuah objek dari kelas \textit{Response} akan merepresentasikan respon \textit{HTTP} yang dikirim oleh \textit{Express} pada saat menerima \textit{HTTP request}.
@@ -255,8 +491,28 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} yaitu :
 
 \begin{itemize}
 	\item \textbf{res.append(field[, value])} \\ Berfungsi untuk menambahkan \textit{value} tertentu pada \textit{HTTP response header}.
+	
 	\item \textbf{res.get(field)} \\ Berfungsi untuk mengembalikan \textit{HTTP response header} yang dispesifikasikan oleh \textit{field}.
+	
+	\item \textbf{res.json([body])} \\ Akan mengembalikan body dari \textit{json} tertentu.
+	
+	\item \textbf{res.send([body])} \\ Berfungsi untuk mengembalikan respon \textit{HTTP}.
 \end{itemize}
+
+Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
+
+\begin{lstlisting}
+	//append
+	res.append('Link', ['<http://localhost/>', '<http://localhost:3000/>']);
+	
+	//get
+	res.get('Content-Type');
+	
+	//json
+	res.json({ user: 'tobi' });
+	
+	
+\end{lstlisting}
 
 \subsection{Router}
 Objek dari kelas \textit{Router} merupakan \textit{instance} dari \textit{middleware} dan \textit{routes}. Setiap aplikasi \textit{Express} memiliki \textit{router} secara \textit{built-in}. 
@@ -265,14 +521,31 @@ Salah satu \textit{method} yang dimiliki oleh kelas \textit{Router} yaitu :
 
 \begin{itemize}
 	\item \textbf{router.route(path)} \\ Berfungsi untuk mengembalikan sebuah \textit{instance} dari satu \textit{route} yang dapat digunakan untuk menangani \textit{HTTP verbs} dengan sebuah \textit{middleware} opsional.
+	
 \end{itemize}
+
+Berikut merupakan contoh implementasi dari \textit{method} tersebut:
+
+\begin{lstlisting}
+	var router = express.Router();
+	
+	router.route('/users/:user_id')
+	.all(function(req, res, next) {
+	// runs for all HTTP verbs first
+	// think of it as route specific middleware!
+	next();
+	})
+	.get(function(req, res, next) {
+	res.json(req.user);
+	})
+\end{lstlisting}
 
 %------------- END OF EXPRESS.JS--------------- 
 
 \section{Canvas API}
 \label{sec:Canvas API}
  
-Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web. Teknologi ini memiliki fitur untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processiong} atau \textit{rendering}. 
+Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web \cite{canvas}. Teknologi ini memiliki fitur untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processiong} atau \textit{rendering}. 
 
 Subbab-subbab berikut menjelaskan tentang beberapa \textit{interface} dari \textit{Canvas}.
 
@@ -365,8 +638,6 @@ Beberapa \textit{method} berikut ini dapat digunakan untuk memanipulasi \textit{
 	\item \textbf{CanvasRenderingContext2D.arc()} \\ Berfungsi untuk menambahkan garis lengkung ke \textit{path} yang berpusat pada posisi (x,y) dengan radius \textit{r}, dimulai dari \textit{startAngle} dan berakhir pada \textit{endAngle} dengan arah gambar garis lengkung yang didefinisikan oleh \textit{anticlockwise}.
 	\item \textbf{CanvasRenderingContext2D.rect()} \\ Berfungsi untuk membuat \textit{path} persegi panjang pada posisi (x,y) dengan ukuran yang didefinisikan oleh \textit{width} dan \textit{height}.
 \end{itemize}
-
-\subsubsection{Transformations}
 
 
 
