@@ -357,6 +357,59 @@ Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
 	});
 \end{lstlisting}
 
+\subsection{Events}
+\textit{Node.js} dibangun berdasarkan arsitektur \textit{event-driven} dengan sifat \textit{asynchronous}, dimana jenis-jenis objek tertentu akan memancarkan suatu \textit{events} secara berkala dan akan memanggil objek \textit{Function} ("\textit{listeners}").
+
+Semua objek yang memancarkan \textit{events} merupakan turunan dari kelas \textit{EventEmitter}. Objek tersebut akan memanggil \textit{method} \textit{eventEmitter.on()} yang memungkinkan satu atau beberapa fungsi dapat ditangani dalam suatu \textit{event} yang dipancarkan oleh objek saat ini.
+
+Kelas \textit{EventEmitter} dapat didefinisikan dengan memanggil modul \textit{events} seperti berikut :
+
+\begin{lstlisting}
+	const EventEmitter = require('events');
+\end{lstlisting}
+
+Sebuah \textit{EventEmitter} akan memancarkan \textit{'event'} \textit{'newListener'} pada saat \textit{listeners} baru akan ditambahkan, dan \textit{'removeListener'} akan dipancarkan saat \textit{listeners} saat ini akan dihapus.
+
+Berikut merupakan beberapa \textit{method} yang dimiliki oleh kelas \textit{EventEmitter}:
+
+\begin{itemize}
+	\item \textbf{eventEmitter.on(eventName, listener)} \\ \textit{Method} ini berfungsi untuk mencatat suatu listener yang akan digunakan. \textit{Method} ini menerima dua parameter, yaitu:
+	\begin{itemize}
+		\item \textit{eventName}, nama dari suatu \textit{event} yang akan dipancarkan.
+		\item \textit{listener}, suatu fungsi \textit{callback} yang akan menangani \textit{event} dari \textit{eventName}.
+	\end{itemize} 
+	Fungsi \textit{listener} akan ditambahkan ke \textit{index} terakhir dari \textit{array of listeners} pada \textit{eventName}. Tidak akan ada pengecekan apakah fungsi \textit{listener} sudah dimasukan sebelumnya. Oleh karena itu, pemanggilan \textit{eventName} dan \textit{listener} secara berulang akan menyebabkan fungsi \textit{listener} dimasukan kedalam \textit{array} dan dipanggil secara berulang.
+	
+	Contoh penggunaan dari method tersebut adalah sebagai berikut:
+	\begin{lstlisting}
+		server.on('connection', (stream) => {
+			console.log('someone connected!');	
+		});
+	\end{lstlisting}
+	
+	\textit{Method} ini juga akan mengembalikan \textit{reference} kepada \textit{EventEmitter}, sehingga pemanggilan dapat saling menyambung dengan pemanggilan lainnya.
+	
+	\item \textbf{eventEmitter.emit(eventName)} \\ \textit{Method} ini berfungsi untuk memicu suatu \textit{event} yang akan dipancarkan. \textit{Method} ini menerima dua parameter, yaitu:
+	\begin{itemize}
+		\item \textit{eventName}, nama dari sebuah \textit{event} yang akan dipicu.
+		\item \textit{...args}, argumen tambahan yang akan diberikan pada \textit{eventName}. 
+	\end{itemize}
+
+	\textit{Method} ini akan memanggil masing-masing \textit{listener} yang sudah dicatat oleh \textit{eventEmitter.on()} dalam \textit{array of listeners} secara sinkronis, dimana beberapa \textit{listener} tersebut mengacu pada \textit{eventName} yang sama. Argumen yang diterima dari parameter akan diberikan pada masing-masing \textit{listener}.
+	
+	Berikut merupakan contoh penggunaan dari \textit{eventEmitter.on()} dan \textit{eventEmitter.emit()}:
+	\begin{lstlisting}
+		const EventEmitter = require('events');
+		
+		class MyEmitter extends EventEmitter {}
+		
+		const myEmitter = new MyEmitter();
+		myEmitter.on('event', () => {
+		console.log('an event occurred!');
+		});
+		myEmitter.emit('event');
+	\end{lstlisting} 
+\end{itemize}
 
 
 
