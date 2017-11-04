@@ -7,23 +7,58 @@ Pada bab ini akan dijelaskan landasan teori mengenai \textit{WebSockets}, \texti
 \section{WebSockets}
 \label{sec:WebSockets} 
 
-\textit{WebSockets} merupakan \textit{Application Programming Interface (API)} yang memungkinkan sebuah aplikasi membuka sesi komunikasi interaktif antara \textit{browser} pengguna dan \textit{server} \cite{websockets}. Dengan API ini, pengguna dapat mengirim pesan ke \textit{server} dan menerima respon tanpa harus melakukan \textit{polling} pada \textit{server} terlebih dahulu.
+\textit{WebSockets} merupakan \textit{Application Programming Interface (API)} yang memiliki kemampuan untuk membuka sesi komunikasi interaktif antara \textit{browser} pengguna dan \textit{server} \cite{websockets}. Dengan \textit{API} ini, pengguna dapat mengirim pesan ke \textit{server} dan menerima respon tanpa harus melakukan \textit{polling} pada \textit{server} terlebih dahulu.
 
-Subbab-subbab berikut menjelaskan beberapa kelas dari \textit{WebSockets}.
+Subbab-subbab berikut menjelaskan kelas-kelas yang ada pada \textit{WebSockets}.
 
 \subsection{WebSocket}
-Sebuah objek dari kelas \textit{WebSocket} menyediakan \textit{API} untuk membuat dan mengelola koneksi \textit{WebSocket} ke \textit{server}, dan juga untuk mengirim dan menerima data pada koneksi. \textit{Constructor} pada kelas \textit{WebSocket} menerima satu parameter wajib dan satu parameter pilihan. 
+Kelas ini merupakan inti untuk mengakses fungsi yang ada pada \textit{WebSockets}. Sebuah objek \textit{WebSocket} dapat membuat dan mengelola koneksi \textit{WebSocket} ke server, serta dapat mengirim dan menerima data pada koneksi tersebut. 
 
-Berikut merupakan \textit{constructor} dari kelas \textit{WebSocket}: 
+%Sebuah objek dari kelas \textit{WebSocket} menyediakan \textit{API} untuk membuat dan mengelola koneksi \textit{WebSocket} ke \textit{server}, dan juga untuk mengirim dan menerima data pada koneksi. \textit{Constructor} pada kelas \textit{WebSocket} menerima satu parameter wajib dan satu parameter pilihan. 
+
+Berikut merupakan konstruktor dari kelas \textit{WebSocket}: 
 \begin{lstlisting}
 	WebSocket WebSocket(in DOMString url, in optional DOMString protocols);
 \end{lstlisting}
 
 \begin{itemize}
-	\item \textbf{url}, merupakan parameter wajib yang menunjukan URL mana yang akan direspon oleh \textit{WebSocket server}.
+	\item \textbf{url}, parameter wajib yang menunjukan \textit{URL} mana yang akan direspon oleh \textit{WebSocket server}.
 	
-	\item \textbf{protocols}, merupakan parameter pilihan yang dapat berupa satu protokol dengan tipe \textit{string}, atau beberapa protokol dengan tipe \textit{array of strings}. Apabila protokol spesifik tidak dimasukan pada parameter, maka akan diasumsikan sebagai \textit{string} kosong.
+	\item \textbf{protocols}, parameter pilihan (tidak harus ada pada parameter) yang dapat berupa satu \textit{string} atau \textit{array of strings}. Parameter \textit{protocols} merepresentasikan nama dari subprotokol yang akan digunakan oleh objek \textit{WebSocket}. Apabila subprotokol tersedia pada parameter, maka \textit{server} akan memeriksa apakah subprotokol tersebut dapat diterima atau tidak. \textit{Server} akan memberikan respon apabila subprotokol dapat diterima, dan akan menghasilkan suatu \textit{error} apabila tidak dapat diterima. Contoh subprotokol yang dapat digunakan yaitu:
+	\begin{itemize}
+		\item \textbf{chat}
+		\item \textbf{superchat}
+	\end{itemize}
 	
+\end{itemize}
+
+Konstruktor dari kelas \textit{WebSocket} dapat menampilkan suatu \textit{exception} seperti berikut:
+
+\begin{lstlisting}
+	SECURITY_ERR
+\end{lstlisting}
+
+\textit{Exception} tersebut menandakan bahwa \textit{port} yang akan digunakan untuk melakukan koneksi diblokir.
+
+Kelas \textit{WebSocket} memiliki dua buah \textit{method}, yaitu:
+
+\begin{itemize}
+	\item \textbf{void close(in optional unsigned long code, in optional DOMString reason)} \\ Berfungsi untuk menutup suatu koneksi atau menghentikan proses koneksi. \\ \textbf{Parameter:} 
+		\begin{itemize}
+			\item \textbf{code} nilai numerik yang menunjukan kode status, yang menjelaskan mengapa suatu koneksi ditutup. Apabila parameter ini tidak tersedia, maka akan diasumsikan dengan nilai \textit{default} yaitu 1000 yang berarti transaksi selesai.
+			\item \textbf{reason} \textit{string} yang menjelaskan mengapa suatu koneksi ditutup. 
+		\end{itemize}
+	\textit{Method} ini dapat menampilkan \textit{exception} seperti berikut:
+		\begin{itemize}
+			\item \textbf{INVAILD\_ACCESS\_ERR} parameter \textit{code} yang tidak valid.
+			\item \textbf{SYNTAX\_ERR} parameter \textit{reason} yang melebihi batas yang telah ditentukan.
+		\end{itemize}
+	
+	\item \textbf{void send(in DOMString data)} \\ Berfungsi untuk mengirimkan data ke \textit{server} melalui koneksi \textit{WebSocket}, dan menambah nilai dari \textit{bufferedAmount} sebanyak jumlah \textit{bytes} yang dibutuhkan untuk menampung data. \\ \textbf{Parameter} \\ Tipe data yang dikirimkan pada parameter dapat berbeda-beda, Beberapa tipe tersebut yaitu sebagai berikut:
+	
+		\begin{itemize}
+			\item \textbf{USVString} sebuah string teks yang ditambahkan ke \textit{buffer} dalam format \textit{UTF-8}.
+		\end{itemize}
 \end{itemize}
 
 Beberapa atribut yang dimiliki oleh kelas \textit{WebSocket} yaitu sebagai berikut:
@@ -50,25 +85,6 @@ Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
 	}
 	
 	
-\end{lstlisting}
-
-Kelas \textit{WebSocket} memiliki dua buah \textit{method}, yaitu : 
-
-\begin{itemize}
-	\item close() \\ Berfungsi untuk menutup koneksi \textit{WebSocket} atau menghentikan apabila sedang ada proses koneksi. \textit{Method} ini memiliki tipe kembalian \textit{void}, sehingga tidak akan mengembalikan apapun.
-	\item send() \\ Berfungsi untuk mengirim data ke \textit{server} melalui koneksi \textit{WebSocket}. \textit{Method} ini memiliki parameter \textbf{data} yang merupakan sebuah \textit{string} yang akan dikirimkan ke \textit{server}.
-\end{itemize}
-
-Berikut merupakan contoh implementasi dari \textit{method-method} tersebut : 
-
-\begin{lstlisting}
-	//close
-	exampleSocket.close();
-
-	//send
-	socket.addEventListener('open', function (event) {
-	socket.send('Hello Server!');
-	});
 \end{lstlisting}
 
 \subsection{CloseEvent}
