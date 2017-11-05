@@ -40,6 +40,32 @@ Konstruktor dari kelas \textit{WebSocket} dapat menampilkan suatu \textit{except
 
 \textit{Exception} tersebut menandakan bahwa \textit{port} yang akan digunakan untuk melakukan koneksi diblokir.
 
+Atribut yang dimiliki oleh kelas \textit{WebSocket} yaitu:
+
+\begin{itemize}
+	\item \textbf{binaryType} \\ tipe: \textbf{DOMString} \\ Sebuah \textit{string} yang menandakan tipe dari data biner yang dikirimkan oleh koneksi tertentu. Nilai dari atribut ini dapat berupa \textit{"ArrayBuffer"} apabila objek dari \textit{ArrayBuffer} digunakan.
+	
+	\item \textbf{bufferedAmount} \\ tipe: \textbf{unsigned long} \\ Jumlah \textit{bytes} dari data yang belum dikirimkan oleh \textit{method} \textbf{send()}. Nilai dari atribut ini akan kembali menjadi nol apabila seluruh data sudah dikirimkan. Apabila koneksi terputus, nilai atribut ini tidak akan kembali menjadi nol dan akan tetap bertambah apabila terus dilakukan pemanggilan pada \textit{method} \textbf{send()}.
+	
+	\item \textbf{onclose} \\ tipe: \textbf{EventListener} \\ \textit{Event listener} yang dipanggil saat atribut \textit{readyState} dalam koneksi \textit{WebSocket} berubah menjadi \textit{CLOSED}. \textit{Listener} akan menerima objek dari \textit{CloseEvent} dengan nilai \textit{"close"}.
+	
+	\item \textbf{onerror} \\ tipe: \textbf{EventListener} \\ \textit{Event listener} yang dipanggil saat terjadi \textit{error}. \textit{Event} tersebut akan bernilai \textit{"error"}.
+	
+	\item \textbf{onmessage} \\ tipe: \textbf{EventListener} \\ \textit{Event listener} yang dipanggil saat atribut \textit{readyState} dalam koneksi \textit{WebSocket} berubah menjadi \textit{OPEN}. Hal tersebut menandakan bahwa koneksi sudah siap untuk mengirim dan menerima data. \textit{Event} tersebut akan bernilai \textit{"open"}.
+	
+	\item \textbf{protocol} \\ tipe: \textbf{DOMString} \\ \textit{String} yang menandakan sebuah nama dari sub-protokol yang dipilih oleh \textit{server}. Atribut ini akan menjadi salah satu masukan parameter yang dibutuhkan untuk konstruksi kelas \textit{WebSocket}.
+	
+	\item \textbf{readyState} \\ tipe: \textbf{unsigned short} \\ Menunjukan kondisi koneksi saat ini. Atribut ini memiliki beberapa konstanta yang menunjukan kondisi dari koneksi \textit{WebSocket}. Konstanta tersebut sebagai berikut:
+		\begin{itemize}
+			\item \textbf{CONNECTING} \\ nilai: 0 \\ Koneksi belum terbuka.
+			\item \textbf{OPEN} \\ nilai: 1 \\ Koneksi sudah terbuka dan siap untuk melakukan komunikasi.
+			\item \textbf{CLOSING} \\ nilai: 2 \\ Koneksi sedang dalam proses menutup.
+			\item \textbf{CLOSED} \\ nilai: 3 \\ Koneksi sudah tertutup atau tidak dapat dibuka.
+		\end{itemize}
+	
+	\item \textbf{url} \\ tipe: \textbf{DOMString} \\ \textit{URL} yang akan dituju oleh objek \textit{WebSocket}. Atribut ini akan menjadi salah satu masukan parameter untuk konstruksi kelas \textit{WebSocket}.
+\end{itemize}
+
 Kelas \textit{WebSocket} memiliki dua buah \textit{method}, yaitu:
 
 \begin{itemize}
@@ -48,44 +74,25 @@ Kelas \textit{WebSocket} memiliki dua buah \textit{method}, yaitu:
 			\item \textbf{code} nilai numerik yang menunjukan kode status, yang menjelaskan mengapa suatu koneksi ditutup. Apabila parameter ini tidak tersedia, maka akan diasumsikan dengan nilai \textit{default} yaitu 1000 yang berarti transaksi selesai.
 			\item \textbf{reason} \textit{string} yang menjelaskan mengapa suatu koneksi ditutup. 
 		\end{itemize}
-	\textit{Method} ini dapat menampilkan \textit{exception} seperti berikut:
+	\textit{Method} ini dapat melemparkan eksepsi seperti berikut:
 		\begin{itemize}
-			\item \textbf{INVAILD\_ACCESS\_ERR} parameter \textit{code} yang tidak valid.
+			\item \textbf{INVALID\_ACCESS\_ERR} parameter \textit{code} yang tidak valid.
 			\item \textbf{SYNTAX\_ERR} parameter \textit{reason} yang melebihi batas yang telah ditentukan.
 		\end{itemize}
 	
 	\item \textbf{void send(in DOMString data)} \\ Berfungsi untuk mengirimkan data ke \textit{server} melalui koneksi \textit{WebSocket}, dan menambah nilai dari \textit{bufferedAmount} sebanyak jumlah \textit{bytes} yang dibutuhkan untuk menampung data. \\ \textbf{Parameter} \\ Tipe data yang dikirimkan pada parameter dapat berbeda-beda, Beberapa tipe tersebut yaitu sebagai berikut:
 	
 		\begin{itemize}
-			\item \textbf{USVString} sebuah string teks yang ditambahkan ke \textit{buffer} dalam format \textit{UTF-8}.
+			\item \textbf{USVString} sebuah teks \textit{string} yang ditambahkan ke \textit{buffer} dalam format \textit{UTF-8}. Nilai dari \textit{bufferedAmount} akan bertambah sesuai dengan jumlah \textit{bytes} yang dibutuhkan untuk menyimpan \textit{UTF-8 string}.
+			
+			\item \textbf{ArrayBuffer} data biner yang disimpan pada \textit{fixed-length buffer}, dimana objek dari \textit{ArrayBuffer} dimanipulasi oleh objek \textit{TypedArray}.
 		\end{itemize}
+	\textit{Method} ini dapat melemparkan eksepsi seperti berikut:
+	\begin{itemize}
+		\item \textbf{INVALID\_STATE\_ERR} koneksi saat ini tidak terbuka.
+		\item \textbf{SYNTAX\_ERR} parameter \textit{data} tidak valid.
+	\end{itemize}
 \end{itemize}
-
-Beberapa atribut yang dimiliki oleh kelas \textit{WebSocket} yaitu sebagai berikut:
-
-\begin{itemize}
-	\item \textbf{readyState} \\ Atribut ini menunjukan status dari sebuah koneksi.
-	\item \textbf{onclose} \\ Atribut ini merupakan \textit{event listener} yang akan dipanggil pada saat status koneksi \textit{WebSocket} berubah menjadi CLOSED.
-	\item \textbf{onerror} \\ Atribut ini merupakan \textit{event listener} yang akan dipanggil apabila terjadi \textit{error}.
-	\item \textbf{onmessage} \\ Atribut ini merupakan \textit{event listener} yang akan dipanggil apabila pesan dari server telah diterima.
-	\item \textbf{onopen} \\ Atribut ini merupakan \textit{event listener} yang akan dipanggil pada saat status koneksi \textit{WebSocket} berubah menjadi OPEN.
-\end{itemize}
-
-Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
-
-\begin{lstlisting}
-	//onopen
-	exampleSocket.onopen = function (event) {
-	exampleSocket.send("Here's some text that the server is urgently awaiting!"); 
-	};
-	
-	//onmessage
-	exampleSocket.onmessage = function (event) {
-	console.log(event.data);
-	}
-	
-	
-\end{lstlisting}
 
 \subsection{CloseEvent}
 \textit{CloseEvent} akan dikirim ke \textit{client} menggunakan protokol \textit{WebSockets} ketika koneksi sudah tertutup. \textit{Constructor} dari kelas ini yaitu : \\
