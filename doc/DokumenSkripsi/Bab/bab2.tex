@@ -95,6 +95,31 @@ Kelas \textit{WebSocket} memiliki dua buah \textit{method}, yaitu:
 \end{itemize}
 
 \subsection{CloseEvent}
+Kelas ini akan menangani koneksi \textit{WebSocket} yang ditutup. Objek \textit{CloseEvent} akan dikirim ke \textit{client} saat koneksi ditutup. Objek tersebut akan dikirimkan ke \textit{listener} yang ditunjukan oleh atribut \textit{onclose} milik objek \textit{WebSocket}.
+
+Konstruksi kelas ini yaitu:
+
+\begin{itemize}
+	\item \textbf{new CloseEvent(typeArg, closeEventInit);} \\ \textbf{Parameter:} 
+		\begin{itemize}
+			\item \textbf{typeArg} \\ tipe: \textbf{DOMString} \\ nama dari suatu \textit{event} yang akan dikirimkan.
+			\item \textbf{closeEventInit} bersifat pilihan, dan memiliki beberapa nilai sebagai berikut:
+				\begin{itemize}
+					\item \textit{"wasClean"} \\ tipe: \textbf{boolean} \\ menunjukan apakah koneksi sudah ditutup dengan baik atau belum.
+					\item \textit{"code"} \\ tipe: \textbf{unsigned short} \\ kode status yang menunjukan mengapa koneksi ditutup.
+					\item \textit{"reason"} \\ tipe: \textbf{DOMString} \\ teks yang menunjukan alasan mengapa koneksi ditutup oleh \textit{server}.
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+
+Berikut merupakan nilai-nilai dari kode status koneksi ditutup:
+
+\begin{itemize}
+	\item \textbf{1000} \\ nama: \textbf{Normal Closure} \\ Penutupan normal, yang berarti koneksi sudah menyelesaikan apapun tujuan dari koneksi tersebut.
+	\item \textbf{1001} \\ nama: \textbf{Going Away} \\ 
+\end{itemize}
+
+
 \textit{CloseEvent} akan dikirim ke \textit{client} menggunakan protokol \textit{WebSockets} ketika koneksi sudah tertutup. \textit{Constructor} dari kelas ini yaitu : \\
 
 \textbf{CloseEvent()} \\
