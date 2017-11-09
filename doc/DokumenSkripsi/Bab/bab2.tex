@@ -115,24 +115,48 @@ Konstruksi kelas ini yaitu:
 Berikut merupakan nilai-nilai dari kode status koneksi ditutup:
 
 \begin{itemize}
+	\item \textbf{0-999} \\ nama: - \\ \textit{Reserved}. Tidak digunakan.
+	
 	\item \textbf{1000} \\ nama: \textbf{Normal Closure} \\ Penutupan normal, yang berarti koneksi sudah menyelesaikan apapun tujuan dari koneksi tersebut.
-	\item \textbf{1001} \\ nama: \textbf{Going Away} \\ 
+	
+	\item \textbf{1001} \\ nama: \textbf{Going Away} \\ \textit{Endpoint} menghilang karena kesalahan server atau \textit{browser} tidak lagi mengakses halaman yang sudah membuka koneksi.
+	
+	\item \textbf{1002} \\ nama: \textbf{Protocol Error} \\ \textit{Endpoint} menghentikan koneksi karena adanya kesalahan protokol.
+	
+	\item \textbf{1003} \\ nama: \textbf{Unsupported Data} \\ Koneksi dihentikan karena \textit{endpoint} menerima data dengan tipe yang tidak bisa diterima (contoh: \textit{text-only endpoint} menerima data biner).
+	
+	\item \textbf{1004} \\ nama: - \\ \textit{Reserved}. Makna dari kode tersebut akan dijelaskan di waktu yang akan datang.
+	
+	\item \textbf{1005} \\ nama: \textbf{No Status Recieved} \\ \textit{Reserved}. Menandakan bahwa tidak ada kode status yang tersedia.
+	
+	\item \textbf{1006} \\ nama: \textbf{Abnormal Closure} \\ \textit{Reserved}. Menandakan bahwa koneksi ditutup secara tidak normal (contoh: tidak ada \textit{close frame} yang dikirimkan).
+	
+	\item \textbf{1007} \\ nama: \textbf{Invalid frame payload data} \\ \textit{Endpoint} menghentikan koneksi karena pesan yang diterima berisi data yang tidak konsisten (contoh: data \textit{non-UTF-8} berada di dalam pesan teks).
+	
+	\item \textbf{1008} \\ nama: \textbf{Policy Violation} \\ \textit{Endpoint} menghentikan koneksi karena menerima pesan yang melanggar kebijakan. Kode status ini dapat digunakan apabila tidak ada kode status lain yang cocok atau digunakan untuk tidak menunjukan kebijakan lebih rinci.
+	
+	\item \textbf{1009} \\ nama: \textbf{Message too big} \\ \textit{Endpoint} menghentikan koneksi karena menerima \textit{frame} data yang terlalu besar.
+	
+	\item \textbf{1010} \\ nama: \textbf{Missing Extension} \\ \textit{Client} menghentikan koneksi karena \textit{server} tidak menangani satu atau beberapa ekstensi yang diminta oleh \textit{client}.
+	
+	\item \textbf{1011} \\ nama: \textbf{Internal Error} \\ \textit{Server} menghentikan koneksi karena mengalami kondisi tertentu yang menyebabkan tidak bisa memenuhi permintaan \textit{client}.
+	
+	\item \textbf{1012} \\ nama: \textbf{Service Restart} \\ \textit{Server} menghentikan koneksi karena harus mengulang kembali koneksi.
+	
+	\item \textbf{1013} \\ nama: \textbf{Try Again Later} \\ \textit{Server} menghentikan koneksi karena ada kondisi yang harus ditangani untuk sementara (contoh: \textit{overloaded}).
+	
+	\item \textbf{1014} \\ nama: \textbf{Bad Gateway} \\ \textit{Server} bertindak sebagai \textit{gateway} atau \textit{proxy} dan menerima respon yang tidak benar dari \textit{upstream server}.
+	
+	\item \textbf{1015} \\ nama: \textbf{TLS Handshake} \\ \textit{Reserved}. Menandakan bahwa koneksi ditutup karena gagal melakukan \textit{TLS handsake} (contoh: sertifikat \textit{server} tidak dapat diverifikasi).
+	
+	\item \textbf{1016-1999} \\ nama: - \\ \textit{Reserved}. Akan digunakan oleh standar \textit{WebSocket} di waktu yang akan datang.
+	
+	\item \textbf{2000-2999} \\ nama: - \\ \textit{Reserved}. Akan digunakan oleh ekstensi \textit{WebSocket}.
+	
+	\item \textbf{3000-3999} \\ nama: - \\ Tersedia untuk digunakan oleh \textit{libraries} dan \textit{frameworks}.
+	
+	\item \textbf{4000-4999} \\ nama: - \\ Tersedia untuk digunakan oleh aplikasi.
 \end{itemize}
-
-
-\textit{CloseEvent} akan dikirim ke \textit{client} menggunakan protokol \textit{WebSockets} ketika koneksi sudah tertutup. \textit{Constructor} dari kelas ini yaitu : \\
-
-\textbf{CloseEvent()} \\
-
-Properti yang dimiliki oleh kelas ini yaitu : 
-
-\begin{itemize}
-	\item \textbf{CloseEvent.code} \\ Mengembalikan sebuah kode untuk menutup koneksi yang dikirimkan oleh \textit{server}.
-	\item \textbf{CloseEvent.reason} \\ Mengembalikan alasan dari koneksi yang telah ditutup oleh \textit{server}
-	\item \textbf{CloseEvent.wasClean} \\ Mengembalikan \textit{boolean} yang mengindikasi apakah sebuah koneksi sudah tertutup sepenuhnya atau belum.
-\end{itemize}
-
-
 
 \subsection{MessageEvent}
 Kelas ini merepresentasikan pesan yang diterima oleh suatu objek tertentu. \textit{Constructor} dari kelas ini yaitu: 
@@ -176,44 +200,124 @@ Contoh penggunaan dari beberapa properti tersebut sebagai berikut:
 \textit{Socket.io} dibagi menjadi dua \textit{API}, yaitu \textit{Server API} dan \textit{Client API}. Subbab-subbab berikut menjelaskan kelas-kelas yang dimiliki \textit{Socket.io}.
 
 \subsection{Server API}
-Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi dalam \textit{server}\cite{socketioserver}. Berikut kelas-kelas yang ada pada \textit{Server API}.
+Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi dalam \textit{server}\cite{socketioserver}. Kelas-kelas tersebut adalah sebagai berikut:
 
-\subsubsection{Server}
-Kelas ini memiliki \textit{constructor} sebagai berikut:
-\begin{lstlisting}
-	Server(httpServer[, options]
-\end{lstlisting}
- 
+\begin{enumerate}
+	\item \textbf{Server} \\ Kelas ini merupakan inti untuk dapat menangani proses yang terjadi dalam \textit{socket.io server}. Kelas ini memiliki tiga konstruktor seperti berikut: 
 	\begin{itemize}
-		\item \textbf{httpServer}, merupakan \textit{server} yang akan dituju.
-		\item \textbf{options}, merupakan parameter pilihan yang dapat berisi objek-objek seperti: 
+		\item \textbf{new Server(httpServer[, options])} \\ 
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{httpServer} \\ tipe: \textbf{http.Server} \\ \textit{Server} yang akan dituju.
+			\item \textbf{options} \\ tipe: \textbf{Object} \\ Parameter ini dapat berupa berbagai jenis objek. Objek-objek tersebut yaitu sebagai berikut: 
 			\begin{itemize}
-				\item \textbf{path}, sebuah \textit{string} yang merepresentasikan nama dari \textit{path} yang akan dituju.
-				\item \textbf{serveClient}, sebuah \textit{boolean} yang menunjukan apakah menangani \textit{files} dari \textit{client}.
+				\item \textbf{path} \\ tipe: \textbf{String} \\ Nama dari path yang akan ditangkap oleh \textit{server} (contoh: \textit{/socket.io}).
+				
+				\item \textbf{serveClient} \\ tipe: \textbf{Boolean} \\ Menunjukan apakah \textit{server} akan melayani \textit{file} dari \textit{client} atau tidak.
+				
+				%\item \textbf{adapter} \\ tipe: \textbf{Adapter} \\ \textit{Adapter} yang akan digunakan oleh \textit{server}.
+				
+				%\item \textbf{origins} \\ tipe: \textbf{String} \\ \textit{Origins} yang diperbolehkan oleh \textit{server}.
+				
+				%\item \textbf{parser} \\ tipe: \textbf{Parser} \\ \textit{Parser} yang akan digunakan oleh \textit{server}.
 			\end{itemize}
+		\end{itemize}
+	
+		Untuk dapat menggunakan fitur yang ada pada \textit{socket.io}, harus menambahkan modul \textit{socket.io} pada konstanta tertentu. Hal tersebut dapat dilakukan dengan dua cara, yaitu menggunakan kata kunci \textit{new} atau tanpa menggunakan kata kunci \textit{new}:
+		
+		\begin{itemize}
+			\item Menggunakan \textit{new}
+			\begin{lstlisting}
+	const Server = require('socket.io');
+	const io = new Server();
+			\end{lstlisting}
+			
+			\item Tanpa menggunakan \textit{new}
+			\begin{lstlisting}
+	const io = require('socket.io')();
+			\end{lstlisting}
+		\end{itemize}
+	
+	Contoh implementasi konstruktor:
+	
+	\begin{lstlisting}
+	const Server = require('socket.io');
+	const http = require('http').createServer();
+		
+	const io = new Server(http, {
+		path: '/test',
+		serveClient: false
+	});
+	\end{lstlisting}
+	
+	\item \textbf{new Server(port[,options])} \\
+	\textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{port} \\ tipe: \textbf{Number} \\ Nomor \textit{port} yang akan dituju.
+		\item \textbf{options} \\ tipe: \textbf{Object} \\ Sama seperti konstruktor pertama, parameter ini dapat berupa berbagai jenis objek.
 	\end{itemize}
 	
-Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu: 
-
-\begin{itemize}
-	\item \textbf{path([value])} \\ \textit{Method} ini memiliki parameter \textit{value} yang berupa \textit{string}, dan akan mengembalikan \textit{path} dari server yang akan dituju.
-	\item \textbf{close([callback])} \\ \textit{Method} ini berfungsi untuk menutup koneksi pada \textit{socket.io server}. 
-\end{itemize}
-
-Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
-
-\begin{lstlisting}
-	const io = require('socket.io')();
-	io.path('/myownpath');
-	
-	// client-side
-	const socket = io({
-	path: '/myownpath'
+	Contoh pemakaian konstruktor: 
+	\begin{lstlisting}
+	const Server = require('socket.io');
+	const io = new Server(3000, {
+		path: '/test',
+		serveClient: false
 	});
+	\end{lstlisting}
 	
-	//close
-	io.close(); // Close current server
-\end{lstlisting}
+	\item \textbf{new Server(options)} \\ 
+	\textbf{Parameter:}
+	
+		\begin{itemize}
+			\item \textbf{options} \\ tipe: \textbf{Object} \\ Sama seperti konstruktor pertama, parameter ini dapat berupa berbagai jenis objek.
+		\end{itemize}
+	
+	Contoh implementasi konstruktor:
+	
+	\begin{lstlisting}
+	const Server = require('socket.io');
+	const io = new Server({
+		path: '/test',
+		serveClient: false
+	});
+	\end{lstlisting}
+	
+	\end{itemize}
+
+	Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu sebagai berikut: 
+	
+		\begin{itemize}
+			\item \textbf{server.serveClient([value])} \\ 
+			\textbf{Parameter:}
+			\begin{itemize}
+				\item \textbf{value} \\ tipe: \textbf{Boolean}
+			\end{itemize}
+			\textbf{Kembalian:} \textit{Server} atau \textit{Boolean}. \\
+			Apabila parameter \textit{value} bernilai \textit{true}, maka \textit{server} akan menangani \textit{file} dari \textit{client}. Apabila tidak ada argumen pada \textit{method} ini, maka kembalian akan berupa status \textit{default} dari \textit{serveClient} saat ini (\textit{true}).
+			
+			\item \textbf{server.path([value])} \\
+			\textbf{Parameter:}
+			\begin{itemize}
+				\item \textbf{value} \\ tipe: \textbf{String}
+			\end{itemize}
+			\textbf{Kembalian:} \textit{Server} atau \textit{String} \\
+			Parameter \textit{value} akan menunjukan nilai dari \textit{path} yang akan dituju. Secara \textit{default} nilai dari \textit{path} akan diisi dengan \textit{/socket.io}. Apabila tidak ada argumen pada \textit{method} ini, maka kembalian akan berupa nilai dari \textit{value} saat ini.
+			
+			\item \textbf{server.attach(httpServer[, options])}
+			
+		
+		
+			
+		\end{itemize}
+
+	\item \textbf{Namespace}
+	
+	\item \textbf{Socket}
+	
+	\item \textbf{Client}  
+	
+\end{enumerate}
 	
 \subsubsection{Namespace}
 Kelas ini merepresentasikan kumpulan dari \textit{sockets} yang terhubung dalam lingkup tertentu, yang diidentifikasi oleh sebuah \textit{pathname}. \textit{Client} selalu terhubung ke \textit{/} (\textit{namespace} utama), kemudian dapat terhubung ke \textit{namespace} lainnya ketika menggunakan koneksi yang sama.
