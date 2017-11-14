@@ -485,30 +485,26 @@ Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
 \end{lstlisting}
 
 \subsection{HTTP}
-\textit{HTTP} dalam \textit{Node.js} berfungsi untuk mendukung berbagai fitur dari protokol tersebut yang sulit untuk digunakan. 
+\textit{Interfaces} \textit{HTTP} pada \textit{Node.js} digunakan untuk menangani \textit{request} dari protokol \textit{HTTP} yang secara \textit{native} sulit untuk digunakan. \textit{Interface} ini akan menangani protokol \textit{HTTP} dengan tidak melakukan \textit{buffer} pada seluruh \textit{request} atau \textit{responses}.
 
-Salah satu kelas yang terdapat pada \textit{HTTP} yaitu: 
+Berikut akan dijelaskan kelas-kelas yang ada pada \textit{interface} \textit{HTTP}.
 
-\subsubsection{http.Server}
-Kelas ini memiliki beberapa \textit{method} sebagai berikut: 
+\begin{enumerate}
+	\item \textbf{http.IncomingMessage} \\ 
+	Objek dari kelas ini akan dibuat oleh kelas \textit{http.Server} atau \textit{http.ClientRequest} dan memasukannya sebagai argumen suatu \textit{event} \textit{'request'} dan \textit{'response'}. Objek tersebut dapat digunakan untuk mengakses status \textit{response}, \textit{headers}, dan data. Kelas ini mengimplementasi \textit{interface Readable Stream}, beserta \textit{method, events,} dan properti yang ada didalamnya.
+	
+	
+\end{enumerate} 
 
 \begin{itemize}
-	\item \textbf{server.close([callback])} \\ Berfungsi untuk menghentikan \textit{server} dalam menerima koneksi-koneksi baru.
-	\item \textbf{server.listen([port][, hostname][, backlog][, callback])} \\ Berfungsi agar \textit{server} dapat menerima koneksi baru \textit{port} dan \textit{hostname} tertentu.
-\end{itemize}
-
-Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut: 
-
-\begin{lstlisting}
-	//close
-	server.close();
+	\item \textbf{http.createServer([requestListener])} \\ \textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{requestListener} fungsi yang akan secara otomatis ditambahkan pada \textit{event} \textit{'request'} milik kelas \textit{http.Server}.
+	\end{itemize}
+	\textbf{Kembalian:} objek \textit{http.Server}
 	
-	//listen
-	server.listen(port, hostname, () => {
-		console.log('connected');
-	});
-\end{lstlisting}
-
+	\textit{Method} ini akan membuat objek \textit{http.Server} untuk menangani \textit{request} dari \textit{client} dan memberikan \textit{response} kepada \textit{client}. Fungsi yang diberikan pada \textit{method} ini akan dipanggil sekali setiap \textit{request} dibuat kepada \textit{server}.
+\end{itemize}
 
 \subsection{Events}
 \textit{Node.js} dibangun berdasarkan arsitektur \textit{event-driven} dengan sifat \textit{asynchronous}, dimana jenis-jenis objek tertentu akan memancarkan suatu \textit{events} secara berkala dan akan memanggil objek \textit{Function} ("\textit{listeners}").
@@ -526,39 +522,47 @@ Sebuah \textit{EventEmitter} akan memancarkan \textit{'event'} \textit{'newListe
 Berikut merupakan beberapa \textit{method} yang dimiliki oleh kelas \textit{EventEmitter}:
 
 \begin{itemize}
-	\item \textbf{eventEmitter.on(eventName, listener)} \\ \textit{Method} ini berfungsi untuk mencatat suatu listener yang akan digunakan. \textit{Method} ini menerima dua parameter, yaitu:
+	\item \textbf{eventEmitter.on(eventName, listener)} \\ \textbf{Parameter:}
 	\begin{itemize}
 		\item \textit{eventName}, nama dari suatu \textit{event} yang akan dipancarkan.
-		\item \textit{listener}, suatu fungsi \textit{callback} yang akan menangani \textit{event} dari \textit{eventName}.
+		\item \textit{listener}, suatu fungsi \textit{callback} yang akan menangani \textit{event} dari \textit{eventName}. 
 	\end{itemize} 
-	Fungsi \textit{listener} akan ditambahkan ke \textit{index} terakhir dari \textit{array of listeners} pada \textit{eventName}. Tidak akan ada pengecekan apakah fungsi \textit{listener} sudah dimasukan sebelumnya. Oleh karena itu, pemanggilan \textit{eventName} dan \textit{listener} secara berulang akan menyebabkan fungsi \textit{listener} dimasukan kedalam \textit{array} dan dipanggil secara berulang.
-	
-	Contoh penggunaan dari method tersebut adalah sebagai berikut:
-	\begin{lstlisting}
-		server.on('connection', (stream) => {
-			console.log('someone connected!');	
-		});
-	\end{lstlisting}
-	
-	\textit{Method} ini juga akan mengembalikan \textit{reference} kepada \textit{EventEmitter}, sehingga pemanggilan dapat saling menyambung dengan pemanggilan lainnya.
-	
-	\item \textbf{eventEmitter.emit(eventName)} \\ \textit{Method} ini berfungsi untuk memicu suatu \textit{event} yang akan dipancarkan. \textit{Method} ini menerima dua parameter, yaitu:
-	\begin{itemize}
-		\item \textit{eventName}, nama dari sebuah \textit{event} yang akan dipicu.
-		\item \textit{...args}, argumen tambahan yang akan diberikan pada \textit{eventName}. 
-	\end{itemize}
+	\textbf{Kembalian:} referensi kepada \textit{EventEmitter}.
 
-	\textit{Method} ini akan memanggil masing-masing \textit{listener} yang sudah dicatat oleh \textit{eventEmitter.on()} dalam \textit{array of listeners} secara sinkronis, dimana beberapa \textit{listener} tersebut mengacu pada \textit{eventName} yang sama. Argumen yang diterima dari parameter akan diberikan pada masing-masing \textit{listener}.
+	\textit{Method} ini berfungsi untuk mencatat suatu listener yang akan digunakan. Fungsi \textit{listener} yang menjadi parameter \textit{method} ini akan ditambahkan ke \textit{index} terakhir dari \textit{array of listeners} pada \textit{eventName}. Tidak akan ada pengecekan apakah fungsi \textit{listener} sudah dimasukan sebelumnya. Oleh karena itu, pemanggilan \textit{eventName} dan \textit{listener} secara berulang akan menyebabkan fungsi \textit{listener} dimasukan kedalam \textit{array} dan dipanggil secara berulang. \textit{Method} ini juga akan mengembalikan \textit{reference} kepada \textit{EventEmitter}, sehingga pemanggilan dapat saling menyambung dengan pemanggilan lainnya.
 	
-	Berikut merupakan contoh penggunaan dari \textit{eventEmitter.on()} dan \textit{eventEmitter.emit()}:
+	Berikut merupakan contoh implementasi dari \textit{method} ini:
 	\begin{lstlisting}
 		const EventEmitter = require('events');
 		
-		class MyEmitter extends EventEmitter {}
+		class MyEmmit extends EventEmitter {}
 		
-		const myEmitter = new MyEmitter();
-		myEmitter.on('event', () => {
-		console.log('an event occurred!');
+		const myEmmit = new MyEmitter();
+		
+		myEmmit.on('event', () => {
+			console.log('suatu event telah terjadi');	
+		});
+	\end{lstlisting}
+	
+	\item \textbf{eventEmitter.emit(eventName)} \\ \textit{Method} ini berfungsi untuk memicu suatu \textit{event} yang akan dipancarkan. \textbf{Parameter:}
+	\begin{itemize}
+		\item \textit{eventName}, nama dari sebuah \textit{event} yang akan dipancarkan.
+		\item \textit{...args}, argumen tambahan yang akan diberikan pada \textit{eventName}. 
+	\end{itemize}
+	\textbf{Kembalian:} \textit{true} apabila \textit{event} memiliki \textit{listener}, false jika tidak.
+
+	\textit{Method} ini akan memanggil masing-masing \textit{listener} yang sudah dicatat oleh \textit{eventEmitter.on()} dalam \textit{array of listeners} secara sinkronis, dimana beberapa \textit{listener} tersebut mengacu pada \textit{eventName} yang sama. Argumen yang diterima dari parameter akan diberikan pada masing-masing \textit{listener}.
+	
+	Berikut merupakan contoh implementasi dari \textit{method} ini:
+	\begin{lstlisting}
+		const EventEmitter = require('events');
+		
+		class MyEmmit extends EventEmitter {}
+		
+		const myEmmit = new MyEmitter();
+		
+		myEmmit.on('event', () => {
+		console.log('suatu event telah terjadi');	
 		});
 		myEmitter.emit('event');
 	\end{lstlisting} 
@@ -576,8 +580,79 @@ Ada empat tipe dasar \textit{stream} dalam \textit{Node.js}:
 \end{itemize}
 
 \begin{enumerate}
-	\item \textbf{Writable Streams} \\ 
-	\textit{Writable Streams} merupakan 
+	\item \textbf{Readable Stream} \\
+	Merupakan abstraksi untuk sumber data yang digunakan. Berikut merupakan contoh dari \textit{Readable Stream} pada \textit{Node.js}:
+	\begin{itemize}
+		\item \textbf{HTTP responses} pada \textit{client}
+		\item \textbf{HTTP requests} pada \textit{server}
+		\item \textbf{fs read streams}
+	\end{itemize}
+	Seluruh \textit{Readable streams} mengimplementasi \textit{interface} yang didefinisikan oleh kelas \textit{stream.Readable}.
+	
+	\begin{itemize}
+		\item \textbf{stream.Readable} \\
+		\textbf{Events:}
+			\begin{itemize}
+				\item \textbf{'close'} \\ \textit{Event} ini dipancarkan saat suatu \textit{stream} atau sumber lain telah ditutup. \textit{Event} ini menandakan tidak akan ada \textit{event} lagi yang akan dipancarkan, dan tidak ada komputasi lain yang akan dilakukan.
+	\begin{lstlisting}
+	const readable = getReadableStreamSomehow();
+	readable.on('close', (chunk) => {
+		console.log(`Stream telah ditutup`);
+	});
+	\end{lstlisting}
+	
+				\item \textbf{'data'} \\ \textit{Event} ini akan dipancarkan setiap kali suatu \textit{stream} melepas kepemilikan sebuah data kepada pemakai. Hal tersebut dapat terjadi setiap suatu \textit{stream} berganti menjadi mode \textit{flowing} dengan memanggil \textit{readable.pipe()}, \textit{readable.resume()}, atau dengan menghubungkan \textit{listener callback} pada \textit{'data' event}. Contoh implementasi:
+	\begin{lstlisting}
+	const readable = getReadableStreamSomehow();
+	readable.on('data', (chunk) => {
+		console.log(`Menerima data sebesar ${chunk.length} bytes.`);
+	});
+	\end{lstlisting}
+				
+				\item \textbf{'end'} \\ \textit{Event} ini dipancarkan saat tidak ada lagi data yang akan digunakan dari \textit{stream}. Contoh implementasi:
+	\begin{lstlisting}
+	const readable = getReadableStreamSomehow();
+	readable.on('end', () => {
+		console.log('Tidak akan ada data yang dikirimkan.');
+	});
+	\end{lstlisting}
+	
+				\item \textbf{'error'} \\ \textit{Event} ini akan dipancarkan oleh \textit{Readable} setiap saat. \textit{Event} ini dapat terjadi apabila \textit{stream} tidak dapat menyediakan data dikarenakan kesalahan internal, atau ketika implementasi suatu \textit{stream} mencoba mengirimkan \textit{chunk} dari data yang tidak sesuai. Contoh implementasi:
+	\begin{lstlisting}
+	const readable = getReadableStreamSomehow();
+	readable.on('error', () => {
+		console.error('Terjadi kesalahan');
+	});
+	\end{lstlisting}
+			\end{itemize}
+		
+		\textbf{Method:}
+			\begin{itemize}
+				\item \textbf{readable.pipe(destination[, options])} \\ \textbf{Parameter:}
+				\begin{itemize}
+					\item \textbf{destination} \\tipe: \textit{stream.Writable} \\ Destinasi untuk menulis suatu data.
+					\item \textbf{options} \\tipe: \textit{Object} \\ Bersifat opsional, dapat berupa objek sebagai berikut:
+					\begin{itemize}
+						\item \textbf{end} \\tipe: \textit{boolean} \\ Mengakhiri \textit{writer} yang melakukan proses menulis saat \textit{reader} telah selesai. Nilai \textit{default} parameter ini yaitu \textit{true}.
+					\end{itemize}
+				\end{itemize}
+				\textbf{Kembalian:} referensi yang menuju \textit{destination}.
+				
+				\textit{Method} ini akan menghubungkan \textit{Writable stream} pada objek \textit{readable}, sehingga dapat berubah menjadi mode \textit{flowing} secara otomatis dan akan menaruh seluruh data pada \textit{Writable} yang sudah terhubung. \textit{Method} ini mengembalikan referensi yang menuju \textit{destination}, sehingga \textit{pipe streams} dapat saling menyambung dengan \textit{pipe streams} lainnya.
+				
+				Berikut merupakan contoh implementasi dari \textit{method} ini:
+				\begin{lstlisting}
+					const fs = require('fs');
+					
+					const readable = getReadableStreamSomehow();
+					const writable = fs.createWriteStream('file.txt');
+					
+					//seluruh data dari objek readable masuk ke 'file.txt'
+					readable.pipe(writable); 
+				\end{lstlisting}
+				
+			\end{itemize}
+	\end{itemize}
 \end{enumerate}
 
 
@@ -685,84 +760,45 @@ Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 			});
 		\end{lstlisting}
 		
+	\item \textbf{app.use([path,] callback[, callback...])} \\ \textbf{Parameter:} 
+		\begin{itemize}
+			\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
+			
+			\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
+		\end{itemize}
+	
+		\textit{Method} ini akan menghubungkan \textit{middleware} atau suatu fungsi tertentu dengan \textit{path} yang sudah ditentukan. Dalam implementasi \textit{method} ini, urutan penempatan pada baris kode sangat berpengaruh. Setelah \textit{app.use()} dieksekusi, maka suatu \textit{request} tidak akan mengeksekusi \textit{middleware} yang ada dibawah baris kode \textit{app.use()}.  Berikut merupakan contoh implementasi dari \textit{method} ini:
+		\begin{lstlisting}
+			//request hanya akan sampai pada middleware ini
+			app.use(function(req, res){
+				res.send('Hanya sampai sini saja');
+			});
+			
+			//request tidak akan mengeksekusi baris ini
+			app.get('/', function(req, res){
+				res.send('Hello World!');
+			});
+		\end{lstlisting}
+		
+	\item \textbf{app.listen(port, [hostname], [backlog], [callback])} \\ \textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{port} nomor yang akan dituju oleh server.
+			\item \textbf{hostname} \textit{string} yang diberikan pada gawai tertentu agar dapat dikenali. Parameter ini bersifat opsional.
+			\item \textbf{backlog} nomor yang menentukan ukuran maksimal dalam antrian koneksi yang tertunda.Parameter ini bersifat opsional.
+			\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut. Parameter ini bersifat opsional.
+		\end{itemize}
+	
+		\textit{Method} ini akan menghubungkan suatu koneksi pada \textit{host} dan \textit{port} yang sudah ditentukan. Berikut merupakan contoh implementasi dari \textit{method} ini:
+		\begin{lstlisting}
+			const express = require('express');
+			const app = express();
+			app.listen(3000);
+		\end{lstlisting}
+		
 \end{itemize}
-
-\subsection{App}
-Sebuah objek dari kelas \textit{Application} akan dapat menangani masalah aplikasi dalam pengembangannya. 
-
-Beberapa \textit{method} yang terdapat pada kelas ini yaitu : 
-\begin{itemize}
-	\item \textbf{app.get()} \\ Berfungsi untuk mengembalikan nama dari sebuah aplikasi tertentu.
-	
-	\item \textbf{app.listen(path, [callback])} \\ Berfungsi untuk melakukan koneksi ke suatu \textit{path} yang diberikan.
-	
-	\item \textbf{app.path()} \\ Berfungsi untuk mengembalikan \textit{path} tertentu yang dituju.
-	
-	\item \textbf{app.delete(path, callback [, callback ...])} \\ Berfungsi untuk menghapus \textit{request} pada \textit{path} tertentu.
-	
-	\item \textbf{app.path()} \\ Berfungsi untuk mengembalikan \textit{path} resmi dari sebuah \textit{app} berupa \textit{string}.
-	
-	
-\end{itemize}
-
-Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
-
-\begin{lstlisting}
-	var express = require('express');
-	var app = express();
-	
-	app.get('/', function(req, res){
-	res.send('hello world');
-	});
-	
-	app.listen(3000);
-	
-	//delete
-	app.delete('/', function (req, res) {
-	res.send('DELETE request to homepage');
-	});
-	
-	//path
-	console.log(app.path());
-	
-\end{lstlisting}
 
 \subsection{Request}
 Sebuah objek dari kelas \textit{Request} akan merepresentasikan \textit{HTTP request} dan memiliki properti untuk \textit{request query} seperti \textit{body, HTTP headers} dan \textit{parameters}.
-
-Beberapa properti yang ada pada kelas ini yaitu:
-
-\begin{itemize}
-	\item \textbf{req.app} \\ Memiliki referensi ke suatu \textit{instance} dari aplikasi yang menggunakan \textit{middleware}.
-	
-	\item \textbf{req.baseURL} \\ \textit{Path} URL dimana \textit{router} terpasang pada suatu \textit{instance}.
-	
-	\item \textbf{req.route} \\ Berisi \textit{route} yang cocok saat ini.
-	
-\end{itemize} 
-
-Berikut merupakan contoh implementasi dari beberapa properti tersebut:
-
-\begin{lstlisting}
-	//app
-	module.exports = function (req, res) {
-	res.send('The views directory is ' + req.app.get('views'));
-	});
-	
-	//baseURL
-	var greet = express.Router();
-	
-	greet.get('/jp', function (req, res) {
-	console.log(req.baseUrl); // /greet
-	res.send('Konichiwa!');
-	});
-	
-	//route
-	app.get('/user/:id?', function userIdHandler(req, res) {
-	console.log(req.route);
-	res.send('GET');
-	});
-\end{lstlisting}
 
 Beberapa \textit{method} yang ada pada kelas \textit{Request} yaitu: 
 \begin{itemize}
@@ -772,30 +808,6 @@ Beberapa \textit{method} yang ada pada kelas \textit{Request} yaitu:
 	
 	\item \textbf{req.is(type)} \\ Berfungsi untuk mengembalikan apakah benar atau salah \textit{type} pada parameter sama dengan status \textit{Content-Type} pada \textit{HTTP header}.
 \end{itemize}
-
-Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
-
-\begin{lstlisting}
-	// Accept: text/*, application/json
-	req.accepts('html');
-	// => "html"
-	req.accepts('text/html');
-	// => "text/html"
-	req.accepts(['json', 'text']);
-	// => "json"
-	req.accepts('application/json');
-	// => "application/json"
-	
-	//get
-	req.get('Content-Type');
-	// => "text/plain"
-	
-	//is
-	// With Content-Type: text/html; charset=utf-8
-	req.is('html');       // => 'html'
-	req.is('text/html');  // => 'text/html'
-	req.is('text/*');     // => 'text/*'
-\end{lstlisting}
 
 \subsection{Response}
 Sebuah objek dari kelas \textit{Response} akan merepresentasikan respon \textit{HTTP} yang dikirim oleh \textit{Express} pada saat menerima \textit{HTTP request}.
@@ -817,51 +829,99 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} yaitu:
 		res.send(new Buffer('<p>This is a Buffer</p>'));
 	\end{lstlisting}
 	
+	\item \textbf{res.end([data][, encoding])} \\ \textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{data} dapat berupa objek \textit{String} atau \textit{Buffer} yang akan dikirim saat mengakhiri proses respon.
+			\item \textbf{encoding} merubah suatu tipe data menjadi tipe data yang lain. Contoh beberapa tipe data yang tersedia yaitu \textit{utf8, base64, ascii, } dan \textit{hex}.
+		\end{itemize}
 	
+		\textit{Method} ini berfungsi untuk mengakhiri suatu proses respon. Apabila akan mengakhiri suatu respon tanpa memerlukan suatu data, maka dapat menggunakan \textit{method} ini. Berikut merupakan contoh implementasi \textit{method} ini:
+		\begin{lstlisting}
+			app.get('/', function(req, res){
+				res.end(); //apabila tidak memerlukan data.
+				
+				res.end('goodbye!'); // apabila memerlukan suatu data untuk mengakhiri proses.
+			});
+		\end{lstlisting}
 	
+	\item \textbf{res.render(view[, locals][, callback])} \\ \textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{view} suatu \textit{string} yang menunjukan \textit{path} dari suatu \textit{view file}.
+			\item \textbf{locals} suatu objek yang memiliki properti yang menunjukan variabel lokal dari \textit{view}.
+			\item \textbf{callback} suatu fungsi \textit{callback}. 
+		\end{itemize}
+	
+		\textit{Method} ini berfungsi untuk merubah \textit{view file} dan mengirim \textit{file} tersebut kepada \textit{client}. Berikut merupakan contoh implementasi \textit{method} ini:
+		\begin{lstlisting}
+			app.get('/', function(req, res){
+				res.render('about');  //akan merubah(render) halaman about 
+			});
+		\end{lstlisting}
+		
+	\item \textbf{res.sendStatus(statusCode)} \\ \textbf{Parameter:} 
+	\begin{itemize}
+		\item \textbf{statusCode} kode status \textit{HTTP}.
+	\end{itemize}
+
+	\textit{Method} ini akan menetapkan kode status \textit{HTTP} di parameter, dan akan mengirimkan bentuk \textit{String} sebagai \textit{body} dari respon. Berikut contoh implementasi \textit{method} ini:
+	\begin{lstlisting}
+	res.sendStatus(200); // akan mengirimkan 'OK' pada response body.
+	res.sendStatus(404); // akan mengirimkan 'Not Found' pada response body.
+	res.sendStatus(500); // akan mengirimkan 'Internal Server Error' pada response body.
+	\end{lstlisting}
+	
+	\item \textbf{res.status(code)} \\ \textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{code} kode status \textit{HTTP}.
+	\end{itemize}
+
+	\textit{Method} ini akan menetapkan kode status \textit{HTTP} untuk respon. Berikut merupakan contoh implementasi \textit{method} ini:
+	\begin{lstlisting}
+		res.status(403).end();
+		res.status(400).send('Bad Request');
+	\end{lstlisting}
+	
+	\item \textbf{res.json([body])} \\ \textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{body} dapat berupa tipe \textit{JSON} apapun, seperti \textit{array, String,} dan \textit{Boolean}.
+	\end{itemize}
+
+	\textit{Method} ini berfungsi untuk mengirimkan respon \textit{JSON}. Berikut merupakan contoh implementasi \textit{method} ini:
+	\begin{lstlisting}
+		res.json({ user: 'tobi', age: '27'});
+	\end{lstlisting}
 	
 \end{itemize}
-
-Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
-
-\begin{lstlisting}
-	//append
-	res.append('Link', ['<http://localhost/>', '<http://localhost:3000/>']);
-	
-	//get
-	res.get('Content-Type');
-	
-	//json
-	res.json({ user: 'tobi' });
-	
-	
-\end{lstlisting}
 
 \subsection{Router}
 Objek dari kelas \textit{Router} merupakan \textit{instance} dari \textit{middleware} dan \textit{routes}. Setiap aplikasi \textit{Express} memiliki \textit{router} secara \textit{built-in}. 
 
-Salah satu \textit{method} yang dimiliki oleh kelas \textit{Router} yaitu : 
+\textit{Method} yang dimiliki oleh \textit{Router} yaitu sebagai berikut:
 
 \begin{itemize}
-	\item \textbf{router.route(path)} \\ Berfungsi untuk mengembalikan sebuah \textit{instance} dari satu \textit{route} yang dapat digunakan untuk menangani \textit{HTTP verbs} dengan sebuah \textit{middleware} opsional.
+	\item \textbf{router.METHOD(path, [callback, ...] callback)} \\ \textbf{Parameter:} \\ 
+	\begin{itemize}
+		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
+		
+		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
+	\end{itemize}
+
+	\textit{Method} ini menyediakan fungsionalitas \textit{routing} dalam aplikasi \textit{Express}, dimana \textit{METHOD} merupakan salah satu \textit{HTTP methods} seperti \textit{GET, PUT, } dan \textit{POST}, dalam huruf kecil. Dengan begitu, \textit{method} ini dapat berupa \textit{router.get(), router.post(),} dan \textit{router.put()}.
+	
+	Berikut merupakan contoh implementasi dari \textit{method} ini:
+	\begin{lstlisting}
+		//menggunakan HTTP method GET
+		router.get('/', function(req, res){
+			res.send('hello world');
+		});
+		
+		//menggunakan HTTP method POST
+		router.post('/buku', function(req, res){
+			res.send('mendapatkan buku');
+		});
+	\end{lstlisting}
 	
 \end{itemize}
-
-Berikut merupakan contoh implementasi dari \textit{method} tersebut:
-
-\begin{lstlisting}
-	var router = express.Router();
-	
-	router.route('/users/:user_id')
-	.all(function(req, res, next) {
-	// runs for all HTTP verbs first
-	// think of it as route specific middleware!
-	next();
-	})
-	.get(function(req, res, next) {
-	res.json(req.user);
-	})
-\end{lstlisting}
 
 %------------- END OF EXPRESS.JS--------------- 
 
