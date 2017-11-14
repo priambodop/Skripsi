@@ -197,6 +197,13 @@ Contoh penggunaan dari beberapa properti tersebut sebagai berikut:
 
 \textit{Socket.io} merupakan salah satu teknologi yang memanfaatkan protokol \textit{WebSockets} \cite{socketio}. Teknologi ini memungkinkan sebuah aplikasi untuk melakukan komunikasi dua arah secara \textit{real-time}. \textit{Socket.io} dapat dijalankan di setiap \textit{platform, browser}, dan gawai.
 
+Sebelum dapat menggunakan \textit{socket.io}, \textit{Node.js} harus sudah ter\textit{install} pada sistem komputer. Apabila hal tersebut sudah dilakukan, maka \textit{socket.io} dapat di\textit{install} dengan menggunakan \textit{command line tools} atau sejenisnya dengan melakukan langkah seperti berikut:
+\begin{lstlisting}
+	npm install socket.io
+\end{lstlisting}
+
+Dengan begitu, aplikasi yang dibuat sudah dapat mengakses fitur-fitur yang dimiliki oleh \textit{socket.io}.
+
 \textit{Socket.io} dibagi menjadi dua \textit{API}, yaitu \textit{Server API} dan \textit{Client API}. Subbab-subbab berikut menjelaskan kelas-kelas yang dimiliki \textit{Socket.io}.
 
 \subsection{Server API}
@@ -215,9 +222,9 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 				
 				\item \textbf{serveClient} \\ tipe: \textbf{Boolean} \\ Menunjukan apakah \textit{server} akan melayani \textit{file} dari \textit{client} atau tidak.
 				
-				%\item \textbf{adapter} \\ tipe: \textbf{Adapter} \\ \textit{Adapter} yang akan digunakan oleh \textit{server}.
+				\item \textbf{adapter} \\ tipe: \textbf{Adapter} \\ Objek yang akan mengatur beberapa \textit{socket} untuk menerima koneksi, dan mengirimkan pesan antara satu \textit{socket} dengan \textit{socket} lainnya.
 				
-				%\item \textbf{origins} \\ tipe: \textbf{String} \\ \textit{Origins} yang diperbolehkan oleh \textit{server}.
+				\item \textbf{origins} \\ tipe: \textbf{String} \\ \textit{Origins} yang diperbolehkan oleh \textit{server}.
 				
 				%\item \textbf{parser} \\ tipe: \textbf{Parser} \\ \textit{Parser} yang akan digunakan oleh \textit{server}.
 			\end{itemize}
@@ -257,7 +264,7 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 		\item \textbf{options} \\ tipe: \textbf{Object} \\ Sama seperti konstruktor pertama, parameter ini dapat berupa berbagai jenis objek.
 	\end{itemize}
 	
-	Contoh pemakaian konstruktor: 
+	Contoh implementasi konstruktor: 
 	\begin{lstlisting}
 	const Server = require('socket.io');
 	const io = new Server(3000, {
@@ -302,10 +309,66 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 				\item \textbf{value} \\ tipe: \textbf{String}
 			\end{itemize}
 			\textbf{Kembalian:} \textit{Server} atau \textit{String} \\
-			Parameter \textit{value} akan menunjukan nilai dari \textit{path} yang akan dituju. Secara \textit{default} nilai dari \textit{path} akan diisi dengan \textit{/socket.io}. Apabila tidak ada argumen pada \textit{method} ini, maka kembalian akan berupa nilai dari \textit{value} saat ini.
+			Parameter \textit{value} akan menetapkan nilai dari \textit{path} yang akan dituju. Secara \textit{default} nilai dari \textit{path} akan diisi dengan \textit{/socket.io}. Apabila tidak ada argumen pada \textit{method} ini, maka kembalian akan berupa nilai dari \textit{value} saat ini.
 			
-			\item \textbf{server.attach(httpServer[, options])}
+			Berikut contoh implementasi dari \textit{method} ini:
+	\begin{lstlisting}
+	const io = require('socket.io')();
+	io.path('/myownpath');
+	\end{lstlisting}
+	
+			\item \textbf{server.adapter([value])} \\
+			\textbf{Parameter:}
+			\begin{itemize}
+				\item \textbf{value} \\tipe: \textbf{Adapter} \\ objek \textit{Adapter} yang akan digunakan.
+			\end{itemize}
+			\textit{Method} ini akan menentukan \textit{adapter} apa yang akan digunakan. Secara \textit{default} adapter yang akan digunakan merupakan objek \textit{adapter} yang berasal dari \textit{socket.io} yang bekerja berdasarkan memori. Apabila \textit{method} ini tidak menerima parameter, maka kembalian akan berupa \textit{adapter} saat ini (secara \textit{default}).
 			
+			Berikut contoh implementasi dari \textit{method} ini:
+	\begin{lstlisting}
+	const io = require('socket.io')(3000);
+	const redis = require('socket.io-redis');
+	io.adapter(redis({ host: 'localhost', port: 6379}));
+	\end{lstlisting}
+	
+			\item \textbf{server.origins([value])} \\ 
+			\textbf{Parameter:} 
+			\begin{itemize}
+				\item \textbf{value} \\tipe: \textbf{String} \\ Menunjukan \textit{origin} mana yang diizinkan oleh \textit{server}.
+			\end{itemize}
+			\textbf{Kembalian:} \textit{Server} atau \textit{String}
+			
+			\textit{Method} ini akan menetapkan \textit{origins} mana yang diizinkan oleh \textit{server}. Secara \textit{default}, \textit{origins} yang diizinkan dapat dari mana saja.
+			
+			Berikut contoh implementasi dari \textit{method} ini:
+	\begin{lstlisting}
+	const io = require('socket.io')();
+	io.origins(['foo.example.com:443']);
+	\end{lstlisting}
+			
+			\item \textbf{server.attach(httpServer[, options])} \\
+			\textbf{Parameter:} 
+			\begin{itemize}
+				\item \textbf{httpServer} \\tipe: \textbf{http.Server} \\ \textit{Server} yang akan dihubungkan.
+				\item \textbf{options} \\tipe: \textbf{Object} \\ Sama seperti konstruktor \textit{new Server(httpServer[, options])}, parameter ini dapat berupa berbagai jenis objek.
+			\end{itemize}
+			\textit{Method} ini akan menghubungkan \textit{Server} dengan objek dari \textit{engine.io} pada parameter \textit{httpSErver} dengan diberikan suatu \textit{options}.
+			
+			\item \textbf{server.bind(engine)} \\
+			\textbf{Parameter:}
+			\begin{itemize}
+				\item \textbf{engine} \\tipe: \textbf{engine.Server}
+			\end{itemize}
+			\textbf{Kembalian:} \textit{Server}
+			
+			\textit{Method} ini akan menghubungkan \textit{server} dengan objek \textit{Server} dari \textit{engine.io}.
+			
+			\item \textbf{server.close([callback])} \\
+			\textbf{Parameter:}
+			\begin{itemize}
+				\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
+			\end{itemize}
+			\textit{Method} ini akan menutup koneksi \textit{server socket.io}. Parameter \textit{callback} bersifat opsional dan akan dipanggi saat semua koneksi sudah ditutup.
 		
 		
 			
@@ -493,9 +556,111 @@ Berikut akan dijelaskan kelas-kelas yang ada pada \textit{interface} \textit{HTT
 	\item \textbf{http.IncomingMessage} \\ 
 	Objek dari kelas ini akan dibuat oleh kelas \textit{http.Server} atau \textit{http.ClientRequest} dan memasukannya sebagai argumen suatu \textit{event} \textit{'request'} dan \textit{'response'}. Objek tersebut dapat digunakan untuk mengakses status \textit{response}, \textit{headers}, dan data. Kelas ini mengimplementasi \textit{interface Readable Stream}, beserta \textit{method, events,} dan properti yang ada didalamnya.
 	
+	\textbf{Properti:}
+	\begin{itemize}
+		\item \textbf{message.headers} \\ \textbf{Kembalian:} \textit{headers} milik objek \textit{request/response.}
+		\item \textbf{message.rawHeaders} \\ \textbf{Kembalian:} bentuk \textit{raw} dari \textit{headers} milik objek \textit{request/response}.
+		\item \textbf{message.statusCode} \\ \textbf{Kembalian:} tiga dijit kode status \textit{HTTP response}. Contoh: 404.
+		\item \textbf{message.statusMessage} \\ \textbf{Kembalian:} pesan status \textit{HTTP response} Contoh: \textit{OK} atau \textit{Internal Server Error.}
+		\item \textbf{message.url} \\ \textbf{Kembalian:} \textit{URL string} yang muncul pada permintaan \textit{HTTP}.
+	\end{itemize}
+
+	\item \textbf{http.ClientRequest} \\ 
+	Objek dari kelas ini dibuat dalam kelas ini sendiri dan dikembalikan dari \textit{method http.request()}. Objek ini merepresentasikan permintaan yang sedang berlangsung dimana \textit{header} objek tersebut sudah berada dalam antrian. \textit{Header} masih dapat diubah dengan menggunakan \textit{setHeader(name, value)} dan \textit{removeHeader(name)}. \textit{Header} yang asli akan dikirim bersamaan dengan \textit{chunk} pertama dari suatu data atau saat memanggil \textit{request.end()}.
 	
+	Beberapa \textbf{event} yang dimiliki oleh kelas ini yaitu sebagai berikut:
+		\begin{itemize}
+			\item \textbf{'connect'} \\ Dipancarkan saat \textit{server} merespon kepada permintaan.
+			\item \textbf{'response'} \\ Dipancarkan saat suatu respon diterima atas permintaan saat ini.
+			\item \textbf{'timeout'} \\ Dipancarkan saat suatu \textit{socket} telah mencapai batas waktu untuk tidak aktif.
+		\end{itemize}
+
+	Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu sebagai berikut:
+		\begin{itemize}
+			\item \textbf{request.end([data[,encoding]][,callback])} \\ 
+			\textbf{Parameter:} 
+			\begin{itemize}
+				\item \textbf{data} \\tipe: \textbf{string} atau \textbf{Buffer} \\ Data yang akan dikirim.
+				\item \textbf{encoding} \\tipe: \textbf{string} \\ Bersifat opsional dan akan bernilai \textit{utf8} apabila tipe parameter \textit{data} berupa \textit{string}.
+				\item \textbf{callback} \\tipe:	\textbf{Function} \\ Fungsi callback
+			\end{itemize}
+		
+			\textit{Method} ini akan mengakhiri proses pengiriman permintaan.
+			
+			\item \textbf{request.getHeader(name)} \\
+			\textbf{Parameter:} 
+			\begin{itemize}
+				\item \textbf{name} \\tipe: \textbf{string} \\ Nama dari \textit{header} yang dibutuhkan.
+			\end{itemize}
+			\textbf{Kembalian:} suatu \textit{string} yang sesuai dengan parameter.
+			
+			\textit{Method} ini akan membaca seluruh \textit{header} dalam permintaan dan mengembalikan bagian yang sesuai dengan parameter. Berikut contoh implementasi dari \textit{method} ini:
+	\begin{lstlisting}
+	const contentType = request.getHeader('Content-Type');
+	\end{lstlisting}
+			
+			\item \textbf{request.removeHeader(name)} \\ 
+			\textbf{Parameter:}
+			\begin{itemize}
+				\item \textbf{name} \\tipe: \textbf{string} \\ Nama dari \textit{header} yang dibutuhkan.
+			\end{itemize}
+			\textit{Method} ini akan menghapus \textit{header} yang sudah ada pada objek \textit{header}. Berikut contoh implementasi dari \textit{method} ini:
+	\begin{lstlisting}
+	request.removeHeader('Content-Type');
+	\end{lstlisting}
+	
+			\item \textbf{request.setHeader(name, value)} \\ 
+			\textbf{Parameter:}
+			\begin{itemize}
+				\item \textbf{name} \\tipe: \textbf{string} \\ Nama dari \textit{header} yang dibutuhkan.
+				\item \textbf{value} \\tipe: \textbf{value} \\ Nilai yang akan dimasukan pada objek \textit{header}
+			\end{itemize}
+		
+			\textit{Method} ini akan menetapkan suatu nilai kepada objek \textit{header}. Berikut contoh implementasi \textit{method} ini:
+	\begin{lstlisting}
+	request.setHeader('Content-Type', 'application/json');
+	\end{lstlisting}
+		\end{itemize}
+
+	\item \textbf{http.Server} \\ 
+	Kelas ini merupakan turunan dari \textit{net.Server}. \textit{Event} yang dimiliki kelas ini yaitu sebagai berikut:
+	\begin{itemize}
+		\item \textbf{'close'} \\ Dipancarkan apabila \textit{server} sudah ditutup.
+		
+	\end{itemize}
+
+	Beberapa properti yang dimiliki oleh kelas ini yaitu:
+	\begin{itemize}
+		\item \textbf{server.listening} \\ Mengembalikan \textit{boolean} yang menandakan apakah \textit{server} melakukan proses \textit{listening} untuk suatu koneksi atau tidak.
+		
+		\item \textbf{server.maxHeadersCount} \\ Mengembalikan \textit{number} yang menandakan batas maksimum suatu \textit{headers} yang masuk. Nilai default dari properti ini yaitu 2000.
+		
+		\item \textbf{server.timeout} \\ Mengembalikan \textit{number} yang menandakan \textit{timeout} dalam milidetik.
+	\end{itemize}
+	
+	Beberapa \textit{Method} yang dimiliki oleh kelas ini yaitu:
+	\begin{itemize}
+		\item \textbf{server.listen()} \\ Memulai \textit{server HTTP} melakukan proses \textit{listening} untuk suatu koneksi.
+		
+		\item \textbf{server.setTimeout([msecs][,callback])} \\ \textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{msec} nilai \textit{timeout} dalam milidetik. secara default bernilai 120000 (2 menit).
+			\item \textbf{callback} fungsi \textit{callback}.
+		\end{itemize}
+		\textbf{Kembalian:} objek \textit{server}.
+	
+		\textit{Method} ini menetapkan nilai \textit{timeout} untuk \textit{sockets} dan memancarkan \textit{event 'timeout'} pada objek \textit{Server}.
+		
+		\item \textbf{server.close([callback])} \\ \textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{callback} fungsi \textit{callback}.
+		\end{itemize} 
+		
+		\textit{Method} ini menghentikan \textit{server} untuk menerima koneksi baru.
+	\end{itemize}
 \end{enumerate} 
 
+Beberapa \textit{Method} yang dimiliki oleh \textit{HTTP} yaitu sebagai berikut:
 \begin{itemize}
 	\item \textbf{http.createServer([requestListener])} \\ \textbf{Parameter:}
 	\begin{itemize}
@@ -503,7 +668,55 @@ Berikut akan dijelaskan kelas-kelas yang ada pada \textit{interface} \textit{HTT
 	\end{itemize}
 	\textbf{Kembalian:} objek \textit{http.Server}
 	
-	\textit{Method} ini akan membuat objek \textit{http.Server} untuk menangani \textit{request} dari \textit{client} dan memberikan \textit{response} kepada \textit{client}. Fungsi yang diberikan pada \textit{method} ini akan dipanggil sekali setiap \textit{request} dibuat kepada \textit{server}.
+	\textit{Method} ini akan membuat objek \textit{http.Server} untuk menangani \textit{request} dari \textit{client} dan memberikan \textit{response} kepada \textit{client}. Fungsi yang diberikan pada \textit{method} ini akan dipanggil satu kali setiap \textit{request} dibuat kepada \textit{server}.
+	
+	\item \textbf{http.request(options[,callback])} \\ 
+	\textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{options} \\ Dapat berupa \textit{Object, string} atau \textit{URL}. Berikut jenis-jenis \textit{options} yang dapat menjadi parameter:
+		\begin{itemize}
+			\item \textbf{protocol} \\tipe: \textbf{string} \\ Protokol yang digunakan.
+			\item \textbf{host} \\tipe: \textbf{string} \\ Nama domain atau alamat \textit{IP} milik server.
+			\item \textbf{hostname} \\tipe: \textbf{string} \\ Nama lain untuk \textit{host}.
+			\item \textbf{port} \\tipe: \textbf{number} \\ \textit{Port} untuk \textit{server}.
+			\item \textbf{path} \\tipe: \textbf{string} \\ \textit{Path} untuk permintaan.
+			\item \textbf{headers} \\tipe: \textbf{Object} \\ Objek yang berisi permintaan \textit{headers}.
+			\item \textbf{timeout} \\tipe: \textbf{number} \\ Nomor yang menentukan \textit{timeout} dari suatu \textit{socket} dalam milidetik.
+		\end{itemize}
+	
+		\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
+	\end{itemize}
+
+	\textbf{Kembalian:} objek dari kelas \textit{http.ClientRequest}.
+	
+	\textit{Method} ini digunakan untuk menangani permintaan \textit{HTTP} pada \textit{server}. Berikut contoh implementasi dari \textit{method} ini:
+	\begin{lstlisting}
+	const options = {
+		hostname: 'www.google.com',
+		port: 80,
+		path: '/upload',
+		method: 'POST',
+		headers: {
+		'Content-Type': 'application/x-www-form-urlencoded',
+		'Content-Length': Buffer.byteLength(postData)
+		}
+	};
+	
+	const req = http.request(options, (res) => {
+		console.log(`STATUS: ${res.statusCode}`);
+		console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+		res.setEncoding('utf8');
+		res.on('data', (chunk) => {
+		console.log(`BODY: ${chunk}`);
+		});
+		res.on('end', () => {
+		console.log('No more data in response.');
+		});
+	});
+	
+	req.end();
+	\end{lstlisting}
+	
 \end{itemize}
 
 \subsection{Events}
@@ -624,6 +837,8 @@ Ada empat tipe dasar \textit{stream} dalam \textit{Node.js}:
 		console.error('Terjadi kesalahan');
 	});
 	\end{lstlisting}
+	
+				
 			\end{itemize}
 		
 		\textbf{Method:}
