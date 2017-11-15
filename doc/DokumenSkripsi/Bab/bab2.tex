@@ -159,36 +159,51 @@ Berikut merupakan nilai-nilai dari kode status koneksi ditutup:
 \end{itemize}
 
 \subsection{MessageEvent}
-Kelas ini merepresentasikan pesan yang diterima oleh suatu objek tertentu. \textit{Constructor} dari kelas ini yaitu: 
-
-\begin{lstlisting}
-	MessageEvent()
-\end{lstlisting}
+Kelas ini merepresentasikan pesan yang diterima oleh suatu objek tujuan. \textit{Constructor} dari kelas ini yaitu: 
+\begin{itemize}
+	\item \textbf{new MessageEvent(type, init);} \\
+	\textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{type} \\ Tipe pesan \textit{MessageEvent} yang akan dibuat.
+		\item \textbf{init} \\ Parameter ini dapat berupa beberapa nilai seperti berikut:
+		\begin{itemize}
+			\item \textbf{data} \\ Data yang akan diisi pada \textit{MessageEvent}. Dapat bernilai tipe data apapun.
+			\item \textbf{origin} \\ Merepresentasikan \textit{origin} dari suatu pemancar pesan.
+			\item \textbf{ports} \\ Sebuah \textit{array of MessagePort} yang merepresentasikan \textit{port} yang berhubungan dengan saluran pesan yang sedang dikirim.
+		\end{itemize}
+	\end{itemize}
+	Contoh implementasi:
+	\begin{lstlisting}
+	var myMessage = new MessageEvent('worker', {
+		data : 'hello'
+	});
+	\end{lstlisting}
+\end{itemize}
 
 Beberapa properti yang dimiliki oleh kelas ini yaitu: 
 
 \begin{itemize}
-	\item \textbf{MessageEvent.data} \\ Merupakan data yang telah dikirimkan oleh pengirim.
-	\item \textbf{MessageEvent.lastEventId} \\ Merepresentasikan \textit{ID} yang unik untuk sebuah \textit{Event}.
-\end{itemize}
-
-Contoh penggunaan dari beberapa properti tersebut sebagai berikut:
-
-\begin{lstlisting}
-	//MessageEvent.data
-	myWorker.onmessage = function(e) {
-	result.textContent = e.data;
-	console.log('Message received from worker');
-	};
+	\item \textbf{MessageEvent.data} \\ Merepresentasikan data yang dikirim oleh pemancar pesan. Parameter ini dapat berisi data dengan tipe data apapun. 
 	
-	//MessageEvent.lastEventId
+	Contoh implementasi:
+	\begin{lstlisting}
 	myWorker.onmessage = function(e) {
-	result.textContent = e.data;
-	console.log('Message received from worker');
-	console.log(e.lastEventId);
+		result.textContent = e.data;
+		console.log('Message received from worker');
 	};
-\end{lstlisting}
-
+	\end{lstlisting}
+	
+	
+	\item \textbf{MessageEvent.source} \\ Merepresentasikan pemancar pesan atau sumber suatu pesan berasal. \\
+	Contoh implementasi:
+	\begin{lstlisting}
+	myWorker.onmessage = function(e) {
+		result.textContent = e.data;
+		console.log('Message received from worker');
+		console.log(e.source);
+	};
+	\end{lstlisting}
+\end{itemize}
 
 %-------------REVISED LIMIT OF WEBSOCKETS---------
 
@@ -234,15 +249,15 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 		
 		\begin{itemize}
 			\item Menggunakan \textit{new}
-			\begin{lstlisting}
+	\begin{lstlisting}
 	const Server = require('socket.io');
 	const io = new Server();
-			\end{lstlisting}
+	\end{lstlisting}
 			
 			\item Tanpa menggunakan \textit{new}
-			\begin{lstlisting}
+	\begin{lstlisting}
 	const io = require('socket.io')();
-			\end{lstlisting}
+	\end{lstlisting}
 		\end{itemize}
 	
 	Contoh implementasi konstruktor:
@@ -354,6 +369,17 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 			\end{itemize}
 			\textit{Method} ini akan menghubungkan \textit{Server} dengan objek dari \textit{engine.io} pada parameter \textit{httpSErver} dengan diberikan suatu \textit{options}.
 			
+			\item \textbf{server.of(nsp)} \\
+			Berfungsi untuk menginisialisasi dan menerima \textit{namespace} yang didapat dari tanda pengenal \textit{nsp}. \\
+			\textbf{Parameter:}
+			\begin{itemize}
+				\item \textbf{nsp} \\tipe: \textbf{String} \\ \textit{Namespace}.
+			\end{itemize}
+			Contoh implementasi:
+	\begin{lstlisting}
+	const adminNamespace = io.of('/admin');
+	\end{lstlisting}
+			
 			\item \textbf{server.bind(engine)} \\
 			\textbf{Parameter:}
 			\begin{itemize}
@@ -364,129 +390,250 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 			\textit{Method} ini akan menghubungkan \textit{server} dengan objek \textit{Server} dari \textit{engine.io}.
 			
 			\item \textbf{server.close([callback])} \\
+			\textit{Method} ini akan menutup koneksi \textit{server socket.io}. Parameter \textit{callback} bersifat opsional dan akan dipanggi saat semua koneksi sudah ditutup. \\
 			\textbf{Parameter:}
 			\begin{itemize}
 				\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
 			\end{itemize}
-			\textit{Method} ini akan menutup koneksi \textit{server socket.io}. Parameter \textit{callback} bersifat opsional dan akan dipanggi saat semua koneksi sudah ditutup.
-		
+			Contoh implementasi:
+	\begin{lstlisting}
+	const Server = require('socket.io');
+	const PORT   = 3030;
+	const server = require('http').Server();
+	
+	const io = Server(PORT);
+	
+	// menutup server saat ini
+	io.close(); 
+	\end{lstlisting}
 		
 			
 		\end{itemize}
 
-	\item \textbf{Namespace}
+	\item \textbf{Namespace} \\ 
+	Kelas ini merepresentasikan kumpulan \textit{sockets} yang terhubung dalam lingkup yang diidentifikasi oleh nama \textit{path}. \textit{Client} akan selalu terhubung ke \textit{/} (\textit{namespace} utama), kemudian dapat terhubung ke \textit{namespace} lain saat berada dalam koneksi yang sama.
 	
-	\item \textbf{Socket}
-	
-	\item \textbf{Client}  
-	
-\end{enumerate}
-	
-\subsubsection{Namespace}
-Kelas ini merepresentasikan kumpulan dari \textit{sockets} yang terhubung dalam lingkup tertentu, yang diidentifikasi oleh sebuah \textit{pathname}. \textit{Client} selalu terhubung ke \textit{/} (\textit{namespace} utama), kemudian dapat terhubung ke \textit{namespace} lainnya ketika menggunakan koneksi yang sama.
+	Beberapa properti yang dimiliki oleh kelas ini yaitu sebagai berikut:
+	\begin{itemize}
+		\item \textbf{namespace.name} \\tipe: \textbf{string} \\ Nama dari \textit{namespace} tertentu.
+		\item \textbf{namespace.adapter} \\tipe: \textbf{string} \\ \textit{Adapter} yang digunakan untuk \textit{namespace} tertentu.
+	\end{itemize}
 
-Beberapa properti yang dimiliki oleh kelas ini yaitu: 
-\begin{itemize}
-	\item \textbf{namespace.name} \\ Sebuah \textit{string} yang merupakan \textit{identifier} pada \textit{namespace}.
-	\item \textbf{namespace.connected} \\ Sebuah \textit{hash} dari objek \textit{Socket} yang terhubung pada \textit{namespace} saat ini.
-	\item \textbf{namespace.adapter} \\ Sebuah adaptor yang digunakan untuk \textit{namespace} tertentu.
-\end{itemize}
-
-Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu:
-
-\begin{itemize}
-	\item \textbf{namespace.emit(eventName[, ...args])} \\ Akan menyebarkan suatu \textit{event} ke semua \textit{clients} yang sedang melakukan koneksi.
-	
-	\item \textbf{namespace.client(callback)} \\ Akan mendapatkan daftar para \textit{clients} yang sedang terkoneksi dengan \textit{namespace} ini.
-\end{itemize}
-
-Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
-
-\begin{lstlisting}
-	//namespace.emit
+	Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu:
+	\begin{itemize}
+		\item \textbf{namespace.emit(eventName[, ...args])} \\
+		Berfungsi untuk memancarkan suatu \textit{event} pada seluruh \textit{clients} yang terhubung. \\
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{eventName} \\tipe: \textbf{String} \\ Nama dari \textit{event}.
+			\item \textbf{args} \\ Argumen tambahan.
+		\end{itemize}
+		Contoh implementasi:
+	\begin{lstlisting}
 	const io = require('socket.io')();
-	io.emit('an event sent to all connected clients');
+		
+	// akan memancarkan event pada namespace utama (/)
+	io.emit('an event sent to all connected clients'); 
+	\end{lstlisting}
+		
+		\item \textbf{namespace.to(room)} \\ 
+		Berfungsi untuk memancarkan \textit{event} kepada \textit{client} yang sudah bergabung dalam \textit{room} tertentu. \\ 
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{room} \\tipe: \textbf{String} \\ Nama dari \textit{room}.
+		\end{itemize}
+		\textbf{Kembalian:} \textit{namespace}. \\
+		Contoh implementasi:
+	\begin{lstlisting}
+	const io = require('socket.io')();
+	const adminNamespace = io.of('/admin');
 	
-	//namespace.client
+	adminNamespace.to('level1').emit('an event', { some: 'data' });
+	\end{lstlisting}
+	
+		\item \textbf{namespace.clients(callback)} \\
+		Berfungsi untuk mendapatkan daftar \textit{ID clients} yang terhubung pada \textit{namespace} ini.
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{callback} \\ fungsi \textit{callback}
+		\end{itemize}
+		Contoh implementasi:
+	\begin{lstlisting}
 	const io = require('socket.io')();
 	io.of('/chat').clients((error, clients) => {
 	if (error) throw error;
-	console.log(clients); // => [PZDoMHjiu8PYfRiKAAAF, Anw2LatarvGVVXEIAAAD]
-	});
-\end{lstlisting}
-
-\subsubsection{Socket}
-Kelas ini merupakan kelas yang sangat mendasar untuk melakukan interaksi dengan \textit{browser} milik \textit{client}. Sebuah \textit{Socket} dimiliki oleh \textit{Namespace} tertentu (secara \textit{default} menggunakan \textbf{/}).
-
-Beberapa properti yang dimiliki oleh kelas ini yaitu : 
-\begin{itemize}
-	\item \textbf{socket.id} \\ Merupakan tanda pengenal yang unik untuk sesi tertentu.
-	\item \textbf{socket.client} \\ Merupakan \textit{reference} ke objek \textit{Client} tertentu.
-	\item \textbf{socket.request} \\ Merupakan \textit{getter proxy} yang mengembalikan referensi ke \textit{request} yang berasal dari \textit{Client} tertentu.
-\end{itemize}
-
-Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu : 
-\begin{itemize}
-	\item \textbf{socket.send([...args[, ack]])} \\ Berfungsi untuk mengirimkan pesan tertentu.
-	\item \textbf{socket.emit(eventName[, ...args][, ack])} \\ Berfungsi untuk mengeluarkan suatu \textit{event} kepada \textit{socket} yang diidentifikasi oleh nama \textit{event} tersebut.
-	\item \textbf{socket.disconnect(close)} \\ Berfungsi untuk mengakhiri koneksi milik \textit{client} saat ini.
-\end{itemize}
-
-Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
-
-\begin{lstlisting}
-	//emit
-	socket.emit('hello', 'world');
 	
-	//disconnect
-	io.on('connection', (socket) => {
-	setTimeout(() => socket.disconnect(true), 5000);
+	// akan menampilkan id seperti [PZDoMHjiu8PYfRiKAAAF, Anw2LatarvGVVXEIAAAD]
+	console.log(clients); 
 	});
-\end{lstlisting}
+	\end{lstlisting}
+	\end{itemize}
+	
+	\item \textbf{Socket} \\
+	Kelas ini merupakan kelas yang mendasar untuk berinteraksi dengan \textit{browser} milik \textit{clients}. \textit{Socket} merupakan milik \textit{namespace} tertentu dan menggunakan kelas \textit{Client} untuk berkomunikasi. Dalam setiap \textit{namespace}, dapat ditentukan suatu \textit{room} yang dimana sebuah \textit{socket} dapat bergabung atau keluar. Kelas ini pun merupakan turunan dari \textit{EventEmitter} milik \textit{Node.js}. Kelas ini melakukan \textit{override} pada \textit{method emit} milik \textit{EventEmitter}, dan tidak memodifikasi \textit{method} lain.
+	
+	Beberapa properti yang dimiliki oleh kelas ini yaitu sebagai berikut:
+	\begin{itemize}
+		\item \textbf{socket.id} \\ Tanda pengenal unik untuk sesi saat ini, yang didapatkan dari kelas \textit{Client}.
+		\item \textbf{socket.rooms} \\ Objek yang menandakan \textit{room} dari \textit{client} saat ini.
+	\end{itemize}
 
-\subsubsection{Client}
-Kelas ini merepresentasikan koneksi \textit{transport} yang masuk\cite{socketioclient}. \textit{Client} dapat terhubung dengan beberapa \textit{Sockets} yang termasuk dalam \textit{Namespaces} yang berbeda.
-
-Atribut-atribut yang dimiliki oleh kelas ini yaitu: 
-
-\begin{itemize}
-	\item \textbf{client.conn} \\ Merupakan referensi kepada koneksi \textit{Socket}.
-	\item \textbf{client.request} \\ Berfungsi untuk mengakses \textit{header} dari \textit{request} seperti \textit{Cookie} atau \textit{User-Agent}.
-\end{itemize}
+	Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu sebagai berikut:
+	\begin{itemize}
+		\item \textbf{socket.join(room[, callback])} \\
+		Berfungsi untuk menambah \textit{client} ke \textit{room}. \\
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{room} \\tipe: \textbf{String} \\ Nama \textit{room}.
+			\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
+		\end{itemize}
+		\textbf{Kembalian:} \textit{Socket}. \\
+		Contoh implementasi:
+	\begin{lstlisting}
+io.on('connection', (socket) => {
+	socket.join('room 237', () => {
+	let rooms = Objects.keys(socket.rooms);
+	console.log(rooms); // [ <socket.id>, 'room 237' ]
+		
+	//akan memancarkan kepada seluruh user 
+	//yang berada di room yang sama
+	io.to('room 237', 'a new user has joined the room'); 
+	});
+});
+	\end{lstlisting}
+		
+		\item \textbf{socket.leave(room[, callback])} \\
+		Berfungsi untuk menghapus \textit{client} dari suatu \textit{room}. \\
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{room} \\tipe: \textbf{String} \\ Nama \textit{room}.
+			\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
+		\end{itemize}
+		
+	\end{itemize}
+	
+	\item \textbf{Client} \\
+	Kelas ini merepresentasikan koneksi \textit{engine.io} yang masuk. Kelas ini dapat berhubungan dengan banyak \textit{socket} yang dimiliki oleh \textit{namespace} berbeda. \\
+	Properti yang dimiliki oleh kelas ini yaitu sebagai berikut:
+	\begin{itemize}
+		\item \textbf{client.conn} \\ Merepresentasikan koneksi \textit{engine.io} yang masuk.
+		\item \textbf{client.request} \\ Berfungsi untuk mendapatkan permintaan \textit{headers} seperti \textit{Cookie} atau \textit{User-Agent}.
+	\end{itemize}
+	
+\end{enumerate}
 
 \subsection{Client API}
-Kelas-kelas yang ada pada \textit{Client API} digunakan untuk menangani proses-proses yang terjadi pada bagian \textit{client}. 
+\textit{Client API} digunakan untuk menangani proses pengaturan koneksi yang terjadi pada bagian \textit{client}. 
 
-Kelas-kelas yang ada pada \textit{Client API} yaitu: 
-
-\subsubsection{Manager}
-Kelas ini memiliki \textit{constructor} sebagai berikut: 
-
-\begin{lstlisting}
-	Manager(url[, options]
-\end{lstlisting}
-
-
-\begin{itemize}
-	\item \textbf{url} , merupakan sebuah \textit{string} yang merepresentasikan suatu \textit{url} yang akan dituju.
-	\item \textbf{options}, merupakan suatu objek yang dapat berupa : 
+Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
+\begin{enumerate}
+	\item \textbf{IO}
+	Untuk dapat menggunakan fungsi yang ada pada \textit{IO}, dapat dilakukan langkah seperti berikut:
+	\begin{lstlisting}
+	
+	//berfungsi untuk melayani file client
+	<script src="/socket.io/socket.io.js"></script>
+	
+	<script>
+	const socket = io('http://localhost');
+	</script>
+	\end{lstlisting}
+	Dengan langkah tersebut, \textit{socket.io} akan dapat menangani \textit{file} yang berasal dari \textit{client}. Selain langkah tersebut, ada satu langkah lagi yang dapat digunakan, yaitu sebagai berikut:
+	\begin{lstlisting}
+	const io = require('socket.io-client');
+	\end{lstlisting}
+	
+	\textit{Method} yang dimiliki oleh kelas ini yaitu sebagai berikut:
+	\begin{itemize}
+		\item \textbf{io([url][, options])} \\
+		Berfungsi untuk membuat objek baru dari kelas \textit{Manager} dengan \textit{url}, dan akan menggunakan objek kelas \textit{Manager} yang sudah ada untuk pemanggilan selanjutnya, apabila \textit{multiplex} pada parameter \textit{option} bernilai \textit{true}. Objek \textit{Socket} akan dikembalikan untuk \textit{namespace} yang sudah ditentukan oleh nama \textit{path} pada \textit{URL}, dengan nilai \textit{default} /. \\
+		\textbf{Parameter:}
 		\begin{itemize}
-			\item \textbf{path}, merupakan sebuah \textit{string} yang merepresentasikan suatu \textit{path} yang akan dituju dalam bagian \textit{server}.
-			\item \textbf{reconnection}, merupakan sebuah \textit{boolean} yang menunjukan apakah dapat melakukan koneksi ulang secara otomatis atau tidak.
-			\item \textbf{timeout}, merupakan angka yang menunjukan koneksi sudah mencapai \textit{timeout} sebelum terjadi error pada koneksi.
+			\item \textbf{url} \\tipe: \textbf{String} \\ Nama \textit{URL}.
+			\item \textbf{options} \\tipe: \textbf{Object} \\ Parameter ini dapat berupa beberapa jenis objek, seperti milik kelas \textit{Manager}
 		\end{itemize}
-\end{itemize}
+		\textbf{Kembalian:} \textit{Socket}
+		
+	\end{itemize}
+	
+	\item \textbf{Manager}
+	Konstruksi kelas ini yaitu sebagai berikut:
+	\begin{itemize}
+		\item \textbf{new Manager(url[, options])} \\
+		\begin{itemize}
+			\item \textbf{url} \\tipe: \textbf{String} \\ Nama \textit{URL}
+			\item \textbf{options} \\tipe: \textbf{Object} \\ Parameter ini dapat berupa berbagai jenis objek seperti berikut:
+			\begin{itemize}
+				\item \textbf{path} \\tipe: \textbf{String} \\ Nama \textit{path} yang dituju pada bagian \textit{server}.
+				\item \textbf{reconnection} \\tipe: \textbf{Boolean} \\ Menandakan apakah akan melakukan koneksi ulang secara otomatis atau tidak.
+				\item \textbf{timeout} \\tipe: \textbf{Number} \\ Menandakan waktu koneksi yang habis sebelum \textit{event connect\_error} dan \textit{connect\_timeout} terjadi.
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
 
-\subsubsection{Socket}
-Kelas ini memiliki atribut \textbf{id}, yang merupakan tanda pengenal unik untuk sesi saat ini.
+	Beberapa \textit{method} yang ada pada kelas ini yaitu sebagai berikut:
+	\begin{itemize}
+		\item \textbf{manager.timeout([value])} \\
+		Berfungsi untuk menentukan nilai \textit{timeout} untuk suatu koneksi.\\
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{value} \\tipe: \textbf{Number} \\ Nilai \textit{timeout}.
+		\end{itemize}
+		\textbf{Kembalian:} \textit{Number}
+		
+		\item \textbf{manager.open([callback])} \\
+		Apabila objek \textit{Manager} diinisiasi dengan nilai \textit{false} pada \textit{autoConnect}, maka dapat menggunakan \textit{method} ini untuk membuat percobaan koneksi baru.\\
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
+		\end{itemize}
+	\end{itemize}
 
-Beberapa \textit{method} yang dimiliki oleh kelas \textit{Socket} yaitu: 
+	Beberapa \textit{events} yang ada pada kelas ini yaitu sebagai berikut:
+	\begin{itemize}
+		\item \textbf{connect\_error} \\ Akan dipancarkan apabila ada kesalahan pada koneksi.
+		\item \textbf{connect\_timeout} \\ Akan dipancarkan apabila waktu koneksi telah habis.
+	\end{itemize}
+	
+	\item \textbf{Socket}
+	Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu:
+	\begin{itemize}
+		\item \textbf{socket.open()} \\ Berfungsi untuk membuka \textit{socket} secara manual.\\
+		\textbf{Kembalian:} \textit{Socket}
+		Contoh implementasi:
+	\begin{lstlisting}
+	const socket = io({
+	autoConnect: false
+	});
+	
+	// ...
+	socket.open();
+	\end{lstlisting}
+	
+	\item \textbf{socket.emit(eventName[, ..args][, ack])} \\ 
+	Berfungsi untuk memancarkan \textit{event} kepada \textit{socket} yang ditandai dengan nama dari \textit{event} tersebut.\\ 
+	\textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{eventName} \\tipe: \textbf{String} \\ Nama \textit{event}.
+		\item \textbf{args} \\ Argumen tambahan (opsional).
+		\item \textbf{ack} \\tipe: \textbf{Function} \\ Fungsi tambahan (opsional).
+	\end{itemize}
+	Contoh implementasi:
+	\begin{lstlisting}
+	socket.emit('ferret', 'tobi', (data) => {
+		console.log(data); // data will be 'woot'
+	});
+	\end{lstlisting}
+	
+	\item \textbf{socket.close()} \\ Berfungsi untuk menutup \textit{socket} secara manual.
+	\end{itemize}
 
-\begin{itemize}
-	\item \textbf{socket.open()} \\ Berfungsi untuk membuka suatu koneksi \textit{socket} tertentu.
-	\item \textbf{socket.emit(eventName[, ...args][, ack])} \\ Berfungsi untuk mengeluarkan suatu \textit{event} kepada \textit{socket} yang diidentifikasi oleh nama \textit{event} tersebut.
-	\item \textbf{socket.close()} \\ Berfungsi untuk menutup koneksi suatu \textit{socket} secara manual. 
-\end{itemize}
+	Beberapa \textit{events} yang ada pada kelas ini yaitu sebagai berikut:
+	\begin{itemize}
+		\item \textbf{connect\_error} \\ Akan dipancarkan apabila ada kesalahan pada koneksi.
+		\item \textbf{connect\_timeout} \\ Akan dipancarkan apabila waktu koneksi telah habis.
+	\end{itemize}
+\end{enumerate} 
 
 %--------------------- END OF SOCKET.IO -----------------
 
@@ -496,56 +643,6 @@ Beberapa \textit{method} yang dimiliki oleh kelas \textit{Socket} yaitu:
 \textit{Node.js} adalah \textit{JavaScript runtime} yang dibangun berdasarkan \textit{V8} yang merupakan \textit{JavaScript engine} milik perusahaan \textit{Google} \cite{nodejs}. \textit{Node.js} memiliki model \textit{event-driven}, dan \textit{non-blocking I/O} yang membuat teknologi tersebut efisien dalam implementasinya. Teknologi ini menyediakan beberapa kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
 
 Beberapa kelas yang terdapat pada \textit{Node.js} yaitu sebagai berikut: 
-
-\subsection{Console}
-\textit{Console} merupakan perangkat \textit{debugging} yang memiliki persamaan dengan mekanisme \textit{JavaScript} yang disediakan oleh \textit{web browsers}. Kelas ini dapat digunakan untuk membuat \textit{logger} sederhana dengan \textit{output streams} yang dapat dikonfigurasi. Agar dapat menggunakan kelas ini, dapat dilakukan langkah berikut: 
-
-\begin{lstlisting}
-	const Console = require('console').Console;
-\end{lstlisting}
-
-Salah satu \textit{method} yang dimiliki oleh kelas ini yaitu: 
-
-\begin{itemize}
-	\item \textbf{console.log()} \\ Akan mengeluarkan beberapa argumen pada \textit{stdout (standard output)}.
-\end{itemize}
-
-Berikut merupakan contoh implementasi dari \textit{method} tersebut:
-
-\begin{lstlisting}
-	const count = 5;
-	console.log('count: %d', count);
-	// Prints: count: 5, to stdout
-\end{lstlisting}
-
-\subsection{File System}
-Modul ini berfungsi untuk menangani proses pengaturan \textit{file} pada \textit{server}. Untuk dapat menggunakan modul ini diperlukan \textbf{require('fs')} agar dapat mengakses fitur-fitur yang ada.
-
-Salah satu kelas yang terdapat pada \textit{File System} yaitu: 
-
-\subsubsection{fs.WriteStream}
-Kelas ini memiliki beberapa \textit{method} sebagai berikut: 
-
-\begin{itemize}
-	\item \textbf{fs.appendFile(file, data[, options],callback)} \\ Berfungsi untuk menambahkan suatu data kedalam \textit{file}, dan membuat \textit{file} baru apabila \textit{file} yang dituju belum tersedia.
-	\item \textbf{fs.readFile(file[, options], callback)} \\ Berfungsi untuk membaca seluruh konten dari suatu \textit{file}.
-\end{itemize}
-
-Berikut merupakan contoh implementasi dari beberapa \textit{method} tersebut:
-
-\begin{lstlisting}
-	//appendFile
-	fs.appendFile('message.txt', 'data to append', (err) => {
-	if (err) throw err;
-	console.log('The "data to append" was appended to file!');
-	});
-	
-	//readFile
-	fs.readFile('/etc/passwd', (err, data) => {
-	if (err) throw err;
-	console.log(data);
-	});
-\end{lstlisting}
 
 \subsection{HTTP}
 \textit{Interfaces} \textit{HTTP} pada \textit{Node.js} digunakan untuk menangani \textit{request} dari protokol \textit{HTTP} yang secara \textit{native} sulit untuk digunakan. \textit{Interface} ini akan menangani protokol \textit{HTTP} dengan tidak melakukan \textit{buffer} pada seluruh \textit{request} atau \textit{responses}.
@@ -1143,7 +1240,22 @@ Objek dari kelas \textit{Router} merupakan \textit{instance} dari \textit{middle
 \section{Canvas API}
 \label{sec:Canvas API}
  
-Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web \cite{canvas}. Teknologi ini memiliki fitur untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processiong} atau \textit{rendering}. 
+Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web \cite{canvas}. Teknologi ini memiliki fitur untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processing} atau \textit{rendering}. Untuk dapat menggunakan fitur-fitur yang ada pada \textit{Canvas API}, langkah yang harus dilakukan adalah sebagai berikut:
+\begin{enumerate}
+	\item Menambahkan \textit{tag <canvas>} pada \textit{file HTML}, dan menambahkan \textit{id} yang akan digunakan pada \textit{file JavaScript}.
+	\begin{lstlisting}
+	<canvas id="canvas"></canvas>
+	\end{lstlisting}
+	
+	\item Membuat variabel untuk mendapatkan konteks \textit{rendering} dan fungsi-fungsi menggambar agar dapat menampilkan sesuatu pada \textit{<canvas>}.
+	\begin{lstlisting}
+	// Variabel yang akan menampilkan sesuatu pada <canvas> dengan id='canvas'
+	var canvas = document.getElementById('canvas'); 
+	
+	// Variabel yang akan mendapatkan fungsi-fungsi menggambar 
+	var ctx = canvas.getContext('2d');
+	\end{lstlisting}
+\end{enumerate}
 
 Subbab-subbab berikut menjelaskan tentang beberapa \textit{interface} dari \textit{Canvas}.
 
@@ -1154,89 +1266,261 @@ Beberapa properti yang dimiliki oleh \textit{HTMLCanvasElement} yaitu :
 
 \begin{itemize}
 	\item \textbf{HTMLCanvasElement.height} \\ Merupakan bilangan integer positif yang merepresentasikan tinggi dari atribut \textit{HTML} pada elemen \textit{canvas} yang diinterpretasikan dalam piksel \textit{CSS}. Apabila atribut tidak didefinisikan, atau atribut diisi dengan nilai negatif, maka akan digunakan nilai \textit{default} yaitu 150.
+	
 	\item \textbf{HTMLCanvasElement.width} \\ Merupakan bilangan integer positif yang merepresentasikan lebar dari atribut \textit{HTML} pada elemen \textit{canvas} yang diinterpretasikan dalam piksel \textit{CSS}. Apabila atribut tidak didefinisikan, atau atribut diisi dengan nilai negatif, maka akan digunakan nilai \textit{default} yaitu 300.
 \end{itemize}
 
 Beberapa \textit{method} yang dimiliki oleh \textit{HTLMCanvasElement} yaitu : 
 
 \begin{itemize}
-	\item \textbf{HTMLCanvasElement.getContext()} \\ \textit{Method} ini akan mengembalikan konteks \textit{drawing} pada \textit{canvas}, atau mengembalikan \textit{null} apabila konteks \textit{ID} tidak tersedia. Konteks \textit{drawing} berfungsi untuk dapat menggambar pada \textit{canvas}.
-	\item \textbf{HTMLCanvasElemen.toBlob()} \\ \textit{Method} ini akan membuat objek \textit{Blob} yang merepresentasikan gambar yang ada pada \textit{canvas}. 
+	\item \textbf{HTMLCanvasElement.getContext(contextType, contextAttributes)} \\
+	\textit{Method} ini akan mengembalikan konteks menggambar pada \textit{canvas}, atau \textit{null} apabila \textit{identifier} konteks tidak didukung.
+	\textbf{Parameter:} 
+	\begin{itemize}
+		\item \textbf{contextType} \\tipe: \textbf{DOMString} \\ Berisi konteks yang menandakan konteks menggambar pada \textit{canvas}. Parameter ini dapat berupa berbagai jenis nilai seperti berikut:
+		\begin{itemize}
+			\item \textbf{"2d"} \\ Merepresentasikan konteks dua dimensi yang akan menciptakan objek \textit{CanvasRenderingContext2D}.
+			\item \textbf{"webgl"} \\ Merepresentasikan konteks tiga dimensi yang akan menciptakan objek \textit{WebGLRenderingContext}.
+			\item \textbf{"webgl2"} \\ Merepresentasikan konteks tiga dimensi yang akan menciptakan objek \textit{WebGL2RenderingContext}. Konteks ini hanya akan tersedia pada \textit{browser} yang dapat mengimplementasi \textit{WebGL} versi 2.
+			\item \textbf{bitmaprenderer} \\ Akan menciptakan objek \textit{ImageBitmapRenderingContext} yang akan mengganti konten dari \textit{canvas} dengan objek tersebut.
+		\end{itemize}
+	
+		\item \textbf{contextAttributes} \\ Berisi atribut dari parameter \textit{contextType}. Contoh atribut dari beberapa tipe konteks yaitu sebagai berikut:
+		\begin{itemize}
+			\item Atribut konteks \textit{2d}:
+			\begin{itemize}
+				\item \textbf{alpha} \\tipe: \textbf{boolean} \\ Menandakan apakah \textit{canvas} berisi \textit{alpha channel} atau tidak. Apabila bernilai \textit{false}, maka \textit{browser} akan menetapkan \textit{backdrop} untuk selalu bernilai \textit{opaque}, sehingga akan mempercepat proses menggambar.
+			\end{itemize}
+			
+			\item Atribut konteks WebGL:
+			\begin{itemize}
+				\item \textbf{depth} \\ tipe: \textbf{boolean} \\ Menandakan apakah \textit{buffer} untuk menggambar memiliki ukuran setidaknya 16 \textit{bits} atau tidak.
+				\item \textbf{antialias} \\tipe: \textbf{boolean} \\ Menandakan apakah dapat melakukan proses \textit{anti-aliasing} atau tidak.
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\textbf{Kembalian:} Objek sesuai parameter \textit{contextType}.
 	
 \end{itemize}
 
 
 \subsection{CanvasRenderingContext2D}
 \textit{Interface} ini digunakan untuk menggambar persegi panjang, teks, gambar, dan objek-objek lain kedalam elemen \textit{canvas}. \textit{CanvasRenderingContext2D} menyediakan konteks \textit{2D rendering} untuk suatu elemen \textit{<canvas>}.
-Untuk mendapatkan objek dari \textit{interface} ini, harus memanggil \textit{getContext()} didalam elemen \textit{<canvas>}, dengan memberi ''2d'' sebagai argumen. Berikut contoh penggunaannya :
+Untuk mendapatkan objek dari \textit{interface} ini, harus memanggil \textit{getContext()} didalam elemen \textit{<canvas>}, dengan memberi \textit{''2d''} sebagai argumen. Berikut contoh penggunaannya :
 
 \begin{lstlisting}
 	var canvas = document.getElementById('myCanvas');
 	var ctx = canvas.getContext('2d');
 \end{lstlisting}
 
-\subsubsection{Rectangles}
-Ada tiga \textit{method} yang dapat digunakan untuk menggambar bentuk persegi panjang:
+Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bagian seperti berikut:
+\begin{enumerate}
+	\item \textbf{\textit{Fill} dan \textit{Stroke styles}}
+	\begin{itemize}
+		\item \textbf{CanvasRenderingContext2D.fillStyle} \\ Menentukan warna atau gaya yang akan digunakan pada bentuk tertentu. Nilai \textit{default} dari properti ini yaitu \#000 (\textit{'black'}). Properti ini dapat berisi:
+		\begin{itemize}
+			\item \textbf{color} \\tipe: \textbf{DOMString} 
+			\item \textbf{gradient} \\tipe: \textbf{CanvasGradient}
+			\item \textbf{pattern} \\tipe: \textbf{CanvasPattern}
+		\end{itemize}
+		Contoh implementasi:
+	\begin{lstlisting}
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	
+	ctx.fillStyle = 'blue'; mengisi bentuk persegi dengan warna biru
+	ctx.fillRect(10, 10, 100, 100);	\\menggambar persegi
+	\end{lstlisting}
+		
+		\item \textbf{CanvasRenderingContext2D.strokeStyle} \\ Menentukan warna atau gaya yang akan digunakan pada garis sisi pada bentuk tertentu. Nilai \textit{default} pada properti ini yaitu \#000 (\textit{'black'}). properti ini dapat berupa:
+		\begin{itemize}
+			\item \textbf{color} \\tipe: \textbf{DOMString} 
+			\item \textbf{gradient} \\tipe: \textbf{CanvasGradient}
+			\item \textbf{pattern} \\tipe: \textbf{CanvasPattern}
+		\end{itemize}
+		 Contoh implementasi:
+	\begin{lstlisting}
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+		 
+	ctx.strokeStyle = 'blue'; mengisi bentuk persegi dengan warna biru hanya pada sisinya
+	ctx.strokeRect(10, 10, 100, 100);	\\menggambar persegi tanpa ada warna didalam bentuknya
+	\end{lstlisting}
+	\end{itemize}
 
-\begin{itemize}
-	\item \textbf{CanvasRenderingContext2D.clearRect()} \\ Berfungsi untuk mengatur semua piksel dalam persegi panjang yang didefinisikan dengan titik awal (x,y) dan ukuran (lebar, tinggi) menjadi hitam transparan, dan menghapus semua konten yang telah digambar sebelumnya.
-	\item \textbf{CanvasRenderingContext2D.fillRect()} \\ Berfungsi untuk menggambar persegi panjang dengan berisi warna tertentu, pada posisi (x,y) dengan ukuran yang ditentukan dari \textit{width} dan \textit{height}.
-	\item \textbf{CanvasRenderingContext2D.strokeRect()} \\ Berfungsi untuk menggambar hanya garis luar dari persegi panjang, pada posisi (x,y) dengan ukuran yang ditentukan dari \textit{width} dan \textit{height}.
-\end{itemize}
+	\item \textbf{\textit{Line styles}} \\ 
+	\begin{itemize}
+		\item \textbf{CanvasRenderingContext2D.lineWidth} \\ Menentukan ketebalan dari garis. Nilai \textit{default} dari properti ini yaitu 1.0. Isi dari properti ini dapat berupa:
+		\begin{itemize}
+			\item \textbf{value} \\ Nilai yang menentukan ketebalan garis.
+		\end{itemize}
+		Contoh implementasi:
+	\begin{lstlisting}
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	
+	ctx.lineWidth = 15;
+	\end{lstlisting}
+	
+		\item \textbf{CanvasRenderingContext2D.lineCap} \\ Menentukan jenis dari ujung suatu garis. Nilai dari properti ini dapat berupa:
+		\begin{itemize}
+			\item \textbf{butt} \\ Ujung dari garis memiliki bentuk rata.
+			\item \textbf{round} \\ Ujung dari garis memiliki bentuk bulat.
+			\item \textbf{square} \\ Ujung dari garis memiliki bentuk rata, ditambah kotak dengan ukuran lebar yang sama dan satu per delapan dari ketebalan garis tersebut.
+		\end{itemize}
+		Contoh implementasi:
+	\begin{lstlisting}
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	
+	ctx.lineCap = 'round';
+	\end{lstlisting}
+	
+		\item \textbf{CanvasRenderingContext2D.lineJoin} \\ Menentukan bagaimana bentuk sudut dari kedua garis yang saling terhubung. Nilai dari atribut ini dapat berupa:
+		\begin{itemize}
+			\item \textbf{round} \\ Sudut memiliki bentuk bulat (melengkung).
+			\item \textbf{bevel} \\ Sudut memiliki bentuk rata.
+			\item \textbf{miter} \\ Sudut memiliki bentuk lancip.
+		\end{itemize}
+		Contoh implementasi:
+		\begin{lstlisting}
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		
+		ctx.lineJoin = 'round';
+		\end{lstlisting}
+	\end{itemize}
 
-\subsubsection{Text}
-Berikut merupakan beberapa \textit{method} yang digunakan untuk menggambar suatu teks:
+	\item \textbf{Text styles} 
+	\begin{itemize}
+		\item \textbf{CanvasRenderingContext2D.font} \\ Menentukan jenis teks yang akan digunakan. Nilai \textit{default} dari properti ini yaitu 10px \textit{sans-serif}.
+	\end{itemize}
+	
+\end{enumerate}
 
-\begin{itemize}
-	\item \textbf{CanvasRenderingContext2D.fillText()} \\ Menggambar teks tertentu pada posisi (x,y).
-	\item \textbf{CanvasRenderingContext2D.strokeText()} \\ Menggambar garis luar dari suatu teks pada posisi (x,y).
-\end{itemize}
+\textit{Method} yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bagian seperti berikut:
+\begin{enumerate}
+	\item \textbf{Menggambar \textit{rectangles}}
+	\begin{itemize}
+		\item \textbf{CanvasRenderingContext2D.clearRect(x, y, width, height)} \\ 
+		\textit{Method} ini akan menghapus gambar sebelumnya dengan membentuk suatu persegi. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
+		
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{x} \\ Koordinat x yang menandakan titik awal persegi.
+			\item \textbf{y} \\ Koordinat y yang menandakan titik awal persegi.
+			\item \textbf{width} \\ Lebar persegi.
+			\item \textbf{height} \\ tinggi persegi.
+		\end{itemize}
+		Contoh implementasi:
+	\begin{lstlisting}
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+		
+	ctx.fillRect(25, 25, 100, 100);
+	
+	// Akan menghapus bagian dalam persegi yang sudah digambar sebelumnya
+	ctx.clearRect(45, 45, 60, 60); 
+	\end{lstlisting}
+		
+		\item \textbf{CanvasRenderingContext2D.fillRect(x, y, width, height)} \\ 
+		\textit{Method} ini akan menggambar persegi dengan warna tertentu didalam bentuknya. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
+		
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{x} \\ Koordinat x yang menandakan titik awal persegi.
+			\item \textbf{y} \\ Koordinat y yang menandakan titik awal persegi.
+			\item \textbf{width} \\ Lebar persegi.
+			\item \textbf{height} \\ tinggi persegi.
+		\end{itemize}
+		Contoh implementasi:
+	\begin{lstlisting}
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	
+	ctx.fillStyle = 'green';
+	ctx.fillRect(10, 10, 100, 100);
+	\end{lstlisting}
+	
+	\item \textbf{CanvasRenderingContext2D.strokeRect(x, y, width, height)} \\ 
+	\textit{Method} ini akan menggambar persegi tanpa ada warna didalam bentuknya, namun akan memberi warna tertentu pada garis sisi persegi tersebut. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
+	
+	\textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{x} \\ Koordinat x yang menandakan titik awal persegi.
+		\item \textbf{y} \\ Koordinat y yang menandakan titik awal persegi.
+		\item \textbf{width} \\ Lebar persegi.
+		\item \textbf{height} \\ tinggi persegi.
+	\end{itemize}
+	Contoh implementasi:
+	\begin{lstlisting}
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	
+	ctx.strokeStyle = 'green';
+	ctx.strokeRect(10, 10, 100, 100);
+	\end{lstlisting}
+	\end{itemize}
 
-\subsubsection{Line Styles}
-Berikut merupakan beberapa properti yang digunakan untuk mengatur bagaimana sebuah garis akan digambar:
+	\item \textbf{Paths} \\
+	\textit{Paths} merupakan kumpulan beberapa titik yang terhubung oleh garis yang dapat membentuk lengkungan, garis, atau bentuk tertentu. Untuk dapat membuat bentuk tertentu menggunakan \textit{paths}, dapat dilakukan langkah berikut:
+	\begin{enumerate}
+		\item Membuat \textit{path}.
+		\item Menggunakan beberapa fungsi \textit{path} untuk menggambar suatu \textit{path}.
+		\item Menutup \textit{path} yang sudah digambar.
+		\item Setelah \textit{path} ditutup, maka bentuk tersebut dapat diberi warna didalam bentuk tersebut maupun di garis sisinya.
+	\end{enumerate}
+	
+	Berikut merupakan beberapa \textit{method} untuk membuat \textit{path}:
+	\begin{itemize}
+		\item \textbf{CanvasRenderingContext2D.beginPath()} \\ 
+		\textit{Method} ini digunakan untuk memulai suatu \textit{path} baru dengan mengosongkan \textit{list} dari \textit{sub-paths} sebelumnya.
+		
+		\item \textbf{CanvasRenderingContext2D.moveTo(x, y)} \\
+		\textit{Method} ini digunakan untuk memindahkan titik awal dari \textit{sub-path} yang baru ke koordinat (\textit{x}, \textit{y}). \\
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{x} \\ Koordinat x yang menandakan titik pada posisi sumbu x.
+			\item \textbf{y} \\ Koordinat y yang menandakan titik pada posisi sumbu y.
+		\end{itemize}
+		
+		\item \textbf{CanvasRenderingContext2D.lineTo(x, y)} \\
+		\textit{Method} ini digunakan untuk menghubungkan titik sebelumnya pada \textit{sub-path} dengan koordinat (\textit{x}, \textit{y}).
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{x} \\ Koordinat x yang menandakan akhir dari garis.
+			\item \textbf{y} \\ Koordinat y yang menandakan akhir dari garis.
+		\end{itemize}
+		
+		\item \textbf{CanvasRenderingContext2D.closePath()} \\
+		\textit{Method} ini berfungsi untuk memindahkan posisi titik saat ini kembali ke posisi awal \textit{sub-path}. Apabila bentuk yang dibuat oleh \textit{path} sudah ditutup, atau hanya memiliki satu titik, maka \textit{method} ini tidak akan berfungsi.
+		
+		\item \textbf{CanvasRenderingContext2D.arc(x, y, radius, startAngle, endAngle, anticlockwise)} \\
+		\textit{Method} ini akan menambah lengkungan pada \textit{path} dengan titik tengah berada pada posisi (\textit{x}, \textit{y}), memiliki \textit{radius} dan dimulai dari sudut \textit{startAngle} dan berakhir di sudut \textit{endAngle}, dengan cara menggambar sesuai arah \textit{anticlockwise}. \\
+		\textbf{Parameter:}
+		\begin{itemize}
+			\item \textbf{x} \\ Koordinat x dari titik tengah lengkungan.
+			\item \textbf{y} \\ Koordinat y dari titik tengah lengkungan.
+			\item \textbf{radius} \\ Radius lengkungan.
+			\item \textbf{startAngle} \\ Derajat awal dari lengkungan, diukur searah jarum jam dari posisi sumbu x positif dalam radian.
+			\item \textbf{endAngle} \\ Derajat akhir dari lengkungan, diukur searah jarum jam dari posisi sumbu x positif dalam radian.
+			\item \textbf{anticlockwise} \\ Cara menggambar lengkungan. Apabila bernilai \textit{true}, maka akan digambar dengan cara berlawanan arah jarum jam.
+		\end{itemize}
+		
+		Contoh implementasi:
+	\begin{lstlisting}
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	
+	// langkah berikut akan membuat gambar segitiga
+	ctx.beginPath();
+	ctx.moveTo(20, 20);
+	ctx.lineTo(200, 20);
+	ctx.lineTo(120, 120);
+	ctx.closePath(); 
+	ctx.stroke();
+	\end{lstlisting}
+		
+	\end{itemize} 
 
-\begin{itemize}
-	\item \textbf{CanvasRenderingContext2D.lineWidth} \\ Properti yang merepresentasikan tebal dari suatu garis. Nilai \textit{default} dari properti ini yaitu 1.0.
-	\item \textbf{CanvasRenderingContext2D.lineCap} \\ Berfungsi untuk menentukan jenis ujung dari suatu garis. Nilai dari properti ini dapat berupa \textit{round}, \textit{square}, atau \textit{butt}. 
-\end{itemize}
-
-\subsubsection{Text Styles}
-Berikut merupakan beberapa properti yang digunakan untuk mengatur bagaimana suatu teks digambar.
-
-\begin{itemize}
-	\item \textbf{CanvasRenderingContext2D.font} \\ Berfungsi untuk mengatur jenis \textit{font} yang akan digunakan. Nilai \textit{default} dari properti ini yaitu 10px \textit{sans-serif}.
-	\item \textbf{CanvasRenderingContext2D.textAlign} \\ Berfungsi untuk mengatur penjajaran dari suatu teks.
-	\item \textbf{CanvasRenderingContext2D.direction} \\  Berfungsi untuk mengatur arah dari teks tertentu. Nilai dari properti ini dapat berupa kiri-ke-kanan, atau kanan-ke-kiri.
-\end{itemize}
-
-\subsubsection{Fill and Stroke Styles}
-\textit{Fill style} digunakan untuk memanipulasi warna dan \textit{style} pada suatu bentuk, dan \textit{stroke style} digunakan untuk memanipulasi garis luar pada suatu bentuk.
-
-\begin{itemize}
-	\item \textbf{CanvasRenderingContext2D.fillStyle} \\ Berfungsi untuk memberi warna yang akan digunakan didalam suatu bentuk tertentu.
-	\item \textbf{CanvasRenderingContext2D.strokeStyle} \\ Berfungsi untuk memberi warna yang akan digunakan pada garis luar suatu bentuk tertentu.
-\end{itemize}
-
-\subsubsection{Gradients and Patterns}
-
-\begin{itemize}
-	\item \textbf{CanvasRenderingContext2D.createLinearGradient()} \\ Berfungsi untuk membuat \textit{linear gradient} sepanjang garis pada koordinat tertentu.
-	\item \textbf{CanvasRenderingContext2D.createRadialGradient()} \\ Berfungsi untuk membuat \textit{radial gradient} pada koordinat tertentu.
-	\item \textbf{CanvasRenderingContext2D.createPattern()} \\ Berfungsi untuk membuat pola dengan menggunakan gambar yang sudah didefinisikan sebelumnya.
-\end{itemize}
-
-\subsubsection{Paths}
-Beberapa \textit{method} berikut ini dapat digunakan untuk memanipulasi \textit{path} dari suatu objek:
-
-\begin{itemize}
-	\item \textbf{CanvasRenderingContext2D.beginPath()} \\ Berfungsi untuk memulai \textit{path} baru dengan mengosongkan daftar dari \textit{sub-paths}.
-	\item \textbf{CanvasRenderingContext2D.closePath()} \\ Berfungsi untuk memindahkan posisi ujung \textit{pen} ke titik awal dari \textit{sub-path} saat ini.
-	\item \textbf{CanvasRenderingContext2D.moveTo()} \\ Berfungsi untuk memindahkan posisi ujung \textit{pen} saat ini ke koordinat (x,y).
-	\item \textbf{CanvasRenderingContext2D.lineTo()} \\ Berfungsi untuk menghubungkan titik terakhir pada \textit{sub-path} ke koordinat (x,y).
-	\item \textbf{CanvasRenderingContext2D.arc()} \\ Berfungsi untuk menambahkan garis lengkung ke \textit{path} yang berpusat pada posisi (x,y) dengan radius \textit{r}, dimulai dari \textit{startAngle} dan berakhir pada \textit{endAngle} dengan arah gambar garis lengkung yang didefinisikan oleh \textit{anticlockwise}.
-	\item \textbf{CanvasRenderingContext2D.rect()} \\ Berfungsi untuk membuat \textit{path} persegi panjang pada posisi (x,y) dengan ukuran yang didefinisikan oleh \textit{width} dan \textit{height}.
-\end{itemize}
-
-
-
-
+\end{enumerate}
