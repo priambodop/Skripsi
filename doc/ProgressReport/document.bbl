@@ -1,0 +1,34 @@
+\begin{thebibliography}{99}
+
+\bibitem{nodejs}
+Dahl, R. (2009) {Node.js}.
+\newblock \url{https://nodejs.org/en/}.
+\newblock [Online; diakses 7-Oktober-2017].
+
+\bibitem{expressjs}
+Holowaychuk, T. (2010) {Express.js}.
+\newblock \url{https://expressjs.com/}.
+\newblock [Online; diakses 7-Oktober-2017].
+
+\bibitem{websockets}
+Mozilla (2011) {WebSockets}.
+\newblock
+  \url{https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API}.
+\newblock [Online; diakses 7-Oktober-2017].
+
+\bibitem{socketio}
+Rauch, G. (2011) {Socket.io}.
+\newblock \url{https://socket.io/}.
+\newblock [Online; diakses 7-Oktober-2017].
+
+\bibitem{socketioserver}
+Rauch, G. (2011) {Socket.io Server API}.
+\newblock \url{https://socket.io/docs/server-api/}.
+\newblock [Online; diakses 7-Oktober-2017].
+
+\bibitem{canvas}
+Mozilla (2004) {Canvas API}.
+\newblock \url{https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API}.
+\newblock [Online; diakses 7-Oktober-2017].
+
+\end{thebibliography}

@@ -61,9 +61,9 @@ Berikut akan dijelaskan kelas-kelas yang ada pada \textit{interface} \textit{HTT
 		\textbf{Kembalian:} suatu \textit{string} yang sesuai dengan parameter.
 		
 		\textit{Method} ini akan membaca seluruh \textit{header} dalam permintaan dan mengembalikan bagian yang sesuai dengan parameter. Berikut contoh implementasi dari \textit{method} ini:
-		\begin{lstlisting}
-		const contentType = request.getHeader('Content-Type');
-		\end{lstlisting}
+\begin{lstlisting}
+const contentType = request.getHeader('Content-Type');
+\end{lstlisting}
 		
 		\item \textbf{request.removeHeader(name)} \\ 
 		\textbf{Parameter:}
@@ -71,9 +71,9 @@ Berikut akan dijelaskan kelas-kelas yang ada pada \textit{interface} \textit{HTT
 			\item \textbf{name} \\tipe: \textbf{string} \\ Nama dari \textit{header} yang dibutuhkan.
 		\end{itemize}
 		\textit{Method} ini akan menghapus \textit{header} yang sudah ada pada objek \textit{header}. Berikut contoh implementasi dari \textit{method} ini:
-		\begin{lstlisting}
-		request.removeHeader('Content-Type');
-		\end{lstlisting}
+\begin{lstlisting}
+request.removeHeader('Content-Type');
+\end{lstlisting}
 		
 		\item \textbf{request.setHeader(name, value)} \\ 
 		\textbf{Parameter:}
@@ -83,9 +83,9 @@ Berikut akan dijelaskan kelas-kelas yang ada pada \textit{interface} \textit{HTT
 		\end{itemize}
 		
 		\textit{Method} ini akan menetapkan suatu nilai kepada objek \textit{header}. Berikut contoh implementasi \textit{method} ini:
-		\begin{lstlisting}
-		request.setHeader('Content-Type', 'application/json');
-		\end{lstlisting}
+\begin{lstlisting}
+request.setHeader('Content-Type', 'application/json');
+\end{lstlisting}
 	\end{itemize}
 	
 	\item \textbf{http.Server} \\ 
@@ -211,17 +211,17 @@ Berikut merupakan beberapa \textit{method} yang dimiliki oleh kelas \textit{Even
 	\textit{Method} ini berfungsi untuk mencatat suatu listener yang akan digunakan. Fungsi \textit{listener} yang menjadi parameter \textit{method} ini akan ditambahkan ke \textit{index} terakhir dari \textit{array of listeners} pada \textit{eventName}. Tidak akan ada pengecekan apakah fungsi \textit{listener} sudah dimasukan sebelumnya. Oleh karena itu, pemanggilan \textit{eventName} dan \textit{listener} secara berulang akan menyebabkan fungsi \textit{listener} dimasukan kedalam \textit{array} dan dipanggil secara berulang. \textit{Method} ini juga akan mengembalikan \textit{reference} kepada \textit{EventEmitter}, sehingga pemanggilan dapat saling menyambung dengan pemanggilan lainnya.
 	
 	Berikut merupakan contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	const EventEmitter = require('events');
+\begin{lstlisting}
+const EventEmitter = require('events');
 	
-	class MyEmmit extends EventEmitter {}
+class MyEmmit extends EventEmitter {}
 	
-	const myEmmit = new MyEmitter();
+const myEmmit = new MyEmitter();
 	
-	myEmmit.on('event', () => {
-	console.log('suatu event telah terjadi');	
-	});
-	\end{lstlisting}
+myEmmit.on('event', () => {
+console.log('suatu event telah terjadi');	
+});
+\end{lstlisting}
 	
 	\item \textbf{eventEmitter.emit(eventName)} \\ \textit{Method} ini berfungsi untuk memicu suatu \textit{event} yang akan dipancarkan. \textbf{Parameter:}
 	\begin{itemize}
@@ -233,18 +233,18 @@ Berikut merupakan beberapa \textit{method} yang dimiliki oleh kelas \textit{Even
 	\textit{Method} ini akan memanggil masing-masing \textit{listener} yang sudah dicatat oleh \textit{eventEmitter.on()} dalam \textit{array of listeners} secara sinkronis, dimana beberapa \textit{listener} tersebut mengacu pada \textit{eventName} yang sama. Argumen yang diterima dari parameter akan diberikan pada masing-masing \textit{listener}.
 	
 	Berikut merupakan contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	const EventEmitter = require('events');
+\begin{lstlisting}
+const EventEmitter = require('events');
 	
-	class MyEmmit extends EventEmitter {}
+class MyEmmit extends EventEmitter {}
 	
-	const myEmmit = new MyEmitter();
+const myEmmit = new MyEmitter();
 	
-	myEmmit.on('event', () => {
-	console.log('suatu event telah terjadi');	
-	});
-	myEmitter.emit('event');
-	\end{lstlisting} 
+myEmmit.on('event', () => {
+console.log('suatu event telah terjadi');	
+});
+myEmitter.emit('event');
+\end{lstlisting} 
 \end{itemize}
 
 \subsection{Stream}
@@ -273,36 +273,36 @@ Ada empat tipe dasar \textit{stream} dalam \textit{Node.js}:
 		\textbf{Events:}
 		\begin{itemize}
 			\item \textbf{'close'} \\ \textit{Event} ini dipancarkan saat suatu \textit{stream} atau sumber lain telah ditutup. \textit{Event} ini menandakan tidak akan ada \textit{event} lagi yang akan dipancarkan, dan tidak ada komputasi lain yang akan dilakukan.
-			\begin{lstlisting}
-			const readable = getReadableStreamSomehow();
-			readable.on('close', (chunk) => {
-			console.log(`Stream telah ditutup`);
-			});
+\begin{lstlisting}
+const readable = getReadableStreamSomehow();
+readable.on('close', (chunk) => {
+console.log(`Stream telah ditutup`);
+});
 			\end{lstlisting}
 			
 			\item \textbf{'data'} \\ \textit{Event} ini akan dipancarkan setiap kali suatu \textit{stream} melepas kepemilikan sebuah data kepada pemakai. Hal tersebut dapat terjadi setiap suatu \textit{stream} berganti menjadi mode \textit{flowing} dengan memanggil \textit{readable.pipe()}, \textit{readable.resume()}, atau dengan menghubungkan \textit{listener callback} pada \textit{'data' event}. Contoh implementasi:
-			\begin{lstlisting}
-			const readable = getReadableStreamSomehow();
-			readable.on('data', (chunk) => {
-			console.log(`Menerima data sebesar ${chunk.length} bytes.`);
-			});
+\begin{lstlisting}
+const readable = getReadableStreamSomehow();
+readable.on('data', (chunk) => {
+console.log(`Menerima data sebesar ${chunk.length} bytes.`);
+});
 			\end{lstlisting}
 			
 			\item \textbf{'end'} \\ \textit{Event} ini dipancarkan saat tidak ada lagi data yang akan digunakan dari \textit{stream}. Contoh implementasi:
-			\begin{lstlisting}
-			const readable = getReadableStreamSomehow();
-			readable.on('end', () => {
-			console.log('Tidak akan ada data yang dikirimkan.');
-			});
-			\end{lstlisting}
+\begin{lstlisting}
+const readable = getReadableStreamSomehow();
+readable.on('end', () => {
+console.log('Tidak akan ada data yang dikirimkan.');
+});
+\end{lstlisting}
 			
 			\item \textbf{'error'} \\ \textit{Event} ini akan dipancarkan oleh \textit{Readable} setiap saat. \textit{Event} ini dapat terjadi apabila \textit{stream} tidak dapat menyediakan data dikarenakan kesalahan internal, atau ketika implementasi suatu \textit{stream} mencoba mengirimkan \textit{chunk} dari data yang tidak sesuai. Contoh implementasi:
-			\begin{lstlisting}
-			const readable = getReadableStreamSomehow();
-			readable.on('error', () => {
-			console.error('Terjadi kesalahan');
-			});
-			\end{lstlisting}
+\begin{lstlisting}
+const readable = getReadableStreamSomehow();
+readable.on('error', () => {
+console.error('Terjadi kesalahan');
+});
+\end{lstlisting}
 			
 			
 		\end{itemize}
@@ -322,15 +322,15 @@ Ada empat tipe dasar \textit{stream} dalam \textit{Node.js}:
 			\textit{Method} ini akan menghubungkan \textit{Writable stream} pada objek \textit{readable}, sehingga dapat berubah menjadi mode \textit{flowing} secara otomatis dan akan menaruh seluruh data pada \textit{Writable} yang sudah terhubung. \textit{Method} ini mengembalikan referensi yang menuju \textit{destination}, sehingga \textit{pipe streams} dapat saling menyambung dengan \textit{pipe streams} lainnya.
 			
 			Berikut merupakan contoh implementasi dari \textit{method} ini:
-			\begin{lstlisting}
-			const fs = require('fs');
+\begin{lstlisting}
+const fs = require('fs');
 			
-			const readable = getReadableStreamSomehow();
-			const writable = fs.createWriteStream('file.txt');
+const readable = getReadableStreamSomehow();
+const writable = fs.createWriteStream('file.txt');
 			
-			//seluruh data dari objek readable masuk ke 'file.txt'
-			readable.pipe(writable); 
-			\end{lstlisting}
+//seluruh data dari objek readable masuk ke 'file.txt'
+readable.pipe(writable); 
+\end{lstlisting}
 			
 		\end{itemize}
 	\end{itemize}
@@ -395,12 +395,12 @@ Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 	\end{itemize}
 	
 	\textit{Method} ini dapat menangani seluruh \textit{HTTP requests} seperti \textit{GET, POST, PUT,} dan \textit{DELETE}. Berikut merupakan contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	app.all('/about', function(req, res, next){
-	console.log('Mengakses bagian about ...');
-	next(); //bagian ini akan menuju ke handler berikutnya
-	});
-	\end{lstlisting}
+\begin{lstlisting}
+app.all('/about', function(req, res, next){
+console.log('Mengakses bagian about ...');
+next(); //bagian ini akan menuju ke handler berikutnya
+});
+\end{lstlisting}
 	
 	\item \textbf{app.get(path, callback[, callback ...])} \\ \textbf{Parameter:}
 	\begin{itemize}
@@ -410,10 +410,10 @@ Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 	\end{itemize}
 	
 	\textit{Method} ini akan mengarahkan \textit{HTTP GET requests} pada \textit{path} dengan fungsi \textit{callback} tertentu. Berikut merupakan contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	app.get('/', function(req, res){
-	res.send('Mengirimkan GET request pada homepage');
-	});
+\begin{lstlisting}
+app.get('/', function(req, res){
+res.send('Mengirimkan GET request pada homepage');
+});
 	\end{lstlisting}
 	
 	\item \textbf{app.post(path, callback[, callback ...])} \\ \textbf{Parameter:}
@@ -424,11 +424,11 @@ Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 	\end{itemize}
 	
 	\textit{Method} ini akan mengarahkan \textit{HTTP POST requests} pada \textit{path} dengan fungsi \textit{callback} tertentu. Berikut merupakan contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	app.post('/', function(req, res){
-	res.send('Mengirimkan POST requests pada homepage');
-	});
-	\end{lstlisting}
+\begin{lstlisting}
+app.post('/', function(req, res){
+res.send('Mengirimkan POST requests pada homepage');
+});
+\end{lstlisting}
 	
 	\item \textbf{app.route(path)} \\ \textbf{Parameter:}
 	\begin{itemize}
@@ -436,11 +436,11 @@ Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 	\end{itemize}
 	
 	\textit{Method} ini akan mengembalikan instansi dari satu \textit{route}, yang kemudian dapat digunakan untuk menangani \textit{HTTP request} dengan \textit{middleware} tertentu. Berikut merupakan contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	app.route('/buku').get(function(req, res){
-	res.send('Mendapatkan suatu buku');
-	});
-	\end{lstlisting}
+\begin{lstlisting}
+app.route('/buku').get(function(req, res){
+res.send('Mendapatkan suatu buku');
+});
+\end{lstlisting}
 	
 	\item \textbf{app.use([path,] callback[, callback...])} \\ \textbf{Parameter:} 
 	\begin{itemize}
@@ -450,17 +450,17 @@ Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 	\end{itemize}
 	
 	\textit{Method} ini akan menghubungkan \textit{middleware} atau suatu fungsi tertentu dengan \textit{path} yang sudah ditentukan. Dalam implementasi \textit{method} ini, urutan penempatan pada baris kode sangat berpengaruh. Setelah \textit{app.use()} dieksekusi, maka suatu \textit{request} tidak akan mengeksekusi \textit{middleware} yang ada dibawah baris kode \textit{app.use()}.  Berikut merupakan contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	//request hanya akan sampai pada middleware ini
-	app.use(function(req, res){
-	res.send('Hanya sampai sini saja');
-	});
+\begin{lstlisting}
+//request hanya akan sampai pada middleware ini
+app.use(function(req, res){
+res.send('Hanya sampai sini saja');
+});
 	
-	//request tidak akan mengeksekusi baris ini
-	app.get('/', function(req, res){
-	res.send('Hello World!');
-	});
-	\end{lstlisting}
+//request tidak akan mengeksekusi baris ini
+app.get('/', function(req, res){
+res.send('Hello World!');
+});
+\end{lstlisting}
 	
 	\item \textbf{app.listen(port, [hostname], [backlog], [callback])} \\ \textbf{Parameter:}
 	\begin{itemize}
@@ -471,11 +471,11 @@ Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 	\end{itemize}
 	
 	\textit{Method} ini akan menghubungkan suatu koneksi pada \textit{host} dan \textit{port} yang sudah ditentukan. Berikut merupakan contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	const express = require('express');
-	const app = express();
-	app.listen(3000);
-	\end{lstlisting}
+\begin{lstlisting}
+const express = require('express');
+const app = express();
+app.listen(3000);
+\end{lstlisting}
 	
 \end{itemize}
 
@@ -500,16 +500,16 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} yaitu:
 	\item \textbf{res.send([body])} \\ \textbf{Parameter:} \textit{body} dapat berupa berbagai jenis objek seperti \textit{Buffer}, \textit{String}, dan \textit{Array}.
 	
 	\textit{Method} ini akan mengirimkan respon HTTP kepada \textit{client} sesuai dengan parameter yang diterima. Berikut merupakan contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	//parameter objek String
-	res.send('Hello World!');
+\begin{lstlisting}
+//parameter objek String
+res.send('Hello World!');
 	
-	//parameter objek Array
-	res.send([1,2,3]);
+//parameter objek Array
+res.send([1,2,3]);
 	
-	//parameter objek Buffer
-	res.send(new Buffer('<p>This is a Buffer</p>'));
-	\end{lstlisting}
+//parameter objek Buffer
+res.send(new Buffer('<p>This is a Buffer</p>'));
+\end{lstlisting}
 	
 	\item \textbf{res.end([data][, encoding])} \\ \textbf{Parameter:}
 	\begin{itemize}
@@ -518,13 +518,13 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} yaitu:
 	\end{itemize}
 	
 	\textit{Method} ini berfungsi untuk mengakhiri suatu proses respon. Apabila akan mengakhiri suatu respon tanpa memerlukan suatu data, maka dapat menggunakan \textit{method} ini. Berikut merupakan contoh implementasi \textit{method} ini:
-	\begin{lstlisting}
-	app.get('/', function(req, res){
-	res.end(); //apabila tidak memerlukan data.
+\begin{lstlisting}
+app.get('/', function(req, res){
+res.end(); //apabila tidak memerlukan data.
 	
-	res.end('goodbye!'); // apabila memerlukan suatu data untuk mengakhiri proses.
-	});
-	\end{lstlisting}
+res.end('goodbye!'); // apabila memerlukan suatu data untuk mengakhiri proses.
+});
+\end{lstlisting}
 	
 	\item \textbf{res.render(view[, locals][, callback])} \\ \textbf{Parameter:}
 	\begin{itemize}
@@ -534,11 +534,11 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} yaitu:
 	\end{itemize}
 	
 	\textit{Method} ini berfungsi untuk merubah \textit{view file} dan mengirim \textit{file} tersebut kepada \textit{client}. Berikut merupakan contoh implementasi \textit{method} ini:
-	\begin{lstlisting}
-	app.get('/', function(req, res){
-	res.render('about');  //akan merubah(render) halaman about 
-	});
-	\end{lstlisting}
+\begin{lstlisting}
+app.get('/', function(req, res){
+res.render('about');  //akan merubah(render) halaman about 
+});
+\end{lstlisting}
 	
 	\item \textbf{res.sendStatus(statusCode)} \\ \textbf{Parameter:} 
 	\begin{itemize}
@@ -546,10 +546,15 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} yaitu:
 	\end{itemize}
 	
 	\textit{Method} ini akan menetapkan kode status \textit{HTTP} di parameter, dan akan mengirimkan bentuk \textit{String} sebagai \textit{body} dari respon. Berikut contoh implementasi \textit{method} ini:
-	\begin{lstlisting}
-	res.sendStatus(200); // akan mengirimkan 'OK' pada response body.
-	res.sendStatus(404); // akan mengirimkan 'Not Found' pada response body.
-	res.sendStatus(500); // akan mengirimkan 'Internal Server Error' pada response body.
+\begin{lstlisting}
+// akan mengirimkan 'OK' pada response body.
+res.sendStatus(200); 
+
+// akan mengirimkan 'Not Found' pada response body.
+res.sendStatus(404); 
+
+// akan mengirimkan 'Internal Server Error' pada response body.
+res.sendStatus(500); 
 	\end{lstlisting}
 	
 	\item \textbf{res.status(code)} \\ \textbf{Parameter:}
@@ -558,10 +563,10 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} yaitu:
 	\end{itemize}
 	
 	\textit{Method} ini akan menetapkan kode status \textit{HTTP} untuk respon. Berikut merupakan contoh implementasi \textit{method} ini:
-	\begin{lstlisting}
-	res.status(403).end();
-	res.status(400).send('Bad Request');
-	\end{lstlisting}
+\begin{lstlisting}
+res.status(403).end();
+res.status(400).send('Bad Request');
+\end{lstlisting}
 	
 	\item \textbf{res.json([body])} \\ \textbf{Parameter:}
 	\begin{itemize}
@@ -569,9 +574,9 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} yaitu:
 	\end{itemize}
 	
 	\textit{Method} ini berfungsi untuk mengirimkan respon \textit{JSON}. Berikut merupakan contoh implementasi \textit{method} ini:
-	\begin{lstlisting}
-	res.json({ user: 'tobi', age: '27'});
-	\end{lstlisting}
+\begin{lstlisting}
+res.json({ user: 'tobi', age: '27'});
+\end{lstlisting}
 	
 \end{itemize}
 
@@ -591,17 +596,17 @@ Objek dari kelas \textit{Router} merupakan \textit{instance} dari \textit{middle
 	\textit{Method} ini menyediakan fungsionalitas \textit{routing} dalam aplikasi \textit{Express}, dimana \textit{METHOD} merupakan salah satu \textit{HTTP methods} seperti \textit{GET, PUT, } dan \textit{POST}, dalam huruf kecil. Dengan begitu, \textit{method} ini dapat berupa \textit{router.get(), router.post(),} dan \textit{router.put()}.
 	
 	Berikut merupakan contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	//menggunakan HTTP method GET
-	router.get('/', function(req, res){
-	res.send('hello world');
-	});
+\begin{lstlisting}
+//menggunakan HTTP method GET
+router.get('/', function(req, res){
+res.send('hello world');
+});
 	
-	//menggunakan HTTP method POST
-	router.post('/buku', function(req, res){
-	res.send('mendapatkan buku');
-	});
-	\end{lstlisting}
+//menggunakan HTTP method POST
+router.post('/buku', function(req, res){
+res.send('mendapatkan buku');
+});
+\end{lstlisting}
 	
 \end{itemize}
 
@@ -622,7 +627,7 @@ Kelas ini merupakan inti untuk mengakses fungsi yang ada pada \textit{WebSockets
 
 Berikut merupakan konstruktor dari kelas \textit{WebSocket}: 
 \begin{lstlisting}
-	WebSocket WebSocket(in DOMString url, in optional DOMString protocols);
+WebSocket WebSocket(in DOMString url, in optional DOMString protocols);
 \end{lstlisting}
 
 \begin{itemize}
@@ -639,7 +644,7 @@ Berikut merupakan konstruktor dari kelas \textit{WebSocket}:
 Konstruktor dari kelas \textit{WebSocket} dapat menampilkan suatu \textit{exception} seperti berikut:
 
 \begin{lstlisting}
-	SECURITY_ERR
+SECURITY_ERR
 \end{lstlisting}
 
 \textit{Exception} tersebut menandakan bahwa \textit{port} yang akan digunakan untuk melakukan koneksi diblokir.
@@ -777,11 +782,11 @@ Kelas ini merepresentasikan pesan yang diterima oleh suatu objek tujuan. \textit
 		\end{itemize}
 	\end{itemize}
 	Contoh implementasi:
-	\begin{lstlisting}
-	var myMessage = new MessageEvent('worker', {
-		data : 'hello'
-	});
-	\end{lstlisting}
+\begin{lstlisting}
+var myMessage = new MessageEvent('worker', {
+data : 'hello'
+});
+\end{lstlisting}
 \end{itemize}
 
 Beberapa properti yang dimiliki oleh kelas ini yaitu: 
@@ -790,22 +795,22 @@ Beberapa properti yang dimiliki oleh kelas ini yaitu:
 	\item \textbf{MessageEvent.data} \\ Merepresentasikan data yang dikirim oleh pemancar pesan. Parameter ini dapat berisi data dengan tipe data apapun. 
 	
 	Contoh implementasi:
-	\begin{lstlisting}
-	myWorker.onmessage = function(e) {
-		result.textContent = e.data;
-		console.log('Message received from worker');
-	};
-	\end{lstlisting}
+\begin{lstlisting}
+myWorker.onmessage = function(e) {
+result.textContent = e.data;
+console.log('Message received from worker');
+};
+\end{lstlisting}
 	
 	
 	\item \textbf{MessageEvent.source} \\ Merepresentasikan pemancar pesan atau sumber suatu pesan berasal. \\
 	Contoh implementasi:
-	\begin{lstlisting}
-	myWorker.onmessage = function(e) {
-		result.textContent = e.data;
-		console.log('Message received from worker');
-		console.log(e.source);
-	};
+\begin{lstlisting}
+myWorker.onmessage = function(e) {
+result.textContent = e.data;
+console.log('Message received from worker');
+console.log(e.source);
+};
 	\end{lstlisting}
 \end{itemize}
 
@@ -818,7 +823,7 @@ Beberapa properti yang dimiliki oleh kelas ini yaitu:
 
 Sebelum dapat menggunakan \textit{socket.io}, \textit{Node.js} harus sudah ter\textit{install} pada sistem komputer. Apabila hal tersebut sudah dilakukan, maka \textit{socket.io} dapat di\textit{install} dengan menggunakan \textit{command line tools} atau sejenisnya dengan melakukan langkah seperti berikut:
 \begin{lstlisting}
-	npm install socket.io
+npm install socket.io
 \end{lstlisting}
 
 Dengan begitu, aplikasi yang dibuat sudah dapat mengakses fitur-fitur yang dimiliki oleh \textit{socket.io}.
@@ -829,7 +834,8 @@ Dengan begitu, aplikasi yang dibuat sudah dapat mengakses fitur-fitur yang dimil
 Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi dalam \textit{server}\cite{socketioserver}. Kelas-kelas tersebut adalah sebagai berikut:
 
 \begin{enumerate}
-	\item \textbf{Server} \\ Kelas ini merupakan inti untuk dapat menangani proses yang terjadi dalam \textit{socket.io server}. Kelas ini memiliki tiga konstruktor seperti berikut: 
+	\item \textbf{Server} \\ 
+	Kelas ini merupakan inti untuk dapat menangani proses yang terjadi dalam \textit{socket.io server}. Kelas ini memiliki tiga konstruktor seperti berikut: 
 	\begin{itemize}
 		\item \textbf{new Server(httpServer[, options])} \\ 
 		\textbf{Parameter:}
@@ -853,28 +859,28 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 		
 		\begin{itemize}
 			\item Menggunakan \textit{new}
-	\begin{lstlisting}
-	const Server = require('socket.io');
-	const io = new Server();
-	\end{lstlisting}
+\begin{lstlisting}
+const Server = require('socket.io');
+const io = new Server();
+\end{lstlisting}
 			
 			\item Tanpa menggunakan \textit{new}
-	\begin{lstlisting}
-	const io = require('socket.io')();
-	\end{lstlisting}
-		\end{itemize}
+\begin{lstlisting}
+const io = require('socket.io')();
+\end{lstlisting}
+\end{itemize}
 	
 	Contoh implementasi konstruktor:
 	
-	\begin{lstlisting}
-	const Server = require('socket.io');
-	const http = require('http').createServer();
+\begin{lstlisting}
+const Server = require('socket.io');
+const http = require('http').createServer();
 		
-	const io = new Server(http, {
-		path: '/test',
-		serveClient: false
-	});
-	\end{lstlisting}
+const io = new Server(http, {
+	path: '/test',
+	serveClient: false
+});
+\end{lstlisting}
 	
 	\item \textbf{new Server(port[,options])} \\
 	\textbf{Parameter:}
@@ -884,13 +890,13 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 	\end{itemize}
 	
 	Contoh implementasi konstruktor: 
-	\begin{lstlisting}
-	const Server = require('socket.io');
-	const io = new Server(3000, {
-		path: '/test',
-		serveClient: false
-	});
-	\end{lstlisting}
+\begin{lstlisting}
+const Server = require('socket.io');
+const io = new Server(3000, {
+	path: '/test',
+	serveClient: false
+});
+\end{lstlisting}
 	
 	\item \textbf{new Server(options)} \\ 
 	\textbf{Parameter:}
@@ -901,13 +907,13 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 	
 	Contoh implementasi konstruktor:
 	
-	\begin{lstlisting}
-	const Server = require('socket.io');
-	const io = new Server({
-		path: '/test',
-		serveClient: false
-	});
-	\end{lstlisting}
+\begin{lstlisting}
+const Server = require('socket.io');
+const io = new Server({
+	path: '/test',
+	serveClient: false
+});
+\end{lstlisting}
 	
 	\end{itemize}
 
@@ -931,10 +937,10 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 			Parameter \textit{value} akan menetapkan nilai dari \textit{path} yang akan dituju. Secara \textit{default} nilai dari \textit{path} akan diisi dengan \textit{/socket.io}. Apabila tidak ada argumen pada \textit{method} ini, maka kembalian akan berupa nilai dari \textit{value} saat ini.
 			
 			Berikut contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	const io = require('socket.io')();
-	io.path('/myownpath');
-	\end{lstlisting}
+\begin{lstlisting}
+const io = require('socket.io')();
+io.path('/myownpath');
+\end{lstlisting}
 	
 			\item \textbf{server.adapter([value])} \\
 			\textbf{Parameter:}
@@ -944,11 +950,11 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 			\textit{Method} ini akan menentukan \textit{adapter} apa yang akan digunakan. Secara \textit{default} adapter yang akan digunakan merupakan objek \textit{adapter} yang berasal dari \textit{socket.io} yang bekerja berdasarkan memori. Apabila \textit{method} ini tidak menerima parameter, maka kembalian akan berupa \textit{adapter} saat ini (secara \textit{default}).
 			
 			Berikut contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	const io = require('socket.io')(3000);
-	const redis = require('socket.io-redis');
-	io.adapter(redis({ host: 'localhost', port: 6379}));
-	\end{lstlisting}
+\begin{lstlisting}
+const io = require('socket.io')(3000);
+const redis = require('socket.io-redis');
+io.adapter(redis({ host: 'localhost', port: 6379}));
+\end{lstlisting}
 	
 			\item \textbf{server.origins([value])} \\ 
 			\textbf{Parameter:} 
@@ -960,10 +966,10 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 			\textit{Method} ini akan menetapkan \textit{origins} mana yang diizinkan oleh \textit{server}. Secara \textit{default}, \textit{origins} yang diizinkan dapat dari mana saja.
 			
 			Berikut contoh implementasi dari \textit{method} ini:
-	\begin{lstlisting}
-	const io = require('socket.io')();
-	io.origins(['foo.example.com:443']);
-	\end{lstlisting}
+\begin{lstlisting}
+const io = require('socket.io')();
+io.origins(['foo.example.com:443']);
+\end{lstlisting}
 			
 			\item \textbf{server.attach(httpServer[, options])} \\
 			\textbf{Parameter:} 
@@ -980,9 +986,9 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 				\item \textbf{nsp} \\tipe: \textbf{String} \\ \textit{Namespace}.
 			\end{itemize}
 			Contoh implementasi:
-	\begin{lstlisting}
-	const adminNamespace = io.of('/admin');
-	\end{lstlisting}
+\begin{lstlisting}
+const adminNamespace = io.of('/admin');
+\end{lstlisting}
 			
 			\item \textbf{server.bind(engine)} \\
 			\textbf{Parameter:}
@@ -1000,16 +1006,16 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 				\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
 			\end{itemize}
 			Contoh implementasi:
-	\begin{lstlisting}
-	const Server = require('socket.io');
-	const PORT   = 3030;
-	const server = require('http').Server();
+\begin{lstlisting}
+const Server = require('socket.io');
+const PORT   = 3030;
+const server = require('http').Server();
 	
-	const io = Server(PORT);
+const io = Server(PORT);
 	
-	// menutup server saat ini
-	io.close(); 
-	\end{lstlisting}
+// menutup server saat ini
+io.close(); 
+\end{lstlisting}
 		
 			
 		\end{itemize}
@@ -1033,12 +1039,12 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 			\item \textbf{args} \\ Argumen tambahan.
 		\end{itemize}
 		Contoh implementasi:
-	\begin{lstlisting}
-	const io = require('socket.io')();
+\begin{lstlisting}
+const io = require('socket.io')();
 		
-	// akan memancarkan event pada namespace utama (/)
-	io.emit('an event sent to all connected clients'); 
-	\end{lstlisting}
+// akan memancarkan event pada namespace utama (/)
+io.emit('an event sent to all connected clients'); 
+\end{lstlisting}
 		
 		\item \textbf{namespace.to(room)} \\ 
 		Berfungsi untuk memancarkan \textit{event} kepada \textit{client} yang sudah bergabung dalam \textit{room} tertentu. \\ 
@@ -1048,12 +1054,12 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 		\end{itemize}
 		\textbf{Kembalian:} \textit{namespace}. \\
 		Contoh implementasi:
-	\begin{lstlisting}
-	const io = require('socket.io')();
-	const adminNamespace = io.of('/admin');
+\begin{lstlisting}
+const io = require('socket.io')();
+const adminNamespace = io.of('/admin');
 	
-	adminNamespace.to('level1').emit('an event', { some: 'data' });
-	\end{lstlisting}
+adminNamespace.to('level1').emit('an event', { some: 'data' });
+\end{lstlisting}
 	
 		\item \textbf{namespace.clients(callback)} \\
 		Berfungsi untuk mendapatkan daftar \textit{ID clients} yang terhubung pada \textit{namespace} ini.
@@ -1062,15 +1068,16 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 			\item \textbf{callback} \\ fungsi \textit{callback}
 		\end{itemize}
 		Contoh implementasi:
-	\begin{lstlisting}
-	const io = require('socket.io')();
-	io.of('/chat').clients((error, clients) => {
-	if (error) throw error;
+\begin{lstlisting}
+const io = require('socket.io')();
+io.of('/chat').clients((error, clients) => {
+if (error) throw error;
 	
-	// akan menampilkan id seperti [PZDoMHjiu8PYfRiKAAAF, Anw2LatarvGVVXEIAAAD]
-	console.log(clients); 
-	});
-	\end{lstlisting}
+// akan menampilkan id seperti [PZDoMHjiu8PYfRiKAAAF, 
+// Anw2LatarvGVVXEIAAAD]
+console.log(clients); 
+});
+\end{lstlisting}
 	\end{itemize}
 	
 	\item \textbf{Socket} \\
@@ -1133,19 +1140,19 @@ Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
 \begin{enumerate}
 	\item \textbf{IO}
 	Untuk dapat menggunakan fungsi yang ada pada \textit{IO}, dapat dilakukan langkah seperti berikut:
-	\begin{lstlisting}
+\begin{lstlisting}
 	
-	//berfungsi untuk melayani file client
-	<script src="/socket.io/socket.io.js"></script>
+//berfungsi untuk melayani file client
+<script src="/socket.io/socket.io.js"></script>
 	
-	<script>
-	const socket = io('http://localhost');
-	</script>
-	\end{lstlisting}
+<script>
+const socket = io('http://localhost');
+</script>
+\end{lstlisting}
 	Dengan langkah tersebut, \textit{socket.io} akan dapat menangani \textit{file} yang berasal dari \textit{client}. Selain langkah tersebut, ada satu langkah lagi yang dapat digunakan, yaitu sebagai berikut:
-	\begin{lstlisting}
-	const io = require('socket.io-client');
-	\end{lstlisting}
+\begin{lstlisting}
+const io = require('socket.io-client');
+\end{lstlisting}
 	
 	\textit{Method} yang dimiliki oleh kelas ini yaitu sebagai berikut:
 	\begin{itemize}
@@ -1205,14 +1212,14 @@ Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
 		\item \textbf{socket.open()} \\ Berfungsi untuk membuka \textit{socket} secara manual.\\
 		\textbf{Kembalian:} \textit{Socket}
 		Contoh implementasi:
-	\begin{lstlisting}
-	const socket = io({
-	autoConnect: false
-	});
+\begin{lstlisting}
+const socket = io({
+autoConnect: false
+});
 	
-	// ...
-	socket.open();
-	\end{lstlisting}
+// ...
+socket.open();
+\end{lstlisting}
 	
 	\item \textbf{socket.emit(eventName[, ..args][, ack])} \\ 
 	Berfungsi untuk memancarkan \textit{event} kepada \textit{socket} yang ditandai dengan nama dari \textit{event} tersebut.\\ 
@@ -1249,18 +1256,19 @@ socket.emit('ferret', 'tobi', (data) => {
 Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web \cite{canvas}. Teknologi ini memiliki fitur untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processing} atau \textit{rendering}. Untuk dapat menggunakan fitur-fitur yang ada pada \textit{Canvas API}, langkah yang harus dilakukan adalah sebagai berikut:
 \begin{enumerate}
 	\item Menambahkan \textit{tag <canvas>} pada \textit{file HTML}, dan menambahkan \textit{id} yang akan digunakan pada \textit{file JavaScript}.
-	\begin{lstlisting}
-	<canvas id="canvas"></canvas>
-	\end{lstlisting}
+\begin{lstlisting}
+<canvas id="canvas"></canvas>
+\end{lstlisting}
 	
 	\item Membuat variabel untuk mendapatkan konteks \textit{rendering} dan fungsi-fungsi menggambar agar dapat menampilkan sesuatu pada \textit{<canvas>}.
-	\begin{lstlisting}
-	// Variabel yang akan menampilkan sesuatu pada <canvas> dengan id='canvas'
-	var canvas = document.getElementById('canvas'); 
+\begin{lstlisting}
+// Variabel yang akan menampilkan sesuatu 
+// pada <canvas> dengan id='canvas'
+var canvas = document.getElementById('canvas'); 
 	
-	// Variabel yang akan mendapatkan fungsi-fungsi menggambar 
-	var ctx = canvas.getContext('2d');
-	\end{lstlisting}
+// Variabel yang akan mendapatkan fungsi-fungsi menggambar 
+var ctx = canvas.getContext('2d');
+\end{lstlisting}
 \end{enumerate}
 
 Subbab-subbab berikut menjelaskan tentang beberapa \textit{interface} dari \textit{Canvas}.
@@ -1315,8 +1323,8 @@ Beberapa \textit{method} yang dimiliki oleh \textit{HTLMCanvasElement} yaitu :
 Untuk mendapatkan objek dari \textit{interface} ini, harus memanggil \textit{getContext()} didalam elemen \textit{<canvas>}, dengan memberi \textit{''2d''} sebagai argumen. Berikut contoh penggunaannya :
 
 \begin{lstlisting}
-	var canvas = document.getElementById('myCanvas');
-	var ctx = canvas.getContext('2d');
+var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
 \end{lstlisting}
 
 Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bagian seperti berikut:
@@ -1330,13 +1338,16 @@ Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bag
 			\item \textbf{pattern} \\tipe: \textbf{CanvasPattern}
 		\end{itemize}
 		Contoh implementasi:
-	\begin{lstlisting}
-	var canvas = document.getElementById('canvas');
-	var ctx = canvas.getContext('2d');
+\begin{lstlisting}
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 	
-	ctx.fillStyle = 'blue'; mengisi bentuk persegi dengan warna biru
-	ctx.fillRect(10, 10, 100, 100);	\\menggambar persegi
-	\end{lstlisting}
+//mengisi bentuk persegi dengan warna biru hanya pada sisinya
+ctx.strokeStyle = 'blue'; 
+
+//menggambar persegi tanpa ada warna didalam bentuknya
+ctx.strokeRect(10, 10, 100, 100);
+\end{lstlisting}
 		
 		\item \textbf{CanvasRenderingContext2D.strokeStyle} \\ Menentukan warna atau gaya yang akan digunakan pada garis sisi pada bentuk tertentu. Nilai \textit{default} pada properti ini yaitu \#000 (\textit{'black'}). properti ini dapat berupa:
 		\begin{itemize}
@@ -1345,13 +1356,16 @@ Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bag
 			\item \textbf{pattern} \\tipe: \textbf{CanvasPattern}
 		\end{itemize}
 		 Contoh implementasi:
-	\begin{lstlisting}
-	var canvas = document.getElementById('canvas');
-	var ctx = canvas.getContext('2d');
-		 
-	ctx.strokeStyle = 'blue'; mengisi bentuk persegi dengan warna biru hanya pada sisinya
-	ctx.strokeRect(10, 10, 100, 100);	\\menggambar persegi tanpa ada warna didalam bentuknya
-	\end{lstlisting}
+\begin{lstlisting}
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+
+//mengisi bentuk persegi dengan warna biru hanya pada sisinya
+ctx.strokeStyle = 'blue'; 
+
+//menggambar persegi tanpa ada warna didalam bentuknya
+ctx.strokeRect(10, 10, 100, 100);	
+\end{lstlisting}
 	\end{itemize}
 
 	\item \textbf{\textit{Line styles}} \\ 
@@ -1361,12 +1375,12 @@ Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bag
 			\item \textbf{value} \\ Nilai yang menentukan ketebalan garis.
 		\end{itemize}
 		Contoh implementasi:
-	\begin{lstlisting}
-	var canvas = document.getElementById('canvas');
-	var ctx = canvas.getContext('2d');
+\begin{lstlisting}
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 	
-	ctx.lineWidth = 15;
-	\end{lstlisting}
+ctx.lineWidth = 15;
+\end{lstlisting}
 	
 		\item \textbf{CanvasRenderingContext2D.lineCap} \\ Menentukan jenis dari ujung suatu garis. Nilai dari properti ini dapat berupa:
 		\begin{itemize}
@@ -1375,12 +1389,12 @@ Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bag
 			\item \textbf{square} \\ Ujung dari garis memiliki bentuk rata, ditambah kotak dengan ukuran lebar yang sama dan satu per delapan dari ketebalan garis tersebut.
 		\end{itemize}
 		Contoh implementasi:
-	\begin{lstlisting}
-	var canvas = document.getElementById('canvas');
-	var ctx = canvas.getContext('2d');
+\begin{lstlisting}
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 	
-	ctx.lineCap = 'round';
-	\end{lstlisting}
+ctx.lineCap = 'round';
+\end{lstlisting}
 	
 		\item \textbf{CanvasRenderingContext2D.lineJoin} \\ Menentukan bagaimana bentuk sudut dari kedua garis yang saling terhubung. Nilai dari atribut ini dapat berupa:
 		\begin{itemize}
@@ -1389,12 +1403,12 @@ Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bag
 			\item \textbf{miter} \\ Sudut memiliki bentuk lancip.
 		\end{itemize}
 		Contoh implementasi:
-		\begin{lstlisting}
-		var canvas = document.getElementById('canvas');
-		var ctx = canvas.getContext('2d');
+\begin{lstlisting}
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 		
-		ctx.lineJoin = 'round';
-		\end{lstlisting}
+ctx.lineJoin = 'round';
+\end{lstlisting}
 	\end{itemize}
 
 	\item \textbf{Text styles} 
@@ -1419,14 +1433,15 @@ Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bag
 			\item \textbf{height} \\ tinggi persegi.
 		\end{itemize}
 		Contoh implementasi:
-	\begin{lstlisting}
-	var canvas = document.getElementById('canvas');
-	var ctx = canvas.getContext('2d');
+\begin{lstlisting}
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 		
-	ctx.fillRect(25, 25, 100, 100);
+ctx.fillRect(25, 25, 100, 100);
 	
-	// Akan menghapus bagian dalam persegi yang sudah digambar sebelumnya
-	ctx.clearRect(45, 45, 60, 60); 
+// Akan menghapus bagian dalam persegi yang 
+// sudah digambar sebelumnya
+ctx.clearRect(45, 45, 60, 60); 
 	\end{lstlisting}
 		
 		\item \textbf{CanvasRenderingContext2D.fillRect(x, y, width, height)} \\ 
@@ -1440,13 +1455,13 @@ Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bag
 			\item \textbf{height} \\ tinggi persegi.
 		\end{itemize}
 		Contoh implementasi:
-	\begin{lstlisting}
-	var canvas = document.getElementById('canvas');
-	var ctx = canvas.getContext('2d');
+\begin{lstlisting}
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 	
-	ctx.fillStyle = 'green';
-	ctx.fillRect(10, 10, 100, 100);
-	\end{lstlisting}
+ctx.fillStyle = 'green';
+ctx.fillRect(10, 10, 100, 100);
+\end{lstlisting}
 	
 	\item \textbf{CanvasRenderingContext2D.strokeRect(x, y, width, height)} \\ 
 	\textit{Method} ini akan menggambar persegi tanpa ada warna didalam bentuknya, namun akan memberi warna tertentu pada garis sisi persegi tersebut. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
@@ -1459,13 +1474,13 @@ Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bag
 		\item \textbf{height} \\ tinggi persegi.
 	\end{itemize}
 	Contoh implementasi:
-	\begin{lstlisting}
-	var canvas = document.getElementById('canvas');
-	var ctx = canvas.getContext('2d');
+\begin{lstlisting}
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 	
-	ctx.strokeStyle = 'green';
-	ctx.strokeRect(10, 10, 100, 100);
-	\end{lstlisting}
+ctx.strokeStyle = 'green';
+ctx.strokeRect(10, 10, 100, 100);
+\end{lstlisting}
 	\end{itemize}
 
 	\item \textbf{Paths} \\
@@ -1514,18 +1529,18 @@ Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bag
 		\end{itemize}
 		
 		Contoh implementasi:
-	\begin{lstlisting}
-	var canvas = document.getElementById('canvas');
-	var ctx = canvas.getContext('2d');
+\begin{lstlisting}
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 	
-	// langkah berikut akan membuat gambar segitiga
-	ctx.beginPath();
-	ctx.moveTo(20, 20);
-	ctx.lineTo(200, 20);
-	ctx.lineTo(120, 120);
-	ctx.closePath(); 
-	ctx.stroke();
-	\end{lstlisting}
+// langkah berikut akan membuat gambar segitiga
+ctx.beginPath();
+ctx.moveTo(20, 20);
+ctx.lineTo(200, 20);
+ctx.lineTo(120, 120);
+ctx.closePath(); 
+ctx.stroke();
+\end{lstlisting}
 		
 	\end{itemize} 
 
