@@ -11,7 +11,7 @@ Pada bab ini akan dijelaskan landasan teori mengenai \textit{Node.js}, \textit{E
 
 \textit{Node.js} adalah \textit{JavaScript runtime} yang dibangun berdasarkan \textit{V8} yang merupakan \textit{JavaScript engine} milik perusahaan \textit{Google} \cite{nodejs}. \textit{Node.js} memiliki model \textit{event-driven}, dan \textit{non-blocking I/O} yang membuat teknologi tersebut efisien dalam implementasinya. Teknologi ini menyediakan beberapa kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
 
-Beberapa kelas yang terdapat pada \textit{Node.js} yaitu sebagai berikut: 
+Beberapa kelas yang terdapat pada \textit{Node.js} adalah sebagai berikut: 
 
 \subsection{HTTP}
 \textit{Interfaces} \textit{HTTP} pada \textit{Node.js} digunakan untuk menangani \textit{request} dari protokol \textit{HTTP} yang secara \textit{native} sulit untuk digunakan. \textit{Interface} ini akan menangani protokol \textit{HTTP} dengan tidak melakukan \textit{buffer} pada seluruh \textit{request} atau \textit{responses}.
@@ -126,10 +126,16 @@ Beberapa kelas yang terdapat pada \textit{Node.js} yaitu sebagai berikut:
 %	\end{itemize}
 %\end{enumerate} 
 
-Beberapa \textit{Method} yang dimiliki oleh \textit{HTTP} yaitu sebagai berikut:
+Salah satu \textit{Method} yang dimiliki oleh \textit{HTTP} yaitu sebagai berikut:
 \begin{itemize}
-	\item \textbf{http.createServer([requestListener])} \\ \textbf{Parameter:}
+	\item \textbf{http.createServer([options][,requestListener])} \\ \textbf{Parameter:}
 	\begin{itemize}
+		\item \textbf{options} objek-objek sebagai berikut:
+			\begin{itemize}
+				\item \textbf{IncomingMessage} menentukan objek dari kelas \textit{IncomingMessage} yang akan digunakan.
+				\item \textbf{ServerResponse} menentukan objek dari kelas \textit{ServerResponse} yang akan digunakan.
+			\end{itemize}
+			
 		\item \textbf{requestListener} fungsi yang akan secara otomatis ditambahkan pada \textit{event} \textit{'request'} milik kelas \textit{http.Server}.
 	\end{itemize}
 	\textbf{Kembalian:} objek \textit{http.Server}
@@ -185,164 +191,190 @@ Beberapa \textit{Method} yang dimiliki oleh \textit{HTTP} yaitu sebagai berikut:
 	
 \end{itemize}
 
-\subsection{Events}
-\textit{Node.js} dibangun berdasarkan arsitektur \textit{event-driven} dengan sifat \textit{asynchronous}, dimana jenis-jenis objek tertentu akan memancarkan suatu \textit{events} secara berkala dan akan memanggil objek \textit{Function} ("\textit{listeners}").
-
-Semua objek yang memancarkan \textit{events} merupakan turunan dari kelas \textit{EventEmitter}. Objek tersebut akan memanggil \textit{method} \textit{eventEmitter.on()} yang memungkinkan satu atau beberapa fungsi dapat ditangani dalam suatu \textit{event} yang dipancarkan oleh objek saat ini.
-
-Kelas \textit{EventEmitter} dapat didefinisikan dengan memanggil modul \textit{events} seperti berikut :
+\subsection{Path}
+Modul \textit{Path} menyediakan fungsi untuk mengatur akses suatu \textit{file} dan direktori. Modul tersebut dapat diakses dengan cara sebagai berikut:
 
 \begin{lstlisting}
-const EventEmitter = require('events');
+const path = require('path');
 \end{lstlisting}
 
-Sebuah \textit{EventEmitter} akan memancarkan \textit{'event'} \textit{'newListener'} pada saat \textit{listeners} baru akan ditambahkan, dan \textit{'removeListener'} akan dipancarkan saat \textit{listeners} saat ini akan dihapus.
-
-Berikut merupakan beberapa \textit{method} yang dimiliki oleh kelas \textit{EventEmitter}:
+Salah satu method yang dimiliki oleh modul \textit{Path} adalah : 
 
 \begin{itemize}
-	\item \textbf{eventEmitter.on(eventName, listener)} \\ \textbf{Parameter:}
+	\item \textbf{path.join([...paths])} \\ 
+	\textbf{parameter:} 
 	\begin{itemize}
-		\item \textit{eventName}, nama dari suatu \textit{event} yang akan dipancarkan.
-		\item \textit{listener}, suatu fungsi \textit{callback} yang akan menangani \textit{event} dari \textit{eventName}. 
-	\end{itemize} 
-	\textbf{Kembalian:} referensi kepada \textit{EventEmitter}.
-	
-	\textit{Method} ini berfungsi untuk mencatat suatu listener yang akan digunakan. Fungsi \textit{listener} yang menjadi parameter \textit{method} ini akan ditambahkan ke \textit{index} terakhir dari \textit{array of listeners} pada \textit{eventName}. Tidak akan ada pengecekan apakah fungsi \textit{listener} sudah dimasukan sebelumnya. Oleh karena itu, pemanggilan \textit{eventName} dan \textit{listener} secara berulang akan menyebabkan fungsi \textit{listener} dimasukan kedalam \textit{array} dan dipanggil secara berulang. \textit{Method} ini juga akan mengembalikan \textit{reference} kepada \textit{EventEmitter}, sehingga pemanggilan dapat saling menyambung dengan pemanggilan lainnya.
-	
-	Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-const EventEmitter = require('events');
-	
-class MyEmmit extends EventEmitter {}
-	
-const myEmmit = new MyEmitter();
-	
-myEmmit.on('event', () => {
-console.log('suatu event telah terjadi');	
-});
-\end{lstlisting}
-	
-	\item \textbf{eventEmitter.emit(eventName)} \\ \textit{Method} ini berfungsi untuk memicu suatu \textit{event} yang akan dipancarkan. \textbf{Parameter:}
-	\begin{itemize}
-		\item \textit{eventName}, nama dari sebuah \textit{event} yang akan dipancarkan.
-		\item \textit{...args}, argumen tambahan yang akan diberikan pada \textit{eventName}. 
+		\item \textbf{...paths} \\ tipe: \textbf{String} \\ Urutan suatu lokasi \textit{file} yang akan digunakan.
 	\end{itemize}
-	\textbf{Kembalian:} \textit{true} apabila \textit{event} memiliki \textit{listener}, false jika tidak.
+
+	\textbf{kembalian:} String
 	
-	\textit{Method} ini akan memanggil masing-masing \textit{listener} yang sudah dicatat oleh \textit{eventEmitter.on()} dalam \textit{array of listeners} secara sinkronis, dimana beberapa \textit{listener} tersebut mengacu pada \textit{eventName} yang sama. Argumen yang diterima dari parameter akan diberikan pada masing-masing \textit{listener}.
-	
-	Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-const EventEmitter = require('events');
-	
-class MyEmmit extends EventEmitter {}
-	
-const myEmmit = new MyEmitter();
-	
-myEmmit.on('event', () => {
-console.log('suatu event telah terjadi');	
-});
-myEmitter.emit('event');
-\end{lstlisting} 
+	\textit{Method} ini akan menggabungkan seluruh bagian-bagian \textit{path} dengan menormalisasinya dan mengembalikan bentuk \textit{path} yang menyeluruh.
 \end{itemize}
 
-\subsection{Stream}
-Kelas ini digunakan untuk menangani aliran data yang terjadi pada \textit{Node.js}. Data yang ditangani dapat berjumlah banyak dan akan menghabiskan banyak memori apabila tidak ditangani dengan baik. Oleh karena itu, modul \textit{stream} menyediakan fitur-fitur yang memudahkan penanganan aliran data.
+%\subsection{Events}
+%\textit{Node.js} dibangun berdasarkan arsitektur \textit{event-driven} dengan sifat \textit{asynchronous}, dimana jenis-jenis objek tertentu akan memancarkan suatu \textit{events} secara berkala dan akan memanggil objek \textit{Function} ("\textit{listeners}").
+%
+%Semua objek yang memancarkan \textit{events} merupakan turunan dari kelas \textit{EventEmitter}. Objek tersebut akan memanggil \textit{method} \textit{eventEmitter.on()} yang memungkinkan satu atau beberapa fungsi dapat ditangani dalam suatu \textit{event} yang dipancarkan oleh objek saat ini.
+%
+%Kelas \textit{EventEmitter} dapat didefinisikan dengan memanggil modul \textit{events} seperti berikut :
+%
+%\begin{lstlisting}
+%const EventEmitter = require('events');
+%\end{lstlisting}
+%
+%Sebuah \textit{EventEmitter} akan memancarkan \textit{'event'} \textit{'newListener'} pada saat \textit{listeners} baru akan ditambahkan, dan \textit{'removeListener'} akan dipancarkan saat \textit{listeners} saat ini akan dihapus.
+%
+%Berikut merupakan beberapa \textit{method} yang dimiliki oleh kelas \textit{EventEmitter}:
+%
+%\begin{itemize}
+%	\item \textbf{eventEmitter.on(eventName, listener)} \\ \textbf{Parameter:}
+%	\begin{itemize}
+%		\item \textit{eventName}, nama dari suatu \textit{event} yang akan dipancarkan.
+%		\item \textit{listener}, suatu fungsi \textit{callback} yang akan menangani \textit{event} dari \textit{eventName}. 
+%	\end{itemize} 
+%	\textbf{Kembalian:} referensi kepada \textit{EventEmitter}.
+%	
+%	\textit{Method} ini berfungsi untuk mencatat suatu listener yang akan digunakan. Fungsi \textit{listener} yang menjadi parameter \textit{method} ini akan ditambahkan ke \textit{index} terakhir dari \textit{array of listeners} pada \textit{eventName}. Tidak akan ada pengecekan apakah fungsi \textit{listener} sudah dimasukan sebelumnya. Oleh karena itu, pemanggilan \textit{eventName} dan \textit{listener} secara berulang akan menyebabkan fungsi \textit{listener} dimasukan kedalam \textit{array} dan dipanggil secara berulang. \textit{Method} ini juga akan mengembalikan \textit{reference} kepada \textit{EventEmitter}, sehingga pemanggilan dapat saling menyambung dengan pemanggilan lainnya.
+%	
+%	Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%const EventEmitter = require('events');
+%	
+%class MyEmmit extends EventEmitter {}
+%	
+%const myEmmit = new MyEmitter();
+%	
+%myEmmit.on('event', () => {
+%console.log('suatu event telah terjadi');	
+%});
+%\end{lstlisting}
+%	
+%	\item \textbf{eventEmitter.emit(eventName)} \\ \textit{Method} ini berfungsi untuk memicu suatu \textit{event} yang akan dipancarkan. \textbf{Parameter:}
+%	\begin{itemize}
+%		\item \textit{eventName}, nama dari sebuah \textit{event} yang akan dipancarkan.
+%		\item \textit{...args}, argumen tambahan yang akan diberikan pada \textit{eventName}. 
+%	\end{itemize}
+%	\textbf{Kembalian:} \textit{true} apabila \textit{event} memiliki \textit{listener}, false jika tidak.
+%	
+%	\textit{Method} ini akan memanggil masing-masing \textit{listener} yang sudah dicatat oleh \textit{eventEmitter.on()} dalam \textit{array of listeners} secara sinkronis, dimana beberapa \textit{listener} tersebut mengacu pada \textit{eventName} yang sama. Argumen yang diterima dari parameter akan diberikan pada masing-masing \textit{listener}.
+%	
+%	Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%const EventEmitter = require('events');
+%	
+%class MyEmmit extends EventEmitter {}
+%	
+%const myEmmit = new MyEmitter();
+%	
+%myEmmit.on('event', () => {
+%console.log('suatu event telah terjadi');	
+%});
+%myEmitter.emit('event');
+%\end{lstlisting} 
+%\end{itemize}
 
-Ada empat tipe dasar \textit{stream} dalam \textit{Node.js}:
-\begin{itemize}
-	\item \textbf{Readable} \\ \textit{Streams} yang dapat membaca data dari sumber eksternal tertentu.
-	\item \textbf{Writable} \\ \textit{Streams} yang dapat menulis data dan mengirimkannya ke sumber external tertentu.
-	\item \textbf{Duplex} \\ \textit{Streams} yang dapat membaca dan menulis data sekaligus.
-	\item \textbf{Transform} \\ \textit{Duplex streams} yang dapat memodifikasi atau mengubah data dimana data tersebut dapat dilihat langsung hasil perubahannya.
-\end{itemize}
-
-\begin{enumerate}
-	\item \textbf{Readable Stream} \\
-	Merupakan abstraksi untuk sumber data yang digunakan. Berikut merupakan contoh dari \textit{Readable Stream} pada \textit{Node.js}:
-	\begin{itemize}
-		\item \textbf{HTTP responses} pada \textit{client}
-		\item \textbf{HTTP requests} pada \textit{server}
-		\item \textbf{fs read streams}
-	\end{itemize}
-	Seluruh \textit{Readable streams} mengimplementasi \textit{interface} yang didefinisikan oleh kelas \textit{stream.Readable}.
-	
-	\begin{itemize}
-		\item \textbf{stream.Readable} \\
-		\textbf{Events:}
-		\begin{itemize}
-			\item \textbf{'close'} \\ \textit{Event} ini dipancarkan saat suatu \textit{stream} atau sumber lain telah ditutup. \textit{Event} ini menandakan tidak akan ada \textit{event} lagi yang akan dipancarkan, dan tidak ada komputasi lain yang akan dilakukan.
-\begin{lstlisting}
-const readable = getReadableStreamSomehow();
-readable.on('close', (chunk) => {
-console.log(`Stream telah ditutup`);
-});
-			\end{lstlisting}
-			
-			\item \textbf{'data'} \\ \textit{Event} ini akan dipancarkan setiap kali suatu \textit{stream} melepas kepemilikan sebuah data kepada pemakai. Hal tersebut dapat terjadi setiap suatu \textit{stream} berganti menjadi mode \textit{flowing} dengan memanggil \textit{readable.pipe()}, \textit{readable.resume()}, atau dengan menghubungkan \textit{listener callback} pada \textit{'data' event}. Contoh implementasi:
-\begin{lstlisting}
-const readable = getReadableStreamSomehow();
-readable.on('data', (chunk) => {
-console.log(`Menerima data sebesar ${chunk.length} bytes.`);
-});
-			\end{lstlisting}
-			
-			\item \textbf{'end'} \\ \textit{Event} ini dipancarkan saat tidak ada lagi data yang akan digunakan dari \textit{stream}. Contoh implementasi:
-\begin{lstlisting}
-const readable = getReadableStreamSomehow();
-readable.on('end', () => {
-console.log('Tidak akan ada data yang dikirimkan.');
-});
-\end{lstlisting}
-			
-			\item \textbf{'error'} \\ \textit{Event} ini akan dipancarkan oleh \textit{Readable} setiap saat. \textit{Event} ini dapat terjadi apabila \textit{stream} tidak dapat menyediakan data dikarenakan kesalahan internal, atau ketika implementasi suatu \textit{stream} mencoba mengirimkan \textit{chunk} dari data yang tidak sesuai. Contoh implementasi:
-\begin{lstlisting}
-const readable = getReadableStreamSomehow();
-readable.on('error', () => {
-console.error('Terjadi kesalahan');
-});
-\end{lstlisting}
-			
-			
-		\end{itemize}
-		
-		\textbf{Method:}
-		\begin{itemize}
-			\item \textbf{readable.pipe(destination[, options])} \\ \textbf{Parameter:}
-			\begin{itemize}
-				\item \textbf{destination} \\tipe: \textit{stream.Writable} \\ Destinasi untuk menulis suatu data.
-				\item \textbf{options} \\tipe: \textit{Object} \\ Bersifat opsional, dapat berupa objek sebagai berikut:
-				\begin{itemize}
-					\item \textbf{end} \\tipe: \textit{boolean} \\ Mengakhiri \textit{writer} yang melakukan proses menulis saat \textit{reader} telah selesai. Nilai \textit{default} parameter ini yaitu \textit{true}.
-				\end{itemize}
-			\end{itemize}
-			\textbf{Kembalian:} referensi yang menuju \textit{destination}.
-			
-			\textit{Method} ini akan menghubungkan \textit{Writable stream} pada objek \textit{readable}, sehingga dapat berubah menjadi mode \textit{flowing} secara otomatis dan akan menaruh seluruh data pada \textit{Writable} yang sudah terhubung. \textit{Method} ini mengembalikan referensi yang menuju \textit{destination}, sehingga \textit{pipe streams} dapat saling menyambung dengan \textit{pipe streams} lainnya.
-			
-			Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-const fs = require('fs');
-			
-const readable = getReadableStreamSomehow();
-const writable = fs.createWriteStream('file.txt');
-			
-//seluruh data dari objek readable masuk ke 'file.txt'
-readable.pipe(writable); 
-\end{lstlisting}
-			
-		\end{itemize}
-	\end{itemize}
-\end{enumerate}
+%\subsection{Stream}
+%Kelas ini digunakan untuk menangani aliran data yang terjadi pada \textit{Node.js}. Data yang ditangani dapat berjumlah banyak dan akan menghabiskan banyak memori apabila tidak ditangani dengan baik. Oleh karena itu, modul \textit{stream} menyediakan fitur-fitur yang memudahkan penanganan aliran data.
+%
+%Ada empat tipe dasar \textit{stream} dalam \textit{Node.js}:
+%\begin{itemize}
+%	\item \textbf{Readable} \\ \textit{Streams} yang dapat membaca data dari sumber eksternal tertentu.
+%	\item \textbf{Writable} \\ \textit{Streams} yang dapat menulis data dan mengirimkannya ke sumber external tertentu.
+%	\item \textbf{Duplex} \\ \textit{Streams} yang dapat membaca dan menulis data sekaligus.
+%	\item \textbf{Transform} \\ \textit{Duplex streams} yang dapat memodifikasi atau mengubah data dimana data tersebut dapat dilihat langsung hasil perubahannya.
+%\end{itemize}
+%
+%\begin{enumerate}
+%	\item \textbf{Readable Stream} \\
+%	Merupakan abstraksi untuk sumber data yang digunakan. Berikut merupakan contoh dari \textit{Readable Stream} pada \textit{Node.js}:
+%	\begin{itemize}
+%		\item \textbf{HTTP responses} pada \textit{client}
+%		\item \textbf{HTTP requests} pada \textit{server}
+%		\item \textbf{fs read streams}
+%	\end{itemize}
+%	Seluruh \textit{Readable streams} mengimplementasi \textit{interface} yang didefinisikan oleh kelas \textit{stream.Readable}.
+%	
+%	\begin{itemize}
+%		\item \textbf{stream.Readable} \\
+%		\textbf{Events:}
+%		\begin{itemize}
+%			\item \textbf{'close'} \\ \textit{Event} ini dipancarkan saat suatu \textit{stream} atau sumber lain telah ditutup. \textit{Event} ini menandakan tidak akan ada \textit{event} lagi yang akan dipancarkan, dan tidak ada komputasi lain yang akan dilakukan.
+%\begin{lstlisting}
+%const readable = getReadableStreamSomehow();
+%readable.on('close', (chunk) => {
+%console.log(`Stream telah ditutup`);
+%});
+%			\end{lstlisting}
+%			
+%			\item \textbf{'data'} \\ \textit{Event} ini akan dipancarkan setiap kali suatu \textit{stream} melepas kepemilikan sebuah data kepada pemakai. Hal tersebut dapat terjadi setiap suatu \textit{stream} berganti menjadi mode \textit{flowing} dengan memanggil \textit{readable.pipe()}, \textit{readable.resume()}, atau dengan menghubungkan \textit{listener callback} pada \textit{'data' event}. Contoh implementasi:
+%\begin{lstlisting}
+%const readable = getReadableStreamSomehow();
+%readable.on('data', (chunk) => {
+%console.log(`Menerima data sebesar ${chunk.length} bytes.`);
+%});
+%			\end{lstlisting}
+%			
+%			\item \textbf{'end'} \\ \textit{Event} ini dipancarkan saat tidak ada lagi data yang akan digunakan dari \textit{stream}. Contoh implementasi:
+%\begin{lstlisting}
+%const readable = getReadableStreamSomehow();
+%readable.on('end', () => {
+%console.log('Tidak akan ada data yang dikirimkan.');
+%});
+%\end{lstlisting}
+%			
+%			\item \textbf{'error'} \\ \textit{Event} ini akan dipancarkan oleh \textit{Readable} setiap saat. \textit{Event} ini dapat terjadi apabila \textit{stream} tidak dapat menyediakan data dikarenakan kesalahan internal, atau ketika implementasi suatu \textit{stream} mencoba mengirimkan \textit{chunk} dari data yang tidak sesuai. Contoh implementasi:
+%\begin{lstlisting}
+%const readable = getReadableStreamSomehow();
+%readable.on('error', () => {
+%console.error('Terjadi kesalahan');
+%});
+%\end{lstlisting}
+%			
+%			
+%		\end{itemize}
+%		
+%		\textbf{Method:}
+%		\begin{itemize}
+%			\item \textbf{readable.pipe(destination[, options])} \\ \textbf{Parameter:}
+%			\begin{itemize}
+%				\item \textbf{destination} \\tipe: \textit{stream.Writable} \\ Destinasi untuk menulis suatu data.
+%				\item \textbf{options} \\tipe: \textit{Object} \\ Bersifat opsional, dapat berupa objek sebagai berikut:
+%				\begin{itemize}
+%					\item \textbf{end} \\tipe: \textit{boolean} \\ Mengakhiri \textit{writer} yang melakukan proses menulis saat \textit{reader} telah selesai. Nilai \textit{default} parameter ini yaitu \textit{true}.
+%				\end{itemize}
+%			\end{itemize}
+%			\textbf{Kembalian:} referensi yang menuju \textit{destination}.
+%			
+%			\textit{Method} ini akan menghubungkan \textit{Writable stream} pada objek \textit{readable}, sehingga dapat berubah menjadi mode \textit{flowing} secara otomatis dan akan menaruh seluruh data pada \textit{Writable} yang sudah terhubung. \textit{Method} ini mengembalikan referensi yang menuju \textit{destination}, sehingga \textit{pipe streams} dapat saling menyambung dengan \textit{pipe streams} lainnya.
+%			
+%			Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%const fs = require('fs');
+%			
+%const readable = getReadableStreamSomehow();
+%const writable = fs.createWriteStream('file.txt');
+%			
+%//seluruh data dari objek readable masuk ke 'file.txt'
+%readable.pipe(writable); 
+%\end{lstlisting}
+%			
+%		\end{itemize}
+%	\end{itemize}
+%\end{enumerate}
 
 \subsection{Module}
-Pada aplikasi berbasis \textit{Node.js}, setiap \textit{file} yang terdapat dalam pembangunan aplikasi dianggap sebagai modul-modul yang terpisah satu sama lain. Variabel dan fungsi yang terdapat pada satu \textit{file}, atau modul, hanya dapat digunakan pada satu lingkup modul tersebut. Suatu modul tidak dapat menggunakan variabel atau fungsi yang terdapat pada modul lainnya. Oleh karena itu, apabila variabel dan fungsi yang terdapat pada satu modul dapat digunakan oleh modul yang lain, diperlukan cara tertentu.
+Pada aplikasi berbasis \textit{Node.js}, setiap \textit{file} yang terdapat dalam pembangunan aplikasi dianggap sebagai modul-modul yang terpisah satu sama lain. Variabel dan fungsi yang terdapat pada satu \textit{file}, atau modul, hanya dapat digunakan pada satu lingkup modul tersebut. Suatu modul tidak dapat menggunakan variabel atau fungsi yang terdapat pada modul lainnya. Oleh karena itu, apabila variabel dan fungsi yang terdapat pada satu modul dapat digunakan oleh modul yang lain, diperlukan cara tertentu. Cara tersebut dapat dilakukan seperti berikut:
 
-	\textbf{module.exports}
-	
-	
+\begin{lstlisting}
+module.exports = functions
 
+\\OR
+
+module.exports = object
+\end{lstlisting}
+
+\textit{module.exports} merupakan objek yang dibentuk oleh sistem \textit{Module}. Dengan menggunakan cara ini, suatu modul dapat berubah menjadi global dan dapat diakses oleh modul-modul lain.
 
 %------------- END OF NODE.JS --------------
 
@@ -366,18 +398,42 @@ const express = require('express');
 const app = express();
 \end{lstlisting}
 
-\textit{Method} yang dimiliki oleh fungsi \textit{express()} yaitu sebagai berikut:
+Salah satu \textit{method} yang dimiliki oleh fungsi \textit{express()} yaitu sebagai berikut:
 
 \begin{itemize}
-	\item \textbf{express.Router([options])} \\ \textbf{Parameter:} 
+%	\item \textbf{express.Router([options])} \\ \textbf{Parameter:} 
+%	\begin{itemize}
+%		\item \textbf{options} bersifat opsional dan akan menentukan sifat dari objek \textit{router}. Parameter ini dapat berupa beberapa jenis seperti berikut:
+%		\begin{itemize}
+%			\item \textit{caseSensitive} memungkinkan \textit{case-sensitive}. Dapat bernilai \textit{true} atau \textit{false}. Secara default akan bernilai \textit{false}.
+%			
+%			\item \textit{strict} memungkinkan \textit{strict routing}. Dapat bernilai \textit{true} atau \textit{false}. Apabila bernilai \textit{false}, maka parameter \textit{'/foo'} dan \textit{'/foo/'} akan dianggap sama oleh \textit{router}.
+%		\end{itemize}
+%	\end{itemize}
+
+	\item \textbf{express.static(root, [,options])} \\
+	\textbf{Parameter:}
 	\begin{itemize}
-		\item \textbf{options} bersifat opsional dan akan menentukan sifat dari objek \textit{router}. Parameter ini dapat berupa beberapa jenis seperti berikut:
+		\item \textbf{root} \\ tipe: \textbf{String} \\ Menentukan direktori \textit{root} yang akan digunakan untuk menyediakan \textit{static file}.
+		\item \textbf{options} Objek-objek seperti berikut:
+			\begin{itemize}
+				\item \textbf{dotfiles} menentukan bagaimana mengatasi suatu \textit{dotfiles} (suatu \textit{file} atau direktori yang dimulai dengan tanda ".").
+			\end{itemize}
+	\end{itemize}
+	
+	\textit{Method} ini akan menyediakan cara agar dapat menggunakan \textit{static file} yang ada.
+	
+	\item \textbf{express.Router([options])} \\
+	\textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{options} merupakan parameter pilihan yang akan menentukan perilaku dari \textit{server}. Parameter dapat berupa objek sebagai berikut:
 		\begin{itemize}
-			\item \textit{caseSensitive} memungkinkan \textit{case-sensitive}. Dapat bernilai \textit{true} atau \textit{false}. Secara default akan bernilai \textit{false}.
-			
-			\item \textit{strict} memungkinkan \textit{strict routing}. Dapat bernilai \textit{true} atau \textit{false}. Apabila bernilai \textit{false}, maka parameter \textit{'/foo'} dan \textit{'/foo/'} akan dianggap sama oleh \textit{router}.
+			\item \textbf{caseSensitive} membedakan huruf besar dan huruf kecil.
 		\end{itemize}
 	\end{itemize}
+
+	\textit{Method} ini akan membuat objek \textit{router} yang dapat digunakan dengan menambahkan \textit{middleware} dan \textit{method HTTP} seperti \textit{get, post,} dan \textit{put}.
+	 
 	
 \end{itemize}
 
@@ -394,61 +450,71 @@ Baris pertama dari potongan kode tersebut berarti variabel \textit{express} mema
 Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 
 \begin{itemize}
-	\item \textbf{app.all(path, callback[, callback ...])} \\ \textbf{Parameter:} 
+%	\item \textbf{app.all(path, callback[, callback ...])} \\ \textbf{Parameter:} 
+%	\begin{itemize}
+%		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
+%		
+%		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
+%	\end{itemize}
+%	
+%	\textit{Method} ini dapat menangani seluruh \textit{HTTP requests} seperti \textit{GET, POST, PUT,} dan \textit{DELETE}. Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%app.all('/about', function(req, res, next){
+%console.log('Mengakses bagian about ...');
+%next(); //bagian ini akan menuju ke handler berikutnya
+%});
+%\end{lstlisting}
+%	
+%	\item \textbf{app.get(path, callback[, callback ...])} \\ \textbf{Parameter:}
+%	\begin{itemize}
+%		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
+%		
+%		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
+%	\end{itemize}
+%	
+%	\textit{Method} ini akan mengarahkan \textit{HTTP GET requests} pada \textit{path} dengan fungsi \textit{callback} tertentu. Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%app.get('/', function(req, res){
+%res.send('Mengirimkan GET request pada homepage');
+%});
+%	\end{lstlisting}
+%	
+%	\item \textbf{app.post(path, callback[, callback ...])} \\ \textbf{Parameter:}
+%	\begin{itemize}
+%		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
+%		
+%		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
+%	\end{itemize}
+%	
+%	\textit{Method} ini akan mengarahkan \textit{HTTP POST requests} pada \textit{path} dengan fungsi \textit{callback} tertentu. Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%app.post('/', function(req, res){
+%res.send('Mengirimkan POST requests pada homepage');
+%});
+%\end{lstlisting}
+%	
+%	\item \textbf{app.route(path)} \\ \textbf{Parameter:}
+%	\begin{itemize}
+%		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
+%	\end{itemize}
+%	
+%	\textit{Method} ini akan mengembalikan instansi dari satu \textit{route}, yang kemudian dapat digunakan untuk menangani \textit{HTTP request} dengan \textit{middleware} tertentu. Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%app.route('/buku').get(function(req, res){
+%res.send('Mendapatkan suatu buku');
+%});
+%\end{lstlisting}
+%	
+	\item \textbf{app.set(name, value)} \\
+	\textbf{Parameter:}
 	\begin{itemize}
-		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
-		
-		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
+		\item \textbf{name} nama tertentu yang dapat digunakan untuk menentukan perilaku dari suatu \textit{server}.
+		\item \textbf{value} nilai yang akan ditetapkan pada parameter \textit{name}.
 	\end{itemize}
+	\textbf{Kembalian:} -
 	
-	\textit{Method} ini dapat menangani seluruh \textit{HTTP requests} seperti \textit{GET, POST, PUT,} dan \textit{DELETE}. Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-app.all('/about', function(req, res, next){
-console.log('Mengakses bagian about ...');
-next(); //bagian ini akan menuju ke handler berikutnya
-});
-\end{lstlisting}
-	
-	\item \textbf{app.get(path, callback[, callback ...])} \\ \textbf{Parameter:}
-	\begin{itemize}
-		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
-		
-		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
-	\end{itemize}
-	
-	\textit{Method} ini akan mengarahkan \textit{HTTP GET requests} pada \textit{path} dengan fungsi \textit{callback} tertentu. Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-app.get('/', function(req, res){
-res.send('Mengirimkan GET request pada homepage');
-});
-	\end{lstlisting}
-	
-	\item \textbf{app.post(path, callback[, callback ...])} \\ \textbf{Parameter:}
-	\begin{itemize}
-		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
-		
-		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
-	\end{itemize}
-	
-	\textit{Method} ini akan mengarahkan \textit{HTTP POST requests} pada \textit{path} dengan fungsi \textit{callback} tertentu. Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-app.post('/', function(req, res){
-res.send('Mengirimkan POST requests pada homepage');
-});
-\end{lstlisting}
-	
-	\item \textbf{app.route(path)} \\ \textbf{Parameter:}
-	\begin{itemize}
-		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
-	\end{itemize}
-	
-	\textit{Method} ini akan mengembalikan instansi dari satu \textit{route}, yang kemudian dapat digunakan untuk menangani \textit{HTTP request} dengan \textit{middleware} tertentu. Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-app.route('/buku').get(function(req, res){
-res.send('Mendapatkan suatu buku');
-});
-\end{lstlisting}
-	
+	Method ini akan menetapkan suatu \textit{value} tertentu pada parameter \textit{name}.
+
 	\item \textbf{app.use([path,] callback[, callback...])} \\ \textbf{Parameter:} 
 	\begin{itemize}
 		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
@@ -456,19 +522,21 @@ res.send('Mendapatkan suatu buku');
 		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
 	\end{itemize}
 	
-	\textit{Method} ini akan menghubungkan \textit{middleware} atau suatu fungsi tertentu dengan \textit{path} yang sudah ditentukan. Dalam implementasi \textit{method} ini, urutan penempatan pada baris kode sangat berpengaruh. Setelah \textit{app.use()} dieksekusi, maka suatu \textit{request} tidak akan mengeksekusi \textit{middleware} yang ada dibawah baris kode \textit{app.use()}.  Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-//request hanya akan sampai pada middleware ini
-app.use(function(req, res){
-res.send('Hanya sampai sini saja');
-});
+	\textit{Method} ini akan menghubungkan \textit{middleware} atau suatu fungsi tertentu dengan \textit{path} yang sudah ditentukan. Dalam implementasi \textit{method} ini, urutan penempatan pada baris kode sangat berpengaruh. Setelah \textit{app.use()} dieksekusi, maka suatu \textit{request} tidak akan mengeksekusi \textit{middleware} yang ada dibawah baris kode \textit{app.use()}. 
 	
-//request tidak akan mengeksekusi baris ini
-app.get('/', function(req, res){
-res.send('Hello World!');
-});
-\end{lstlisting}
-	
+%	Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%//request hanya akan sampai pada middleware ini
+%app.use(function(req, res){
+%res.send('Hanya sampai sini saja');
+%});
+%	
+%//request tidak akan mengeksekusi baris ini
+%app.get('/', function(req, res){
+%res.send('Hello World!');
+%});
+%\end{lstlisting}
+
 	\item \textbf{app.listen(port, [hostname], [backlog], [callback])} \\ \textbf{Parameter:}
 	\begin{itemize}
 		\item \textbf{port} nomor yang akan dituju oleh server.
@@ -477,61 +545,70 @@ res.send('Hello World!');
 		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut. Parameter ini bersifat opsional.
 	\end{itemize}
 	
-	\textit{Method} ini akan menghubungkan suatu koneksi pada \textit{host} dan \textit{port} yang sudah ditentukan. Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-const express = require('express');
-const app = express();
-app.listen(3000);
-\end{lstlisting}
+	\textit{Method} ini akan menghubungkan suatu koneksi pada \textit{host} dan \textit{port} yang sudah ditentukan. 
+	
+%	Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%const express = require('express');
+%const app = express();
+%app.listen(3000);
+%\end{lstlisting}
 	
 \end{itemize}
 
-\subsection{Request}
-Sebuah objek dari kelas \textit{Request} akan merepresentasikan \textit{HTTP request} dan memiliki properti untuk \textit{request query} seperti \textit{body, HTTP headers} dan \textit{parameters}.
-
-Beberapa \textit{method} yang ada pada kelas \textit{Request} yaitu: 
-\begin{itemize}
-	\item \textbf{req.accepts(types)} \\ Berfungsi untuk memeriksa apakah tipe konten tertentu dapat diterima atau tidak.
-	
-	\item \textbf{req.get(field)} \\ Berfungsi untuk mengembalikan \textit{HTTP request header} tertentu.
-	
-	\item \textbf{req.is(type)} \\ Berfungsi untuk mengembalikan apakah benar atau salah \textit{type} pada parameter sama dengan status \textit{Content-Type} pada \textit{HTTP header}.
-\end{itemize}
+%\subsection{Request}
+%Sebuah objek dari kelas \textit{Request} akan merepresentasikan \textit{HTTP request} dan memiliki properti untuk \textit{request query} seperti \textit{body, HTTP headers} dan \textit{parameters}.
+%
+%Beberapa \textit{method} yang ada pada kelas \textit{Request} yaitu: 
+%\begin{itemize}
+%	\item \textbf{req.accepts(types)} \\ Berfungsi untuk memeriksa apakah tipe konten tertentu dapat diterima atau tidak.
+%	
+%	\item \textbf{req.get(field)} \\ Berfungsi untuk mengembalikan \textit{HTTP request header} tertentu.
+%	
+%	\item \textbf{req.is(type)} \\ Berfungsi untuk mengembalikan apakah benar atau salah \textit{type} pada parameter sama dengan status \textit{Content-Type} pada \textit{HTTP header}.
+%\end{itemize}
 
 \subsection{Response}
 Sebuah objek dari kelas \textit{Response} akan merepresentasikan respon \textit{HTTP} yang dikirim oleh \textit{Express} pada saat menerima \textit{HTTP request}.
 
-Beberapa \textit{method} yang terdapat pada kelas \textit{Response} yaitu: 
+Salah satu properti yang dimiliki oleh kelas ini adalah:
 
 \begin{itemize}
-	\item \textbf{res.send([body])} \\ \textbf{Parameter:} \textit{body} dapat berupa berbagai jenis objek seperti \textit{Buffer}, \textit{String}, dan \textit{Array}.
-	
-	\textit{Method} ini akan mengirimkan respon HTTP kepada \textit{client} sesuai dengan parameter yang diterima. Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-//parameter objek String
-res.send('Hello World!');
-	
-//parameter objek Array
-res.send([1,2,3]);
-	
-//parameter objek Buffer
-res.send(new Buffer('<p>This is a Buffer</p>'));
-\end{lstlisting}
-	
-	\item \textbf{res.end([data][, encoding])} \\ \textbf{Parameter:}
-	\begin{itemize}
-		\item \textbf{data} dapat berupa objek \textit{String} atau \textit{Buffer} yang akan dikirim saat mengakhiri proses respon.
-		\item \textbf{encoding} merubah suatu tipe data menjadi tipe data yang lain. Contoh beberapa tipe data yang tersedia yaitu \textit{utf8, base64, ascii, } dan \textit{hex}.
-	\end{itemize}
-	
-	\textit{Method} ini berfungsi untuk mengakhiri suatu proses respon. Apabila akan mengakhiri suatu respon tanpa memerlukan suatu data, maka dapat menggunakan \textit{method} ini. Berikut merupakan contoh implementasi \textit{method} ini:
-\begin{lstlisting}
-app.get('/', function(req, res){
-res.end(); //apabila tidak memerlukan data.
-	
-res.end('goodbye!'); // apabila memerlukan suatu data untuk mengakhiri proses.
-});
-\end{lstlisting}
+	\item \textbf{res.locals} \\
+	Objek yang berisi variabel lokal milik \textit{response} yang berada dalam lingkup suatu \textit{request} tertentu. Objek ini hanya tersedia selama waktu \textit{request} atau \textit{response} tertentu.
+\end{itemize}
+
+Beberapa \textit{method} yang terdapat pada kelas \textit{Response} adalah: 
+
+\begin{itemize}
+%	\item \textbf{res.send([body])} \\ \textbf{Parameter:} \textit{body} dapat berupa berbagai jenis objek seperti \textit{Buffer}, \textit{String}, dan \textit{Array}.
+%	
+%	\textit{Method} ini akan mengirimkan respon HTTP kepada \textit{client} sesuai dengan parameter yang diterima. Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%//parameter objek String
+%res.send('Hello World!');
+%	
+%//parameter objek Array
+%res.send([1,2,3]);
+%	
+%//parameter objek Buffer
+%res.send(new Buffer('<p>This is a Buffer</p>'));
+%\end{lstlisting}
+%	
+%	\item \textbf{res.end([data][, encoding])} \\ \textbf{Parameter:}
+%	\begin{itemize}
+%		\item \textbf{data} dapat berupa objek \textit{String} atau \textit{Buffer} yang akan dikirim saat mengakhiri proses respon.
+%		\item \textbf{encoding} merubah suatu tipe data menjadi tipe data yang lain. Contoh beberapa tipe data yang tersedia yaitu \textit{utf8, base64, ascii, } dan \textit{hex}.
+%	\end{itemize}
+%	
+%	\textit{Method} ini berfungsi untuk mengakhiri suatu proses respon. Apabila akan mengakhiri suatu respon tanpa memerlukan suatu data, maka dapat menggunakan \textit{method} ini. Berikut merupakan contoh implementasi \textit{method} ini:
+%\begin{lstlisting}
+%app.get('/', function(req, res){
+%res.end(); //apabila tidak memerlukan data.
+%	
+%res.end('goodbye!'); // apabila memerlukan suatu data untuk mengakhiri proses.
+%});
+%\end{lstlisting}
 	
 	\item \textbf{res.render(view[, locals][, callback])} \\ \textbf{Parameter:}
 	\begin{itemize}
@@ -540,82 +617,88 @@ res.end('goodbye!'); // apabila memerlukan suatu data untuk mengakhiri proses.
 		\item \textbf{callback} suatu fungsi \textit{callback}. 
 	\end{itemize}
 	
-	\textit{Method} ini berfungsi untuk merubah \textit{view file} dan mengirim \textit{file} tersebut kepada \textit{client}. Berikut merupakan contoh implementasi \textit{method} ini:
-\begin{lstlisting}
-app.get('/', function(req, res){
-res.render('about');  //akan merubah(render) halaman about 
-});
-\end{lstlisting}
+	\textit{Method} ini berfungsi untuk merubah \textit{view file} dan mengirim \textit{file} tersebut kepada \textit{client}.
 	
-	\item \textbf{res.sendStatus(statusCode)} \\ \textbf{Parameter:} 
-	\begin{itemize}
-		\item \textbf{statusCode} kode status \textit{HTTP}.
-	\end{itemize}
+%	Berikut merupakan contoh implementasi \textit{method} ini:
+%\begin{lstlisting}
+%app.get('/', function(req, res){
+%res.render('about');  //akan merubah(render) halaman about 
+%});
+%\end{lstlisting}
 	
-	\textit{Method} ini akan menetapkan kode status \textit{HTTP} di parameter, dan akan mengirimkan bentuk \textit{String} sebagai \textit{body} dari respon. Berikut contoh implementasi \textit{method} ini:
-\begin{lstlisting}
-// akan mengirimkan 'OK' pada response body.
-res.sendStatus(200); 
-
-// akan mengirimkan 'Not Found' pada response body.
-res.sendStatus(404); 
-
-// akan mengirimkan 'Internal Server Error' pada response body.
-res.sendStatus(500); 
-	\end{lstlisting}
+%	\item \textbf{res.sendStatus(statusCode)} \\ \textbf{Parameter:} 
+%	\begin{itemize}
+%		\item \textbf{statusCode} kode status \textit{HTTP}.
+%	\end{itemize}
+%	
+%	\textit{Method} ini akan menetapkan kode status \textit{HTTP} di parameter, dan akan mengirimkan bentuk \textit{String} sebagai \textit{body} dari respon. Berikut contoh implementasi \textit{method} ini:
+%\begin{lstlisting}
+%// akan mengirimkan 'OK' pada response body.
+%res.sendStatus(200); 
+%
+%// akan mengirimkan 'Not Found' pada response body.
+%res.sendStatus(404); 
+%
+%// akan mengirimkan 'Internal Server Error' pada response body.
+%res.sendStatus(500); 
+%	\end{lstlisting}
 	
 	\item \textbf{res.status(code)} \\ \textbf{Parameter:}
 	\begin{itemize}
 		\item \textbf{code} kode status \textit{HTTP}.
 	\end{itemize}
 	
-	\textit{Method} ini akan menetapkan kode status \textit{HTTP} untuk respon. Berikut merupakan contoh implementasi \textit{method} ini:
-\begin{lstlisting}
-res.status(403).end();
-res.status(400).send('Bad Request');
-\end{lstlisting}
+	\textit{Method} ini akan menetapkan kode status \textit{HTTP} untuk respon. 
 	
-	\item \textbf{res.json([body])} \\ \textbf{Parameter:}
-	\begin{itemize}
-		\item \textbf{body} dapat berupa tipe \textit{JSON} apapun, seperti \textit{array, String,} dan \textit{Boolean}.
-	\end{itemize}
+%	Berikut merupakan contoh implementasi \textit{method} ini:
+%\begin{lstlisting}
+%res.status(403).end();
+%res.status(400).send('Bad Request');
+%\end{lstlisting}
 	
-	\textit{Method} ini berfungsi untuk mengirimkan respon \textit{JSON}. Berikut merupakan contoh implementasi \textit{method} ini:
-\begin{lstlisting}
-res.json({ user: 'tobi', age: '27'});
-\end{lstlisting}
-	
-\end{itemize}
-
-\subsection{Router}
-Objek dari kelas \textit{Router} merupakan \textit{instance} dari \textit{middleware} dan \textit{routes}. Setiap aplikasi \textit{Express} memiliki \textit{router} secara \textit{built-in}. 
-
-\textit{Method} yang dimiliki oleh \textit{Router} yaitu sebagai berikut:
-
-\begin{itemize}
-	\item \textbf{router.METHOD(path, [callback, ...] callback)} \\ \textbf{Parameter:} \\ 
-	\begin{itemize}
-		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
-		
-		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
-	\end{itemize}
-	
-	\textit{Method} ini menyediakan fungsionalitas \textit{routing} dalam aplikasi \textit{Express}, dimana \textit{METHOD} merupakan salah satu \textit{HTTP methods} seperti \textit{GET, PUT, } dan \textit{POST}, dalam huruf kecil. Dengan begitu, \textit{method} ini dapat berupa \textit{router.get(), router.post(),} dan \textit{router.put()}.
-	
-	Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}
-//menggunakan HTTP method GET
-router.get('/', function(req, res){
-res.send('hello world');
-});
-	
-//menggunakan HTTP method POST
-router.post('/buku', function(req, res){
-res.send('mendapatkan buku');
-});
-\end{lstlisting}
+%	\item \textbf{res.json([body])} \\ \textbf{Parameter:}
+%	\begin{itemize}
+%		\item \textbf{body} dapat berupa tipe \textit{JSON} apapun, seperti \textit{array, String,} dan \textit{Boolean}.
+%	\end{itemize}
+%	
+%	\textit{Method} ini berfungsi untuk mengirimkan respon \textit{JSON}. 
+%	
+%	Berikut merupakan contoh implementasi \textit{method} ini:
+%\begin{lstlisting}
+%res.json({ user: 'tobi', age: '27'});
+%\end{lstlisting}
 	
 \end{itemize}
+
+%\subsection{Router}
+%Objek dari kelas \textit{Router} merupakan \textit{instance} dari \textit{middleware} dan \textit{routes}. Setiap aplikasi \textit{Express} memiliki \textit{router} secara \textit{built-in}. 
+%
+%\textit{Method} yang dimiliki oleh \textit{Router} yaitu sebagai berikut:
+%
+%\begin{itemize}
+%	\item \textbf{router.METHOD(path, [callback, ...] callback)} \\ \textbf{Parameter:} \\ 
+%	\begin{itemize}
+%		\item \textbf{path} suatu \textit{path} yang akan ditangani oleh \textit{middleware}. Dapat berupa \textit{string}, \textit{path pattern}, atau \textit{array} dari kombinasi \textit{string} dan \textit{path pattern}.
+%		
+%		\item \textbf{callback} merupakan fungsi \textit{callback}, dimana fungsi tersebut dapat berupa fungsi \textit{middleware}, kumpulan dari fungsi \textit{middleware} (yang dipisahkan dengan menggunakan koma), fungsi \textit{array of middleware}, atau kombinasi dari seluruh \textit{item} tersebut.
+%	\end{itemize}
+%	
+%	\textit{Method} ini menyediakan fungsionalitas \textit{routing} dalam aplikasi \textit{Express}, dimana \textit{METHOD} merupakan salah satu \textit{HTTP methods} seperti \textit{GET, PUT, } dan \textit{POST}, dalam huruf kecil. Dengan begitu, \textit{method} ini dapat berupa \textit{router.get(), router.post(),} dan \textit{router.put()}.
+%	
+%	Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}
+%//menggunakan HTTP method GET
+%router.get('/', function(req, res){
+%res.send('hello world');
+%});
+%	
+%//menggunakan HTTP method POST
+%router.post('/buku', function(req, res){
+%res.send('mendapatkan buku');
+%});
+%\end{lstlisting}
+	
+%\end{itemize}
 
 %------------- END OF EXPRESS.JS--------------- 
 
@@ -862,32 +945,32 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 			\end{itemize}
 		\end{itemize}
 	
-		Untuk dapat menggunakan fitur yang ada pada \textit{socket.io}, harus menambahkan modul \textit{socket.io} pada konstanta tertentu. Hal tersebut dapat dilakukan dengan dua cara, yaitu menggunakan kata kunci \textit{new} atau tanpa menggunakan kata kunci \textit{new}:
-		
-		\begin{itemize}
-			\item Menggunakan \textit{new}
-\begin{lstlisting}
-const Server = require('socket.io');
-const io = new Server();
-\end{lstlisting}
-			
-			\item Tanpa menggunakan \textit{new}
-\begin{lstlisting}
-const io = require('socket.io')();
-\end{lstlisting}
-\end{itemize}
-	
-	Contoh implementasi konstruktor:
-	
-\begin{lstlisting}
-const Server = require('socket.io');
-const http = require('http').createServer();
-		
-const io = new Server(http, {
-	path: '/test',
-	serveClient: false
-});
-\end{lstlisting}
+%		Untuk dapat menggunakan fitur yang ada pada \textit{socket.io}, harus menambahkan modul \textit{socket.io} pada konstanta tertentu. Hal tersebut dapat dilakukan dengan dua cara, yaitu menggunakan kata kunci \textit{new} atau tanpa menggunakan kata kunci \textit{new}:
+%		
+%		\begin{itemize}
+%			\item Menggunakan \textit{new}
+%\begin{lstlisting}
+%const Server = require('socket.io');
+%const io = new Server();
+%\end{lstlisting}
+%			
+%			\item Tanpa menggunakan \textit{new}
+%\begin{lstlisting}
+%const io = require('socket.io')();
+%\end{lstlisting}
+%\end{itemize}
+%	
+%	Contoh implementasi konstruktor:
+%	
+%\begin{lstlisting}
+%const Server = require('socket.io');
+%const http = require('http').createServer();
+%		
+%const io = new Server(http, {
+%	path: '/test',
+%	serveClient: false
+%});
+%\end{lstlisting}
 	
 %	\item \textbf{new Server(port[,options])} \\
 %	\textbf{Parameter:}
@@ -1106,33 +1189,34 @@ adminNamespace.to('level1').emit('an event', { some: 'data' });
 			\item \textbf{room} \\tipe: \textbf{String} \\ Nama \textit{room}.
 			\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
 		\end{itemize}
-		\textbf{Kembalian:} \textit{Socket}. \\
-		Contoh implementasi:
-	\begin{lstlisting}
-io.on('connection', (socket) => {
-	socket.join('room 237', () => {
-	let rooms = Objects.keys(socket.rooms);
-	console.log(rooms); // [ <socket.id>, 'room 237' ]
+		\textbf{Kembalian:} \textit{Socket}.
 		
-	//akan memancarkan kepada seluruh user 
-	//yang berada di room 237
-	io.to('room 237', 'a new user has joined the room'); 
-	});
-});
-	\end{lstlisting}
+%		Contoh implementasi:
+%	\begin{lstlisting}
+%io.on('connection', (socket) => {
+%	socket.join('room 237', () => {
+%	let rooms = Objects.keys(socket.rooms);
+%	console.log(rooms); // [ <socket.id>, 'room 237' ]
+%		
+%	//akan memancarkan kepada seluruh user 
+%	//yang berada di room 237
+%	io.to('room 237', 'a new user has joined the room'); 
+%	});
+%});
+%	\end{lstlisting}
 		
-		\item \textbf{socket.leave(room[, callback])} \\
-		Berfungsi untuk menghapus \textit{client} dari suatu \textit{room}. \\
-		\textbf{Parameter:}
-		\begin{itemize}
-			\item \textbf{room} \\tipe: \textbf{String} \\ Nama \textit{room}.
-			\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
-		\end{itemize}
-		\textbf{Kembalian:} \textit{Socket}. \\
-		Contoh implementasi:
-	\begin{lstlisting}
-socket.leave('room 237');
-	\end{lstlisting}
+%		\item \textbf{socket.leave(room[, callback])} \\
+%		Berfungsi untuk menghapus \textit{client} dari suatu \textit{room}. \\
+%		\textbf{Parameter:}
+%		\begin{itemize}
+%			\item \textbf{room} \\tipe: \textbf{String} \\ Nama \textit{room}.
+%			\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
+%		\end{itemize}
+%		\textbf{Kembalian:} \textit{Socket}. \\
+%		Contoh implementasi:
+%	\begin{lstlisting}
+%socket.leave('room 237');
+%	\end{lstlisting}
 		
 	\end{itemize}
 	
@@ -1161,10 +1245,6 @@ Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
 	
 //berfungsi untuk melayani file client
 <script src="/socket.io/socket.io.js"></script>
-	
-<script>
-const socket = io('http://localhost');
-</script>
 \end{lstlisting}
 
 %	Dengan langkah tersebut, \textit{socket.io} akan dapat menangani \textit{file} yang berasal dari \textit{client}. Selain langkah tersebut, ada satu langkah lagi yang dapat digunakan, yaitu sebagai berikut:
@@ -1232,7 +1312,7 @@ const socket = io('http://localhost');
 		\item \textbf{socket.id} \\ \textit{Identifier} unik yang dimiliki oleh satu \textit{socket} untuk satu sesi. Properti ini akan mempunyai nilai segera setelah koneksi terhubung, dan akan diperbarui setelah melakukan koneksi ulang.
 	\end{itemize}
 	
-	Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu:
+	Salah satu \textit{method} yang dimiliki oleh kelas ini yaitu:
 	
 	\begin{itemize}
 		
@@ -1280,7 +1360,7 @@ socket.emit('ferret', 'tobi', (data) => {
 \section{Canvas API}
 \label{sec:Canvas API}
  
-Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web \cite{canvas}. Teknologi ini memiliki fitur untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processing} atau \textit{rendering}. Untuk dapat menggunakan fitur-fitur yang ada pada \textit{Canvas API}, langkah yang harus dilakukan adalah sebagai berikut:
+Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web \cite{canvas}. Teknologi ini memiliki fitur untuk membuat komposisi foto dan membuat animasi. Untuk dapat menggunakan fitur-fitur yang ada pada \textit{Canvas API}, langkah yang harus dilakukan adalah sebagai berikut:
 \begin{enumerate}
 	\item Menambahkan \textit{tag <canvas>} pada \textit{file HTML}, dan menambahkan \textit{id} yang akan digunakan pada \textit{file JavaScript}.
 \begin{lstlisting}
@@ -1300,52 +1380,343 @@ var ctx = canvas.getContext('2d');
 
 Subbab-subbab berikut menjelaskan tentang beberapa \textit{interface} dari \textit{Canvas}.
 
-\subsection{HTMLCanvasElement}
-\textit{Interface} ini menyediakan beberapa properti dan \textit{method} untuk memanipulasi tata letak dan tampilan dari elemen \textit{canvas}.
+%\subsection{HTMLCanvasElement}
+%\textit{Interface} ini menyediakan beberapa properti dan \textit{method} untuk memanipulasi tata letak dan tampilan dari elemen \textit{canvas}.
 
-Beberapa properti yang dimiliki oleh \textit{HTMLCanvasElement} yaitu : 
+%Beberapa properti yang dimiliki oleh \textit{HTMLCanvasElement} yaitu : 
 
-\begin{itemize}
-	\item \textbf{HTMLCanvasElement.height} \\ Merupakan bilangan integer positif yang merepresentasikan tinggi dari atribut \textit{HTML} pada elemen \textit{canvas} yang diinterpretasikan dalam piksel \textit{CSS}. Apabila atribut tidak didefinisikan, atau atribut diisi dengan nilai negatif, maka akan digunakan nilai \textit{default} yaitu 150.
+%\begin{itemize}
+%	\item \textbf{HTMLCanvasElement.height} \\ Merupakan bilangan integer positif yang merepresentasikan tinggi dari atribut \textit{HTML} pada elemen \textit{canvas} yang diinterpretasikan dalam piksel \textit{CSS}. Apabila atribut tidak didefinisikan, atau atribut diisi dengan nilai negatif, maka akan digunakan nilai \textit{default} yaitu 150.
+%	
+%	\item \textbf{HTMLCanvasElement.width} \\ Merupakan bilangan integer positif yang merepresentasikan lebar dari atribut \textit{HTML} pada elemen \textit{canvas} yang diinterpretasikan dalam piksel \textit{CSS}. Apabila atribut tidak didefinisikan, atau atribut diisi dengan nilai negatif, maka akan digunakan nilai \textit{default} yaitu 300.
+%\end{itemize}
+
+%Beberapa \textit{method} yang dimiliki oleh \textit{HTLMCanvasElement} yaitu : 
+
+%\begin{itemize}
+%	\item \textbf{HTMLCanvasElement.getContext(contextType, contextAttributes)} \\
+%	\textit{Method} ini akan mengembalikan konteks menggambar pada \textit{canvas}, atau \textit{null} apabila \textit{identifier} konteks tidak didukung.
+%	\textbf{Parameter:} 
+%	\begin{itemize}
+%		\item \textbf{contextType} \\tipe: \textbf{DOMString} \\ Berisi konteks yang menandakan konteks menggambar pada \textit{canvas}. Parameter ini dapat berupa berbagai jenis nilai seperti berikut:
+%		\begin{itemize}
+%			\item \textbf{"2d"} \\ Merepresentasikan konteks dua dimensi yang akan menciptakan objek \textit{CanvasRenderingContext2D}.
+%			\item \textbf{"webgl"} \\ Merepresentasikan konteks tiga dimensi yang akan menciptakan objek \textit{WebGLRenderingContext}.
+%			\item \textbf{"webgl2"} \\ Merepresentasikan konteks tiga dimensi yang akan menciptakan objek \textit{WebGL2RenderingContext}. Konteks ini hanya akan tersedia pada \textit{browser} yang dapat mengimplementasi \textit{WebGL} versi 2.
+%			\item \textbf{bitmaprenderer} \\ Akan menciptakan objek \textit{ImageBitmapRenderingContext} yang akan mengganti konten dari \textit{canvas} dengan objek tersebut.
+%		\end{itemize}
+%	
+%		\item \textbf{contextAttributes} \\ Berisi atribut dari parameter \textit{contextType}. Contoh atribut dari beberapa tipe konteks yaitu sebagai berikut:
+%		\begin{itemize}
+%			\item Atribut konteks \textit{2d}:
+%			\begin{itemize}
+%				\item \textbf{alpha} \\tipe: \textbf{boolean} \\ Menandakan apakah \textit{canvas} berisi \textit{alpha channel} atau tidak. Apabila bernilai \textit{false}, maka \textit{browser} akan menetapkan \textit{backdrop} untuk selalu bernilai \textit{opaque}, sehingga akan mempercepat proses menggambar.
+%			\end{itemize}
+%			
+%			\item Atribut konteks WebGL:
+%			\begin{itemize}
+%				\item \textbf{depth} \\ tipe: \textbf{boolean} \\ Menandakan apakah \textit{buffer} untuk menggambar memiliki ukuran setidaknya 16 \textit{bits} atau tidak.
+%				\item \textbf{antialias} \\tipe: \textbf{boolean} \\ Menandakan apakah dapat melakukan proses \textit{anti-aliasing} atau tidak.
+%			\end{itemize}
+%		\end{itemize}
+%	\end{itemize}
+%	\textbf{Kembalian:} Objek sesuai parameter \textit{contextType}.
+%	
+%\end{itemize}
+
+
+%\subsection{CanvasRenderingContext2D}
+%\textit{Interface} ini digunakan untuk menggambar persegi panjang, teks, gambar, dan objek-objek lain kedalam elemen \textit{canvas}. \textit{CanvasRenderingContext2D} menyediakan konteks \textit{2D rendering} untuk suatu elemen \textit{<canvas>}.
+%Untuk mendapatkan objek dari \textit{interface} ini, harus memanggil \textit{getContext()} didalam elemen \textit{<canvas>}, dengan memberi \textit{''2d''} sebagai argumen. Berikut contoh penggunaannya :
+%
+%\begin{lstlisting}
+%var canvas = document.getElementById('myCanvas');
+%var ctx = canvas.getContext('2d');
+%\end{lstlisting}
+
+%Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bagian seperti berikut:
+%\begin{enumerate}
+%	\item \textbf{\textit{Fill} dan \textit{Stroke styles}}
+%	\begin{itemize}
+%		\item \textbf{CanvasRenderingContext2D.fillStyle} \\ Menentukan warna atau gaya yang akan digunakan pada bentuk tertentu. Nilai \textit{default} dari properti ini yaitu \#000 (\textit{'black'}). Properti ini dapat berisi:
+%		\begin{itemize}
+%			\item \textbf{color} \\tipe: \textbf{DOMString} 
+%			\item \textbf{gradient} \\tipe: \textbf{CanvasGradient}
+%			\item \textbf{pattern} \\tipe: \textbf{CanvasPattern}
+%		\end{itemize}
+%		Contoh implementasi:
+%\begin{lstlisting}
+%var canvas = document.getElementById('canvas');
+%var ctx = canvas.getContext('2d');
+%	
+%//mengisi bentuk persegi dengan warna biru hanya pada sisinya
+%ctx.strokeStyle = 'blue'; 
+%
+%//menggambar persegi tanpa ada warna didalam bentuknya
+%ctx.strokeRect(10, 10, 100, 100);
+%\end{lstlisting}
+%		
+%		\item \textbf{CanvasRenderingContext2D.strokeStyle} \\ Menentukan warna atau gaya yang akan digunakan pada garis sisi pada bentuk tertentu. Nilai \textit{default} pada properti ini yaitu \#000 (\textit{'black'}). properti ini dapat berupa:
+%		\begin{itemize}
+%			\item \textbf{color} \\tipe: \textbf{DOMString} 
+%			\item \textbf{gradient} \\tipe: \textbf{CanvasGradient}
+%			\item \textbf{pattern} \\tipe: \textbf{CanvasPattern}
+%		\end{itemize}
+%		 Contoh implementasi:
+%\begin{lstlisting}
+%var canvas = document.getElementById('canvas');
+%var ctx = canvas.getContext('2d');
+%
+%//mengisi bentuk persegi dengan warna biru hanya pada sisinya
+%ctx.strokeStyle = 'blue'; 
+%
+%//menggambar persegi tanpa ada warna didalam bentuknya
+%ctx.strokeRect(10, 10, 100, 100);	
+%\end{lstlisting}
+%	\end{itemize}
+%
+%	\item \textbf{\textit{Line styles}} \\ 
+%	\begin{itemize}
+%		\item \textbf{CanvasRenderingContext2D.lineWidth} \\ Menentukan ketebalan dari garis. Nilai \textit{default} dari properti ini yaitu 1.0. Isi dari properti ini dapat berupa:
+%		\begin{itemize}
+%			\item \textbf{value} \\ Nilai yang menentukan ketebalan garis.
+%		\end{itemize}
+%		Contoh implementasi:
+%\begin{lstlisting}
+%var canvas = document.getElementById('canvas');
+%var ctx = canvas.getContext('2d');
+%	
+%ctx.lineWidth = 15;
+%\end{lstlisting}
+%	
+%		\item \textbf{CanvasRenderingContext2D.lineCap} \\ Menentukan jenis dari ujung suatu garis. Nilai dari properti ini dapat berupa:
+%		\begin{itemize}
+%			\item \textbf{butt} \\ Ujung dari garis memiliki bentuk rata.
+%			\item \textbf{round} \\ Ujung dari garis memiliki bentuk bulat.
+%			\item \textbf{square} \\ Ujung dari garis memiliki bentuk rata, ditambah kotak dengan ukuran lebar yang sama dan satu per delapan dari ketebalan garis tersebut.
+%		\end{itemize}
+%		Contoh implementasi:
+%\begin{lstlisting}
+%var canvas = document.getElementById('canvas');
+%var ctx = canvas.getContext('2d');
+%	
+%ctx.lineCap = 'round';
+%\end{lstlisting}
+%	
+%		\item \textbf{CanvasRenderingContext2D.lineJoin} \\ Menentukan bagaimana bentuk sudut dari kedua garis yang saling terhubung. Nilai dari atribut ini dapat berupa:
+%		\begin{itemize}
+%			\item \textbf{round} \\ Sudut memiliki bentuk bulat (melengkung).
+%			\item \textbf{bevel} \\ Sudut memiliki bentuk rata.
+%			\item \textbf{miter} \\ Sudut memiliki bentuk lancip.
+%		\end{itemize}
+%		Contoh implementasi:
+%\begin{lstlisting}
+%var canvas = document.getElementById('canvas');
+%var ctx = canvas.getContext('2d');
+%		
+%ctx.lineJoin = 'round';
+%\end{lstlisting}
+%	\end{itemize}
+%
+%	\item \textbf{Text styles} 
+%	\begin{itemize}
+%		\item \textbf{CanvasRenderingContext2D.font} \\ Menentukan jenis teks yang akan digunakan. Nilai \textit{default} dari properti ini yaitu 10px \textit{sans-serif}.
+%	\end{itemize}
+%	
+%\end{enumerate}
+
+%\textit{Method} yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bagian seperti berikut:
+%\begin{enumerate}
+%	\item \textbf{Menggambar \textit{rectangles}}
+%	\begin{itemize}
+%		\item \textbf{CanvasRenderingContext2D.clearRect(x, y, width, height)} \\ 
+%		\textit{Method} ini akan menghapus gambar sebelumnya dengan membentuk suatu persegi. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
+%		
+%		\textbf{Parameter:}
+%		\begin{itemize}
+%			\item \textbf{x} \\ Koordinat x yang menandakan titik awal persegi.
+%			\item \textbf{y} \\ Koordinat y yang menandakan titik awal persegi.
+%			\item \textbf{width} \\ Lebar persegi.
+%			\item \textbf{height} \\ tinggi persegi.
+%		\end{itemize}
+%		Contoh implementasi:
+%\begin{lstlisting}
+%var canvas = document.getElementById('canvas');
+%var ctx = canvas.getContext('2d');
+%		
+%ctx.fillRect(25, 25, 100, 100);
+%	
+%// Akan menghapus bagian dalam persegi yang 
+%// sudah digambar sebelumnya
+%ctx.clearRect(45, 45, 60, 60); 
+%	\end{lstlisting}
+		
+%		\item \textbf{CanvasRenderingContext2D.fillRect(x, y, width, height)} \\ 
+%		\textit{Method} ini akan menggambar persegi dengan warna tertentu didalam bentuknya. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
+%		
+%		\textbf{Parameter:}
+%		\begin{itemize}
+%			\item \textbf{x} \\ Koordinat x yang menandakan titik awal persegi.
+%			\item \textbf{y} \\ Koordinat y yang menandakan titik awal persegi.
+%			\item \textbf{width} \\ Lebar persegi.
+%			\item \textbf{height} \\ tinggi persegi.
+%		\end{itemize}
+%		Contoh implementasi:
+%\begin{lstlisting}
+%var canvas = document.getElementById('canvas');
+%var ctx = canvas.getContext('2d');
+%	
+%ctx.fillStyle = 'green';
+%ctx.fillRect(10, 10, 100, 100);
+%\end{lstlisting}
 	
-	\item \textbf{HTMLCanvasElement.width} \\ Merupakan bilangan integer positif yang merepresentasikan lebar dari atribut \textit{HTML} pada elemen \textit{canvas} yang diinterpretasikan dalam piksel \textit{CSS}. Apabila atribut tidak didefinisikan, atau atribut diisi dengan nilai negatif, maka akan digunakan nilai \textit{default} yaitu 300.
-\end{itemize}
+%	\item \textbf{CanvasRenderingContext2D.strokeRect(x, y, width, height)} \\ 
+%	\textit{Method} ini akan menggambar persegi tanpa ada warna didalam bentuknya, namun akan memberi warna tertentu pada garis sisi persegi tersebut. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
+%	
+%	\textbf{Parameter:}
+%	\begin{itemize}
+%		\item \textbf{x} \\ Koordinat x yang menandakan titik awal persegi.
+%		\item \textbf{y} \\ Koordinat y yang menandakan titik awal persegi.
+%		\item \textbf{width} \\ Lebar persegi.
+%		\item \textbf{height} \\ tinggi persegi.
+%	\end{itemize}
+%	Contoh implementasi:
+%\begin{lstlisting}
+%var canvas = document.getElementById('canvas');
+%var ctx = canvas.getContext('2d');
+%	
+%ctx.strokeStyle = 'green';
+%ctx.strokeRect(10, 10, 100, 100);
+%\end{lstlisting}
+%	\end{itemize}
 
-Beberapa \textit{method} yang dimiliki oleh \textit{HTLMCanvasElement} yaitu : 
+%	\item \textbf{Paths} \\
+%	\textit{Paths} merupakan kumpulan beberapa titik yang terhubung oleh garis yang dapat membentuk lengkungan, garis, atau bentuk tertentu. Untuk dapat membuat bentuk tertentu menggunakan \textit{paths}, dapat dilakukan langkah berikut:
+%	\begin{enumerate}
+%		\item Membuat \textit{path}.
+%		\item Menggunakan beberapa fungsi \textit{path} untuk menggambar suatu \textit{path}.
+%		\item Menutup \textit{path} yang sudah digambar.
+%		\item Setelah \textit{path} ditutup, maka bentuk tersebut dapat diberi warna didalam bentuk tersebut maupun di garis sisinya.
+%	\end{enumerate}
+	
+%	Berikut merupakan beberapa \textit{method} untuk membuat \textit{path}:
+%	\begin{itemize}
+%		\item \textbf{CanvasRenderingContext2D.beginPath()} \\ 
+%		\textit{Method} ini digunakan untuk memulai suatu \textit{path} baru dengan mengosongkan \textit{list} dari \textit{sub-paths} sebelumnya.
+%		
+%		\item \textbf{CanvasRenderingContext2D.moveTo(x, y)} \\
+%		\textit{Method} ini digunakan untuk memindahkan titik awal dari \textit{sub-path} yang baru ke koordinat (\textit{x}, \textit{y}). \\
+%		\textbf{Parameter:}
+%		\begin{itemize}
+%			\item \textbf{x} \\ Koordinat x yang menandakan titik pada posisi sumbu x.
+%			\item \textbf{y} \\ Koordinat y yang menandakan titik pada posisi sumbu y.
+%		\end{itemize}
+%		
+%		\item \textbf{CanvasRenderingContext2D.lineTo(x, y)} \\
+%		\textit{Method} ini digunakan untuk menghubungkan titik sebelumnya pada \textit{sub-path} dengan koordinat (\textit{x}, \textit{y}).
+%		\textbf{Parameter:}
+%		\begin{itemize}
+%			\item \textbf{x} \\ Koordinat x yang menandakan akhir dari garis.
+%			\item \textbf{y} \\ Koordinat y yang menandakan akhir dari garis.
+%		\end{itemize}
+%		
+%		\item \textbf{CanvasRenderingContext2D.closePath()} \\
+%		\textit{Method} ini berfungsi untuk memindahkan posisi titik saat ini kembali ke posisi awal \textit{sub-path}. Apabila bentuk yang dibuat oleh \textit{path} sudah ditutup, atau hanya memiliki satu titik, maka \textit{method} ini tidak akan berfungsi.
+%		
+%		\item \textbf{CanvasRenderingContext2D.arc(x, y, radius, startAngle, endAngle, anticlockwise)} \\
+%		\textit{Method} ini akan menambah lengkungan pada \textit{path} dengan titik tengah berada pada posisi (\textit{x}, \textit{y}), memiliki \textit{radius} dan dimulai dari sudut \textit{startAngle} dan berakhir di sudut \textit{endAngle}, dengan cara menggambar sesuai arah \textit{anticlockwise}. \\
+%		\textbf{Parameter:}
+%		\begin{itemize}
+%			\item \textbf{x} \\ Koordinat x dari titik tengah lengkungan.
+%			\item \textbf{y} \\ Koordinat y dari titik tengah lengkungan.
+%			\item \textbf{radius} \\ Radius lengkungan.
+%			\item \textbf{startAngle} \\ Derajat awal dari lengkungan, diukur searah jarum jam dari posisi sumbu x positif dalam radian.
+%			\item \textbf{endAngle} \\ Derajat akhir dari lengkungan, diukur searah jarum jam dari posisi sumbu x positif dalam radian.
+%			\item \textbf{anticlockwise} \\ Cara menggambar lengkungan. Apabila bernilai \textit{true}, maka akan digambar dengan cara berlawanan arah jarum jam.
+%		\end{itemize}
+%		
+%		Contoh implementasi:
+%\begin{lstlisting}
+%var canvas = document.getElementById('canvas');
+%var ctx = canvas.getContext('2d');
+%	
+%// langkah berikut akan membuat gambar segitiga
+%ctx.beginPath();
+%ctx.moveTo(20, 20);
+%ctx.lineTo(200, 20);
+%ctx.lineTo(120, 120);
+%ctx.closePath(); 
+%ctx.stroke();
+%\end{lstlisting}
+%		
+%	\end{itemize} 
+
+%\end{enumerate}
+
+\subsection{Animation}
+Dengan menggunakan \textit{JavaScript} untuk mengontrol elemen \textbf{<canvas>}, hal tersebut akan sangat membantu dalam membuat animasi interaktif. Subbab ini akan membahas tentang pembuatan animasi didalam \textit{Canvas API}.
+
+\textbf{Langkah Dasar Animasi}
+
+Ada beberapa langkah yang dibutuhkan untuk menggambar suatu \textit{frame}.
+
+\begin{enumerate}
+	\item \textit{Clear the canvas} \\
+	Gambar atau bentuk yang berada dalam \textit{canvas} pada \textit{state} sebelumnya harus dihapus terlebih dahulu. Cara yang paling mudah untuk melakukan hal tersebut adalah menggunakan \textit{method} \textit{clearRect()}.
+	
+	\item \textit{Save the canvas state} \\
+	Apabila akan dilakukan perubahan pada gaya, transformasi, atau hal lainnya yang mengakibatkan kondisi \textit{canvas} saat ini, maka kondisi \textit{canvas} yang asli harus disimpan terlebih dahulu. Hal tersebut dilakukan agar kondisi \textit{canvas} yang asli digunakan setiap suatu \textit{frame} digambar.
+	
+	\item \textit{Draw animated shapes} \\
+	Langkah ini melakukan proses \textit{rendering} pada \textit{frame} yang telah digambar.
+	
+	\item \textit{Restore the canvas state} \\
+	Apabila kondisi \textit{canvas} telah disimpan sebelumnya, maka kondisi tersebut harus dikembalikan lagi sebelum menggambar \textit{frame} baru.
+\end{enumerate}
+
+Untuk dapat melihat suatu gambar atau bentuk yang bergerak didalam \textit{canvas}, diperlukan cara menjalankan fungsi menggambar selama periode waktu tertentu. Berikut merupakan beberapa cara yang dapat dilakukan:
 
 \begin{itemize}
-	\item \textbf{HTMLCanvasElement.getContext(contextType, contextAttributes)} \\
-	\textit{Method} ini akan mengembalikan konteks menggambar pada \textit{canvas}, atau \textit{null} apabila \textit{identifier} konteks tidak didukung.
-	\textbf{Parameter:} 
+	\item \textbf{setInterval(func, delay[, param1, param2, ...])} \\
+	\textbf{Parameter:}
 	\begin{itemize}
-		\item \textbf{contextType} \\tipe: \textbf{DOMString} \\ Berisi konteks yang menandakan konteks menggambar pada \textit{canvas}. Parameter ini dapat berupa berbagai jenis nilai seperti berikut:
-		\begin{itemize}
-			\item \textbf{"2d"} \\ Merepresentasikan konteks dua dimensi yang akan menciptakan objek \textit{CanvasRenderingContext2D}.
-			\item \textbf{"webgl"} \\ Merepresentasikan konteks tiga dimensi yang akan menciptakan objek \textit{WebGLRenderingContext}.
-			\item \textbf{"webgl2"} \\ Merepresentasikan konteks tiga dimensi yang akan menciptakan objek \textit{WebGL2RenderingContext}. Konteks ini hanya akan tersedia pada \textit{browser} yang dapat mengimplementasi \textit{WebGL} versi 2.
-			\item \textbf{bitmaprenderer} \\ Akan menciptakan objek \textit{ImageBitmapRenderingContext} yang akan mengganti konten dari \textit{canvas} dengan objek tersebut.
-		\end{itemize}
-	
-		\item \textbf{contextAttributes} \\ Berisi atribut dari parameter \textit{contextType}. Contoh atribut dari beberapa tipe konteks yaitu sebagai berikut:
-		\begin{itemize}
-			\item Atribut konteks \textit{2d}:
-			\begin{itemize}
-				\item \textbf{alpha} \\tipe: \textbf{boolean} \\ Menandakan apakah \textit{canvas} berisi \textit{alpha channel} atau tidak. Apabila bernilai \textit{false}, maka \textit{browser} akan menetapkan \textit{backdrop} untuk selalu bernilai \textit{opaque}, sehingga akan mempercepat proses menggambar.
-			\end{itemize}
-			
-			\item Atribut konteks WebGL:
-			\begin{itemize}
-				\item \textbf{depth} \\ tipe: \textbf{boolean} \\ Menandakan apakah \textit{buffer} untuk menggambar memiliki ukuran setidaknya 16 \textit{bits} atau tidak.
-				\item \textbf{antialias} \\tipe: \textbf{boolean} \\ Menandakan apakah dapat melakukan proses \textit{anti-aliasing} atau tidak.
-			\end{itemize}
-		\end{itemize}
+		\item \textbf{func} \\
+		Suatu fungsi yang akan dieksekusi setiap \textit{delay} \textit{milliseconds}.
+		
+		\item \textbf{delay} \\
+		Waktu dalam \textit{milliseconds}. \textit{Timer} akan melakukan \textit{delay} diantara waktu selama menjalankan fungsi tertentu.
+		
+		\item \textbf{param1,...,paramN} \\
+		Parameter tambahan untuk fungsi apabila waktu \textit{timer} telah habis.
 	\end{itemize}
-	\textbf{Kembalian:} Objek sesuai parameter \textit{contextType}.
 	
-\end{itemize}
+	\textbf{Kembalian:} \\ 
+	\textbf{intervalID} identifikasi unik milik suatu interval.
+
+	\textit{Method} ini akan memanggil suatu fungsi atau mengeksekusi kode tertentu selama rentang waktu yang telah ditentukan. Pemanggilan fungsi atau eksekusi kode dilakukan dengan penundaan selama waktu \textit{delay} tertentu.
+	
+	\item \textbf{clearInterval(intervalID)} \\
+	\textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{intervalID} identifikasi milik suatu interval yang akan diberhentikan.
+	\end{itemize}
+
+	\textit{Method} ini akan memberhentikan suatu fungsi yang berjalan berulang-ulang selama rentang waktu tertentu, yang dipanggil oleh \textit{method} \textbf{setInterval()}.
+	
+	
+	\item \textbf{requestAnimationFrame(callback)} \\
+	\textbf{Parameter:} \\
+	\begin{itemize}
+		\item \textbf{callback} \\
+		Parameter fungsi yang akan dipanggil saat harus memperbarui animasi dan menggambar \textit{frame} selanjutnya.
+	\end{itemize}
+
+	\textit{Method} ini akan memberitahu \textit{browser} bahwa akan dilakukan suatu animasi, dan melakukan \textit{request} kepada \textit{browser} untuk memanggil fungsi tertentu untuk memperbarui animasi sebelum melakukan gambar ulang selanjutnya.
+\end{itemize} 
 
 
-\subsection{CanvasRenderingContext2D}
+\subsection{canvasRenderingContext2D} 
+
 \textit{Interface} ini digunakan untuk menggambar persegi panjang, teks, gambar, dan objek-objek lain kedalam elemen \textit{canvas}. \textit{CanvasRenderingContext2D} menyediakan konteks \textit{2D rendering} untuk suatu elemen \textit{<canvas>}.
 Untuk mendapatkan objek dari \textit{interface} ini, harus memanggil \textit{getContext()} didalam elemen \textit{<canvas>}, dengan memberi \textit{''2d''} sebagai argumen. Berikut contoh penggunaannya :
 
@@ -1354,144 +1725,22 @@ var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 \end{lstlisting}
 
-Properti yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bagian seperti berikut:
-\begin{enumerate}
-	\item \textbf{\textit{Fill} dan \textit{Stroke styles}}
-	\begin{itemize}
-		\item \textbf{CanvasRenderingContext2D.fillStyle} \\ Menentukan warna atau gaya yang akan digunakan pada bentuk tertentu. Nilai \textit{default} dari properti ini yaitu \#000 (\textit{'black'}). Properti ini dapat berisi:
-		\begin{itemize}
-			\item \textbf{color} \\tipe: \textbf{DOMString} 
-			\item \textbf{gradient} \\tipe: \textbf{CanvasGradient}
-			\item \textbf{pattern} \\tipe: \textbf{CanvasPattern}
-		\end{itemize}
-		Contoh implementasi:
-\begin{lstlisting}
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+Salah satu properti yang dimiliki oleh \textit{interface} ini adalah:
+\begin{itemize}
+	\item \textbf{CanvasRenderingContext2D.globalCompositeOperation} \\
+	Properti ini akan menetapkan tipe operasi komposisi yang akan digunakan saat menggambar suatu bentuk baru kedalam \textit{canvas}. Tipe tersebut berupa \textit{String} yang akan menentukan komposisi atau \textit{blending mode} yang akan digunakan. 
 	
-//mengisi bentuk persegi dengan warna biru hanya pada sisinya
-ctx.strokeStyle = 'blue'; 
-
-//menggambar persegi tanpa ada warna didalam bentuknya
-ctx.strokeRect(10, 10, 100, 100);
-\end{lstlisting}
-		
-		\item \textbf{CanvasRenderingContext2D.strokeStyle} \\ Menentukan warna atau gaya yang akan digunakan pada garis sisi pada bentuk tertentu. Nilai \textit{default} pada properti ini yaitu \#000 (\textit{'black'}). properti ini dapat berupa:
-		\begin{itemize}
-			\item \textbf{color} \\tipe: \textbf{DOMString} 
-			\item \textbf{gradient} \\tipe: \textbf{CanvasGradient}
-			\item \textbf{pattern} \\tipe: \textbf{CanvasPattern}
-		\end{itemize}
-		 Contoh implementasi:
-\begin{lstlisting}
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-
-//mengisi bentuk persegi dengan warna biru hanya pada sisinya
-ctx.strokeStyle = 'blue'; 
-
-//menggambar persegi tanpa ada warna didalam bentuknya
-ctx.strokeRect(10, 10, 100, 100);	
-\end{lstlisting}
+	Berikut contoh tipe yang dapat digunakan:
+	\begin{itemize}
+		\item \textbf{destination-over} Bentuk yang baru akan digambar pada posisi dibelakang konten \textit{canvas} yang telah ada sebelumnya.
 	\end{itemize}
+\end{itemize}
 
-	\item \textbf{\textit{Line styles}} \\ 
-	\begin{itemize}
-		\item \textbf{CanvasRenderingContext2D.lineWidth} \\ Menentukan ketebalan dari garis. Nilai \textit{default} dari properti ini yaitu 1.0. Isi dari properti ini dapat berupa:
-		\begin{itemize}
-			\item \textbf{value} \\ Nilai yang menentukan ketebalan garis.
-		\end{itemize}
-		Contoh implementasi:
-\begin{lstlisting}
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-	
-ctx.lineWidth = 15;
-\end{lstlisting}
-	
-		\item \textbf{CanvasRenderingContext2D.lineCap} \\ Menentukan jenis dari ujung suatu garis. Nilai dari properti ini dapat berupa:
-		\begin{itemize}
-			\item \textbf{butt} \\ Ujung dari garis memiliki bentuk rata.
-			\item \textbf{round} \\ Ujung dari garis memiliki bentuk bulat.
-			\item \textbf{square} \\ Ujung dari garis memiliki bentuk rata, ditambah kotak dengan ukuran lebar yang sama dan satu per delapan dari ketebalan garis tersebut.
-		\end{itemize}
-		Contoh implementasi:
-\begin{lstlisting}
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-	
-ctx.lineCap = 'round';
-\end{lstlisting}
-	
-		\item \textbf{CanvasRenderingContext2D.lineJoin} \\ Menentukan bagaimana bentuk sudut dari kedua garis yang saling terhubung. Nilai dari atribut ini dapat berupa:
-		\begin{itemize}
-			\item \textbf{round} \\ Sudut memiliki bentuk bulat (melengkung).
-			\item \textbf{bevel} \\ Sudut memiliki bentuk rata.
-			\item \textbf{miter} \\ Sudut memiliki bentuk lancip.
-		\end{itemize}
-		Contoh implementasi:
-\begin{lstlisting}
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-		
-ctx.lineJoin = 'round';
-\end{lstlisting}
-	\end{itemize}
+Beberapa \textit{method} yang dimiliki oleh \textit{interface} ini adalah sebagai berikut:
 
-	\item \textbf{Text styles} 
-	\begin{itemize}
-		\item \textbf{CanvasRenderingContext2D.font} \\ Menentukan jenis teks yang akan digunakan. Nilai \textit{default} dari properti ini yaitu 10px \textit{sans-serif}.
-	\end{itemize}
-	
-\end{enumerate}
-
-\textit{Method} yang dimiliki oleh \textit{interfaces} ini terbagi menjadi beberapa bagian seperti berikut:
-\begin{enumerate}
-	\item \textbf{Menggambar \textit{rectangles}}
-	\begin{itemize}
-		\item \textbf{CanvasRenderingContext2D.clearRect(x, y, width, height)} \\ 
-		\textit{Method} ini akan menghapus gambar sebelumnya dengan membentuk suatu persegi. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
-		
-		\textbf{Parameter:}
-		\begin{itemize}
-			\item \textbf{x} \\ Koordinat x yang menandakan titik awal persegi.
-			\item \textbf{y} \\ Koordinat y yang menandakan titik awal persegi.
-			\item \textbf{width} \\ Lebar persegi.
-			\item \textbf{height} \\ tinggi persegi.
-		\end{itemize}
-		Contoh implementasi:
-\begin{lstlisting}
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-		
-ctx.fillRect(25, 25, 100, 100);
-	
-// Akan menghapus bagian dalam persegi yang 
-// sudah digambar sebelumnya
-ctx.clearRect(45, 45, 60, 60); 
-	\end{lstlisting}
-		
-		\item \textbf{CanvasRenderingContext2D.fillRect(x, y, width, height)} \\ 
-		\textit{Method} ini akan menggambar persegi dengan warna tertentu didalam bentuknya. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
-		
-		\textbf{Parameter:}
-		\begin{itemize}
-			\item \textbf{x} \\ Koordinat x yang menandakan titik awal persegi.
-			\item \textbf{y} \\ Koordinat y yang menandakan titik awal persegi.
-			\item \textbf{width} \\ Lebar persegi.
-			\item \textbf{height} \\ tinggi persegi.
-		\end{itemize}
-		Contoh implementasi:
-\begin{lstlisting}
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-	
-ctx.fillStyle = 'green';
-ctx.fillRect(10, 10, 100, 100);
-\end{lstlisting}
-	
-	\item \textbf{CanvasRenderingContext2D.strokeRect(x, y, width, height)} \\ 
-	\textit{Method} ini akan menggambar persegi tanpa ada warna didalam bentuknya, namun akan memberi warna tertentu pada garis sisi persegi tersebut. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
+\begin{itemize}
+	\item \textbf{CanvasRenderingContext2D.clearRect(x, y, width, height)} \\ 
+	\textit{Method} ini akan menghapus gambar sebelumnya dengan membentuk suatu persegi. \textit{Method} ini akan menggambar koordinat titik awal (\textit{x}, \textit{y}) dengan lebar dan tinggi yang sudah ditentukan oleh \textit{width} dan \textit{height}. 
 	
 	\textbf{Parameter:}
 	\begin{itemize}
@@ -1500,75 +1749,31 @@ ctx.fillRect(10, 10, 100, 100);
 		\item \textbf{width} \\ Lebar persegi.
 		\item \textbf{height} \\ tinggi persegi.
 	\end{itemize}
-	Contoh implementasi:
-\begin{lstlisting}
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+%	Contoh implementasi:
+%	\begin{lstlisting}
+%	var canvas = document.getElementById('canvas');
+%	var ctx = canvas.getContext('2d');
+%	
+%	ctx.fillRect(25, 25, 100, 100);
+%	
+%	// Akan menghapus bagian dalam persegi yang 
+%	// sudah digambar sebelumnya
+%	ctx.clearRect(45, 45, 60, 60); 
+%	\end{lstlisting}
 	
-ctx.strokeStyle = 'green';
-ctx.strokeRect(10, 10, 100, 100);
-\end{lstlisting}
+	\item \textbf{CanvasRenderingContext2D.drawImage(image, dx, dy)} \\
+	\textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{image} elemen yang akan digambar kedalam \textit{context} tertentu.
+		\item \textbf{dx} koordinat \textit{x} pada \textit{canvas} untuk menempatkan \textit{image} di pojok kiri atas.
+		\item \textbf{dy} koordinat \textit{y} pada \textit{canvas} untuk menempatkan \textit{image} di pojok kiri atas.
 	\end{itemize}
 
-	\item \textbf{Paths} \\
-	\textit{Paths} merupakan kumpulan beberapa titik yang terhubung oleh garis yang dapat membentuk lengkungan, garis, atau bentuk tertentu. Untuk dapat membuat bentuk tertentu menggunakan \textit{paths}, dapat dilakukan langkah berikut:
-	\begin{enumerate}
-		\item Membuat \textit{path}.
-		\item Menggunakan beberapa fungsi \textit{path} untuk menggambar suatu \textit{path}.
-		\item Menutup \textit{path} yang sudah digambar.
-		\item Setelah \textit{path} ditutup, maka bentuk tersebut dapat diberi warna didalam bentuk tersebut maupun di garis sisinya.
-	\end{enumerate}
+	\textit{Method} ini akan menyediakan cara untuk menggambar suatu elemen \textit{image} pada \textit{canvas}.
 	
-	Berikut merupakan beberapa \textit{method} untuk membuat \textit{path}:
-	\begin{itemize}
-		\item \textbf{CanvasRenderingContext2D.beginPath()} \\ 
-		\textit{Method} ini digunakan untuk memulai suatu \textit{path} baru dengan mengosongkan \textit{list} dari \textit{sub-paths} sebelumnya.
-		
-		\item \textbf{CanvasRenderingContext2D.moveTo(x, y)} \\
-		\textit{Method} ini digunakan untuk memindahkan titik awal dari \textit{sub-path} yang baru ke koordinat (\textit{x}, \textit{y}). \\
-		\textbf{Parameter:}
-		\begin{itemize}
-			\item \textbf{x} \\ Koordinat x yang menandakan titik pada posisi sumbu x.
-			\item \textbf{y} \\ Koordinat y yang menandakan titik pada posisi sumbu y.
-		\end{itemize}
-		
-		\item \textbf{CanvasRenderingContext2D.lineTo(x, y)} \\
-		\textit{Method} ini digunakan untuk menghubungkan titik sebelumnya pada \textit{sub-path} dengan koordinat (\textit{x}, \textit{y}).
-		\textbf{Parameter:}
-		\begin{itemize}
-			\item \textbf{x} \\ Koordinat x yang menandakan akhir dari garis.
-			\item \textbf{y} \\ Koordinat y yang menandakan akhir dari garis.
-		\end{itemize}
-		
-		\item \textbf{CanvasRenderingContext2D.closePath()} \\
-		\textit{Method} ini berfungsi untuk memindahkan posisi titik saat ini kembali ke posisi awal \textit{sub-path}. Apabila bentuk yang dibuat oleh \textit{path} sudah ditutup, atau hanya memiliki satu titik, maka \textit{method} ini tidak akan berfungsi.
-		
-		\item \textbf{CanvasRenderingContext2D.arc(x, y, radius, startAngle, endAngle, anticlockwise)} \\
-		\textit{Method} ini akan menambah lengkungan pada \textit{path} dengan titik tengah berada pada posisi (\textit{x}, \textit{y}), memiliki \textit{radius} dan dimulai dari sudut \textit{startAngle} dan berakhir di sudut \textit{endAngle}, dengan cara menggambar sesuai arah \textit{anticlockwise}. \\
-		\textbf{Parameter:}
-		\begin{itemize}
-			\item \textbf{x} \\ Koordinat x dari titik tengah lengkungan.
-			\item \textbf{y} \\ Koordinat y dari titik tengah lengkungan.
-			\item \textbf{radius} \\ Radius lengkungan.
-			\item \textbf{startAngle} \\ Derajat awal dari lengkungan, diukur searah jarum jam dari posisi sumbu x positif dalam radian.
-			\item \textbf{endAngle} \\ Derajat akhir dari lengkungan, diukur searah jarum jam dari posisi sumbu x positif dalam radian.
-			\item \textbf{anticlockwise} \\ Cara menggambar lengkungan. Apabila bernilai \textit{true}, maka akan digambar dengan cara berlawanan arah jarum jam.
-		\end{itemize}
-		
-		Contoh implementasi:
-\begin{lstlisting}
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+	\item \textbf{CanvasRenderingContext2D.save()} \\ 
+	\textit{Method} ini akan menyimpan seluruh \textit{state} dari \textit{canvas} dengan menaruh \textit{state} tersebut kedalam suatu \textit{stack} yang sudah diatur didalam elemen \textit{<canvas>}.
 	
-// langkah berikut akan membuat gambar segitiga
-ctx.beginPath();
-ctx.moveTo(20, 20);
-ctx.lineTo(200, 20);
-ctx.lineTo(120, 120);
-ctx.closePath(); 
-ctx.stroke();
-\end{lstlisting}
-		
-	\end{itemize} 
-
-\end{enumerate}
+	\item \textbf{CanvasRenderingContext2D.restore()} \\
+	\textit{Method} ini akan mengembalikan \textit{state} yang baru saja disimpan dengan mengeluarkannya dari tumpukan paling atas suatu \textit{stack}. Apabila \textit{stack} tersebut kosong, maka \textit{method} ini tidak melakukan apapun.
+\end{itemize}
