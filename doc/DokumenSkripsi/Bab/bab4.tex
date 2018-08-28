@@ -222,3 +222,125 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 \end{figure}
 	
 \end{enumerate}
+
+\section{Perancangan Struktur Direktori}
+
+Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun web. Struktur direktori meliputi beberapa folder dan \textit{file} yang memiliki fungsi berbeda-beda. Folder beserta \textit{file} yang digunakan akan dijelaskan sebagai berikut:
+
+\begin{enumerate}
+	\item \textbf{Folder bin} \\
+	Folder ini berisi bagian-bagian yang berperan sebagai \textit{server}. Pada folder ini terdapat folder lain dan berkas yang berfungsi untuk menangani jalannya koneksi pada saat web diakses. Berikut merupakan isi dari folder ini:
+	\begin{enumerate}
+		\item Folder \textbf{utils} \\
+		Folder ini menyimpan berkas yang membantu proses berjalannya koneksi untuk \textit{server}. Isi dari folder ini adalah sebagai berikut:
+		\begin{itemize}
+			\item Berkas \textbf{users.js}  \\
+			Berkas ini berfungsi untuk menyimpan seluruh \textit{client} yang terkoneksi pada \textit{socket.io server}. Seluruh data pengguna yang akan memainkan permainan web akan disimpan dan diatur oleh berkas ini.
+		\end{itemize}
+	
+		\item Berkas \textbf{www} \\
+		Berkas ini berfungsi sebagai \textit{server}. Seluruh koneksi yang tersambung dan terputus akan diatur oleh berkas ini. Komunikasi antara \textit{client} pun akan diatur oleh \textit{server}.
+	\end{enumerate}
+	
+	\item \textbf{Folder public} \\
+	Folder ini menyimpan bagian-bagian yang memiliki sifat \textit{static}. Berikut akan dijelaskan isi dari folder ini:
+	\begin{enumerate}
+		\item \textbf{Folder images} \\
+		Folder ini berisi gambar-gambar yang dibutuhkan untuk ditampilkan dibeberapa halaman yang terdapat didalam web. Berikut merupakan daftar isi dari gambar-gambar yang ada didalam folder ini: 
+		\begin{itemize}
+			\item \textbf{BrocoDude.png} gambar karakter brokoli dengan ukuran besar.
+			\item \textbf{brocoDudeTiny.png} gambar karakter brokoli dengan ukuran kecil.
+			\item \textbf{DabuDonut.png} gambar karakter donat dengan ukuran besar.
+			\item \textbf{dabuDonut.png} gambar karakter donat dengan ukuran kecil.
+			\item \textbf{finga.png} gambar jari yang ditampilkan dihalaman awal.
+			\item \textbf{GrapeYoda.png} gambar karakter anggur dengan ukuran besar.
+			\item \textbf{grapeYodaTiny.png} gambar karakter anggur dengan ukuran kecil.
+			\item \textbf{stepUp.png} gambar telapak kaki kiri yang ditampilkan dihalaman pengendali.
+			\item \textbf{stepUpRight.png} gambar telapak kaki kanan yang ditampilkan dihalaman pengendali.
+			\item \textbf{grapeYodaTiny.png} gambar karakter anggur dengan ukuran kecil.
+			\item \textbf{SummerEgg.png} gambar karakter telur mata sapi dengan ukuran besar.
+			\item \textbf{summerEggTiny.png} gambar karakter telur mata sapi dengan ukuran kecil.
+			\item \textbf{timer1.png} gambar angka 1 yang ditampilkan saat hitungan mundur.
+			\item \textbf{timer2.png} gambar angka 2 yang ditampilkan saat hitungan mundur.
+			\item \textbf{timer3.png} gambar angka 3 yang ditampilkan saat hitungan mundur.
+			\item \textbf{track.png} gambar lintasan saat permainan dimulai.
+			\item \textbf{winning.png} gambar panggung saat sudah ada pemenang dalam permainan.
+		\end{itemize}
+	
+		\item \textbf{Folder javascripts} \\
+		Folder ini berisi bagian-bagian yang berfungsi untuk mengatur bagaimana perilaku web pada saat diakses oleh pengguna. Terdapat berbagai berkas dengan ekstensi \textbf{.js} yang memiliki fungsi berbeda-beda. Berikut akan dijelaskan isi dari folder ini:
+		
+		\begin{enumerate}
+			\item \textbf{Folder libs} \\
+			Folder ini berisi berkas yang berfungsi untuk mengatur pengiriman data melewati \textit{form}. Berikut isi dari folder ini:
+			\begin{itemize}
+				\item \textbf{jquery-3.3.1.min.js} \\ Berkas ini merupakan \textbf{jquery} yang menyediakan fungsi-fungsi dalam pengiriman dan penerimaan data yang dilakukan \textit{client} dan \textit{server}. 
+			\end{itemize}
+		
+			\item \textbf{charDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman pemilihan karakter di \textit{desktop browser} pada saat diakses oleh \textit{client}.
+			
+			\item \textbf{charMobileScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman pemilihan karakter di \textit{mobile browser} pada saat diakses oleh \textit{client}.
+			
+			\item \textbf{gamePlayDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman permainan di \textit{desktop browser} pada saat diakses oleh \textit{client}.
+			
+			\item \textbf{gamePlayMobileScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman permainan di \textit{mobile browser} pada saat diakses oleh \textit{client}.
+			
+			\item \textbf{homeScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman utama di \textit{desktop browser} dan \textit{mobile browser} pada saat diakses oleh \textit{client}.
+			
+			\item \textbf{mobileScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman proses permintaan koneksi di \textit{mobile browser} pada saat diakses oleh \textit{client}.
+			
+			\item \textbf{syncScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman proses permintaan koneksi di \textit{desktop browser} pada saat diakses oleh \textit{client}.
+			
+			\item \textbf{winningDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman saat permainan telah selesai di \textit{desktop browser} pada saat diakses oleh \textit{client}.
+			
+			\item \textbf{winningMobileScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman saat permainan telah selesai di \textit{mobile browser} pada saat diakses oleh \textit{client}.
+			
+			\item 
+		\end{enumerate}
+		\item \textbf{Folder stylesheets} \\ 
+		Folder ini berisi bagian-bagian yang berfungsi untuk menghias setiap halaman yang terdapat didalam web. Pada folder ini terdapat berbagai berkas dengan ekstensi \textbf{.css}. Berikut akan dijelaskan isi dari folder ini:
+		
+		\begin{enumerate}
+			\item \textbf{charDesktopStyle.css}, Berkas ini berfungsi untuk menghias halaman pemilihan karakter pada \textit{desktop browser}.
+			
+			\item \textbf{charMobileStyle.css}, Berkas ini berfungsi untuk menghias halaman pemilihan karakter pada \textit{mobile browser}.
+			
+			\item \textbf{gamePlayDesktopStyle.css}, Berkas ini berfungsi untuk menghias halaman permainan pada \textit{desktop browser}.
+			
+			\item \textbf{gamePlayMobileStyle.css}, Berkas ini berfungsi untuk menghias halaman permainan pada \textit{mobile browser}.
+			
+			\item \textbf{homeStyle.css}, Berkas ini berfungsi untuk menghias halaman utama pada \textit{desktop browser} dan \textit{mobile browser}.
+			
+			\item \textbf{mobileStyle.css}, Berkas ini berfungsi untuk menghias halaman proses permintaan koneksi pada \textit{mobile browser}.
+			
+			\item \textbf{Nickname_DEMO.otf}, Berkas ini berfungsi sebagai tipe \textit{font} yang digunakan di beberapa halaman yang terdapat pada web.
+			
+			\item \textbf{syncStyle.css}, Berkas ini berfungsi untuk menghias halaman proses permintaan koneksi pada \textit{desktop browser}.
+			
+			\item \textbf{winningDesktopStyle.css}, Berkas ini berfungsi untuk menghias halaman saat permainan telah selesai pada \textit{mobile browser}.
+			
+			\item \textbf{winningMobileStyle.css}, Berkas ini berfungsi untuk menghias halaman saat permainan telah selesai pada \textit{mobile browser}.
+			
+			
+		\end{enumerate}
+	\end{enumerate}
+	
+	\item \textbf{routes} \\
+	Folder ini berisi bagian-bagian yang berperan sebagai \textit{middleware}. Berikut merupakan isi dari folder ini:
+	\begin{itemize}
+		\item \textit{homeRoutes.js}, berkas ini berfungsi sebagai \textit{middleware} yang menampilkan halaman utama pada saat \textit{client} mengakses alamat web. Berkas ini akan digunakan oleh berkas \textbf{app.js} yang berperan sebagai modul utama.
+	\end{itemize}
+
+	\item \textbf{views} \\
+	Folder ini berisi bagian-bagian yang berfungsi untuk menampilkan halaman-halaman kepada \textit{client}. Folder ini memiliki berkas dengan ekstensi \textbf{.ejs}. Sama seperti ekstensi \textbf{.html}, ekstensi tersebut akan menampilkan berbagai tampilan dengan menggunakan \textit{syntax} \textbf{.html}. Berikut merupakan isi dari folder ini:
+	
+	\begin{enumerate}
+		\item \textbf{error.ejs}, berkas ini berfungsi untuk menampilkan halaman apabila terjadi kesalahan dalam mengakses halaman utama.
+		
+		\item \textbf{home.ejs}, berkas ini berfungsi untuk menampilkan halaman utama pada saat \textit{client} mengakses alamat web.
+	\end{enumerate}
+	
+	
+	\item \textbf{app.js} \\ 
+	Berkas ini berfungsi sebagai modul utama, yang mengatur akses dari berbagai folder dan berkas yang ada pada struktur web ini.
+\end{enumerate}

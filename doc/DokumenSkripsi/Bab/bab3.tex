@@ -150,8 +150,6 @@ Perbaikan yang dapat dilakukan adalah dengan memberi \textit{feedback} yang lebi
 
 Pada analisis ini dilakukan pengamatan pada jalannya koneksi \textit{socket.io} antara \textit{server} dan \textit{client}. Hal-hal yang dianalisis adalah bagaimana koneksi tersambung di awal permainan, bagaimana data-data yang dibutuhkan dikirim melalui koneksi tersebut, hingga koneksi antara \textit{client} dan \textit{server} terputus. Analisis dilakukan dengan menggunakan \textit{developer tools} yang tersedia pada \textit{web browser} untuk mengamati koneksi \textit{client}, dan \textit{terminal} untuk mengamati koneksi \textit{server}.
 
-\subsection{Sequence Diagram JoinRoom}
-
 %Sediain gambar server dan client saat si host berhasil konek ke socket.io
 
 
@@ -194,5 +192,7 @@ Pemain akan menekan tombol yang ditampilkan di \textit{smartphone} secara terus 
 Apabila sudah ada pemain yang menyentuh garis akhir, maka permainan pun akan berakhir dan halaman akan berubah menuju ke halaman pemenang. Pada saat permainan berakhir, akan dikirimkan suatu \textit{event} ke \textit{server} yang berisi parameter \textit{socket.id} dan \textit{value} untuk menampilkan pemain mana yang menang dan karakter mana yang dimilikinya. \textit{Event} tersebut kemudian dilanjutkan kembali ke \textit{host} lalu pemenang pun dapat ditampilkan. Pada tahap ini, pemain dapat memilih untuk keluar dari permainan dan kembali ke halaman utama.
 
 %tampilin gambar winning page sama console dan si terminalnya juga
+
+\section{Analisis Pemanfaatan Socket.io}
 
 
