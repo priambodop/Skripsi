@@ -1,7 +1,7 @@
 \chapter{Analisis}
 \label{chap:analisis}
 
-Pada bab ini akan dijelaskan mengenai analisis aplikasi sejenis yang menggunakan \textit{smartphone} sebagai pengendali permainan berbasis web, analisis jalannya koneksi \textit{socket.io} dari awal hingga akhir permainan.
+Pada bab ini akan dijelaskan mengenai analisis aplikasi sejenis yang menggunakan \textit{smartphone} sebagai pengendali permainan berbasis web, analisis \textit{sequence} diagram.
 
 \section{Analisis Aplikasi Sejenis}
 \label{sec:AirConsole}
@@ -145,14 +145,19 @@ Dari ketiga percobaan yang sudah dilakukan, ada beberapa hal yang dapat diperbai
 
 Perbaikan yang dapat dilakukan adalah dengan memberi \textit{feedback} yang lebih jelas pada pemain, apabila ada kesalahan pada aplikasi yang terjadi seperti pemutusan koneksi. Dengan begitu, pemain akan lebih mengetahui bahwa koneksi dapat saja terputus dan tidak dapat melanjutkan permainannya.
 
-\section{Koneksi Socket.io}
-\label{koneksiSocket.io}
+\section{Analisis Sequence Diagram}
+\label{sequence}
 
 Pada analisis ini dilakukan pengamatan pada jalannya koneksi \textit{socket.io} antara \textit{server} dan \textit{client}. Hal-hal yang dianalisis adalah bagaimana koneksi tersambung di awal permainan, bagaimana data-data yang dibutuhkan dikirim melalui koneksi tersebut, hingga koneksi antara \textit{client} dan \textit{server} terputus. Analisis dilakukan dengan menggunakan \textit{developer tools} yang tersedia pada \textit{web browser} untuk mengamati koneksi \textit{client}, dan \textit{terminal} untuk mengamati koneksi \textit{server}.
 
-Pada awal permainan, \textit{client} pertama yang melakukan koneksi pada \textit{server} adalah \textit{desktop computer}, yang berperan sebagai \textit{host} dalam permainan.\textit{Host} akan menyediakan suatu kode yang akan berguna sebagai \textit{room} untuk kedua pemain yang akan bergabung dengan melakukan koneksi ke \textit{server}. \textit{Room} yang disediakan hanya akan menerima tiga \textit{client} saja, yaitu \textit{host}, \textit{player1}, dan \textit{player2}. Setelah berhasi melakukan koneksi, maka \textit{client} akan memiliki \textit{socket.id} yang berfungsi sebagai tanda pengenal unik, dan kode \textit{room} dimana proses pengiriman dan penerimaan data hanya dapat dilakukan didalam \textit{room} tersebut. 
+\subsection{Sequence Diagram JoinRoom}
 
 %Sediain gambar server dan client saat si host berhasil konek ke socket.io
+
+
+Pada awal permainan, \textit{client} pertama yang melakukan koneksi pada \textit{server} adalah \textit{desktop computer}, yang berperan sebagai \textit{host} dalam permainan.\textit{Host} akan menyediakan suatu kode yang berguna sebagai \textit{room} untuk kedua pemain yang akan bergabung dengan melakukan koneksi ke \textit{server}. \textit{Room} yang disediakan hanya akan menerima tiga \textit{client} saja, yaitu \textit{host}, \textit{player1}, dan \textit{player2}. 
+
+Setelah berhasi melakukan koneksi, maka \textit{client} akan memiliki \textit{socket.id} yang berfungsi sebagai tanda pengenal unik, dan kode \textit{room} dimana proses pengiriman dan penerimaan data hanya dapat dilakukan didalam \textit{room} tersebut. 
 
 Setelah \textit{client} pertama berhasil tersambung, selanjutnya para pemain yang akan bergabung akan melakukan koneksi pada \textit{server}. Pemain akan menggunakan \textit{smartphone} yang akan berfungsi sebagai \textit{controller} permainan. Untuk melakukan koneksi, pemain harus memasukan kode \textit{room} yang telah disediakan \textit{host} agar dapat bergabung. Pada proses ini, akan dilakukan pengecekan oleh \textit{server}, apakah kode \textit{room} yang telah dikirim oleh \textit{client} tersedia atau tidak. Apabila \textit{room} tersedia, maka pemain akan berhasil bergabung, dan apabila tidak tersedia, maka pemain tidak dapat bergabung.
 
