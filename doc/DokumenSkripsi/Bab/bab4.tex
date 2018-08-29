@@ -11,7 +11,7 @@ Pada \textit{sequence} diagram akan dibahas mengenai jalannya koneksi \textit{so
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{Gambar/JoinRoom}
+	\includegraphics[scale=0.2]{Gambar/JoinRoom}
 	\caption{Proses melakukan koneksi ke \textit{socket.io} dan bergabung kedalam \textit{room}.}
 	\label{fig:1_JoinRoom}
 \end{figure}
@@ -97,19 +97,19 @@ Apabila pemain menekan tombol \textit{back} yang ada pada halaman \textit{browse
 \section{Perancangan Antarmuka}
 \label{sec:antarmuka}
 
-Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \textit{browser} yang ada di \textit{PC} dan \textit{smartphone}.
+Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \textit{browser} yang ada di \textit{desktop} dan \textit{smartphone}.
 
 \begin{enumerate}
 	\item Antarmuka halaman \textit{home}
 	
-	\textbf{PC}
+	\textbf{Desktop}
 	
 	Halaman ini merupakan halaman utama yang pertama kali dituju oleh pengguna yang menggunakan \textit{PC}. Komponen halaman ini terdiri dari dua buah gambar jari yang melambangkan permainan, teks yang menunjukan nama permainan yaitu \textit{finger for life}, dan tombol \textit{start} yang digunakan untuk memulai permainan. Rancangan antarmuka halaman \textit{home} dapat dilihat pada Gambar \ref{fig:web1_home}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web1_home}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{desktop} yang menunjukan tampilan awal saat \textit{client} mengakses alamat web.}
 	\label{fig:web1_home}
 \end{figure}
 
@@ -120,20 +120,20 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/mob1_home}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{mobile} yang tampilan awal saat \textit{client} mengakses alamat web.}
 	\label{fig:mob1_home}
 \end{figure}
 
 	\item Antarmuka halaman \textit{sync}
 	
-	\textbf{PC}
+	\textbf{Desktop}
 	
-	Halaman ini menampilkan suatu perintah yang dapat dilakukan oleh pengguna apabila akan bergabung dalam permainan. Halaman ini pun menyediakan suatu kode untuk para pemain dimana kode tersebut akan berfungsi sebagai suatu \textit{room} bagi para pemain. Pada halaman ini akan dilakukan proses sinkronisasi untuk para pengguna, apakah berhasil bergabung dalam permainan atau tidak. Apabila berhasil, maka akan muncul suatu teks yang menunjukan suatu pemain telah berhasil bergabung. Apabila tidak, maka tidak akan menampilkan apapun dan halaman tidak akan menuju ke halaman selanjutnya sebelum ada dua pemain yang berhasil bergabung. Rancangan antarmuka halaman \textit{sync} pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web2_sync}.
+	Halaman ini menampilkan suatu perintah yang dapat dilakukan oleh pengguna apabila akan bergabung dalam permainan. Halaman ini pun menyediakan suatu kode untuk para pemain dimana kode tersebut akan berfungsi sebagai suatu \textit{room} bagi para pemain. Pada halaman ini akan dilakukan proses sinkronisasi untuk para pengguna, apakah berhasil bergabung dalam permainan atau tidak. Apabila berhasil, maka akan muncul suatu teks yang menunjukan suatu pemain telah berhasil bergabung. Apabila tidak, maka tidak akan menampilkan apapun dan halaman tidak akan menuju ke halaman selanjutnya sebelum ada dua pemain yang berhasil bergabung. Rancangan antarmuka halaman \textit{sync} pada \textit{desktop} dapat dilihat pada Gambar \ref{fig:web2_sync}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web2_sync}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{desktop} yang menampilkan langkah untuk bergabung dalam permainan}
 	\label{fig:web2_sync}
 \end{figure}
 
@@ -144,20 +144,20 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/mob2_sync1}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{smartphone} yang menampilkan kolom untuk mengisi kode.}
 	\label{fig:mob2_sync1}
 \end{figure}
 
 \item Antarmuka halaman \textit{character}
 
-	\textbf{PC}
+	\textbf{desktop}
 	
-	Halaman ini akan menampilkan karakter yang telah dipilih oleh pemain. Apabila karakter belum memilih karakter yang akan dimainkan, maka halaman ini belum menampilkan apapun. Rancangan antarmuka halaman \textit{character} pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web3_char}.
+	Halaman ini akan menampilkan karakter yang telah dipilih oleh pemain. Apabila karakter belum memilih karakter yang akan dimainkan, maka halaman ini belum menampilkan apapun. Rancangan antarmuka halaman \textit{character} pada \textit{desktop} dapat dilihat pada Gambar \ref{fig:web3_char}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web3_char}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{desktop} yang menampilkan karakter yang telah ditetapkan oleh pemain.}
 	\label{fig:web3_char}
 \end{figure}
 
@@ -169,20 +169,20 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/mob3_char1}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{smartphone} yang menampilkan daftar karakter yang dapat dipilih.}
 	\label{fig:mob3_char1}
 \end{figure}
 
 \item Antarmuka halaman \textit{gameplay}
 
-	\textbf{PC}
+	\textbf{Desktop}
 	
-	Halaman ini menampilkan arena permainan untuk para pemain. Komponen halaman ini terdiri dari suatu gambar lintasan lari, dan karakter yang telah dipilih pada halaman sebelumnya. Rancangan antarmuka halaman \textit{gameplay} pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web5_gameplay2}.
+	Halaman ini menampilkan arena permainan untuk para pemain. Komponen halaman ini terdiri dari suatu gambar lintasan lari, dan karakter yang telah dipilih pada halaman sebelumnya. Rancangan antarmuka halaman \textit{gameplay} pada \textit{desktop} dapat dilihat pada Gambar \ref{fig:web5_gameplay2}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web5_gameplay2}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{desktop} yang menampilkan lintasan lari dan karakter untuk dimainkan.}
 	\label{fig:web5_gameplay2}
 \end{figure}
 
@@ -193,20 +193,20 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/mob5_play}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{smartphone} yang menampilkan telapak kaki yang berfungsi sebagai pengendali.}
 	\label{fig:mob5_play}
 \end{figure}
 
 \item Antarmuka halaman \textit{gameover}
 
-	\textbf{PC}
+	\textbf{Desktop}
 	
-	Halaman ini menampilkan para pemenang yang telah berhasil menyelesaikan permainan. Setelah pemain selesai bermain, pemain dapat menekan tombol \textit{back} untuk kembali ke halaman utama dan mengakhiri permainan. Rancangan antarmuka halaman \textit{gameover} pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web6_winning}.
+	Halaman ini menampilkan para pemenang yang telah berhasil menyelesaikan permainan. Setelah pemain selesai bermain, pemain dapat menekan tombol \textit{back} untuk kembali ke halaman utama dan mengakhiri permainan. Rancangan antarmuka halaman \textit{gameover} pada \textit{desktop} dapat dilihat pada Gambar \ref{fig:web6_winning}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web6_winning}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{desktop} yang menampilkan pemenang permainan.}
 	\label{fig:web6_winning}
 \end{figure}
 
@@ -217,7 +217,7 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/mob6_win}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{smartphone} yang menampilkan teks bahwa permainan telah selesai.}
 	\label{fig:mob6_win}
 \end{figure}
 	
@@ -227,8 +227,23 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 
 Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun web. Struktur direktori meliputi beberapa folder dan \textit{file} yang memiliki fungsi berbeda-beda. Folder beserta \textit{file} yang digunakan akan dijelaskan sebagai berikut:
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{Gambar/direktori}
+	\caption{Direktori seluruh folder dan \textit{file}.}
+	\label{fig:direktori}
+\end{figure}
+
 \begin{enumerate}
 	\item \textbf{Folder bin} \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.4]{Gambar/direktori_bin}
+		\caption{Isi folder bin.}
+		\label{fig:direktori_bin}
+	\end{figure}
+	
 	Folder ini berisi bagian-bagian yang berperan sebagai \textit{server}. Pada folder ini terdapat folder lain dan berkas yang berfungsi untuk menangani jalannya koneksi pada saat web diakses. Berikut merupakan isi dari folder ini:
 	\begin{enumerate}
 		\item Folder \textbf{utils} \\
@@ -243,6 +258,14 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 	\end{enumerate}
 	
 	\item \textbf{Folder public} \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.4]{Gambar/direktori_public}
+		\caption{Isi dari folder public.}
+		\label{fig:direktori_public}
+	\end{figure}
+	
 	Folder ini menyimpan bagian-bagian yang memiliki sifat \textit{static}. Berikut akan dijelaskan isi dari folder ini:
 	\begin{enumerate}
 		\item \textbf{Folder images} \\
@@ -326,12 +349,28 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 	\end{enumerate}
 	
 	\item \textbf{Folder routes} \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.4]{Gambar/direktori_routes}
+		\caption{Isi dari folder routes}
+		\label{fig:direktori_routes}
+	\end{figure}
+	
 	Folder ini berisi bagian-bagian yang berperan sebagai \textit{middleware}. Berikut merupakan isi dari folder ini:
 	\begin{itemize}
 		\item \textbf{homeRoutes.js}, berkas ini berfungsi sebagai \textit{middleware} yang menampilkan halaman utama pada saat \textit{client} mengakses alamat web. Berkas ini akan digunakan oleh berkas \textbf{app.js} yang berperan sebagai modul utama.
 	\end{itemize}
 
 	\item \textbf{Folder views} \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.4]{Gambar/direktori_views}
+		\caption{Isi dari folder views}
+		\label{fig:direktori_views}
+	\end{figure}
+	
 	Folder ini berisi bagian-bagian yang berfungsi untuk menampilkan halaman-halaman kepada \textit{client}. Folder ini memiliki berkas dengan ekstensi \textbf{.ejs}. Sama seperti ekstensi \textbf{.html}, ekstensi tersebut akan menampilkan berbagai tampilan dengan menggunakan \textit{syntax} \textbf{.html}. Berikut merupakan isi dari folder ini:
 	
 	\begin{enumerate}
@@ -343,4 +382,9 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 	
 	\item \textbf{Berkas app.js} \\ 
 	Berkas ini berfungsi sebagai modul utama, yang mengatur akses dari berbagai folder dan berkas yang ada pada struktur web ini.
+	
+%	\item \textbf{Berkas .gitignore} \\
+%	Berkas ini berfungsi untuk kebutuhan penyimpanan direktori di \textit{github}, dimana isi dari berkas ini tidak akan disimpan oleh \textit{github}.
+	
+	
 \end{enumerate}
