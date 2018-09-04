@@ -9,12 +9,12 @@ Pada bab ini akan dijelaskan landasan teori mengenai \textit{Node.js}, \textit{E
 
 \label{sec:Node.js}
 
-\textit{Node.js} adalah \textit{JavaScript runtime} yang dibangun berdasarkan \textit{V8} yang merupakan \textit{JavaScript engine} milik perusahaan \textit{Google} \cite{nodejs}. \textit{Node.js} memiliki model \textit{event-driven}, dan \textit{non-blocking I/O} yang membuat teknologi tersebut efisien dalam implementasinya. Teknologi ini menyediakan beberapa kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
+\textit{Node.js} adalah \textit{JavaScript runtime} yang dibangun berdasarkan \textit{V8} yang merupakan \textit{JavaScript engine} milik perusahaan \textit{Google} \cite{dahl:09:nodejs}. \textit{Node.js} memiliki model \textit{event-driven}, dan \textit{non-blocking I/O} yang membuat teknologi tersebut efisien dalam implementasinya. Teknologi ini menyediakan beberapa kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
 
 Beberapa kelas yang terdapat pada \textit{Node.js} adalah sebagai berikut: 
 
 \subsection{HTTP}
-\textit{Interfaces} \textit{HTTP} pada \textit{Node.js} digunakan untuk menangani \textit{request} dari protokol \textit{HTTP} yang secara \textit{native} sulit untuk digunakan. \textit{Interface} ini akan menangani protokol \textit{HTTP} dengan tidak melakukan \textit{buffer} pada seluruh \textit{request} atau \textit{responses}.
+\textit{Interfaces} \textit{HTTP} pada \textit{Node.js} digunakan untuk menangani \textit{request} dari protokol \textit{HTTP} yang secara \textit{native} sulit untuk digunakan \cite{dahl:09:nodejsdocs}. \textit{Interface} ini akan menangani protokol \textit{HTTP} dengan tidak melakukan \textit{buffer} pada seluruh \textit{request} atau \textit{responses}.
 
 %Berikut akan dijelaskan kelas-kelas yang ada pada \textit{interface} \textit{HTTP}.
 
@@ -192,7 +192,7 @@ Salah satu \textit{Method} yang dimiliki oleh \textit{HTTP} yaitu sebagai beriku
 \end{itemize}
 
 \subsection{Path}
-Modul \textit{Path} menyediakan fungsi untuk mengatur akses suatu \textit{file} dan direktori. Modul tersebut dapat diakses dengan cara sebagai berikut:
+Modul \textit{Path} menyediakan fungsi untuk mengatur akses suatu \textit{file} dan direktori \cite{dahl:09:nodejsdocs}. Modul tersebut dapat diakses dengan cara sebagai berikut:
 
 \begin{lstlisting}
 const path = require('path');
@@ -364,7 +364,7 @@ Salah satu method yang dimiliki oleh modul \textit{Path} adalah :
 %\end{enumerate}
 
 \subsection{Module}
-Pada aplikasi berbasis \textit{Node.js}, setiap \textit{file} yang terdapat dalam pembangunan aplikasi dianggap sebagai modul-modul yang terpisah satu sama lain. Variabel dan fungsi yang terdapat pada satu \textit{file}, atau modul, hanya dapat digunakan pada satu lingkup modul tersebut. Suatu modul tidak dapat menggunakan variabel atau fungsi yang terdapat pada modul lainnya. Oleh karena itu, apabila variabel dan fungsi yang terdapat pada satu modul dapat digunakan oleh modul yang lain, diperlukan cara tertentu. Cara tersebut dapat dilakukan seperti berikut:
+Pada aplikasi berbasis \textit{Node.js}, setiap \textit{file} yang terdapat dalam pembangunan aplikasi dianggap sebagai modul-modul yang terpisah satu sama lain \cite{dahl:09:nodejsdocs}. Variabel dan fungsi yang terdapat pada satu \textit{file}, atau modul, hanya dapat digunakan pada satu lingkup modul tersebut. Suatu modul tidak dapat menggunakan variabel atau fungsi yang terdapat pada modul lainnya. Oleh karena itu, apabila variabel dan fungsi yang terdapat pada satu modul dapat digunakan oleh modul yang lain, diperlukan cara tertentu. Cara tersebut dapat dilakukan seperti berikut:
 
 \begin{lstlisting}
 module.exports = functions
@@ -381,7 +381,7 @@ module.exports = object
 \section{Express.js}
 \label{sec:Express.js}
 
-\textit{Express.js} merupakan \textit{framework} aplikasi web untuk \textit{Node.js} \cite{expressjs}. \textit{Express.js} menyediakan fitur-fitur untuk web dan aplikasi \textit{mobile} agar dapat bertahan lama. \textit{Framework} ini digunakan untuk mengatur struktur direktori dalam pengembangan aplikasi permainan berbasis web. Untuk dapat menggunakan \textit{Express.js}, dapat dilakukan langkah sebagai berikut: 
+\textit{Express.js} merupakan \textit{framework} aplikasi web untuk \textit{Node.js} \cite{tj:10:expressjs}. \textit{Express.js} menyediakan fitur-fitur untuk web dan aplikasi \textit{mobile} agar dapat bertahan lama. \textit{Framework} ini digunakan untuk mengatur struktur direktori dalam pengembangan aplikasi permainan berbasis web. Untuk dapat menggunakan \textit{Express.js}, dapat dilakukan langkah sebagai berikut: 
 \begin{lstlisting}
 var express = require('express');
 var app = express();
@@ -438,7 +438,7 @@ Beberapa \textit{method} yang dimiliki oleh fungsi \textit{express()} adalah seb
 \end{itemize}
 
 \subsection{Application}
-Kelas ini akan menangani berbagai proses yang terjadi dalam aplikasi \textit{Express} seperti melakukan \textit{routing} terhadap \textit{HTTP requests}, mengatur \textit{middleware}, \textit{rendering} sebuah \textit{HTML views}, dan mendaftarkan \textit{template engine} tertentu. Untuk dapat melakukan fungsi-fungsi tersebut dapat dilakukan langkah berikut:
+Kelas ini akan menangani berbagai proses yang terjadi dalam aplikasi \textit{Express} seperti melakukan \textit{routing} terhadap \textit{HTTP requests}, mengatur \textit{middleware}, \textit{rendering} sebuah \textit{HTML views}, dan mendaftarkan \textit{template engine} tertentu \cite{tj:10:expressjsdocs}. Untuk dapat melakukan fungsi-fungsi tersebut dapat dilakukan langkah berikut:
 
 \begin{lstlisting}
 const express = require('express');
@@ -569,7 +569,7 @@ Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 %\end{itemize}
 
 \subsection{Response}
-Sebuah objek dari kelas \textit{Response} akan merepresentasikan respon \textit{HTTP} yang dikirim oleh \textit{Express} pada saat menerima \textit{HTTP request}.
+Sebuah objek dari kelas \textit{Response} akan merepresentasikan respon \textit{HTTP} yang dikirim oleh \textit{Express} pada saat menerima \textit{HTTP request} \cite{tj:10:expressjsdocs}.
 
 Salah satu properti yang dimiliki oleh kelas ini adalah:
 
@@ -703,10 +703,10 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} adalah:
 %------------- END OF EXPRESS.JS--------------- 
 
 
-\section{WebSockets}
-\label{sec:WebSockets} 
+%\section{WebSockets}
+%\label{sec:WebSockets} 
 
-\textit{WebSockets} merupakan \textit{Application Programming Interface (API)} yang memiliki kemampuan untuk membuka sesi komunikasi interaktif antara \textit{browser} pengguna dan \textit{server} \cite{websockets}. Dengan \textit{API} ini, pengguna dapat mengirim pesan ke \textit{server} dan menerima respon tanpa harus melakukan \textit{polling} pada \textit{server} terlebih dahulu. Protokol \textit{WebSockets} akan menjadi dasar dalam penggunaan teknologi \textit{Socket.io}.
+%\textit{WebSockets} merupakan \textit{Application Programming Interface (API)} yang memiliki kemampuan untuk membuka sesi komunikasi interaktif antara \textit{browser} pengguna dan \textit{server} \cite{websockets}. Dengan \textit{API} ini, pengguna dapat mengirim pesan ke \textit{server} dan menerima respon tanpa harus melakukan \textit{polling} pada \textit{server} terlebih dahulu. Protokol \textit{WebSockets} akan menjadi dasar dalam penggunaan teknologi \textit{Socket.io}.
 
 %Subbab-subbab berikut menjelaskan kelas-kelas yang ada pada \textit{WebSockets}.
 
@@ -909,7 +909,7 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} adalah:
 \section{Socket.io}
 \label{sec:Socket.io}
 
-\textit{Socket.io} merupakan salah satu teknologi yang memanfaatkan protokol \textit{WebSockets} \cite{socketio}. Teknologi ini memungkinkan sebuah aplikasi untuk melakukan komunikasi dua arah secara \textit{real-time}. \textit{Socket.io} dapat dijalankan di setiap \textit{platform, browser}, dan gawai.
+\textit{Socket.io} merupakan salah satu teknologi yang memanfaatkan protokol \textit{WebSockets} \cite{rauch:11:socketio}. Teknologi ini memungkinkan sebuah aplikasi untuk melakukan komunikasi dua arah secara \textit{real-time}. \textit{Socket.io} dapat dijalankan di setiap \textit{platform, browser}, dan gawai.
 
 Sebelum dapat menggunakan \textit{socket.io}, \textit{Node.js} harus sudah ter\textit{install} pada sistem komputer. Apabila hal tersebut sudah dilakukan, maka \textit{socket.io} dapat di\textit{install} dengan menggunakan \textit{command line tools} atau sejenisnya dengan melakukan langkah seperti berikut:
 \begin{lstlisting}
@@ -921,7 +921,7 @@ Dengan begitu, aplikasi yang dibuat sudah dapat mengakses fitur-fitur yang dimil
 \textit{Socket.io} dibagi menjadi dua \textit{API}, yaitu \textit{Server API} dan \textit{Client API}. Subbab-subbab berikut menjelaskan kelas-kelas yang dimiliki \textit{Socket.io}.
 
 \subsection{Server API}
-Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi dalam \textit{server}\cite{socketioserver}. Kelas-kelas tersebut adalah sebagai berikut:
+Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi dalam \textit{server}\cite{rauch:11:socketioserver}. Kelas-kelas tersebut adalah sebagai berikut:
 
 \begin{enumerate}
 	\item \textbf{Server} \\ 
@@ -1231,7 +1231,7 @@ adminNamespace.to('level1').emit('an event', { some: 'data' });
 \end{enumerate}
 
 \subsection{Client API}
-\textit{Client API} digunakan untuk menangani proses pengaturan koneksi yang terjadi pada bagian \textit{client}. Agar dapat menggunakan \textit{API} yang tersedia, \textit{client} harus menambahkan \textit{url} pada \textit{syntax script} didalam \textit{html} yang bersangkutan. Hal tersebut dapat dilakukan seperti berikut:
+\textit{Client API} digunakan untuk menangani proses pengaturan koneksi yang terjadi pada bagian \textit{client}\cite{rauch:11:socketioclient}. Agar dapat menggunakan \textit{API} yang tersedia, \textit{client} harus menambahkan \textit{url} pada \textit{syntax script} didalam \textit{html} yang bersangkutan. Hal tersebut dapat dilakukan seperti berikut:
 
 \begin{lstlisting}
 	<script src="/socket.io/socket.io.js"></script>
@@ -1777,3 +1777,89 @@ Beberapa \textit{method} yang dimiliki oleh \textit{interface} ini adalah sebaga
 	\item \textbf{CanvasRenderingContext2D.restore()} \\
 	\textit{Method} ini akan mengembalikan \textit{state} yang baru saja disimpan dengan mengeluarkannya dari tumpukan paling atas suatu \textit{stack}. Apabila \textit{stack} tersebut kosong, maka \textit{method} ini tidak melakukan apapun.
 \end{itemize}
+
+\section{jQuery}
+\label{sec:jQuery}
+
+jQuery merupakan pustaka JavaScript yang menyediakan fitur-fitur untuk mengatur berbagai elemen HTML ~\cite{jQuery}. Pustaka ini memiliki fitur-fitur seperti memanipulasi berkas HTML, menangani suatu \textit{event}, dan mengatur jalannya animasi. jQuery dapat menyediakan fitur-fitur untuk menangani berbagai hal tersebut yang berjalan di berbagai \textit{browser} yang berbeda.
+
+Subbab-subbab berikut akan menjelaskan beberapa \textit{method} yang dimiliki oleh jQuery.
+
+\subsection{.submit(handler)}
+\textit{Method} ini akan menyambungkan \textit{handler} suatu \textit{event} dengan \textit{"submit"} yang merupakan \textit{event} dari JavaScript, atau memancarkan \textit{event} tersebut kepada elemen tertentu ~\cite{jQueryAPI}. 
+
+\textbf{Parameter:}
+\begin{itemize}
+	\item \textbf{handler}, Fungsi yang akan dieksekusi setiap suatu \textit{event} dipancarkan.
+\end{itemize}
+
+Berikut merupakan contoh penggunaan dari \textit{method} ini:
+
+\begin{lstlisting}
+// HTML
+<form id="target">
+<input type="text" value="Hello there">
+<input type="submit" value="Go">
+</form>
+
+// JQUERY
+$( "#target" ).submit(function( event ) {
+alert( "Handler for .submit() called." );
+event.preventDefault();
+});
+\end{lstlisting}
+
+\subsection{.val()}
+\textit{Method} ini akan mendapatkan nilai dari elemen-elemen \textit{form} seperti \textbf{input}, \textit{select}, dan \textit{textarea} ~\cite{jQueryAPI}. \\
+\textbf{Kembalian:} \textit{String, Number, Array}.
+
+\subsection{.html()}
+\textit{Method} ini akan mendapatkan konten HTML dari elemen pertama yang ada didalam kumpulan elemen-elemen yang sesuai ~\cite{jQueryAPI}. \\
+\textbf{Kembalian:} \textit{String}
+
+\subsection{.preventDefault()}
+Apabila \textit{method} ini dieksekusi, maka aksi \textit{default} dari suatu \textit{event} tidak akan dieksekusi ~\cite{jQueryAPI}.
+
+\section{Content Template element}
+\label{sec:template}
+
+HTML Content Template (<template>) element adalah suatu mekanisme untuk menyimpan konten milik \textit{client} agar konten tersebut tidak dimuat pada saat memuat halaman, dimana konten tersebut dapat dipakai pada saat \textit{runtime} dengan menggunakan JavaScript. 
+
+Berikut merupakan contoh penggunaan dari elemen <template>:
+
+\begin{lstlisting}
+<html>
+<head>
+<title>Home</title>
+</head>
+<body>
+<p>Hello World!</p>
+
+<template id="stage">
+
+</template>
+
+<template id="home_page">
+<p>Hello from template element!</p>
+</template>
+
+</body>
+</html>
+\end{lstlisting}
+
+Apabila halaman HTML ini dimuat, maka yang akan ditunjukan dihalaman adalah teks "Hello World!". Seluruh elemen yang ada didalam elemen <template> tidak akan dimuat dihalaman. Agar seluruh isi dari elemen <template> dimuat, maka diperlukan JavaScript. Berikut merupakan contoh kode JavaScript untuk memuat elemen <template>.
+
+\begin{lstlisting}
+<script>
+// variable yang menyimpan elemen dari <template> stage
+var bg = $("#stage");
+
+// variable ini menyimpan seluruh isi dari template home_page
+var home = $("#home_page").html();
+
+// variable bg akan memuat template dari home_page
+bg.html(home);
+
+</script>
+\end{lstlisting}
+
