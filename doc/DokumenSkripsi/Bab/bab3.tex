@@ -193,43 +193,150 @@ Dari ketiga percobaan yang sudah dilakukan, ada beberapa hal yang dapat diperbai
 %
 %%tampilin gambar winning page sama console dan si terminalnya juga
 
-\section{Analisis Pengembangan Web}
-Pengembangan aplikasi permainan berbasis web ini dilakukan dengan cara studi pustaka dan eksperimen beberapa \textit{framework}. Penulis menemukan beberapa teknologi tambahan yang dibutuhkan untuk mengembangkan web ini. Teknologi tersebut akan dijelaskan sebagai berikut:
+
+
+\section{Analisis Alur Permainan Finger For Life}
+\label{alur}
+
+Web yang akan dikembangkan merupakan aplikasi permainan berbasis web.
+
+\subsection{Proses Permintaan Bergabung}
+
+\subsection{Proses Memilih Karakter}
+
+\subsection{Proses Memainkan Permainan}
+
+\subsection{Proses Pemutusan Koneksi}
+
+\section{Analisis \textit{Use Case}}
+
+\subsection{Diagram \textit{Use Case}}
+\label{usecase}
+
+Diagram \textit{use case} pada permainan berbasis web yang akan dibangun hanya mengandung satu aktor, yaitu pemain. Diagram \textit{use case} dapat dilihat pada Gambar \ref{fig:usecase_pemain}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{Gambar/usecase_pemain}
+	\caption{Diagram \textit{use case} pemain}
+	\label{fig:usecase_pemain}
+\end{figure}
+
+Berdasarkan hasil analisis pada subbab \ref{alur}, akan dibentuk empat \textit{use case} antara lain:
+
+\begin{itemize}
+	\item \textbf{Melakukan permintaan untuk bergabung}, pemain dapat bergabung dalam permainan dengan mengirimkan kode yang sudah disediakan \textit{browser PC} dengan menggunakan \textit{browser smartphone}.
+	
+	\item \textbf{Memilih karakter}, pemain dapat memilih karakter yang tersedia di \textit{browser smartphone}.
+	
+	\item \textbf{Memainkan permainan}, pemain dapat memainkan permainan dengan menekan tombol-tombol yang ada di \textit{smartphone}.
+	
+	\item \textbf{Memutus koneksi}, pemain dapat memutus koneksi untuk keluar dari permainan.
+\end{itemize}
+
+\subsection{Skenario \textit{Use Case}}
+
 \begin{enumerate}
-	\item \textbf{jQuery} \\
-	\textit{jQuery} merupakan pustaka \textit{JavaScript} yang menyediakan fitur-fitur untuk mengatur berbagai elemen \textit{html}. Pustaka ini memiliki fitur-fitur seperti memanipulasi berkas \textit{html}, menangani suatu \textit{event}, dan mengatur jalannya animasi. \textit{jQuery} dapat menyediakan fitur-fitur untuk menangani berbagai hal tersebut yang berjalan di berbagai \textit{browser} yang berbeda.
+	\item \textbf{Melakukan Permintaan Untuk Bergabung}
 	
-	Beberapa fitur \textit{jQuery} yang digunakan untuk pengembangan aplikasi permainan berbasis web ini adalah sebagai berikut:
 	\begin{itemize}
-		\item \textbf{.submit(handler)} \\
-		\textbf{Parameter:}
-		\begin{itemize}
-			\item \textbf{handler}, Fungsi yang akan dieksekusi setiap suatu \textit{event} dipancarkan.
-		\end{itemize}
-	
-		Penulis menggunakan \textit{method} ini untuk mengirimkan data yang telah diisi didalam \textit{<form>}, yang merupakan elemen dari \textit{html}, menuju halaman lain untuk diproses.
+		\item Nama: Melakukan permintaan untuk bergabung
 		
-		\item \textbf{.val()} \\
-		\textbf{Kembalian:} \textbf{String, Number, Array}. \\
-		\textit{Method} ini akan mendapatkan nilai dari elemen-elemen \textit{form} seperti \textbf{input}, \textbf{select}, dan \textbf{textarea}.
+		\item Aktor: Pemain
 		
-		Penulis menggunakan \textit{method} ini untuk mendapatkan nilai yang terdapat pada elemen \textit{input} yang akan dikirimkan melalui \textbf{.submit()}.
+		\item Deskripsi: Melakukan permintaan untuk bergabung dengan \textit{room} yang sudah tersedia
 		
-		\item \textbf{.html()} \\
-		\textbf{Kembalian:} \textbf{String} \\
-		\textit{Method} ini akan mendapatkan konten html dari elemen pertama yang ada didalam kumpulan elemen-elemen yang sesuai.
+		\item Kondisi awal: Pemain telah membuka halaman \textit{join} pada \textit{browser smartphone} dan mengisi \textit{form} dengan kode yang telah disediakan
 		
-		Penulis menggunakan \textit{method} ini untuk mendapatkan elemen \textit{html} dengan nama kelas tertentu.
+		\item Kondisi akhir: Pemain bergabung kedalam \textit{room}
 		
-		\item \textbf{event.preventDefault()} \\
-		\textbf{Kembalian:} - \\
-		Apabila \textit{method} ini dieksekusi, maka aksi \textit{default} milik suatu \textit{event} tidak akan dilakukan. Penulis menggunakan \textit{method} ini untuk mengatasi aksi \textit{default} dari suatu \textit{event} yang selalu melakukan \textit{reload} halaman web.
+		\item Skenario utama: 
+		
+
+\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
+	\hline
+	No & Aksi Aktor & Reaksi Sistem \\ \hline
+	1 & Pemain mengisi \textit{form} dengan kode \textit{room} dan menekan tombol \textit{send} & Sistem mendapatkan kode \textit{room} dan memproses kode tersebut, kemudian memberikan \textit{feedback} kepada pemain. \\ \hline
+\end{tabular}
+
+		\item Eksepsi: Pemain bergabung kedalam \textit{room}.
+
 		
 	\end{itemize}
 	
-	\item \textbf{<template>} \\ 
-	\textbf{<template>} merupakan bagian dari elemen \textbf{html}. Elemen ini adalah suatu mekanisme untuk menyimpan konten milik \textit{client} agar tidak dilakukan proses \textit{render} pada saat halaman dibuka, dimana konten tersebut dapat dipakai pada saat \textit{runtime} dengan menggunakan \textit{JavaScript}. Dalam satu berkas \textbf{html}, elemen ini dapat digunakan lebih dari satu kali.
+	\item \textbf{Memilih Karakter}
 	
-	Web ini menggunakan teknologi \textbf{socket.io}, dimana teknologi tersebut akan memberikan suatu identifikasi unik untuk para \textit{client} yang telah melakukan koneksi. Apabila web ini berganti halaman, maka koneksi socket.io akan terputus dan menyambung kembali, yang menyebabkan identifikasi unik milik \textit{client} berubah. Oleh karena itu, elemen \textbf{<template>} berfungsi untuk membantu pengembangan web ini dalam hal pergantian halaman. Dengan menggunakan elemen tersebut, maka hanya dibutuhkan satu berkas \textit{html} saja apabila akan mengganti halaman.
+	\begin{itemize}
+		\item Nama: Memilih karakter
+		
+		\item Aktor: Pemain
+		
+		\item Deskripsi: Memilih karakter yang ditampilkan pada \textit{browser smartphone}
+		
+		\item Kondisi awal: Pemain telah bergabung kedalam \textit{room}
+		
+		\item Kondisi akhir: Pemain menetapkan karakter yang akan dimainkan
+		
+		\item Skenario utama:
+		
+\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
+	\hline
+	No & Aksi Aktor & Reaksi Sistem \\ \hline
+	1 & Pemain memilih karakter yang tersedia dan menetapkan karakter tersebut. & Sistem menerima karakter yang dipilih dan menetapkan karakter yang dipilih oleh pemain \\ \hline
+\end{tabular}
+		
+	\end{itemize}
+	
+	\item \textbf{Memainkan Permainan}
+		
+		\begin{itemize}
+			\item Nama: Memainkan permainan
+			
+			\item Aktor: Pemain
+			
+			\item Deskripsi: Memainkan permainan dengan menekan tombol-tombol pada \textit{browser smartphone} untuk menggerakan karakter
+			
+			\item Kondisi awal: Pemain telah menetapkan karakter permainan
+			
+			\item Kondisi akhir: Pemain memainkan permainan dengan menggerakan karakter
+			
+			\item Skenario utama:
+
+\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
+	\hline
+	No & Aksi Aktor & Reaksi Sistem \\ \hline
+	1 & Pemain menekan tombol telapak kaki berulang-ulang & Sistem menangkap \textit{event} menekan tombol telapak kaki dan menggerakan karakter milik pemain \\ \hline
+\end{tabular}	
+			
+		\end{itemize}
+	
+	\item \textbf{Memutus Koneksi}
+	
+		\begin{itemize}
+			\item Nama: Memutus koneksi
+			
+			\item Aktor: Pemain
+			
+			\item Deskripsi: Memutus koneksi dengan keluar dari \textit{browser} atau menekan tombol \textit{exit} saat telah selesai bermain
+			
+			\item Kondisi awal: Pemain telah selesai bermain
+			
+			\item Kondisi akhir: Pemain keluar dari permainan dan koneksi terputus
+			
+			\item Skenario utama:
+			
+			\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
+				\hline
+				No & Aksi Aktor & Reaksi Sistem \\ \hline
+				1 & Pemain menekan tombol \textit{exit} pada halaman terakhir atau menutup \textit{browser} & Sistem akan menangkap \textit{event} tombol \textit{exit} ditekan dan memutus koneksi pemain \\ \hline
+			\end{tabular}
+		\end{itemize}
 \end{enumerate}
 
+
+\section{Analisis Aristektur Finger For Life}
+Arsitektur Finger For Life dapat dilihat pada Gambar ... . Jumlah \textit{Client} dalam permainan ini adalah tiga. \textit{Client} tersebut antara lain \textit{host}, \textit{player 1}, dan \textit{player 2}. Apabila \textit{player 1} akan mengirimkan data untuk diproses oleh \textit{host}, maka data tersebut akan dikirimkan terlebih dahulu kepada \textit{server}, kemudian dilanjutkan kepada \textit{host}.
+
+Komunikasi antara \textit{client} dengan \textit{client} tidak dapat dilakukan secara langsung. Komunikasi tersebut harus melewati \textit{server} terlebih dahulu. 
+
+Finger For Life dibangun diatas Node.js. Seluruh berkas serta folder yang dibutuhkan untuk membangun aplikasi permainan ini diatur dengan menggunakan Express.js. Proses pengiriman dan penerimaan data secara \textit{realtime} dilakukan menggunakan Socket.io. Dalam permainan ini, animasi akan dilakukan dengan menggunakan Canvas API.
