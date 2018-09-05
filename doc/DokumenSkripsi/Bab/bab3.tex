@@ -198,15 +198,76 @@ Dari ketiga percobaan yang sudah dilakukan, ada beberapa hal yang dapat diperbai
 \section{Analisis Alur Permainan Finger For Life}
 \label{alur}
 
-Web yang akan dikembangkan merupakan aplikasi permainan berbasis web.
+Web yang akan dikembangkan merupakan aplikasi permainan berbasis web yang bernama Finger For Life. Jenis permainan ini adalah kompetisi balap lari yang dilakukan oleh dua pemain. Tujuan dari permainan ini adalah mencapai garis akhir lintasan lari lebih dulu untuk menjadi pemenang. Untuk dapat memainkan permainan ini, para pemain harus menyiapkan beberapa hal seperti berikut:
 
-\subsection{Proses Permintaan Bergabung}
+\begin{itemize}
+	\item \textbf{Satu Komputer \textit{PC}}.
+	\item \textbf{Dua \textit{smartphone}}.
+	\item \textbf{Jaringan Internet}.
+\end{itemize}
 
-\subsection{Proses Memilih Karakter}
+Para pemain harus menyediakan satu perangkat komputer \textit{PC}, dimana \textit{PC} tersebut akan berfungsi sebagai \textit{console}, dan dua \textit{smartphone} yang akan berfungsi sebagai \textit{controller}. \textit{PC} akan memiliki peran sebagai \textit{host} yang menciptakan suatu \textit{room}, dimana \textit{room} tersebut merupakan ruang permainan yang dapat dimainkan. Ketiga perangkat tersebut akan membutuhkan jaringan internet untuk dapat mengakses alamat web yang harus dituju. Setelah ketiga perangkat tersebut tersedia, maka para pemain dapat membuka \textit{browser} untuk mengakses alamat web permainan Finger For Life. Agar para pemain dapat mulai memainkan permainan ini, ada beberapa tahap yang harus dilakukan. Beberapa tahap yang dilakukan akan dibagi menjadi dua, yaitu yang terjadi pada bagian \textit{PC}, dan pada \textit{smartphone}. Tahap-tahap tersebut akan dijelaskan sebagai berikut:
 
-\subsection{Proses Memainkan Permainan}
+\begin{enumerate}
+	\item \textbf{Permintaan Bergabung} \\
+	
+	\textbf{PC} \\
+	Saat \textit{client} mengakses alamat web Finger For Life pada \textit{PC}, \textit{client} akan ditujukan kehalaman permintaan bergabung. Pada tahap ini, halaman pada \textit{PC} akan menunjukan kode yang harus dikirimkan oleh para pemain. Kode tersebut merupakan \textit{room} yang akan menyimpan tiga \textit{client} pada saat permainan dimulai. Ketiga \textit{client} tersebut adalah \textit{host}, pemain pertama, dan pemain kedua. Para pemain harus mengirimkan kode tersebut kepada \textit{host}, sehingga \textit{smartphone} pemain dapat tersambung dengan \textit{PC}. Kode yang tersedia berfungsi untuk proses verifikasi, apakah \textit{client} dapat bergabung kedalam \textit{room} atau tidak. \\
+	
+	\textbf{Smartphone} \\
+	Pada halaman \textit{smartphone}, \textit{client} harus mengisi form yang tersedia dengan kode \textit{room} dari \textit{PC}. Setelah kode dikirimkan, maka \textit{client} akan segera mendapatkan pesan yang menandakan apakah sudah berhasil bergabung kedalam \textit{room} atau tidak. Apabila pemain yang bergabung masih berjumlah satu, maka \textit{room} masih menunggu untuk pemain lainnya bergabung. \textit{Room} akan ditutup apabila pemain yang bergabung sudah berjumlah dua. Setelah tahap ini selesai, maka akan ditujukan ke halaman lain untuk tahap berikutnya.
+	
+	\item \textbf{Memilih Karakter} \\
+	
+	\textbf{PC} \\
+	Para pemain yang telah bergabung akan segera ditujukan kehalaman memilih karakter. Pada halaman ini, akan muncul karakter yang telah dipilih oleh para pemain. Pada tahap ini, kedua pemain harus menetapkan karakter yang merepresentasikan para pemain dalam permainan. Apabila kedua pemain belum menetapkan karakter, maka tidak dapat menuju ke tahap selanjutnya.
+	
+	\textbf{Smartphone}
+	Halaman ini akan menunjukan daftar karakter yang dapat dipilih oleh para pemain. Karakter yang dipilih akan ditunjukan dilayar \textit{PC}. Apabila pemain akan menetapkan karakter yang dipilih, maka pemain dapat menekan tombol \textit{choose}. Setelah kedua pemain menetapkan karakter masing-masing, maka akan dituju kehalaman selanjutnya.
+	
+	\item \textbf{Memainkan Permainan}
+	
+	\textbf{PC} \\
+	Permainan sudah dapat dimainkan pada tahap ini. Sebelum permainan dimulai, halaman \textit{PC} akan menampilkan \textit{countdown} selama tiga detik. Setelah waktu tiga detik selesai, maka akan ditampilkan lintasan lari yang harus dilalui para pemain, dan dua karakter yang sudah ditetapkan oleh kedua pemain. Karakter tersebut akan berlari melalui lintasan untuk mencapai garis akhir. Pemain yang lebih dulu mencapai garis akhir akan menjadi pemenang.
+	
+	\textbf{Smartphone} \\
+	Pada saat \textit{countdown} dilakukan halaman \textit{PC}, halaman \textit{smartphone} akan menampilkan instruksi untuk memainkan permainan ini. Instruksi tersebut menunjukan untuk mengubah mode tampilan \textit{smartphone} dari \textit{portrait} menjadi \textit{landscape}. Setelah \textit{coundown} selesai, maka halaman akan menampilkan dua telapak kaki yang berfungsi sebagai tombol. Untuk dapat menggerakan karakter, pemain harus menekan kedua tombol tersebut secara berulang. Apabila sudah ada pemain yang mencapai garis akhir, maka halaman akan dituju kehalaman selanjutnya.
+	
+	\item \textbf{Mengakhiri Permainan} \\
+	
+	\textbf{PC} \\
+	Halaman ini akan menampilkan pemenang yang berhasil mencapai garis akhir lebih dulu. Halaman ini menampilkan podium yang menempatkan para pemenang sesuai posisi nomor urut masing-masing. Pada tahap ini, karakter milik pemenang akan ditampilkan di podium nomor satu, dan pemain selanjutnya dinomor dua. Untuk mengakhiri permainan, pemain harus menekan tombol \textit{exit} yang terdapat dihalaman ini.
+	
+	\textbf{Smartphone} \\
+	Pada halaman ini akan ditampilkan teks yang menunjukan posisi pemenang. Apabila pemain lebih dulu mencapai garis akhir, maka akan ditampilkan teks yang menunjukan posisi pertama. Setelah tombol \textit{exit} dihalaman \textit{PC} ditekan, maka permainan telah berakhir, dan halaman pada \textit{PC} dan \textit{smartphone} akan menuju kehalaman awal.
+	
+\end{enumerate}
 
-\subsection{Proses Pemutusan Koneksi}
+\section{Analisis Pengembangan Web}
+\label{pengembangan}
+
+Pada subbab ini akan dijelaskan beberapa pustaka yang digunakan dalam proses pengembangan aplikasi permainan berbasis web ini.
+
+\begin{enumerate}
+	\item \textbf{Node.js}
+	\begin{enumerate}
+		\item \textbf{HTTP}
+		
+		\begin{itemize}
+			\item \textbf{http.createServer([options])}
+		\end{itemize}
+	\end{enumerate}
+	
+	\item \textbf{Express.js}
+	
+	\item \textbf{Socket.io}
+	
+	\item \textbf{Canvas API}
+	
+	\item \textbf{jQuery}
+	
+	\item \textbf{The Content Template element}
+\end{enumerate}
 
 \section{Analisis \textit{Use Case}}
 
