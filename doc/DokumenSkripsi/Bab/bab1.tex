@@ -5,17 +5,19 @@
 \section{Latar Belakang}
 \label{sec:label}
 
-\textit{WebSockets} adalah teknologi yang memungkinkan \textit{web browser} pengguna dan \textit{web server} membuka sesi komunikasi interaktif satu sama lain. Teknologi \textit{WebSockets}  didesain untuk diimplementasikan pada \textit{web browser} dan \textit{web server}, tetapi dapat juga digunakan oleh setiap aplikasi \textit{client} maupun \textit{server}. \textit{WebSockets} memiliki standar yang menyediakan cara agar \textit{web server} dapat mengirim konten ke \textit{web browser} tanpa diminta oleh \textit{client}, dan memungkinkan agar pesan dikirimkan berulang-ulang dengan tetap menjaga koneksi yang terbuka. Oleh karena itu, protokol \textit{WebSockets} memungkinkan interaksi antara \textit{web browser} dan \textit{web server} dengan \textit{overhead} yang rendah, dan juga memfasilitasi transfer data \textit{realtime} dari \textit{server} maupun menuju \textit{server}.
+%\textit{WebSockets} adalah teknologi yang memungkinkan \textit{web browser} pengguna dan \textit{web server} membuka sesi komunikasi interaktif satu sama lain. Teknologi \textit{WebSockets}  didesain untuk diimplementasikan pada \textit{web browser} dan \textit{web server}, tetapi dapat juga digunakan oleh setiap aplikasi \textit{client} maupun \textit{server}. \textit{WebSockets} memiliki standar yang menyediakan cara agar \textit{web server} dapat mengirim konten ke \textit{web browser} tanpa diminta oleh \textit{client}, dan memungkinkan agar pesan dikirimkan berulang-ulang dengan tetap menjaga koneksi yang terbuka. Oleh karena itu, protokol \textit{WebSockets} memungkinkan interaksi antara \textit{web browser} dan \textit{web server} dengan \textit{overhead} yang rendah, dan juga memfasilitasi transfer data \textit{realtime} dari \textit{server} maupun menuju \textit{server}.
 
-Salah satu teknologi yang memanfaatkan protokol \textit{WebSockets} adalah \textit{Socket.io}. Teknologi ini memungkinkan untuk melakukan komunikasi secara \textit{realtime}, dan dua arah antara \textit{client} dan \textit{server}. Socket.io memiliki dua bagian: \textit{client-side library} yang berjalan didalam \textit{web browser}, dan \textit{server-side library} yang berjalan pada bagian \textit{server}. \textit{Socket.io} memiliki fitur-fitur yang beragam, seperti melakukan broadcast ke beberapa \textit{sockets}, dan menyimpan data yang berhubungan dengan masing-masing \textit{client}. Teknologi ini sangat berguna untuk membantu membangun sebuah aplikasi yang membutuhkan koneksi \textit{realtime} seperti dalam aplikasi \textit{chatting} maupun \textit{game}.
+%Salah satu teknologi yang memanfaatkan protokol \textit{WebSockets} adalah \textit{Socket.io}. Teknologi ini 
 
-Untuk memanfaatkan teknologi \textit{Socket.io} dalam membangun aplikasi permainan, akan dibutuhkan beberapa teknologi yang dapat membantu pembangunan aplikasinya. Salah satu teknologi tersebut yaitu \textit{Canvas API}. Teknologi ini merupakan bagian dari \textit{HTML5 element} yang dapat digunakan untuk menggambar suatu grafis melalui \textit{JavaScript} secara \textit{on the fly}. \textit{Canvas API} dapat juga digunakan untuk membuat komposisi foto dan membuat animasi. Oleh karena itu, fungsi-fungsi yang ada pada \textit{Canvas API} akan membantu pembangunan aplikasi permainan terutama pada bagian pengembangan grafis pada aplikasinya.
+Socket.io adalah teknologi yang memungkinkan untuk melakukan komunikasi secara \textit{realtime}, dan dua arah antara \textit{client} dan \textit{server}. Socket.io memiliki dua bagian: \textit{client-side library} yang berjalan didalam \textit{web browser}, dan \textit{server-side library} yang berjalan pada bagian \textit{server}. Socket.io memiliki fitur-fitur yang beragam, seperti melakukan broadcast ke beberapa \textit{sockets}, dan menyimpan data yang berhubungan dengan masing-masing \textit{client}. Teknologi ini sangat berguna untuk membantu membangun sebuah aplikasi yang membutuhkan koneksi \textit{realtime} seperti dalam aplikasi \textit{chatting} maupun \textit{game}.
 
-Teknologi lain yang dapat membantu membangun aplikasi permainan dalam memanfaatkan teknologi \textit{Socket.io} adalah \textit{Node.js}. Teknologi ini merupakan sebuah \textit{platform} yang didesain untuk mengembangkan aplikasi berbasis web pada bagian \textit{web server}. \textit{Node.js} ditulis dalam sintaks bahasa pemrograman \textit{JavaScript} dan menggunakan \textit{V8} yang merupakan \textit{engine JavaScript} milik perusahaan \textit{Google} untuk mengeksekusi \textit{JavaScript} pada \textit{web server}. \textit{Node.js} memiliki sifat \textit{non-blocking}, yang berarti \textit{Node.js} tidak akan menunggu untuk mengerjakan \textit{request} selanjutnya. Fitur-fitur yang dimiliki oleh \textit{Node.js} akan sangat membantu untuk membangun aplikasi permainan yang membutuhkan koneksi \textit{real-time}.
+Untuk memanfaatkan teknologi Socket.io dalam membangun aplikasi permainan, akan dibutuhkan beberapa teknologi yang dapat membantu pembangunan aplikasinya. Salah satu teknologi tersebut yaitu \textit{Canvas API}. Teknologi ini merupakan bagian dari \textit{HTML5 element} yang dapat digunakan untuk menggambar suatu grafis melalui \textit{JavaScript} secara \textit{on the fly}. \textit{Canvas API} dapat juga digunakan untuk membuat komposisi foto dan membuat animasi. Oleh karena itu, fungsi-fungsi yang ada pada \textit{Canvas API} akan membantu pembangunan aplikasi permainan terutama pada bagian pengembangan grafis pada aplikasinya.
 
-Salah satu teknologi yang akan membantu dalam memanfaatkan \textit{Node.js} adalah \textit{Express.js}. Teknologi ini menyediakan kumpulan fitur untuk mengatur penyimpanan data lokal dalam membangun aplikasi web maupun \textit{mobile}. \textit{Express.js} hanya dapat digunakan untuk membangun aplikasi apabila aplikasi tersebut berjalan berdasarkan \textit{Node.js}. Oleh karena itu, fitur-fitur yang dimiliki oleh \textit{Express.js} akan membantu dalam pembangunan aplikasi berbasis \textit{Node.js}.
+Teknologi lain yang dapat membantu membangun aplikasi permainan dalam memanfaatkan teknologi Socket.io adalah Node.js. Teknologi ini merupakan sebuah \textit{platform} yang didesain untuk mengembangkan aplikasi berbasis web pada bagian \textit{web server}. Node.js ditulis dalam sintaks bahasa pemrograman \textit{JavaScript} dan menggunakan \textit{V8} yang merupakan \textit{engine JavaScript} milik perusahaan \textit{Google} untuk mengeksekusi \textit{JavaScript} pada \textit{web server}. Node.js memiliki sifat \textit{non-blocking}, yang berarti Node.js tidak akan menunggu untuk mengerjakan \textit{request} selanjutnya. Fitur-fitur yang dimiliki oleh Node.js akan sangat membantu untuk membangun aplikasi permainan yang membutuhkan koneksi \textit{real-time}.
 
-Pada skripsi ini, akan dibuat sebuah aplikasi permainan yang memanfaatkan protokol \textit{WebSockets}, dimana dalam penggunaan protokol tersebut akan dibantu dengan teknologi \textit{Socket.io}. Selain itu, aplikasi yang dibuat akan memanfaatkan \textit{personal computer (PC)} dan \textit{smartphone} untuk pengembangan aplikasinya. Para pemain akan mengkoneksikan \textit{smartphone} pada suatu \textit{PC} yang akan berfungsi sebagai \textit{console}, dan \textit{smartphone} tersebut akan berfungsi sebagai \textit{controller} untuk memainkan permainannya. Oleh karena itu, protokol \textit{WebSockets} akan digunakan sebagai koneksi antara \textit{smartphone} dan \textit{PC} dalam aplikasi permainan yang akan dibangun. Aplikasi permainan akan menggunakan teknologi berbasis web, sehingga untuk memainkannya, \textit{client} harus mengakses melalui \textit{web browser}.
+Salah satu teknologi yang akan membantu dalam memanfaatkan Node.js adalah Express.js. Teknologi ini menyediakan kumpulan fitur untuk mengatur penyimpanan data lokal dalam membangun aplikasi web maupun \textit{mobile}. Express.js hanya dapat digunakan untuk membangun aplikasi apabila aplikasi tersebut berjalan berdasarkan \textit{Node.js}. Oleh karena itu, fitur-fitur yang dimiliki oleh Express.js akan membantu dalam pembangunan aplikasi berbasis Node.js
+
+Pada skripsi ini, akan dibuat sebuah aplikasi permainan yang memanfaatkan Socket.io. Selain itu, aplikasi yang dibuat akan memanfaatkan \textit{personal computer (PC)} dan \textit{smartphone} untuk pengembangan aplikasinya. Para pemain akan mengkoneksikan \textit{smartphone} pada suatu \textit{PC} yang akan berfungsi sebagai \textit{console}, dan \textit{smartphone} tersebut akan berfungsi sebagai \textit{controller} untuk memainkan permainannya. Oleh karena itu, Socket.io akan digunakan sebagai koneksi antara \textit{smartphone} dan \textit{PC} dalam aplikasi permainan yang akan dibangun. Aplikasi permainan akan menggunakan teknologi berbasis web, sehingga untuk memainkannya, \textit{client} harus mengakses melalui \textit{web browser}.
 
 
 %Hampir setiap \textit{game} menggunakan animasi yang ditujukan untuk memperjelas dan memperindah jalannya permainan tersebut. Pada skripsi ini, animasi akan digunakan dalam pembangungan aplikasinya. Oleh karena itu, akan digunakan teknologi bernama \textit{HTML5Canvas}. Teknologi ini merupakan bagian dari \textit{HTML element} yang dapat digunakan untuk menggambar suatu grafis melalui \textit{JavaScript} secara \textit{on the fly}. \textit{HTML5Canvas} dapat juga digunakan untuk membuat komposisi foto, membuat animasi, dan membuat \textit{real-time video processing} atau \textit{rendering}. Dengan fungsi-fungsi tersebut, skripsi ini akan memanfaatkan \textit{HTML5Canvas} dalam pembangunan aplikasi untuk membuat animasi.
@@ -27,16 +29,16 @@ Pada skripsi ini, akan dibuat sebuah aplikasi permainan yang memanfaatkan protok
 \label{sec:rumusan}
 
 \begin{enumerate}
-	\item Bagaimana membangun aplikasi permainan berbasis web dengan memanfaatkan protokol \textit{WebSockets} untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web ?
-	\item Berapa \textit{latency} yang dihasilkan berdasarkan penggunaan protokol \textit{WebSockets} ? 
+	\item Bagaimana membangun aplikasi permainan berbasis web dengan memanfaatkan Socket.io untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web ?
+	\item Berapa \textit{latency} yang dihasilkan berdasarkan penggunaan Socket.io ? 
 \end{enumerate}
 
 
 \section{Tujuan}
 \label{sec:tujuan}
 \begin{enumerate}
-	\item Mengetahui cara membangun aplikasi permainan berbasis web dengan memanfaatkan protokol \textit{WebSockets} untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web.
-	\item Mengetahui jumlah \textit{latency} yang dihasilkan berdasarkan pemanfaatan protokol \textit{WebSockets}.
+	\item Mengetahui cara membangun aplikasi permainan berbasis web dengan memanfaatkan Socket.io untuk penggunaan \textit{smartphone} sebagai pengendali permainan berbasis web.
+	\item Mengetahui jumlah \textit{latency} yang dihasilkan berdasarkan pemanfaatan Socket.io.
 \end{enumerate}
 
 
@@ -57,11 +59,13 @@ Metodologi yang dilakukan dalam pengerjaan skripsi ini adalah sebagai berikut:
 \begin{enumerate}
 	\item Studi literatur mengenai :
 		\begin{itemize}
-			\item \textit{WebSockets} yang akan digunakan untuk koneksi antara \textit{smartphone} dan \textit{PC}.
+%			\item \textit{WebSockets} yang akan digunakan untuk koneksi antara \textit{smartphone} dan \textit{PC}.
 			\item \textit{Socket.io} sebagai teknologi yang akan menggunakan \textit{WebSockets} dalam pembangunan aplikasi.
 			\item \textit{Canvas API} yang akan digunakan untuk antarmuka permainan.
 			\item \textit{Node.js} sebagai \textit{web server} dalam pembangunan aplikasi. 	
 			\item \textit{Express.js} sebagai \textit{Node.js framework} yang akan digunakan untuk mengatur penyimpanan data.
+			\item \textit{jQuery} yang akan digunakan dalam pengaturan elemen HTML.
+			\item \textit{The Content Template element} yang akan digunakan dalam menampilkan halaman-halaman HTML.
 		\end{itemize}
 	\item Menganalisis aplikasi sejenis.
 	\item Merancang antarmuka permainan pada \textit{PC} dan \textit{smartphone}. Antarmuka pada \textit{PC} akan berbeda dengan yang ada di \textit{smartphone}, karena \textit{smartphone} akan bekerja sebagai \textit{controller} dan \textit{PC} akan bekerja sebagai \textit{console}.
@@ -80,7 +84,7 @@ Setiap bab dalam skripsi ini memiliki sistematika penulisan yang dijelaskan keda
 	Membahas mengenai gambaran umum penelitian ini. Berisi tentang latar belakang, rumusan masalah, tujuan, batasan masalah, metode penelitian, dan sistematika penulisan.
 	
 	\item Bab 2 : Dasar Teori \\
-	Membahas mengenai teori-teori yang mendukung berjalannya penelitian ini. Berisi tentang \textit{WebSockets}, \textit{Socket.io}, \textit{Node.js},  \textit{Express.js}, dan \textit{Canvas API}.
+	Membahas mengenai teori-teori yang mendukung berjalannya penelitian ini. Berisi tentang \textit{Socket.io}, \textit{Node.js},  \textit{Express.js}, \textit{Canvas API}, \textit{jQuery}, dan \textit{The Content Template element}.
 	
 	\item Bab 3 : Analisis \\
 	Membahas mengenai analisa masalah.

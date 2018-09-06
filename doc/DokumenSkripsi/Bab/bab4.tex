@@ -5,13 +5,13 @@ Pada bab ini akan dijelaskan mengenai perancangan aplikasi yang akan dibangun me
 
 \section{Perancangan Sequence Diagram}
 
-Pada \textit{sequence} diagram akan dibahas mengenai jalannya koneksi \textit{socket.io} dari awal koneksi mulai tersambung hingga koneksi terputus.
+Pada \textit{sequence} diagram akan dibahas mengenai jalannya koneksi \textit{socket.io} dari awal koneksi mulai tersambung hingga koneksi terputus. \textit{Sequence} diagram meliputi \textit{sequence} Join Room, \textit{sequence} Choose Character, \textit{sequence} Game Begin, \textit{sequence} Winning Game.
 
-\subsection{Sequence Diagram Join Room}
+\subsection{\textit{Sequence} Join Room}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.2]{Gambar/JoinRoom}
+	\includegraphics[scale=0.3]{Gambar/JoinRoom}
 	\caption{Proses melakukan koneksi ke \textit{socket.io} dan bergabung kedalam \textit{room}.}
 	\label{fig:1_JoinRoom}
 \end{figure}
@@ -39,7 +39,7 @@ Apabila kedua hal diatas tidak terpenuhi, maka pemain tidak dapat terkoneksi ke 
 
 Setelah \textit{room} berisi tiga \textit{client}, maka \textit{host} akan mengirimkan \textit{event} \textbf{roomFull(room)} kepada \textit{server}. \textit{Event} tersebut menandakan bahwa \textit{room} sudah tidak dapat menerima \textit{client} yang akan bergabung. Setelah \textit{event} tersebut diterima oleh \textit{server}, maka \textit{event} \textbf{toCharPage()} akan dipancarkan oleh \textit{server} kepada seluruh koneksi yang ada didalam \textit{room} tersebut. \textit{Event} ini berfungsi untuk mengganti halaman saat ini ke halaman selanjutnya.
 
-\subsection{Sequence Diagram Choose Character}
+\subsection{\textit{Sequence} Choose Character}
 
 \begin{figure}[H]
 	\centering
@@ -59,7 +59,7 @@ Apabila pemain akan menetapkan karakter yang telah ditampilkan dihalaman \textit
 
 Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karakter yang akan dimainkan. Apabila kedua pemain telah menetapkan karakter yang akan dimainkan, \textit{host} akan memancarkan \textit{event} \textbf{charIsReady(playerData)}.Data yang dikirimkan merupakan suatu \textit{object array} yang berisi data para pemain dan data karakter yang telah dipilih.\textit{Event} tersebut berfungsi untuk memberi informasi kepada \textit{server} untuk pindah kehalaman selanjutnya.
 
-\subsection{Sequence Diagaram Game Begin}
+\subsection{\textit{Sequence} Game Begin}
 
 \begin{figure}[H]
 	\centering
@@ -81,7 +81,7 @@ Apabila ada pemain yang berhasil menyentuh garis akhir, maka \textit{host} akan 
 \end{itemize}
 \textit{Server} akan menangkap \textit{event} tersebut dan meneruskannya dengan memancarkan \textit{event} \textbf{toWinnerPage(playerWin, playerCharArr)} ke setiap \textit{client} pada \textit{room} tertentu. \textit{Event} tersebut berfungsi untuk berpindah ke halaman selanjutnya.
 
-\subsection{Sequence Diagram Winning Page}
+\subsection{\textit{Sequence} Winning Game}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.3]{Gambar/WinningPage}
@@ -250,11 +250,116 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 		Folder ini menyimpan berkas yang membantu proses berjalannya koneksi untuk \textit{server}. Isi dari folder ini adalah sebagai berikut:
 		\begin{itemize}
 			\item Berkas \textbf{users.js}  \\
-			Berkas ini berfungsi untuk menyimpan seluruh \textit{client} yang terkoneksi pada \textit{socket.io server}. Seluruh data pengguna yang akan memainkan permainan web akan disimpan dan diatur oleh berkas ini.
+			Berkas ini merupakan suatu kelas yang berfungsi untuk menyimpan seluruh \textit{client} yang terkoneksi pada \textit{socket.io server}. Seluruh data pengguna yang akan memainkan permainan web akan disimpan dan diatur oleh berkas ini.
+			
+			\textit{Method-method} yang dimiliki oleh berkas ini akan dijelaskan sebagai berikut:
+			\begin{itemize}
+				\item \textbf{addUser(id, room)} \\
+				\textit{Method} ini akan menambahkan pengguna kedalam \textit{array}. \\
+				\textbf{Parameter:}
+				\begin{itemize}
+					\item \textbf{id}, identifikasi unik Socket.io milik pengguna.
+					\item \textbf{room}, kode \textit{room} milik pengguna.
+				\end{itemize}
+				\textbf{Kembalian:} Objek Users
+				
+				\item \textbf{IsRoomExist(room)} \\
+				\textit{Method} ini akan memeriksa apakah parameter \textit{room} cocok dengan \textit{room} yang ada didalam \textit{array}. \\
+				\textbf{Parameter:}
+				\begin{itemize}
+					\item \textbf{room}, kode \textit{room} yang akan dicek.
+				\end{itemize}
+				\item \textbf{Kembalian:} \textit{Integer}
+				
+				\item \textbf{getUser(id)} \\
+				\textit{Method} ini akan mendapatkan pengguna dengan parameter \textit{id} yang cocok dengan \textit{id} didalam \textit{array}. \\
+				\textbf{Parameter:}
+				\begin{itemize}
+					\item \textbf{id}, identifikasi unik Socket.io milik pengguna.
+				\end{itemize}
+				\textbf{Kembalian:} Objek Users
+				
+				\item \textbf{removeUser(id)} \\ 
+				\textit{Method} ini akan menghapus pengguna dengan \textit{id} tertentu dari dalam \textit{array}. \\
+				\textbf{Parameter:}
+				\begin{itemize}
+					\item \textbf{id}, identifikasi unik Socket.io milik pengguna.
+				\end{itemize}
+				\textbf{Kembalian:} Objek Users
+				
+				\item \textbf{getUserList(room)} \\
+				\textit{Method} ini akan mengembalikan seluruh pengguna yang berada didalam \textit{room} yang cocok dengan parameter \textit{room}. \\
+				\textbf{Parameter:}
+				\begin{itemize}
+					\item \textbf{room}, kode \textit{room} milik pengguna.
+				\end{itemize}
+				\textbf{Kembalian:} \textit{Array} objek Users
+			\end{itemize}
+			
 		\end{itemize}
 	
 		\item Berkas \textbf{www} \\
 		Berkas ini berfungsi sebagai \textit{server}. Seluruh koneksi yang tersambung dan terputus akan diatur oleh berkas ini. Komunikasi antara \textit{client} pun akan diatur oleh \textit{server}.
+		
+		Properti yang dimiliki oleh berkas ini akan dijelaskan sebagai berikut:
+		\begin{itemize}
+			\item \textbf{app}, modul app
+			\item \textbf{debug}, modul debug
+			\item \textbf{http}, modul http
+			\item \textbf{socketIO}, modul Socket.io
+			\item \textbf{{Users}}, modul Users
+			\item \textbf{port}, nilai \textit{port} yang akan dituju oleh \textit{server}
+			\item \textbf{server}, objek http \textit{server}
+			\item \textbf{io}, \textit{server} Socket.io 
+		\end{itemize}
+	
+		\textit{Method-method} yang dimiliki oleh berkas ini akan dijelaskan sebagai berikut:
+		\begin{itemize}
+			\item \textbf{normalizePort(val)} \\
+			\textit{Method} ini berfungsi untuk mengubah bentuk parameter \textit{val} menjadi \textit{String, Integer}, atau \textit{false}. //
+			\textbf{Parameter:}
+			\begin{itemize}
+				\item \textbf{val}, parameter \textit{port}
+			\end{itemize}
+			\textbf{Kembalian:} Objek \textit{String, Integer,} atau \textit{Boolean}. 
+			
+		\end{itemize}
+	
+		\textit{Event} Socket.io yang dimiliki berkas ini akan dijelaskan sebagai berikut:
+		\begin{itemize}
+			\item \textbf{io.on('connection', (socket) => {...})} \\
+			Berfungsi untuk menangani suatu koneksi Socket.io yang baru tersambung.
+			
+			\item \textbf{socket.on('hostJoinRoom', (msg) => {...})} \\ 
+			Berfungsi untuk menangkap \textit{event} hostJoinRoom yang dipancarkan oleh \textit{host} pada saat \textit{host} akan masuk kedalam room.
+			
+			\item \textbf{socket.on('sendingTheWinner', (winner) => {...})} \\
+			Berfungsi untuk menangkap \textit{event} sendingTheWinner yang dipancarkan oleh \textit{client} setelah ada pemenang permainan.
+			
+			\item \textbf{socket.on('goBackHome', (msg) => {...})} \\
+			Berfungsi untuk menangkap \textit{event} goBackHome yang dipancarkan oleh \textit{client} saat permainan telah berakhir.
+			
+			\item \textbf{socket.on('roomFull', (msg) => {...})} \\
+			Berfungsi untuk menangkap \textit{event} roomFull yang dipancarkan oleh \textit{client} pada saat \textit{room} telah terisi penuh.
+			
+			\item \textbf{socket.on('selectingChar', (msg) => {...})} \\
+			Berfungsi untuk menangkap \textit{event} selectingChar yang dipancarkan oleh \textit{client} pada saat karakter telah dipilih oleh pemain.
+			
+			\item \textbf{socket.on('sendingChar', (msg) => {...})} \\
+			Berfungsi untuk menangkap \textit{event} sendingChar yang dipancarkan oleh \textit{client} pada saat karakter telah ditetapkan oleh pemain.
+			
+			\item \textbf{socket.on('charIsReady', (msg) => {...})} \\
+			Berfungsi untuk menangkap \textit{event} charIsReady yang dipancarkan oleh \textit{client} pada saat kedua karakter telah ditetapkan.
+			
+			\item \textbf{socket.on('stepClicked', (message) => {...})} \\
+			Berfungsi untuk menangkap \textit{event} stepClicked yang dipancarkan oleh \textit{client} pada saat tombol telapak kaki ditekan oleh pemain.
+			
+			\item \textbf{socket.on('requestToJoin', (msg) => {...})} \\
+			Berfungsi untuk menangkap \textit{event} requestToJoin yang dipancarkan oleh \textit{client} pada saat \textit{client} melakukan proses permintaan bergabung.
+			
+			\item \textbf{socket.on('disconnect', () => {...})} \\
+			Berfungsi untuk menangkap \textit{event} disconnect yang dipancarkan oleh \textit{client} pada saat koneksi telah terputus.
+ 		\end{itemize}
 	\end{enumerate}
 	
 	\item \textbf{Folder public} \\
@@ -302,21 +407,325 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 		
 			\item \textbf{charDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman pemilihan karakter di \textit{desktop browser} pada saat diakses oleh \textit{client}.
 			
+			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{marker}, \textit{integer} yang menandakan ada berapa pemain yang sudah menetapkan karakter.
+				\item \textbf{playerData}, \textit{array} yang menyimpan objek pengguna dengan nilai karakter yang dipilihnya.
+				\item \textbf{imageArray}, \textit{array} yang menyimpan daftar karakter yang dapat dipilih.
+			\end{itemize}
+		
+			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{toGamePlayDesktop()} \\
+				Berfungsi untuk memindahkan halaman kehalaman permainan.
+			\end{itemize}
+		
+			\textit{Event} Socket.io yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{socket.on('charSelecting', function(msg)\{\})} \\
+				Berfungsi untuk menangkap \textit{event} charSelecting yang dipancarkan oleh \textit{server} pada saat karakter yang dipilih akan ditampilkan ke layar \textit{PC}.
+				
+				\item \textbf{socket.on('charSent', function(msg)\{\})} \\
+				Berfungsi untuk menangkap \textit{event} charSent yang dipancarkan oleh \textit{server} untuk memeriksa apakah kedua pemain telah menetapkan karakter untuk pindah kehalaman selanjutnya.
+			\end{itemize}
+			
 			\item \textbf{charMobileScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman pemilihan karakter di \textit{mobile browser} pada saat diakses oleh \textit{client}.
+			
+			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{mark}, \textit{integer} yang menandakan ada berapa pemain yang sudah menetapkan karakter.
+			\end{itemize}
+		
+			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{selectChar()} \\
+				Berfungsi untuk mengirimkan nilai karakter yang telah dipilih oleh pemain.
+			\end{itemize}
+			
+			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{socket.on('charSent', function(msg){})} \\ 
+				Berfungsi untuk menangkap \textit{event} charSent yang dipancarkan oleh \textit{server} untuk memeriksa apakah kedua pemain telah menetapkan karakter untuk pindah kehalaman selanjutnya.
+				
+				\item \textbf{socket.emit('selectingChar', {val, id})} \\
+				Berfungsi untuk memancarkan \textit{event} selectingChar saat pemain telah memilih karakter. Data yang dikirimkan adalah:
+				\begin{itemize}
+					\item \textbf{val}, nilai karakter berupa \textit{integer}.
+					\item \textbf{id}, identifikasi unik Socket.io milik pemain.
+				\end{itemize}
+			
+				\item \textbf{socket.on('sendingChar', {val, id, marker})} \\
+				Berfungsi untuk memancarkan \textit{event} sendingChar saat pemain telah menetapkan karakter yang dipilih. Data yang dikirimkan adalah:
+				\begin{itemize}
+					\item \textbf{val}, nilai karakter berupa \textit{integer}.
+					\item \textbf{id}, identifikasi unik Socket.io milik pemain.
+					\item \textbf{marker}, \textit{integer} penanda seorang pemain telah menetapkan karakter.
+				\end{itemize}
+			\end{itemize}
 			
 			\item \textbf{gamePlayDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman permainan di \textit{desktop browser} pada saat diakses oleh \textit{client}.
 			
+			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{canvas}
+				\item \textbf{ctx}
+				\item \textbf{ctx2}
+				\item \textbf{track}
+				\item \textbf{timer1}
+				\item \textbf{timer2}
+				\item \textbf{timer3}
+				\item \textbf{player1Char}
+				\item \textbf{player2Char}
+				\item \textbf{dataOfPlayer}
+				\item \textbf{player1Val}
+				\item \textbf{player2Val}
+				\item \textbf{winner}
+				\item \textbf{timerArray}
+				\item \textbf{charArray}
+				\item \textbf{arrOfPlayerChar}
+				\item \textbf{aniFrame}
+				\item \textbf{aniFrame2}
+				\item \textbf{progressPlayer1}
+				\item \textbf{progressPlayer2}
+				\item \textbf{xPosition1}
+				\item \textbf{yPosition1}
+				\item \textbf{xPosition2}
+				\item \textbf{yPosition2}
+			\end{itemize}
+			
+			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{init()} \\
+				Berfungsi untuk menggambar lintasan lari diawal permainan.
+				
+				\item \textbf{beginCountDown(beginCounter, msg)} \\
+				Berfungsi untuk memulai hitungan mundur dengan menggambar angka tiga hingga satu kelayar permainan.
+				
+				\item \textbf{drawChar(data)} \\
+				Berfungsi untuk menggambar karakter milik pemain diatas lintasan lari.
+				
+				\item \textbf{beginGamePlay()} \\
+				Berfungsi untuk memulai permainan.
+				
+				\item \textbf{reachFinishLine(player)} \\
+				Berfungsi untuk mencatat pemain mana yang sampai pada garis akhir duluan.
+				
+				\item \textbf{toWinningPage()} \\
+				Berfungsi untuk memindahkan halaman ke halaman pemenang.
+				
+				\item \textbf{readyPlayerOne()} \\
+				Berfungsi untuk menggerakan karakter pemain pertama pada saat tombol telapak kaki ditekan.
+				
+				\item \textbf{readyPlayerTwo()} \\
+				Berfungsi untuk menggerakan karakter pemain kedua pada saat tombol telapak kaki ditekan.
+			\end{itemize}
+			
+			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{socket.on('moveThePlayer', function(msg){...})}\\
+				Berfungsi untuk menangkap \textit{event} moveThePlayer yang dipancarkan oleh \textit{server} saat tombol telapak kaki ditekan oleh pemain.
+				
+				\item \textbf{socket.on('startTheGame', function(msg){...})}\\
+				Berfungsi untuk menangkap \textit{event} startTheGame yang dipancarkan oleh \textit{server} pada saat akan memulai permainan dengan menggambar aset-aset yang dibutuhkan ke layar \textit{PC}.
+				
+				\item \textbf{socket.on('toWinnerPage', function(){})} \\
+				Berfungsi untuk menangkap \textit{event} toWinnerPage yang dipancarkan oleh \textit{server} yang memindahkan halaman ke halaman pemenang.
+				
+				\item \textbf{socket.emit('sendingTheWinner', {playerWin,playerCharArr})} \\
+				Berfungsi untuk memancarkan \textit{event} sendingTheWinner pada saat pemain telah mencapai garis akhir. Data yang dikirimkan adalah:
+				\begin{itemize}
+					\item \textbf{playerWin}, pemenang yang mencapai garis akhir lebih dulu.
+					\item \textbf{playerCharArr}, nilai dari kedua karakter milik para pemain.
+				\end{itemize}
+			\end{itemize}
+			
 			\item \textbf{gamePlayMobileScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman permainan di \textit{mobile browser} pada saat diakses oleh \textit{client}.
+			
+			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{stepLeftHtml}, Elemen HTML berupa gambar telapak kaki.
+				\item \textbf{instructionEl}, Elemen HTML berupa teks instruksi.
+			\end{itemize}
+			
+			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{stepClicked()} \\
+				Berfungsi untuk menangani aksi menekan tombol telapak kaki oleh pemain.
+				
+				\item \textbf{moveToWinPage()} \\
+				Berfungsi untuk memindahkan halaman ke halaman pemenang.
+				
+				\item \textbf{showInstruction(beginCounter)} \\
+				Berfungsi untuk menampilkan instruksi kelayar permainan.\\
+				\textbf{Parameter:}
+				\begin{itemize}
+					\item \textbf{beginCounter}, \textit{integer} yang menunjukan berapa detik instruksi akan ditampilkan.
+				\end{itemize}
+			\end{itemize}
+			
+			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{socket.on('startTheGame', function()\{...\})}\\
+				Berfungsi untuk menangkap \textit{event} startTheGame yang dipancarkan oleh \textit{server} saat permainan akan segera dimulai.
+				
+				\item \textbf{socket.on('toWinnerPage', function()\{...\})}\\
+				Berfungsi untuk menangkap \textit{event} toWinnerPage yang dipancarkan oleh \textit{server} pada saat permainan telah selesai.
+				
+				\item \textbf{socket.emit('stepClicked',\{playerId\})} \\
+				Berfungsi untuk memancarkan \textit{event} stepClicked pada saat pemain menekan tombol telapak kaki dilayar \textit{smartphone}.
+			\end{itemize}
 			
 			\item \textbf{homeScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman utama di \textit{desktop browser} dan \textit{mobile browser} pada saat diakses oleh \textit{client}.
 			
+			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{bg}, elemen HTML berupa \textit{div} dengan nama kelas \textit{stage-area}.
+				\item \textbf{titleHtml}, elemen HTML berupa \textit{div} dengan nama \textit{id homePage}.
+			\end{itemize}
+			
+			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{startClicked()} \\
+				Berfungsi untuk memindahkan halaman menuju halaman proses permintaan bergabung pada \textit{PC}.
+				
+				\item \textbf{joinClicked()} \\
+				Berfungsi untuk memindahkan halaman menuju halaman proses permintaan bergabung pada \textit{smartphone}.
+			\end{itemize}
+			
 			\item \textbf{mobileScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman proses permintaan koneksi di \textit{mobile browser} pada saat diakses oleh \textit{client}.
+			
+			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{socket}, variabel koneksi Socket.io
+			\end{itemize}
+			
+			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{requestToJoin()} \\ 
+				Berfungsi untuk melakukan proses permintaan bergabung saat pengguna menekan tombol \textit{send}.
+				
+				\item \textbf{toCharMobile()} \\
+				Berfungsi untuk memindahkan halaman ke halaman pemilihan karakter.
+			\end{itemize}
+			
+			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{socket.on('connect',function()/{.../})} \\
+				Berfungsi untuk menangkap \textit{event} connect yang dipancarkan apabila \textit{client} berhasil tersambung ke Socket.io.
+				
+				\item \textbf{socket.on('joinSucceed', function(msg)\{...\})} \\
+				Berfungsi untuk menangkap \textit{event} joinSucceed yang dipancarkan oleh \textit{server} apabila \textit{client} berhasil bergabung kedalam \textit{room}.
+				
+				\item \textbf{socket.on('joinRejected', function(msg)\{...\})} \\
+				Berfungsi untuk menangkap \textit{event} joinRejected yang dipancarkan oleh \textit{server} apabila \textit{client} tidak berhasil bergabung kedalam \textit{room}.
+				
+				\item \textbf{socket.on('toCharPage')} \\
+				Berfungsi untuk menangkap \textit{event} toCharPage yang dipancarkan oleh \textit{server} pada saat akan berpindah halaman ke halaman pemilihan karakter.
+			\end{itemize}
 			
 			\item \textbf{syncScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman proses permintaan koneksi di \textit{desktop browser} pada saat diakses oleh \textit{client}.
 			
+			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{socket}, variabel koneksi Socket.io.
+				\item \textbf{player}, \textit{integer} yang menunjukan pemain urutan keberapa.
+				\item \textbf{players}, \textit{array} yang menyimpan data para pemain.
+				\item \textbf{text}, \textit{integer} kode \textit{room}. 
+			\end{itemize}
+			
+			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{toCharDesk()} \\
+				Berfungsi untuk memindahkan halaman ke halaman pemilihan karakter pada \textit{PC}.
+				
+				\item \textbf{getRandInt()} \\
+				Berfungsi untuk membangkitkan kode \textit{room} berupa \textit{integer} secara acak.
+				
+				\item \textbf{requestAccepted(msg)} \\
+				Berfungsi untuk memasukan data \textit{client} kedalam \textit{array} pada saat telah tersambung ke Socket.io.
+			\end{itemize}
+			
+			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{socket.on('connect', function()\{\})} \\
+				Berfungsi untuk menangkap \textit{event} connect pada saat \textit{client} telah berhasil tersambung ke Socket.io.
+				
+				\item \textbf{socket.on('requestAccepted',function(msg)\{\})} \\
+				Berfungsi untuk menangkap \textit{event} requestAccepted yang dipancarkan oleh \textit{server} pada saat \textit{client} telah berhasil bergabung kedalam \textit{room}.
+				
+				\item \textbf{socket.on('toCharPage', function()\{\})} \\
+				Berfungsi untuk menangkap \textit{event} toCharPage yang dipancarkan oleh \textit{server} pada saat akan memindahkan halaman ke halaman pemilihan karakter pada \textit{smartphone}
+				
+				\item \textbf{socket.emit('hostJoinRoom',\{id, room\})} \\
+				Berfungsi untuk memancarkan \textit{event} hostJoinRoom saat \textit{host} telah bergabung kedalam \textit{room}. Data yang dikirimkan adalah:
+				\begin{itemize}
+					\item \textbf{id} identifikasi unik Socket.io milik \textit{client}
+					\item \textbf{room} kode \textit{room} milik \textit{client}
+				\end{itemize}
+			
+				\item \textbf{socket.emit('roomFull', \{room\})} \\
+				Berfungsi untuk memancarkan \textit{event} hostJoinRoom pada saat \textit{room} sudah terisi penuh.	
+				
+			\end{itemize}
+			
 			\item \textbf{winningDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman saat permainan telah selesai di \textit{desktop browser} pada saat diakses oleh \textit{client}.
 			
+			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{winCanvas}
+				\item \textbf{winCtx}
+				\item \textbf{podium}
+				\item \textbf{winnerCharArr}
+			\end{itemize}
+			
+			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{drawStage()} \\
+				Berfungsi untuk menggambar podium ke layar permainan.
+				
+				\item \textbf{drawWinner(winner)} \\
+				Berfungsi untuk menggambar para pemenang permainan.
+				
+				\item \textbf{drawFirstWinner(firstWinner)} \\
+				Berfungsi untuk menggambar pemenang pertama.
+				
+				\item \textbf{drawSecondWinner(secondWinner)} \\
+				Berfungsi untuk menggambar pemenang kedua.
+				
+				\item \textbf{toHomePage()} \\
+				Berfungsi untuk memindahkan halaman ke halaman awal.
+			\end{itemize}
+			
+			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{socket.on('getTheWinner',function(msg)\{\})} \\
+				Berfungsi untuk menangkap \textit{event} getTheWinner yang dipancarkan oleh \textit{server} pada saat permainan selesai.
+				
+				\item \textbf{socket.on('backHome', function()\{\})}  \\
+				Berfungsi untuk menangkap \textit{event} backHome yang dipancarkan oleh \textit{server} untuk memindahkan halaman ke halaman awal.
+				
+				\item \textbf{socket.emit('goBackHome', 'back home')} \\
+				Berfungsi untuk memancarkan \textit{event} goBackHome pada saat pemain menekan tombol \textit{exit}. 
+				 
+			\end{itemize}
+			
 			\item \textbf{winningMobileScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman saat permainan telah selesai di \textit{mobile browser} pada saat diakses oleh \textit{client}.
+			
+			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{gameOverEl}, elemen HTML berupa teks.
+			\end{itemize}
+			
+			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{showGameOver()} \\
+				Berfungsi untuk menampilkan teks yang menandakan permainan sudah selesai.
+				
+				\item \textbf{backToHome()} \\
+				Berfungsi untuk memindahkan halaman ke halaman awal.
+			\end{itemize}
+			
+			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
 			
 		\end{enumerate}
 		\item \textbf{Folder stylesheets} \\ 
