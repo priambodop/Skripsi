@@ -252,19 +252,227 @@ Pada subbab ini akan dijelaskan beberapa pustaka yang digunakan dalam proses pen
 	\item \textbf{Node.js}
 	\begin{enumerate}
 		\item \textbf{HTTP}
+		HTTP \textit{API} digunakan pada bagian \textit{server}. Web yang akan dikembangkan akan menggunakan HTTP \textit{server} untuk menyediakan akses yang dapat dilakukan oleh \textit{client}. HTTP \textit{server} akan diintegrasikan dengan Socket.io, dimana HTTP \textit{server} akan menjadi \textit{input} parameter yang dibutuhkan Socket.io.
+		
+		Contoh penggunaan HTTP \textit{server} akan dijelaskan sebagai berikut:
+\begin{lstlisting}
+var express = require('express');
+var http = require('http');
+var socketIO = require('socket.io');
+
+var app = express();
+var httpServer = http.createServer(app);
+var io = socketIO(server);
+\end{lstlisting}
+
+Bagian pertama potongan kode merupakan proses yang dilakukan untuk mendapatkan fungsi-fungsi yang tersedia dari masing-masing modul. Dengan melakukan proses tersebut, maka dapat dibuat variabel baru untuk melakukan proses inisialisasi yang dilakukan pada bagian kedua potongan kode.
+
+Variabel \textit{app} menginisialisasi Express.js yang akan melakukan penanganan fungsi \textit{server}. Variabel tersebut akan disambungkan dengan HTTP \textit{server}, dengan menggunakan variabel \textit{server}. Setelah variabel \textit{httpServer} diinisialisasi, variabel \textit{io} dapat diintegrasikan dengan HTTP \textit{server} agar dapat menggunakan Socket.io sebagai \textit{server}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.
+		
+		Salah satu \textit{method} yang dimiliki oleh HTTP adalah sebagai berikut:
 		
 		\begin{itemize}
-			\item \textbf{http.createServer([options])}
+			\item \textbf{http.createServer([options][,requestListener])} \\
+			\textit{Method} ini digunakan untuk menciptakan \textit{server} \textit{HTTP} milik Node.js. \\
+			\textbf{Parameter:}
+			\begin{itemize}
+				\item \textbf{options}, objek-objek sebagai berikut:
+				\begin{itemize}
+					\item \textbf{IncomingMessage}, objek yang menangani pesan masuk dari \textit{client}.
+					\item \textbf{ServerResponse}, objek yang menangani respon dari \textit{server}.
+				\end{itemize}
+				\item \textbf{requestListener}, fungsi tertentu yang menangani proses pengiriman data pada \textit{server}.
+			\end{itemize}
+			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk membangun \textit{server} HTTP. Berikut merupakan contoh penggunaan dalam pengembangan Finger For Life:
+\begin{lstlisting}
+const express = require('express');
+const http = require('http');
+
+var app = express();
+var httpServer = http.createServer(app);
+\end{lstlisting}
+
+Baris pertama dan kedua pada potongan kode merupakan proses untuk mendapatkan fungsi dari masing-masing modul. Baris keempat merupakan proses inisialisasi Express.js yang dilakukan variabel \textit{app}. Baris selanjutnya merupakan proses menciptakan HTTP \textit{server} dengan menyambungkan variabel \textit{app} kedalam parameter.			
+		\end{itemize}
+	
+		\item \textbf{Path}
+		Path digunakan untuk mengatur akses dari suatu direktori dan berkas didalam pengembangan Finger For Life. Salah satu \textit{method} yang dimiliki oleh modul ini adalah sebagai berikut:
+		
+		\begin{itemize}
+			\item \textbf{path.join(...path)} \\
+			Berikut merupakan contoh implementasi dari \textit{method} ini:
+\begin{lstlisting}
+path.join(__dirname + 'public');
+\end{lstlisting} 
+			
+			\textit{Method} ini menerima parameter \textbf{\_\_dirname}, yang merepresentasikan lokasi direktori dari berkas saat ini yang sedang dimanipulasi. Parameter tambahan yang diterima \textit{method} ini adalah \textbf{public}, yang merepresentasikan nama direktori yang akan disambungkan dengan parameter sebelumnya.
+		\end{itemize}
+		
+		
+		\item \textbf{Module}
+		Dalam pengembangan Finger For Life, Module digunakan untuk memberikan akses pada direktori atau berkas lain untuk mendapatkan fungsi dari satu berkas tertentu. Contoh implementasi dari Module adalah sebagai berikut:
+		
+\begin{lstlisting}
+module.exports = app;
+\end{lstlisting}
+Potongan kode ini akan diletakan dibaris paling bawah suatu berkas. Dengan melakukan proses ini, maka berkas dan direktori lain akan dapat menggunakan fungsi-fungsi dari modul tersebut .
+	\end{enumerate}
+	
+	\item \textbf{Express.js} \\
+	\begin{enumerate}
+		\item \textbf{express()}
+		\begin{itemize}
+			\item \textbf{express.static(root, [,options])} \\
+			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menyediakan akses kepada suatu modul agar dapat mengakses modul-modul lainnya. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+\begin{lstlisting}
+express.static(path.join(__dirname, 'public'))
+\end{lstlisting}
+			\textit{Method} ini akan menerima parameter yang merepresentasikan direktori yang bersifat \textit{static}. Dengan melakukan proses ini, maka modul saat ini akan dapat mengakses setiap modul yang ada pada direktori \textbf{public}.
+			
+			\item \textbf{express.Router([options])} \\
+			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk mendapatkan fungsi yang dimiliki oleh modul Router. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+			
+\begin{lstlisting}
+var router = express.Router();
+\end{lstlisting}
+			Potongan kode tersebut menunjukan proses inisialisasi dari variabel \textit{router} untuk mendapatkan fungsi yang dimiliki oleh modul \textbf{Router}.
+		\end{itemize}
+	
+		\item \textbf{Application}
+		\begin{itemize}
+			\item \textbf{app.set(name, value)} \\
+			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menetapkan suatu nilai tertentu kepada parameter \textbf{name}. Contoh implentasi dari \textit{method} ini adalah sebagai berikut:
+\begin{lstlisting}
+app.set('view engine', 'ejs');
+\end{lstlisting}
+Potongan kode tersebut menunjukan bahwa nilai \textit{ejs} akan ditetapkan kepada \textit{view engine}. Dengan begitu, \textit{view engine} akan mengembalikan \textit{ejs} apabila diperlukan untuk diakses. 
+			
+			\item \textbf{app.use([path,] callback[, callback...])} \\
+			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+\begin{lstlisting}
+app.use('/', homeRouter);
+\end{lstlisting}
+			Potongan kode tersebut menunjukan bahwa apabila suatu \textit{client} mengakses \textit{port} yang tersedia, maka Express.js akan mengarahkan halaman web menuju homeRouter.
+			
+			\item \textbf{app.listen(port, [hostname], [backlog], [callback])} \\
+		\end{itemize}
+		
+%		\item \textbf{Response}
+%		\begin{itemize}
+%			\item \textbf{res.locals} \\
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}
+%	
+%\end{lstlisting}
+%		\end{itemize}
+	
+%		\begin{itemize}
+%			\item \textbf{res.render(view[, locals][, callback])} \\
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}
+%
+%\end{lstlisting}
+%			
+%			\item \textbf{res.status(code)} \\
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}
+%
+%\end{lstlisting}
+%		\end{itemize}
+	\end{enumerate}
+	
+	\item \textbf{Socket.io}
+	\begin{enumerate}
+		\item \textbf{Server API}
+		\begin{enumerate}
+			
+			\item \textbf{Server}
+			\begin{itemize}
+				\item \textbf{new Server(httpServer[, options])}
+			\end{itemize}
+		
+			\item \textbf{Namespace}
+			\begin{itemize}
+				\item \textbf{namespace.emit(eventName[, ...args])}
+				
+				\item \textbf{namespace.to(room)}
+			\end{itemize}
+		
+			\item \textbf{Socket}
+			properti
+			\begin{itemize}
+				\item \textbf{socket.id}
+				\item \textbf{socket.room}
+			\end{itemize}
+		
+			method
+			\begin{itemize}
+				\item \textbf{socket.join(room[, callback])}
+			\end{itemize}
+		\end{enumerate}
+	
+		
+		\item \textbf{Client API}
+		\begin{enumerate}
+			\item \textbf{IO}
+			\begin{itemize}
+				\item \textbf{io([url][, options])}
+			\end{itemize}
+		
+			\item \textbf{Socket}
+			\begin{itemize}
+				\item \textbf{socket.emit(eventName[, ..args][, ack])}
+			\end{itemize}
+		
+			\begin{itemize}
+				\item \textbf{connect}
+				\item \textbf{disconnect}
+			\end{itemize}
+		\end{enumerate}
+	\end{enumerate}
+	
+	\item \textbf{Canvas API}
+	\begin{enumerate}
+		\item \textbf{Animation}
+		\begin{itemize}
+			\item \textbf{setInterval(func, delay[, param1, param2, ...])}
+			
+			\item \textbf{clearInterval(intervalID)}
+			
+			\item \textbf{requestAnimationFrame(callback)}
+		\end{itemize}
+		
+		\item \textbf{canvasRenderingContext2D} \\
+		Properti
+		\begin{itemize}
+			\item \textbf{CanvasRenderingContext2D.globalCompositeOperation}
+			\begin{itemize}
+				\item \textbf{destination-over}
+			\end{itemize}
+		\end{itemize}
+		
+		Method:
+		\begin{itemize}
+			\item \textbf{CanvasRenderingContext2D.clearRect(x, y, width, height)}
+			
+			\item \textbf{CanvasRenderingContext2D.drawImage(image, dx, dy)}
+			
+			\item \textbf{CanvasRenderingContext2D.save()}
+			
+			\item \textbf{CanvasRenderingContext2D.restore()}
 		\end{itemize}
 	\end{enumerate}
 	
-	\item \textbf{Express.js}
-	
-	\item \textbf{Socket.io}
-	
-	\item \textbf{Canvas API}
-	
-	\item \textbf{jQuery}
+	\item \textbf{jQuery} 
+	\begin{enumerate}
+		\item \textbf{submit(handler)}
+		
+		\item \textbf{val()}
+		
+		\item \textbf{html()}
+		
+		\item \textbf{preventDefault()}
+	\end{enumerate}
 	
 	\item \textbf{The Content Template element}
 \end{enumerate}
