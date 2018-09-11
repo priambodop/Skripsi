@@ -767,3 +767,91 @@ Arsitektur Finger For Life dapat dilihat pada Gambar ... . Jumlah \textit{Client
 Komunikasi antara \textit{client} dengan \textit{client} tidak dapat dilakukan secara langsung. Komunikasi tersebut harus melewati \textit{server} terlebih dahulu. 
 
 Finger For Life dibangun diatas Node.js. Seluruh berkas serta folder yang dibutuhkan untuk membangun aplikasi permainan ini diatur dengan menggunakan Express.js. Proses pengiriman dan penerimaan data secara \textit{realtime} dilakukan menggunakan Socket.io. Dalam permainan ini, animasi akan dilakukan dengan menggunakan Canvas API.
+
+\section{Analisis Socket.io}
+Pada pengembangan Finger For Life digunakan banyak fitur yang telah disediakan oleh Socket.io. Teknologi ini digunakan untuk proses sinkronisasi antara \textit{smartphone} dengan \textit{PC} dan komunikasi secara \textit{real-time} antara \textit{client} dan \textit{server}. Seperti yang sudah dijelaskan pada subbab \ref{alur}, ada beberapa tahap yang harus dilakukan sebelum dapat memainkan aplikasi permainan berbasis web ini. Tahap tersebut banyak menggunakan pustaka Socket.io dalam proses implementasinya.
+
+Subbab ini akan menjelaskan bagaimana teknologi Socket.io digunakan dalam implementasi Finger For Life pada tahap-tahap yang harus dilakukan.
+\begin{enumerate}
+	\item \textbf{Sinkronisasi \textit{PC} dan \textit{Smartphone}} \\
+	Pada permainan Finger For Life terdapat tahap permintaan bergabung yang dilakukan oleh \textit{PC} dan \textit{smartphone}. Tahap tersebut merupakan proses sinkronisasi yang harus dilakukan agar \textit{smartphone} dan \textit{PC} dapat tersambung dan dapat berkomunikasi satu sama lain. Kedua gawai tersebut dapat tersambung dengan menggunakan Socket.io. Ada beberapa langkah yang harus dilakukan, langkah-langkah tersebut antara lain:
+	\begin{itemize}
+		\item \textbf{Koneksi Socket.io} \\
+		Sebelum \textit{PC} dan \textit{smartphone} tersambung, kedua gawai tersebut harus tersambung dengan Socket.io. Proses melakukan koneksi terhadap Socket.io dilakukan pada saat halaman web mengakses halaman \textit{sync}. Pada saat kedua gawai mengakses halaman tersebut, proses yang terjadi adalah sebagai berikut:
+		\begin{itemize}
+			\item Didalam berkas \textit{syncScript.js} dan \textit{mobileScript.js}, terdapat variabel yang memulai \textit{client} untuk melakukan koneksi kepada Socket.io. Variabel tersebut adalah sebagai berikut:
+\begin{lstlisting}
+var socket = io();
+\end{lstlisting}
+			Variabel \textit{socket} akan mendapatkan fungsi-fungsi milik Socket.io yang telah tersedia, yang dapat dipakai pada bagian \textit{client}. Apabila \textit{PC} dan \textit{smartphone} telah mengakses halaman \textit{sync}, maka kedua gawai tersebut telah tersambung dengan Socket.io. Walaupun sudah tersambung, kedua gawai tersebut belum dapat berkomunikasi satu sama lain.
+		\end{itemize}
+	
+		\item \textbf{Sinkronisasi \textit{PC} dan \textit{Smartphone}} \\
+		\textit{PC} akan menyediakan kode yang harus dikirimkan oleh \textit{smartphone}. Kode tersebut merupakan kode \textit{room} yang dibutuhkan untuk proses sinkronisasi antara \textit{PC} dan \textit{smartphone}. Kode \textit{room} akan dibangkitkan secara acak pada halaman \textit{sync}. Kode tersebut dibangkitkan dengan cara seperti berikut:
+\begin{lstlisting}
+function getRandInt(){
+text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
+document.getElementById("roomId").innerHTML = text;
+}
+\end{lstlisting}
+		Kode yang akan dibangkitkan secara acak berjumlah enam dijit angka, dimana angka tersebut berada didalam rentang 000000 hingga 999999. Pada saat kode \textit{room} telah dibangkitkan, \textit{PC} secara otomatis akan langsung bergabung kedalam \textit{room} tersebut. Langkah tersebut dapat dilakukan seperti berikut:
+\begin{lstlisting}
+function getRandInt(){
+	text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
+	document.getElementById("roomId").innerHTML = text;
+
+	var roomString = text.toString();
+
+	socket.emit('hostJoinRoom', {
+		id: socket.id,
+		room: roomString
+	});
+}
+\end{lstlisting}
+		\textit{PC} akan memancarkan \textit{event hostJoinRoom} dimana yang akan ditangkap oleh \textit{server}. \textit{Event} tersebut mengirimkan data berupa identifikasi unik milik \textit{client}, dan kode \textit{room} yang telah dibangkitkan. \textit{Server} akan menangkap \textit{event} tersebut dan menambahkan \textit{host} kedalam \textit{room} yang telah dibangun. Proses tersebut dilakukan sebagai berikut:
+\begin{lstlisting}
+socket.on('hostJoinRoom', (msg) => {
+	socket.join(msg.room);
+	users.removeUser(msg.id);
+	users.addUser(msg.id, msg.room);
+});
+\end{lstlisting}
+		\textit{Event hostJoinRoom} akan ditangkap oleh \textit{server} kemudian akan mengeksekusi fungsi yang ada didalamnya. \textit{Server} akan menambahkan \textit{host} kedalam \textit{room} dengan menggunakan \textit{socket.join(msg.room)}. Kemudian \textit{host} akan ditambahkan kedalam \textit{array} yang berada didalam kelas Users. Array tersebut berisi daftar \textit{client} yang telah memiliki \textit{room}. Proses tersebut dilakukan dengan menggunakan \textit{users.addUser(msg.id, msg.room)}. Dengan melakukan proses ini, maka \textit{room} telah dibangkitkan, dan \textit{host} telah tergabung didalamnya.
+		
+		Setelah kode \textit{room} dibangkitkan, maka akan ditampilkan kelayar \textit{PC}. Pengguna akan memasukan kode tersebut ke kolom yang berada dihalaman \textit{smartphone} untuk dikirimkan ke \textit{server}. Proses ini merupakan proses sinkronisasi yang dibutuhkan antara \textit{PC} dan \textit{smartphone}. Proses pengiriman kode \textit{room} akan dilakukan dengan cara berikut:
+\begin{lstlisting}
+function requestToJoin(){
+	$('form').submit(function(e){
+		e.preventDefault();
+		socket.emit('requestToJoin', {
+			id: socket.id,
+			room: $('#code').val()
+		});
+	});
+}
+\end{lstlisting}
+		\textit{Smartphone} akan mengirimkan kode \textit{room} dengan memancarkan \textit{event requestToJoin}. Kode \textit{room} yang telah diisi didalam kolom akan diambil dengan menggunakan jQuery. Proses tersebut dilakukan dengan menggunakan \textit{jQuery('\#code').val()}. \textit{Event requestToJoin} akan mengirim data identifikasi unik Socket.io milik \textit{client} dan kode \textit{room}. \textit{Event} tersebut akan ditangkap oleh \textit{server} yang kemudian akan dilakukan proses otentikasi. Proses tersebut akan dilakukan seperti berikut:
+\begin{lstlisting}[caption={Proses otentikasi}, label={lst:otentikasi},captionpos=b]
+socket.on('requestToJoin', function(msg){
+	var check = users.isRoomExist(msg.room);
+
+	//debug purpose
+	console.log(`this is check ${check}`);
+
+	if (check === 1) {
+		socket.join(msg.room);
+		users.removeUser(msg.id);
+		users.addUser(msg.id, msg.room);
+
+		io.to(user.room).emit('requestAccepted', msg);
+		socket.emit('joinSucceed', 'Welcome to the game :)');
+
+	}else{
+		socket.emit('joinRejected', 'The room is not exist');
+	}
+})
+\end{lstlisting}
+		\textit{Event} ini akan memeriksa apakah kode yang dikirimkan oleh \textit{smartphone} sesuai dengan data \textit{room} yang ada didalam \textit{array}. Pengecekan tersebut dilakukan dengan menggunakan \textit{var check = users.isRoomExist(msg.room)}. Apabila \textit{room} sesuai, maka \textit{smartphone} dapat bergabung kedalam \textit{room}, apabila tidak sesuai, maka \textit{smartphone} tidak dapat bergabung. Dengan bergabungnya \textit{smartphone} kedalam \textit{room}, maka proses sinkronisasi antara \textit{smartphone} dan \textit{PC} telah terpenuhi. Dengan begitu, kedua gawai tersebut dapat melakukan komunikasi satu sama lain.
+		
+	\end{itemize}
+\end{enumerate}
