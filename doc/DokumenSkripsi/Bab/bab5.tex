@@ -31,26 +31,147 @@ Lingkungan implementasi terbagi menjadi dua bagian, yaitu lingkungan perangkat k
 			free & yes & no & 512 MB & 1x & no & 1x-4x \\ \hline
 				
 			\end{tabular}
-		
-			\item \textbf{Node.js}
+			
+			\item \textbf{Node.js} \\
+			Node.js merupakan JavaScript \textit{runtime} yang menyediakan fitur untuk mengeksekusi JavaScript dilingkungan lokal. Pengembangan Finger For Life menggunakan Node.js sebagai dasar penggunaan JavaScript dalam hal pengaturan \textit{server} maupun \textit{client}. Versi Node.js yang dipakai adalah 8.11.4.
+			
+			\item \textbf{Socket.io} \\
+			Socket.io merupakan teknologi yang menyediakan fitur komunikasi dua arah secara \textit{real-time} antara \textit{client} dan \textit{server}. Pengembangan Finger For Life menggunakan Socket.io sebagai cara komunikasi berdasarkan \textit{event} antara \textit{client} dan \textit{server}. Dengan menggunakan Socket.io, maka proses komunikasi dalam permainan menjadi lebih efisien. Versi Socket.io yang dipakai adalah 2.0.4.
 			 
 		\end{enumerate}
 		
 		\item \textbf{Client}
 		\begin{enumerate}
-			\item \textbf{Express.js}
+			\item \textbf{Express.js} \\
+			Express.js adalah web \textit{framework} untuk Node.js. \textit{Framework} ini menyediakan kumpulan fitur yang dapat membantu dalam pembuatan aplikasi web. Pengembangan Finger For Life menggunakan Express.js untuk mengatur struktur direktori yang diperlukan. Dengan menggunakan Express.js, direktori dan berkas yang diperlukan untuk pengembangan dapat diatur peletakannya. Versi Express.js yang dipakai adalah 4.15.5.
 			
-			\item \textbf{Canvas API}
+			\item \textbf{Canvas API} \\
+			Pengembangan Finger For Life menggunakan Canvas API untuk membuat elemen-elemen grafis didalam web. Canvas API digunakan untuk membuat animasi permainan pada saat pemain menggerakan karakter yang ada dilintasan lari.
 			
-			\item \textbf{jQuery}
+			\item \textbf{jQuery} \\
+			Pengembangan Finger For Life menggunakan Canvas API untuk mengatur akses elemen-elemen html yang ada didalam berkas-berkas tertentu. jQuery pun digunakan untuk mengirimkan data dalam bentuk form yang sudah diisi oleh pengguna. Versi jQuery yang dipakai adalah 3.3.1.
 			
-			\item \textbf{The Content Template element}
+			\item \textbf{The Content Template element} \\
+			Pengembangan Finger For Life menggunakan The Content Template element untuk menampilkan kumpulan elemen HTML kelayar dengan menggunakan elemen <template>. 
+			
 		\end{enumerate}
 	\end{enumerate}
 	
 \end{enumerate}
 
 \subsection{Hasil Implementasi}
+
+Hasil implementasi berupa aplikasi berbasis web yang berjalan berdasarkan Node.js. Aplikasi dapat diakses pada jaringan internet dengan URL \url{http://fingerforlife.herokuapp.com}. Aplikasi Finger For Life terdiri dari beberapa halaman. Halaman tersebut terbagi menjadi dua bagian, yaitu halaman pada \textit{PC} dan pada \textit{smartphone}. Halaman-halaman tersebut antara lain:
+
+\begin{enumerate}
+	\item \textbf{Halaman \textit{home}} \\
+	\textbf{PC} \\
+	
+	Halaman \textit{home} pada \textit{PC} digunakan pengguna untuk memulai permainan. Pada halaman ini terdapat tombol \textit{start} yang berfungsi untuk meminta akses masuk kedalam permainan. Apabila pengguna menekan tombol tersebut, maka pengguna akan diarahkan kehalaman selanjutnya. Tangkapan layar dari halaman \textit{home} pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb1_home}.
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{Gambar/realWeb1_home}
+	\caption{Halaman \textit{Home}}
+	\label{fig:realWeb1_home}
+\end{figure}
+
+	\textbf{Smartphone} \\
+	Halaman \textit{home} pada \textit{smartphone} digunakan pengguna untuk memulai permainan. Pada halaman ini terdapat tombol \textit{join} yang berfungsi untuk meminta akses masuk kedalam permainan. Apabila pengguna menekan tombol tersebut, maka pengguna akan diarahkan kehalaman selanjutnya. Tangkapan layar dari halaman \textit{home} pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone1_home}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.3]{Gambar/realPhone1_home}
+		\caption{Halaman \textit{Home}}
+		\label{fig:realPhone1_home}
+	\end{figure}
+
+	\item \textbf{Halaman \textit{sync}}\\
+	\textbf{PC} \\
+	Halaman \textit{sync} pada \textit{PC} berguna untuk proses sinkronisasi antara \textit{PC} dan \textit{smartphone}. Halaman ini menyediakan kode \textit{room} yang harus dikirimkan oleh pengguna melalui \textit{smartphone}. Apabila kode yang dikirimkan pengguna sesuai, maka pengguna akan bergabung kedalam \textit{room} permainan. Apabila kode tidak sesuai, maka pengguna tidak bisa bergabung kedalam \textit{room} permainan. Tangkapan layar dari halaman \textit{sync} pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb2_sync}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.3]{Gambar/realWeb2_sync}
+		\caption{Halaman \textit{Home}}
+		\label{fig:realWeb2_sync}
+	\end{figure}
+	
+	
+	\textbf{Smartphone} \\
+	Halaman \textit{sync} pada \textit{smarpthone} berguna untuk proses sinkronisasi antara \textit{PC} dan \textit{smartphone}. Pengguna dapat mengisi kolom dengan kode yang didapatkan dari halaman web pada \textit{PC}, kemudian menekan tombol \textit{Send}. Apabila kode yang dikirimkan sesuai, maka akan muncul teks yang menunjukan berhasil bergabung kedalam \textit{room}. Apabila tidak sesuai, maka akan muncul teks yang menunjukan tidak berhasil bergabung kedalam \textit{room}. Tangkapan layar dari halaman \textit{sync} pada \textit{PC} dapat dilihat pada gambar \ref{fig:realPhone2_sync}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.3]{Gambar/realPhone2_sync}
+		\caption{Halaman \textit{Home}}
+		\label{fig:realPhone2_sync}
+	\end{figure}
+	
+	\item \textbf{Halaman Pemilihan Karakter} \\
+	\textbf{PC} \\
+	Halaman pemilihan karakter pada \textit{PC} akan menampilkan dua karakter yang telah dipilih oleh kedua pemain. Jika pemain menekan karakter yang terdapat pada halaman \textit{smartphone}, maka karakter tersebut akan ditampilkan. Jika pemain belum menekan karakter yang tersedia, maka halaman pada \textit{PC} tidak akan menampilkan karakter. Tangkapan layar dari halaman pemilihan karakter pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb3_char}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.3]{Gambar/realWeb3_char}
+		\caption{Halaman \textit{Home}}
+		\label{fig:realWeb3_char}
+	\end{figure}
+	
+	\textbf{Smartphone} \\
+	Halaman pemilihan karakter pada \textit{smartphone} akan menampilkan daftar karakter permainan Finger For Life. Pemain dapat memilih satu karakter yang ditampilkan, kemudia menekan tombol \textit{choose} untuk menetapkan karakter tersebut. Karakter yang telah ditetapkan akan dapat dimainkan saat permainan dimulai. Apabila kedua pemain telah menetapkan karakter, maka halaman akan berganti kehalaman selanjutnya. Tangkapan layar dari halaman pemilihan karakter pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone3_char}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.3]{Gambar/realPhone3_char}
+		\caption{Halaman \textit{Home}}
+		\label{fig:realPhone3_char}
+	\end{figure}
+	
+	\item \textbf{Halaman \textit{Gameplay}} \\
+	\textbf{PC} \\
+	Halaman ini menampilkan lintasan lari dan kedua karakter yang dapat dimainkan. Karakter pada layar dapat bergerak melalui lintasan lari apabila pemain menekan tombol yang ada pada halaman \textit{smartphone}. Tangkapan layar dari halaman \textit{gameplay} pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb4_game}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.3]{Gambar/realWeb4_game}
+		\caption{Halaman \textit{Home}}
+		\label{fig:realWeb4_game}
+	\end{figure}
+	
+	\textbf{Smartphone} \\
+	Halaman ini menampilkan tombol telapak kaki yang dapat ditekan oleh pemain. Tombol tersebut berfungsi untuk menggerakan karakter miliknya yang ditampilkan dihalaman \textit{PC}. Pemain yang pertama kali menggerakan karakter hingga mencapai garis akhir menjadi pemenang, dan halaman akan berganti kehalaman selanjutnya. Tangkapan layar dari halaman \textit{gameplay} pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone4_game}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.3]{Gambar/realPhone4_game}
+		\caption{Halaman \textit{Home}}
+		\label{fig:realPhone4_game}
+	\end{figure}
+	
+	
+	\item \textbf{Halaman \textit{Game Over}} \\
+	\textbf{PC} \\
+	Halaman ini menampilkan pemain yang memenangkan permainan. Pemenang pertama akan ditampilkan dipodium posisi atas, sedangkan pemenang kedua akan ditampilkan dipodium posisi bawah. Pemain dapat menekan tombol \textit{exit} untuk keluar dari permainan. Tangkapan layar dari halaman \textit{game over} pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb5_over}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.3]{Gambar/realWeb5_over}
+		\caption{Halaman \textit{Home}}
+		\label{fig:realWeb5_over}
+	\end{figure}
+
+	\textbf{Smartphone} \\
+	Halaman ini menampilkan teks yang menunjukan posisi pemenang. Pemenang pertama akan ditampilkan teks yang menunjukan posisi pertama, sedangkan pemenang kedua akan ditampilkan teks yang menunjukan posisi kedua. Tangkapan layar dari halaman \textit{game over} pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone5_over}.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.3]{Gambar/realPhone5_over}
+		\caption{Halaman \textit{Home}}
+		\label{fig:realPhone5_over}
+	\end{figure}
+
+\end{enumerate}
 
 
 \section{Pengujian}

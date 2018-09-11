@@ -1312,7 +1312,7 @@ Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
 		\item \textbf{socket.id} \\ \textit{Identifier} unik yang dimiliki oleh satu \textit{socket} untuk satu sesi. Properti ini akan mempunyai nilai segera setelah koneksi terhubung, dan akan diperbarui setelah melakukan koneksi ulang.
 	\end{itemize}
 	
-	Salah satu \textit{method} yang dimiliki oleh kelas ini yaitu:
+	Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu:
 	
 	\begin{itemize}
 		
@@ -1327,6 +1327,14 @@ Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
 %// ...
 %socket.open();
 %\end{lstlisting}
+
+	\item \textbf{socket.on(eventName, callback)} \\
+	Berfungsi untuk menyediakan fungsi yang menangani \textit{event} yang dipancarkan. \\
+	\textbf{Parameter:}
+	\begin{itemize}
+		\item \textbf{eventName}, nama \textit{event} yang dipancarkan.
+		\item \textbf{callback}, fungsi yang akan menangani \textit{event} yang dipancarkan.
+	\end{itemize}
 	
 	\item \textbf{socket.emit(eventName[, ..args][, ack])} \\ 
 	Berfungsi untuk memancarkan \textit{event} kepada \textit{socket} yang ditandai dengan nama dari \textit{event} tersebut.\\ 
