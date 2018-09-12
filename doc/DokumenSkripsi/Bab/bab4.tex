@@ -16,7 +16,7 @@ Pada \textit{sequence} diagram akan dibahas mengenai jalannya koneksi \textit{so
 	\label{fig:1_JoinRoom}
 \end{figure}
 
-Pada awal permainan, \textit{client} pertama yang melakukan koneksi pada \textit{server} adalah \textit{desktop computer}, yang berperan sebagai \textit{host} dalam permainan seperti yang dijelaskan pada Gambar \ref{fig:1_JoinRoom}.\textit{Host} akan menyediakan suatu kode yang berguna sebagai \textit{room} untuk kedua pemain yang akan bergabung dengan melakukan koneksi ke \textit{server}. \textit{Room} yang disediakan hanya akan menerima tiga \textit{client} saja, yaitu \textit{host}, \textit{player1}, dan \textit{player2}. 
+Pada awal permainan, \textit{client} pertama yang melakukan koneksi pada \textit{server} adalah \textit{PC computer}, yang berperan sebagai \textit{host} dalam permainan seperti yang dijelaskan pada Gambar \ref{fig:1_JoinRoom}.\textit{Host} akan menyediakan suatu kode yang berguna sebagai \textit{room} untuk kedua pemain yang akan bergabung dengan melakukan koneksi ke \textit{server}. \textit{Room} yang disediakan hanya akan menerima tiga \textit{client} saja, yaitu \textit{host}, \textit{player1}, dan \textit{player2}. 
 
 \textit{Host} akan mengirimkan \textit{event} yang menandakan akan bergabung kedalam room, \textit{event} tersebut adalah \textbf{hostJoinRoom(id, room)}. \textit{Event} ini memiliki data yang akan dikirimkan kepada \textit{server}, data-data tersebut dijelaskan sebagai berikut:
 \begin{itemize}
@@ -43,19 +43,19 @@ Setelah \textit{room} berisi tiga \textit{client}, maka \textit{host} akan mengi
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{Gambar/ChooseCharacter}
+	\includegraphics[scale=0.35]{Gambar/ChooseCharacter}
 	\caption{Proses memilih karakter.}
 	\label{fig:2_ChooseCharacter}
 \end{figure}
 
-Halaman ini merupakan halaman yang dituju oleh para pemain yang telah berhasil melakukan koneksi dan bergabung kedalam \textit{room}. Para pemain akan memilih karakter yang ada pada halaman \textit{smartphone browser}, dimana karakter yang dipilih akan muncul pada halaman \textit{desktop browser}.Seperti yang dijelaskan pada Gambar \ref{fig:2_ChooseCharacter}, pemain yang memilih karakter tertentu akan mengirimkan \textit{event} \textbf{selectingChar(val, id)} kepada \textit{server}. Data-data yang dikirimkan akan dijelaskan sebagai berikut:
+Halaman ini merupakan halaman yang dituju oleh para pemain yang telah berhasil melakukan koneksi dan bergabung kedalam \textit{room}. Para pemain akan memilih karakter yang ada pada halaman \textit{smartphone browser}, dimana karakter yang dipilih akan muncul pada halaman \textit{PC browser}.Seperti yang dijelaskan pada Gambar \ref{fig:2_ChooseCharacter}, pemain yang memilih karakter tertentu akan mengirimkan \textit{event} \textbf{selectingChar(val, id)} kepada \textit{server}. Data-data yang dikirimkan akan dijelaskan sebagai berikut:
 \begin{itemize}
 	\item \textbf{val} identifikasi unik yang dimiliki oleh masing-masing karakter.
 	\item \textbf{id} identifikasi unik yang dimiliki masing-masing \textit{client} yang terkoneksi dengan \textit{socket.io}.
 \end{itemize}
-Setelah \textit{event} tersebut diterima oleh \textit{server}, maka server akan mengirimkan \textit{event} \textbf{charSelecting(val, id)} kepada \textit{host}. \textit{Event} tersebut berfungsi untuk menampilkan karakter yang dipilih oleh pemain dihalaman \textit{desktop}.
+Setelah \textit{event} tersebut diterima oleh \textit{server}, maka server akan mengirimkan \textit{event} \textbf{charSelecting(val, id)} kepada \textit{host}. \textit{Event} tersebut berfungsi untuk menampilkan karakter yang dipilih oleh pemain dihalaman \textit{PC}.
 
-Apabila pemain akan menetapkan karakter yang telah ditampilkan dihalaman \textit{desktop}, maka \textit{pemain} akan mengirimkan \textit{event} \textbf{sendingChar(val,id,marker)} kepada \textit{server}. Data-data tersebut sama seperti yang dikirimkan oleh \textit{event} sebelumnya, hanya saja ada tambahan data \textbf{marker} pada parameter. Data tersebut berfungsi sebagai penanda bahwa sudah ada satu pemain yang telah menetapkan karakter yang akan dimainkan. Setelah \textit{server} menerima \textit{event} tersebut, maka \textit{server} akan meneruskan data-data tersebut pada \textit{host} dengan mengirimkan \textit{event} \textbf{charSent(val,id,marker)}.
+Apabila pemain akan menetapkan karakter yang telah ditampilkan dihalaman \textit{PC}, maka \textit{pemain} akan mengirimkan \textit{event} \textbf{sendingChar(val,id,marker)} kepada \textit{server}. Data-data tersebut sama seperti yang dikirimkan oleh \textit{event} sebelumnya, hanya saja ada tambahan data \textbf{marker} pada parameter. Data tersebut berfungsi sebagai penanda bahwa sudah ada satu pemain yang telah menetapkan karakter yang akan dimainkan. Setelah \textit{server} menerima \textit{event} tersebut, maka \textit{server} akan meneruskan data-data tersebut pada \textit{host} dengan mengirimkan \textit{event} \textbf{charSent(val,id,marker)}.
 
 Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karakter yang akan dimainkan. Apabila kedua pemain telah menetapkan karakter yang akan dimainkan, \textit{host} akan memancarkan \textit{event} \textbf{charIsReady(playerData)}.Data yang dikirimkan merupakan suatu \textit{object array} yang berisi data para pemain dan data karakter yang telah dipilih.\textit{Event} tersebut berfungsi untuk memberi informasi kepada \textit{server} untuk pindah kehalaman selanjutnya.
 
@@ -63,7 +63,7 @@ Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karak
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{Gambar/GameBegin}
+	\includegraphics[scale=0.33]{Gambar/GameBegin}
 	\caption{Proses memulai permainan.}
 	\label{fig:3_GameBegin}
 \end{figure}
@@ -84,7 +84,7 @@ Apabila ada pemain yang berhasil menyentuh garis akhir, maka \textit{host} akan 
 \subsection{\textit{Sequence} Mengakhiri Permainan}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{Gambar/WinningPage}
+	\includegraphics[scale=0.33]{Gambar/WinningPage}
 	\caption{Menampilkan para pemain yang telah selesai bermain.}
 	\label{fig:4_WinningPage}
 \end{figure}
@@ -97,19 +97,19 @@ Apabila pemain menekan tombol \textit{back} yang ada pada halaman \textit{browse
 \section{Perancangan Antarmuka}
 \label{sec:antarmuka}
 
-Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \textit{browser} yang ada di \textit{desktop} dan \textit{smartphone}.
+Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \textit{browser} yang ada di \textit{PC} dan \textit{smartphone}.
 
 \begin{enumerate}
 	\item Antarmuka halaman \textit{home}
 	
-	\textbf{Desktop}
+	\textbf{PC}
 	
 	Halaman ini merupakan halaman utama yang pertama kali dituju oleh pengguna yang menggunakan \textit{PC}. Komponen halaman ini terdiri dari dua buah gambar jari yang melambangkan permainan, teks yang menunjukan nama permainan yaitu \textit{finger for life}, dan tombol \textit{start} yang digunakan untuk memulai permainan. Rancangan antarmuka halaman \textit{home} dapat dilihat pada Gambar \ref{fig:web1_home}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web1_home}
-	\caption{Halaman pada \textit{desktop} yang menunjukan tampilan awal saat \textit{client} mengakses alamat web.}
+	\caption{Halaman pada \textit{PC} yang menunjukan tampilan awal saat \textit{client} mengakses alamat web.}
 	\label{fig:web1_home}
 \end{figure}
 
@@ -126,14 +126,14 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 
 	\item Antarmuka halaman \textit{sync}
 	
-	\textbf{Desktop}
+	\textbf{PC}
 	
-	Halaman ini menampilkan suatu perintah yang dapat dilakukan oleh pengguna apabila akan bergabung dalam permainan. Halaman ini pun menyediakan suatu kode untuk para pemain dimana kode tersebut akan berfungsi sebagai suatu \textit{room} bagi para pemain. Pada halaman ini akan dilakukan proses sinkronisasi untuk para pengguna, apakah berhasil bergabung dalam permainan atau tidak. Apabila berhasil, maka akan muncul suatu teks yang menunjukan suatu pemain telah berhasil bergabung. Apabila tidak, maka tidak akan menampilkan apapun dan halaman tidak akan menuju ke halaman selanjutnya sebelum ada dua pemain yang berhasil bergabung. Rancangan antarmuka halaman \textit{sync} pada \textit{desktop} dapat dilihat pada Gambar \ref{fig:web2_sync}.
+	Halaman ini menampilkan suatu perintah yang dapat dilakukan oleh pengguna apabila akan bergabung dalam permainan. Halaman ini pun menyediakan suatu kode untuk para pemain dimana kode tersebut akan berfungsi sebagai suatu \textit{room} bagi para pemain. Pada halaman ini akan dilakukan proses sinkronisasi untuk para pengguna, apakah berhasil bergabung dalam permainan atau tidak. Apabila berhasil, maka akan muncul suatu teks yang menunjukan suatu pemain telah berhasil bergabung. Apabila tidak, maka tidak akan menampilkan apapun dan halaman tidak akan menuju ke halaman selanjutnya sebelum ada dua pemain yang berhasil bergabung. Rancangan antarmuka halaman \textit{sync} pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web2_sync}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web2_sync}
-	\caption{Halaman pada \textit{desktop} yang menampilkan langkah untuk bergabung dalam permainan}
+	\caption{Halaman pada \textit{PC} yang menampilkan langkah untuk bergabung dalam permainan}
 	\label{fig:web2_sync}
 \end{figure}
 
@@ -150,14 +150,14 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 
 \item Antarmuka halaman \textit{character}
 
-	\textbf{desktop}
+	\textbf{PC}
 	
-	Halaman ini akan menampilkan karakter yang telah dipilih oleh pemain. Apabila karakter belum memilih karakter yang akan dimainkan, maka halaman ini belum menampilkan apapun. Rancangan antarmuka halaman \textit{character} pada \textit{desktop} dapat dilihat pada Gambar \ref{fig:web3_char}.
+	Halaman ini akan menampilkan karakter yang telah dipilih oleh pemain. Apabila karakter belum memilih karakter yang akan dimainkan, maka halaman ini belum menampilkan apapun. Rancangan antarmuka halaman \textit{character} pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web3_char}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web3_char}
-	\caption{Halaman pada \textit{desktop} yang menampilkan karakter yang telah ditetapkan oleh pemain.}
+	\caption{Halaman pada \textit{PC} yang menampilkan karakter yang telah ditetapkan oleh pemain.}
 	\label{fig:web3_char}
 \end{figure}
 
@@ -175,14 +175,14 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 
 \item Antarmuka halaman \textit{gameplay}
 
-	\textbf{Desktop}
+	\textbf{PC}
 	
-	Halaman ini menampilkan arena permainan untuk para pemain. Komponen halaman ini terdiri dari suatu gambar lintasan lari, dan karakter yang telah dipilih pada halaman sebelumnya. Rancangan antarmuka halaman \textit{gameplay} pada \textit{desktop} dapat dilihat pada Gambar \ref{fig:web5_gameplay2}.
+	Halaman ini menampilkan arena permainan untuk para pemain. Komponen halaman ini terdiri dari suatu gambar lintasan lari, dan karakter yang telah dipilih pada halaman sebelumnya. Rancangan antarmuka halaman \textit{gameplay} pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web5_gameplay2}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web5_gameplay2}
-	\caption{Halaman pada \textit{desktop} yang menampilkan lintasan lari dan karakter untuk dimainkan.}
+	\caption{Halaman pada \textit{PC} yang menampilkan lintasan lari dan karakter untuk dimainkan.}
 	\label{fig:web5_gameplay2}
 \end{figure}
 	Untuk menampilkan karakter yang telah dipilih kelayar \textit{PC}, ada beberapa langkah yang harus dilakukan. Langkah-langkah tersebut akan dijelaskan sebagai berikut:
@@ -193,6 +193,19 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 		
 		 
 	\end{itemize}
+	
+	Untuk menampilkan karakter kelayar \textit{PC} saat proses animasi, ada beberapa langkah yang harus dilakukan. Langkah-langkah tersebut dijelaskan sebagai berikut:
+	\begin{enumerate}
+		\item \textit{Canvas} akan menetapkan properti \textit{globalCompositeOperation} dengan nilai \textit{destination-over}. Nilai tersebut akan menyebabkan objek yang ditaruh pada \textit{canvas} saat ini, akan berada dibelakang objek sebelumnya.
+		
+		\item \textit{State} dari \textit{canvas} akan diubah ulang dengan cara menghilangkan seluruh objek yang berada didalam \textit{canvas}. Proses tersebut akan dilakukan dengan menggunakan \textit{method clearRect(0, 0, 900, 600)}.
+		
+		\item Proses pengecekan akan dilakukan kepada seluruh pemain. Apabila pemain berada pada posisi x dan y tertentu, maka \textit{state} dari \textit{canvas} akan disimpan dengan menggunakan \textit{save()}. Setelah itu, karakter milik kedua pemain akan digambar ke \textit{canvas} dengan menggunakan \textit{drawImage()}. Setelah proses tersebut selesai, maka seluruh \textit{state} dari \textit{canvas} akan dikembalikan ke \textit{state} sebelumnya dengan menggunakan \textit{restore()}.
+		
+		\item Setelah proses pengecekan selesai, \textit{state} dari \textit{canvas} akan dikembalikan ke \textit{state} sebelumnya dengan menggunakan \textit{restore()}. Setelah itu akan dilakukan proses penggambaran lintasan lari dengan menggunakan drawImage(). Posisi lintasan lari yang digambar akan berada dibelakang gambar karakter yang sudah digambar sebelumnya. 
+		
+		\item Proses ini akan diulang kembali dari awal selama waktu permainan berjalan.
+	\end{enumerate}
 
 	\textbf{Smartphone}
 	
@@ -207,14 +220,14 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 
 \item Antarmuka halaman \textit{gameover}
 
-	\textbf{Desktop}
+	\textbf{PC}
 	
-	Halaman ini menampilkan para pemenang yang telah berhasil menyelesaikan permainan. Setelah pemain selesai bermain, pemain dapat menekan tombol \textit{back} untuk kembali ke halaman utama dan mengakhiri permainan. Rancangan antarmuka halaman \textit{gameover} pada \textit{desktop} dapat dilihat pada Gambar \ref{fig:web6_winning}.
+	Halaman ini menampilkan para pemenang yang telah berhasil menyelesaikan permainan. Setelah pemain selesai bermain, pemain dapat menekan tombol \textit{back} untuk kembali ke halaman utama dan mengakhiri permainan. Rancangan antarmuka halaman \textit{gameover} pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web6_winning}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web6_winning}
-	\caption{Halaman pada \textit{desktop} yang menampilkan pemenang permainan.}
+	\caption{Halaman pada \textit{PC} yang menampilkan pemenang permainan.}
 	\label{fig:web6_winning}
 \end{figure}
 
@@ -413,7 +426,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 				\item \textbf{jquery-3.3.1.min.js} \\ Berkas ini merupakan \textbf{jquery} yang menyediakan fungsi-fungsi dalam pengiriman dan penerimaan data yang dilakukan \textit{client} dan \textit{server}. 
 			\end{itemize}
 		
-			\item \textbf{charDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman pemilihan karakter di \textit{desktop browser} pada saat diakses oleh \textit{client}.
+			\item \textbf{charDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman pemilihan karakter di \textit{PC browser} pada saat diakses oleh \textit{client}.
 			
 			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
@@ -471,34 +484,34 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 				\end{itemize}
 			\end{itemize}
 			
-			\item \textbf{gamePlayDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman permainan di \textit{desktop browser} pada saat diakses oleh \textit{client}.
+			\item \textbf{gamePlayDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman permainan di \textit{PC browser} pada saat diakses oleh \textit{client}.
 			
 			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
-				\item \textbf{canvas}
-				\item \textbf{ctx}
-				\item \textbf{ctx2}
-				\item \textbf{track}
-				\item \textbf{timer1}
-				\item \textbf{timer2}
-				\item \textbf{timer3}
-				\item \textbf{player1Char}
-				\item \textbf{player2Char}
-				\item \textbf{dataOfPlayer}
-				\item \textbf{player1Val}
-				\item \textbf{player2Val}
-				\item \textbf{winner}
-				\item \textbf{timerArray}
-				\item \textbf{charArray}
-				\item \textbf{arrOfPlayerChar}
-				\item \textbf{aniFrame}
-				\item \textbf{aniFrame2}
-				\item \textbf{progressPlayer1}
-				\item \textbf{progressPlayer2}
-				\item \textbf{xPosition1}
-				\item \textbf{yPosition1}
-				\item \textbf{xPosition2}
-				\item \textbf{yPosition2}
+				\item \textbf{canvas}, elemen \textit{canvas} yang ada pada berkas HTML.
+				\item \textbf{ctx} , menyimpan fungsi-fungsi konteks 2d milik \textit{Canvas API} untuk pemain pertama.
+				\item \textbf{ctx2}, menyimpan fungsi-fungsi konteks 2d milik \textit{Canvas API} untuk pemain kedua.
+				\item \textbf{track}, gambar lintasan lari.
+				\item \textbf{timer1}, gambar angka 1 yang akan digunakan pada \textit{countdown}.
+				\item \textbf{timer2}, gambar angka 2 yang akan digunakan pada \textit{countdown}.
+				\item \textbf{timer3}, gambar angka 3 yang akan digunakan pada \textit{countdown}.
+				\item \textbf{player1Char},  gambar karakter milik pemain pertama.
+				\item \textbf{player2Char}, gambar karakter milik pemain kedua.
+				\item \textbf{dataOfPlayer}, menyimpan data kedua pemain.
+				\item \textbf{player1Val}, menyimpan nilai karakter pemain pertama yang telah dipilih.
+				\item \textbf{player2Val}, menyimpan nilai karakter pemain kedua yang telah dipilih.
+				\item \textbf{winner}, menyimpan pemain pemenang.
+				\item \textbf{timerArray}, menyimpan kumpulan gambar angka untuk proses \textit{coundown}.
+				\item \textbf{charArray}, menyimpan kumpulan gambar karakter.
+				\item \textbf{arrOfPlayerChar}, menyimpan kedua karakter yang telah dipilih oleh pemain.
+				\item \textbf{aniFrame}, menyimpan \textit{animation frame} yang digunakan untuk proses animasi karakter pemain pertama.
+				\item \textbf{aniFrame2}, menyimpan \textit{animation frame} yang digunakan untuk proses animasi karakter pemain kedua.
+				\item \textbf{progressPlayer1}, menyimpan kemajuan suatu posisi karakter yang digerakan pada lintasan lari milik pemain pertama.
+				\item \textbf{progressPlayer2}, menyimpan kemajuan suatu posisi karakter yang digerakan pada lintasan lari milik pemain kedua.
+				\item \textbf{xPosition1}, menyimpan posisi karakter pemain pertama pada sumbu x.
+				\item \textbf{yPosition1}, menyimpan posisi karakter pemain pertama pada sumbu y.
+				\item \textbf{xPosition2}, menyimpan posisi karakter pemain kedua pada sumbu x.
+				\item \textbf{yPosition2}, menyimpan posisi karakter pemain kedua pada sumbu y.
 			\end{itemize}
 			
 			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
@@ -583,7 +596,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 				Berfungsi untuk memancarkan \textit{event} stepClicked pada saat pemain menekan tombol telapak kaki dilayar \textit{smartphone}.
 			\end{itemize}
 			
-			\item \textbf{homeScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman utama di \textit{desktop browser} dan \textit{mobile browser} pada saat diakses oleh \textit{client}.
+			\item \textbf{homeScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman utama di \textit{PC browser} dan \textit{mobile browser} pada saat diakses oleh \textit{client}.
 			
 			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
@@ -631,7 +644,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 				Berfungsi untuk menangkap \textit{event} toCharPage yang dipancarkan oleh \textit{server} pada saat akan berpindah halaman ke halaman pemilihan karakter.
 			\end{itemize}
 			
-			\item \textbf{syncScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman proses permintaan koneksi di \textit{desktop browser} pada saat diakses oleh \textit{client}.
+			\item \textbf{syncScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman proses permintaan koneksi di \textit{PC browser} pada saat diakses oleh \textit{client}.
 			
 			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
@@ -676,7 +689,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 				
 			\end{itemize}
 			
-			\item \textbf{winningDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman saat permainan telah selesai di \textit{desktop browser} pada saat diakses oleh \textit{client}.
+			\item \textbf{winningDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman saat permainan telah selesai di \textit{PC browser} pada saat diakses oleh \textit{client}.
 			
 			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
@@ -740,21 +753,21 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 		Folder ini berisi bagian-bagian yang berfungsi untuk menghias setiap halaman yang terdapat didalam web. Pada folder ini terdapat berbagai berkas dengan ekstensi \textbf{.css}. Berikut akan dijelaskan isi dari folder ini:
 		
 		\begin{enumerate}
-			\item \textbf{charDesktopStyle.css}, Berkas ini berfungsi untuk menghias halaman pemilihan karakter pada \textit{desktop browser}.
+			\item \textbf{charDesktopStyle.css}, Berkas ini berfungsi untuk menghias halaman pemilihan karakter pada \textit{PC browser}.
 			
 			\item \textbf{charMobileStyle.css}, Berkas ini berfungsi untuk menghias halaman pemilihan karakter pada \textit{mobile browser}.
 			
-			\item \textbf{gamePlayDesktopStyle.css}, Berkas ini berfungsi untuk menghias halaman permainan pada \textit{desktop browser}.
+			\item \textbf{gamePlayDesktopStyle.css}, Berkas ini berfungsi untuk menghias halaman permainan pada \textit{PC browser}.
 			
 			\item \textbf{gamePlayMobileStyle.css}, Berkas ini berfungsi untuk menghias halaman permainan pada \textit{mobile browser}.
 			
-			\item \textbf{homeStyle.css}, Berkas ini berfungsi untuk menghias halaman utama pada \textit{desktop browser} dan \textit{mobile browser}.
+			\item \textbf{homeStyle.css}, Berkas ini berfungsi untuk menghias halaman utama pada \textit{PC browser} dan \textit{mobile browser}.
 			
 			\item \textbf{mobileStyle.css}, Berkas ini berfungsi untuk menghias halaman proses permintaan koneksi pada \textit{mobile browser}.
 			
-			\item \textbf{Nickname\_DEMO.otf}, Berkas ini berfungsi sebagai tipe \textit{font} yang digunakan di beberapa halaman yang terdapat pada web.
+			\item \textbf{Nickname\_DEMO.otf\footnote{\url{http://pizzadude.dk/site/fonts/nickname}, diakses 12 September 2018}}, Berkas ini berfungsi sebagai tipe \textit{font} yang digunakan di beberapa halaman yang terdapat pada web.
 			
-			\item \textbf{syncStyle.css}, Berkas ini berfungsi untuk menghias halaman proses permintaan koneksi pada \textit{desktop browser}.
+			\item \textbf{syncStyle.css}, Berkas ini berfungsi untuk menghias halaman proses permintaan koneksi pada \textit{PC browser}.
 			
 			\item \textbf{winningDesktopStyle.css}, Berkas ini berfungsi untuk menghias halaman saat permainan telah selesai pada \textit{mobile browser}.
 			
@@ -790,9 +803,9 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 	Folder ini berisi bagian-bagian yang berfungsi untuk menampilkan halaman-halaman kepada \textit{client}. Folder ini memiliki berkas dengan ekstensi \textbf{.ejs}. Sama seperti ekstensi \textbf{.html}, ekstensi tersebut akan menampilkan berbagai tampilan dengan menggunakan \textit{syntax} \textbf{.html}. Berikut merupakan isi dari folder ini:
 	
 	\begin{enumerate}
-		\item \textbf{error.ejs}, berkas ini berfungsi untuk menampilkan halaman apabila terjadi kesalahan dalam mengakses halaman utama.
+		\item \textbf{error.ejs}, berkas ini berisi \textit{template} yang akan menampilkan halaman \textit{error} apabila terjadi kesalahan dalam mengakses web. Halaman ini akan ditampilkan oleh \textit{router}.
 		
-		\item \textbf{home.ejs}, berkas ini berfungsi untuk menampilkan halaman utama pada saat \textit{client} mengakses alamat web.
+		\item \textbf{home.ejs}, berkas ini berisi \textit{template} yang akan menampilkan halaman awal pada saat pengguna mengakses web. Halaman ini akan ditampilkan oleh \textit{router}.
 	\end{enumerate}
 	
 	

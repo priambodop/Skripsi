@@ -550,7 +550,7 @@ Properti ini akan menetapkan nilai \textit{globalCompositeOperation} menjadi \te
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{Gambar/canvas_destination}
+	\includegraphics[scale=0.45]{Gambar/canvas_destination}
 	\caption{Efek \textit{destination-over}}
 	\label{fig:canvas_destination}
 \end{figure}
@@ -678,7 +678,7 @@ Berdasarkan hasil analisis pada subbab \ref{alur}, akan dibentuk empat \textit{u
 	
 	\item \textbf{Memainkan permainan}, pemain dapat memainkan permainan dengan menekan tombol-tombol yang ada di \textit{smartphone}.
 	
-	\item \textbf{Memutus koneksi}, pemain dapat memutus koneksi untuk keluar dari permainan.
+	\item \textbf{Mengakhiri permainan}, pemain dapat mengakhiri permainan dengan memutus koneksi Socket.io.
 \end{itemize}
 
 \subsection{Skenario \textit{Use Case}}
@@ -782,11 +782,11 @@ Berdasarkan hasil analisis pada subbab \ref{alur}, akan dibentuk empat \textit{u
 
 
 \section{Analisis Aristektur Finger For Life}
-Arsitektur Finger For Life dapat dilihat pada Gambar \ref{ars_fingerforlife} . Jumlah \textit{Client} dalam permainan ini adalah tiga. \textit{Client} tersebut antara lain \textit{host}, \textit{player 1}, dan \textit{player 2}. Apabila \textit{player 1} akan mengirimkan data untuk diproses oleh \textit{host}, maka data tersebut akan dikirimkan terlebih dahulu kepada \textit{server}, kemudian dilanjutkan kepada \textit{host}.
+Arsitektur Finger For Life dapat dilihat pada Gambar \ref{fig:ars_fingerforlife} . Jumlah \textit{Client} dalam permainan ini adalah tiga. \textit{Client} tersebut antara lain \textit{host}, \textit{player 1}, dan \textit{player 2}. Apabila \textit{player 1} akan mengirimkan data untuk diproses oleh \textit{host}, maka data tersebut akan dikirimkan terlebih dahulu kepada \textit{server}, kemudian dilanjutkan kepada \textit{host}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{Gambar/ars_fingerforlife}
+	\includegraphics[scale=0.45]{Gambar/ars_fingerforlife}
 	\caption{Arsitektur Finger For Life}
 	\label{fig:ars_fingerforlife}
 \end{figure}
@@ -803,12 +803,12 @@ Subbab ini akan menjelaskan bagaimana teknologi Socket.io digunakan dalam implem
 	\item \textbf{Komunikasi antara \textit{client} dan \textit{server}} \\
 	Pada aplikasi permainan berbasis web ini, akan banyak dibutuhkan proses komunikasi antara sesama \textit{client} maupun dengan \textit{server}. Komunikasi yang dilakukan harus secara \textit{real-time}, agar interaksi didalam permainan dapat berjalan pada saat permainan dimainkan.
 	
-	Interaksi tersebut akan dilakukan berdasarkan \textit{event}. Suatu \textit{event} akan dipancarkan kedalam suatu \textit{stream}, dimana \textit{stream} akan berisi berbagai \textit{event} yang telah dipancarkan, yang menunggu untuk ditangkap oleh fungsi tertentu. Pada saat \textit{client} akan berkomunikasi dengan \textit{client} lain, maka \textit{event} yang dipancarkan akan ditangkap oleh \textit{server} sebelum kemudian dilanjutkan kepada \textit{client} lain. Arsitektur interaksi antara \textit{client} dan \textit{server} dapat dilihat pada Gambar \ref{ars_socketio}.
+	Interaksi tersebut akan dilakukan berdasarkan \textit{event}. Suatu \textit{event} akan dipancarkan kedalam suatu \textit{stream}, dimana \textit{stream} akan berisi berbagai \textit{event} yang telah dipancarkan, yang menunggu untuk ditangkap oleh fungsi tertentu. Pada saat \textit{client} akan berkomunikasi dengan \textit{client} lain, maka \textit{event} yang dipancarkan akan ditangkap oleh \textit{server} sebelum kemudian dilanjutkan kepada \textit{client} lain. Arsitektur interaksi antara \textit{client} dan \textit{server} dapat dilihat pada Gambar \ref{fig:ars_socketio}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.2]{Gambar/ars_socketio}
 	\caption{Arsitektur interaksi \textit{client} dan \textit{server}}
-	\label{fig:ars_socket.io}
+	\label{fig:ars_socketio}
 \end{figure}	
 	Agar proses tersebut dapat dilakukan, maka fitur yang dimiliki oleh Socket.io akan digunakan. Fitur-fitur tersebut adalah sebagai berikut:
 	

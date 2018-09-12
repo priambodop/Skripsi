@@ -16,9 +16,9 @@ Beberapa kelas yang terdapat pada \textit{Node.js} adalah sebagai berikut:
 \subsection{HTTP}
 \textit{Interfaces} \textit{HTTP} pada \textit{Node.js} digunakan untuk menangani \textit{request} dari protokol \textit{HTTP} yang secara \textit{native} sulit untuk digunakan \cite{dahl:09:nodejsdocs}. \textit{Interface} ini akan menangani protokol \textit{HTTP} dengan tidak melakukan \textit{buffer} pada seluruh \textit{request} atau \textit{responses}.
 
-%Berikut akan dijelaskan kelas-kelas yang ada pada \textit{interface} \textit{HTTP}.
+Berikut akan dijelaskan salah satu kelas yang ada pada \textit{interface} \textit{HTTP}.
 
-%\begin{enumerate}
+\begin{enumerate}
 %	\item \textbf{http.IncomingMessage} \\ 
 %	Objek dari kelas ini akan dibuat oleh kelas \textit{http.Server} atau \textit{http.ClientRequest} dan memasukannya sebagai argumen suatu \textit{event} \textit{'request'} dan \textit{'response'}. Objek tersebut dapat digunakan untuk mengakses status \textit{response}, \textit{headers}, dan data. Kelas ini mengimplementasi \textit{interface Readable Stream}, beserta \textit{method, events,} dan properti yang ada didalamnya.
 %	
@@ -88,7 +88,7 @@ Beberapa kelas yang terdapat pada \textit{Node.js} adalah sebagai berikut:
 %\end{lstlisting}
 %	\end{itemize}
 	
-%	\item \textbf{http.Server} \\ 
+	\item \textbf{http.Server} \\ 
 %	Kelas ini merupakan turunan dari \textit{net.Server}. \textit{Event} yang dimiliki kelas ini yaitu sebagai berikut:
 %	\begin{itemize}
 %		\item \textbf{'close'} \\ Dipancarkan apabila \textit{server} sudah ditutup.
@@ -104,10 +104,10 @@ Beberapa kelas yang terdapat pada \textit{Node.js} adalah sebagai berikut:
 %		\item \textbf{server.timeout} \\ Mengembalikan \textit{number} yang menandakan \textit{timeout} dalam milidetik.
 %	\end{itemize}
 %	
-%	Beberapa \textit{Method} yang dimiliki oleh kelas ini yaitu:
-%	\begin{itemize}
-%		\item \textbf{server.listen()} \\ Memulai \textit{server HTTP} melakukan proses \textit{listening} untuk suatu koneksi.
-%		
+	Salah satu \textit{Method} yang dimiliki oleh kelas ini yaitu:
+	\begin{itemize}
+		\item \textbf{server.listen()} \\ Memulai \textit{server HTTP} melakukan proses \textit{listening} untuk suatu koneksi.
+	\end{itemize}
 %		\item \textbf{server.setTimeout([msecs][,callback])} \\ \textbf{Parameter:}
 %		\begin{itemize}
 %			\item \textbf{msec} nilai \textit{timeout} dalam milidetik. secara default bernilai 120000 (2 menit).
@@ -124,9 +124,9 @@ Beberapa kelas yang terdapat pada \textit{Node.js} adalah sebagai berikut:
 %		
 %		\textit{Method} ini menghentikan \textit{server} untuk menerima koneksi baru.
 %	\end{itemize}
-%\end{enumerate} 
+\end{enumerate} 
 
-Salah satu \textit{Method} yang dimiliki oleh \textit{HTTP} yaitu sebagai berikut:
+Beberapa satu \textit{Method} yang dimiliki oleh \textit{HTTP} yaitu sebagai berikut:
 \begin{itemize}
 	\item \textbf{http.createServer([options][,requestListener])} \\ \textbf{Parameter:}
 	\begin{itemize}
@@ -1368,7 +1368,7 @@ socket.emit('ferret', 'tobi', (data) => {
 \section{Canvas API}
 \label{sec:Canvas API}
  
-Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web \cite{canvas}. Teknologi ini memiliki fitur untuk membuat komposisi foto dan membuat animasi. Untuk dapat menggunakan fitur-fitur yang ada pada \textit{Canvas API}, langkah yang harus dilakukan adalah sebagai berikut:
+Canvas API merupakan salah satu elemen \textit{HTML5} yang digunakan untuk membuat gambar grafis dalam aplikasi web \cite{moz:04:canvasapi}. Teknologi ini memiliki fitur untuk membuat komposisi foto dan membuat animasi. Untuk dapat menggunakan fitur-fitur yang ada pada \textit{Canvas API}, langkah yang harus dilakukan adalah sebagai berikut:
 \begin{enumerate}
 	\item Menambahkan \textit{tag <canvas>} pada \textit{file HTML}, dan menambahkan \textit{id} yang akan digunakan pada \textit{file JavaScript}.
 \begin{lstlisting}
@@ -1789,12 +1789,12 @@ Beberapa \textit{method} yang dimiliki oleh \textit{interface} ini adalah sebaga
 \section{jQuery}
 \label{sec:jQuery}
 
-jQuery merupakan pustaka JavaScript yang menyediakan fitur-fitur untuk mengatur berbagai elemen HTML ~\cite{jQuery}. Pustaka ini memiliki fitur-fitur seperti memanipulasi berkas HTML, menangani suatu \textit{event}, dan mengatur jalannya animasi. jQuery dapat menyediakan fitur-fitur untuk menangani berbagai hal tersebut yang berjalan di berbagai \textit{browser} yang berbeda.
+jQuery merupakan pustaka JavaScript yang menyediakan fitur-fitur untuk mengatur berbagai elemen HTML \cite{mit:06:jquery}. Pustaka ini memiliki fitur-fitur seperti memanipulasi berkas HTML, menangani suatu \textit{event}, dan mengatur jalannya animasi. jQuery dapat menyediakan fitur-fitur untuk menangani berbagai hal tersebut yang berjalan di berbagai \textit{browser} yang berbeda.
 
 Subbab-subbab berikut akan menjelaskan beberapa \textit{method} yang dimiliki oleh jQuery.
 
 \subsection{.submit(handler)}
-\textit{Method} ini akan menyambungkan \textit{handler} suatu \textit{event} dengan \textit{"submit"} yang merupakan \textit{event} dari JavaScript, atau memancarkan \textit{event} tersebut kepada elemen tertentu ~\cite{jQueryAPI}. 
+\textit{Method} ini akan menyambungkan \textit{handler} suatu \textit{event} dengan \textit{"submit"} yang merupakan \textit{event} dari JavaScript, atau memancarkan \textit{event} tersebut kepada elemen tertentu \cite{mit:06:jQueryAPI}. 
 
 \textbf{Parameter:}
 \begin{itemize}
@@ -1818,20 +1818,20 @@ event.preventDefault();
 \end{lstlisting}
 
 \subsection{.val()}
-\textit{Method} ini akan mendapatkan nilai dari elemen-elemen \textit{form} seperti \textbf{input}, \textit{select}, dan \textit{textarea} ~\cite{jQueryAPI}. \\
+\textit{Method} ini akan mendapatkan nilai dari elemen-elemen \textit{form} seperti \textbf{input}, \textit{select}, dan \textit{textarea} \cite{mit:06:jQueryAPI}. \\
 \textbf{Kembalian:} \textit{String, Number, Array}.
 
 \subsection{.html()}
-\textit{Method} ini akan mendapatkan konten HTML dari elemen pertama yang ada didalam kumpulan elemen-elemen yang sesuai ~\cite{jQueryAPI}. \\
+\textit{Method} ini akan mendapatkan konten HTML dari elemen pertama yang ada didalam kumpulan elemen-elemen yang sesuai ~\cite{mit:06:jQueryAPI}. \\
 \textbf{Kembalian:} \textit{String}
 
 \subsection{.preventDefault()}
-Apabila \textit{method} ini dieksekusi, maka aksi \textit{default} dari suatu \textit{event} tidak akan dieksekusi ~\cite{jQueryAPI}.
+Apabila \textit{method} ini dieksekusi, maka aksi \textit{default} dari suatu \textit{event} tidak akan dieksekusi \cite{mit:06:jQueryAPI}.
 
 \section{Content Template element}
 \label{sec:template}
 
-HTML Content Template (<template>) element adalah suatu mekanisme untuk menyimpan konten milik \textit{client} agar konten tersebut tidak dimuat pada saat memuat halaman, dimana konten tersebut dapat dipakai pada saat \textit{runtime} dengan menggunakan JavaScript. 
+HTML Content Template (<template>) element adalah suatu mekanisme untuk menyimpan konten milik \textit{client} agar konten tersebut tidak dimuat pada saat memuat halaman, dimana konten tersebut dapat dipakai pada saat \textit{runtime} dengan menggunakan JavaScript \cite{moz:05:template}. 
 
 Berikut merupakan contoh penggunaan dari elemen <template>:
 
