@@ -7,16 +7,16 @@ Pada bab ini akan dijelaskan mengenai perancangan aplikasi yang akan dibangun me
 
 Pada \textit{sequence} diagram akan dibahas mengenai jalannya koneksi \textit{socket.io} dari awal koneksi mulai tersambung hingga koneksi terputus. \textit{Sequence} diagram meliputi \textit{sequence} Join Room, \textit{sequence} Choose Character, \textit{sequence} Game Begin, \textit{sequence} Winning Game.
 
-\subsection{\textit{Sequence} Join Room}
+\subsection{\textit{Sequence} Permintaan Bergabung}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{Gambar/JoinRoom}
+	\includegraphics[scale=0.25]{Gambar/JoinRoom}
 	\caption{Proses melakukan koneksi ke \textit{socket.io} dan bergabung kedalam \textit{room}.}
 	\label{fig:1_JoinRoom}
 \end{figure}
 
-Pada awal permainan, \textit{client} pertama yang melakukan koneksi pada \textit{server} adalah \textit{desktop computer}, yang berperan sebagai \textit{host} dalam permainan.\textit{Host} akan menyediakan suatu kode yang berguna sebagai \textit{room} untuk kedua pemain yang akan bergabung dengan melakukan koneksi ke \textit{server}. \textit{Room} yang disediakan hanya akan menerima tiga \textit{client} saja, yaitu \textit{host}, \textit{player1}, dan \textit{player2}.
+Pada awal permainan, \textit{client} pertama yang melakukan koneksi pada \textit{server} adalah \textit{desktop computer}, yang berperan sebagai \textit{host} dalam permainan seperti yang dijelaskan pada Gambar \ref{fig:1_JoinRoom}.\textit{Host} akan menyediakan suatu kode yang berguna sebagai \textit{room} untuk kedua pemain yang akan bergabung dengan melakukan koneksi ke \textit{server}. \textit{Room} yang disediakan hanya akan menerima tiga \textit{client} saja, yaitu \textit{host}, \textit{player1}, dan \textit{player2}. 
 
 \textit{Host} akan mengirimkan \textit{event} yang menandakan akan bergabung kedalam room, \textit{event} tersebut adalah \textbf{hostJoinRoom(id, room)}. \textit{Event} ini memiliki data yang akan dikirimkan kepada \textit{server}, data-data tersebut dijelaskan sebagai berikut:
 \begin{itemize}
@@ -39,7 +39,7 @@ Apabila kedua hal diatas tidak terpenuhi, maka pemain tidak dapat terkoneksi ke 
 
 Setelah \textit{room} berisi tiga \textit{client}, maka \textit{host} akan mengirimkan \textit{event} \textbf{roomFull(room)} kepada \textit{server}. \textit{Event} tersebut menandakan bahwa \textit{room} sudah tidak dapat menerima \textit{client} yang akan bergabung. Setelah \textit{event} tersebut diterima oleh \textit{server}, maka \textit{event} \textbf{toCharPage()} akan dipancarkan oleh \textit{server} kepada seluruh koneksi yang ada didalam \textit{room} tersebut. \textit{Event} ini berfungsi untuk mengganti halaman saat ini ke halaman selanjutnya.
 
-\subsection{\textit{Sequence} Choose Character}
+\subsection{\textit{Sequence} Memilih Karakter}
 
 \begin{figure}[H]
 	\centering
@@ -48,7 +48,7 @@ Setelah \textit{room} berisi tiga \textit{client}, maka \textit{host} akan mengi
 	\label{fig:2_ChooseCharacter}
 \end{figure}
 
-Halaman ini merupakan halaman yang dituju oleh para pemain yang telah berhasil melakukan koneksi dan bergabung kedalam \textit{room}. Para pemain akan memilih karakter yang ada pada halaman \textit{smartphone browser}, dimana karakter yang dipilih akan muncul pada halaman \textit{desktop browser}. Pemain yang memilih karakter tertentu akan mengirimkan \textit{event} \textbf{selectingChar(val, id)} kepada \textit{server}. Data-data yang dikirimkan akan dijelaskan sebagai berikut:
+Halaman ini merupakan halaman yang dituju oleh para pemain yang telah berhasil melakukan koneksi dan bergabung kedalam \textit{room}. Para pemain akan memilih karakter yang ada pada halaman \textit{smartphone browser}, dimana karakter yang dipilih akan muncul pada halaman \textit{desktop browser}.Seperti yang dijelaskan pada Gambar \ref{fig:2_ChooseCharacter}, pemain yang memilih karakter tertentu akan mengirimkan \textit{event} \textbf{selectingChar(val, id)} kepada \textit{server}. Data-data yang dikirimkan akan dijelaskan sebagai berikut:
 \begin{itemize}
 	\item \textbf{val} identifikasi unik yang dimiliki oleh masing-masing karakter.
 	\item \textbf{id} identifikasi unik yang dimiliki masing-masing \textit{client} yang terkoneksi dengan \textit{socket.io}.
@@ -59,7 +59,7 @@ Apabila pemain akan menetapkan karakter yang telah ditampilkan dihalaman \textit
 
 Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karakter yang akan dimainkan. Apabila kedua pemain telah menetapkan karakter yang akan dimainkan, \textit{host} akan memancarkan \textit{event} \textbf{charIsReady(playerData)}.Data yang dikirimkan merupakan suatu \textit{object array} yang berisi data para pemain dan data karakter yang telah dipilih.\textit{Event} tersebut berfungsi untuk memberi informasi kepada \textit{server} untuk pindah kehalaman selanjutnya.
 
-\subsection{\textit{Sequence} Game Begin}
+\subsection{\textit{Sequence} Memulai Permainan}
 
 \begin{figure}[H]
 	\centering
@@ -68,7 +68,7 @@ Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karak
 	\label{fig:3_GameBegin}
 \end{figure}
 
-Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{startTheGame(playerData)}. Data yang dikirimkan merupakan data yang didapatkan dari \textit{event} sebelumnya. \textit{Event} tersebut akan diterima oleh seluruh \textit{client} yang berada didalam \textit{room} tertentu, yang kemudian akan memulai permainannya. \textit{Host} akan mengeksekusi \textit{method} \textbf{init()} dan \textbf{beginCountDown(3)} untuk memulai permainan. \textit{Method} \textbf{init()} berfungsi untuk mulai menggambar lintasan lari di halaman saat ini yang akan menjadi tempat para karakter dimainkan. \textit{Method} \textbf{beginCountDown(3)} berfungsi untuk melakukan hitungan mundur selama tiga detik. 
+Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{startTheGame(playerData)}. Seperti yang dijelaskan pada Gambar \ref{fig:3_GameBegin}, data yang dikirimkan merupakan data yang didapatkan dari \textit{event} sebelumnya. \textit{Event} tersebut akan diterima oleh seluruh \textit{client} yang berada didalam \textit{room} tertentu, yang kemudian akan memulai permainannya. \textit{Host} akan mengeksekusi \textit{method} \textbf{init()} dan \textbf{beginCountDown(3)} untuk memulai permainan. \textit{Method} \textbf{init()} berfungsi untuk mulai menggambar lintasan lari di halaman saat ini yang akan menjadi tempat para karakter dimainkan. \textit{Method} \textbf{beginCountDown(3)} berfungsi untuk melakukan hitungan mundur selama tiga detik. 
 
 Para pemain yang menerima \textit{event} \textbf{startTheGame(playerData)} akan mengeksekusi \textit{method} \textbf{showInstruction(3)}. \textit{Method} tersebut berfungsi untuk menampilkan instruksi untuk memainkan permainan selama tiga detik. Apabila hitungan mundur telah selesai, maka permainan akan dimulai.
 
@@ -81,7 +81,7 @@ Apabila ada pemain yang berhasil menyentuh garis akhir, maka \textit{host} akan 
 \end{itemize}
 \textit{Server} akan menangkap \textit{event} tersebut dan meneruskannya dengan memancarkan \textit{event} \textbf{toWinnerPage(playerWin, playerCharArr)} ke setiap \textit{client} pada \textit{room} tertentu. \textit{Event} tersebut berfungsi untuk berpindah ke halaman selanjutnya.
 
-\subsection{\textit{Sequence} Winning Game}
+\subsection{\textit{Sequence} Mengakhiri Permainan}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.3]{Gambar/WinningPage}
@@ -89,7 +89,7 @@ Apabila ada pemain yang berhasil menyentuh garis akhir, maka \textit{host} akan 
 	\label{fig:4_WinningPage}
 \end{figure}
 
-Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{getTheWinner(playerWin, playerCharArr)} dengan data-data yang diterima dari \textit{event} sebelumnya. \textit{Host} akan menerima \textit{event} tersebut dan akan mengeksekusi \textit{method} \textbf{drawWinner()}. \textit{Method} tersebut berfungsi untuk menampilkan karakter milik para pemenang yang telah selesai bermain. Para pemain akan menerima \textit{event} yang dipancarkan oleh \textit{server} dan mengeksekusi \textit{method} \textbf{showGameOver()}. \textit{Method} ini akan menampilkan teks yang menunjukan bahwa permainan telah selesai.
+Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{getTheWinner(playerWin, playerCharArr)} dengan data-data yang diterima dari \textit{event} sebelumnya. Seperti yang dijelaskan pada Gambar \ref{fig:4_WinningPage} \textit{host} akan menerima \textit{event} tersebut dan akan mengeksekusi \textit{method} \textbf{drawWinner()}. \textit{Method} tersebut berfungsi untuk menampilkan karakter milik para pemenang yang telah selesai bermain. Para pemain akan menerima \textit{event} yang dipancarkan oleh \textit{server} dan mengeksekusi \textit{method} \textbf{showGameOver()}. \textit{Method} ini akan menampilkan teks yang menunjukan bahwa permainan telah selesai.
 
 Apabila pemain menekan tombol \textit{back} yang ada pada halaman \textit{browser}, maka \textit{host} akan memancarkan \textit{event} \textbf{goBackHome()}. \textit{Event} tersebut akan diterima oleh \textit{server} dan akan diteruskan dengan memancarkan \textit{event} \textbf{backHome()}. Selurh \textit{client} didalam \textit{room} yang menerima \textit{event} tersebut akan kembali kehalaman semula dan koneksi pun akan terputus.
 
@@ -185,6 +185,14 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka pada \texti
 	\caption{Halaman pada \textit{desktop} yang menampilkan lintasan lari dan karakter untuk dimainkan.}
 	\label{fig:web5_gameplay2}
 \end{figure}
+	Untuk menampilkan karakter yang telah dipilih kelayar \textit{PC}, ada beberapa langkah yang harus dilakukan. Langkah-langkah tersebut akan dijelaskan sebagai berikut:
+	\begin{itemize}
+		\item \textit{Client smartphone} akan mengirimkan nilai dari karakter tertentu yang dipilih. Nilai tersebut dikirimkan melalui \textit{event} Socket.io yang dipancarkan dengan nama \textit{sendingChar}. \textit{Server} akan menangkap \textit{event} tersebut, kemudian akan memancarkan \textit{event startTheGame}, dimana \textit{event} tersebut akan ditangkap oleh \textit{host} untuk memulai permainan.
+		
+		\item \textit{Host} akan mulai menggambar karakter pada \textit{canvas} setelah mendapatkan data-data yang dikirimkan melalui \textit{event startTheGame}.
+		
+		 
+	\end{itemize}
 
 	\textbf{Smartphone}
 	
