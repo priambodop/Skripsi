@@ -176,7 +176,100 @@ Hasil implementasi berupa aplikasi berbasis web yang berjalan berdasarkan Node.j
 \section{Pengujian}
 
 \subsection{Pengujian Fungsional}
-Pengujian fungsional dilakukan untuk mengetahui kesesuaian reaksi perangkat lunak dengan reaksi yang diharapkan berdasarkan aksi pengguna terhadap perangkat lunak. Pengujian fungsional terbagi menjadi dua, yaitu pengujian fungsional pada \textit{PC} dan pada \textit{smartphone}.
+Pengujian fungsional dilakukan untuk mengetahui kesesuaian reaksi perangkat lunak dengan reaksi yang diharapkan berdasarkan aksi pengguna terhadap perangkat lunak. Pada saat pengujian fungsional dilakukan, penulis menemukan beberapa masalah yang muncul pada program aplikasi. Masalah tersebut muncul pada beberapa tahapan saat program dijalankan. Berdasarkan masalah-masalah yang ditemukan, penulis juga mendapatkan solusi atas masalah yang ada. Berikut akan dijelaskan beberapa masalah yang ditemukan, beserta proses memecahkan masalah yang telah dilakukan.
+
+\begin{enumerate}
+	\item \textbf{Halaman \textit{home}}
+	\begin{itemize}
+		\item \textbf{Masalah:} \\
+		Tampilan home pada smartphone terkadang muncul gambar jari. Masalah ini ditemukan pada \textit{smartphone} dengan resolusi layar yang berbeda-beda. Apabila ada \textit{smartphone} dengan resolusi lebih besar dibanding yang lainnya, maka gambar jari muncul dilayar.
+		
+		\item \textbf{Solusi:} \\
+		Solusi dari masalah ini adalah dengan menggunakan fitur dari CSS yaitu \textit{@media querry}. Fitur ini dapat mengatur pada resolusi berapakah suatu elemen ditampilkan kelayar. Berikut merupakan potongan kode solusi dari masalah ini.
+		
+\begin{lstlisting}[caption={Fitur CSS \textit{@media querry}}, label={lst:mediaQuerry},captionpos=b]
+@media (max-width:1260px){
+	#left, #right, #startButton{
+		display: none;
+		float: none;
+	}
+			
+	#joinButton{
+		visibility: visible;
+		width: 85%;
+	}
+}
+\end{lstlisting}
+	\end{itemize}
+
+	\item \textbf{Halaman permintaan bergabung}
+	\begin{itemize}
+		\item \textbf{Masalah:} \\
+		Pada saat kedua pemain menyelesaikan permainan dan menekan tombol \textit{exit}, kemudian kedua pemain akan mengulang permainan dengan menuju ke halaman permintaan bergabung. Pada tahap ini, salah satu pemain tidak dapat bergabung kedalam \textit{room}. \\
+		
+		\textit{Error} ini terjadi akibat penggunaan elemen jQuery pada halaman permintaan bergabung, yaitu elemen \textit{.submit()}. Pada saat pemain akan bermain kedua kalinya dan sampai dihalaman permintaan bergabung, elemen \textit{submit()} akan mengirimkan kode room lebih dari satu kali. Dengan begitu, \textit{server} akan mengira bahwa ada dua pemain yang sudah bergabung, sehingga halaman langsung berpindah kehalaman selanjutnya. Padahal pemain kedua belum mengisi kode \textit{room} dan belum mengirimkan ke \textit{server}.
+		
+		\item \textbf{Solusi:} \\
+		Solusi dari masalah ini adalah dengan menghilangkan elemen \textit{submit()}, kemudian diganti dengan menggunakan Socket.io untuk memancarkan \textit{event} pada saat tombol \textit{send} ditekan. Berikut merupakan potongan kode dari solusi masalah ini.
+		
+\begin{lstlisting}[caption={Proses memancarkan \textit{event}}, label={lst:emitEvent},captionpos=b]
+function requestToJoin(){
+	socket.emit('requestToJoin', {
+		id: socket.id,
+		room: $('#code').val()
+	});
+}
+\end{lstlisting}	
+	\end{itemize}
+	
+	\item \textbf{Halaman pemilihan karakter}
+	\begin{itemize}
+		\item \textbf{Masalah:} \\
+		Pada saat salah satu pemain menekan tombol \textit{choose} dua kali, halaman langsung pindah kehalaman \textit{gameplay} disaat pemain kedua belum memilih karakter. \\
+		
+		\textit{Error} terjadi karena pada saat pemain menekan tombol choose, seluruh data langsung dikirimkan ke \textit{server} sehingga \textit{server} menangkap sudah ada satu pemain yang berhasil mengirimkan data karakter. Apabila ditekan dua kali, maka akan dianggap sudah ada dua pemain yang mengirimkan data karakter. Dengan begitu halaman pun berpindah.
+		
+		\item \textbf{Solusi:} \\
+		Solusi untuk masalah ini adalah dengan menggunakan JavaScript untuk menangani tombol \textit{choose}, sehingga pemain tidak dapat mengirimkan data apabila belum memilih karakter. Setelah itu, tombol \textit{choose}  milik pemain yang telah memilih karakter akan dinonaktifkan, sehingga tidak dapat ditekan dua kali. Berikut merupakan potongan kode dari solusi masalah ini:
+		
+\begin{lstlisting}[caption={Proses menangani tombol \textit{choose}}, label={lst:tombolChoose},captionpos=b]
+var valButton = $('input[name="radioChar"]:checked').val();
+	if (valButton === undefined) {
+	alert("You have not choose a character.");
+}
+else{
+	socket.emit('sendingChar', {
+	val: valButton,
+	id: socket.id,
+	marker: 1
+});
+document.getElementById("nextButton").disabled = true;
+}
+\end{lstlisting}
+	\end{itemize}
+
+	\item \textbf{Halaman pemilihan karakter}
+	\begin{itemize}
+		\item \textbf{Masalah:} \\
+		Pada saat memilih karakter, setelah ditekan karakternya pada \textit{smartphone}, karakter tidak muncul dilayar \textit{PC}.\\
+		
+		\textit{Error} ini terjadi karena adanya kesalahan pengiriman data pada saat proses bergabung kedalam \textit{room}. Yang masuk kedalam \textit{room} hanya satu pemain saja, sedangkan pemain kedua tidak mengirimkan data kepada \textit{server} sehingga tidak masuk kedalam \textit{room}.
+		
+		\item \textbf{Solusi:} \\
+		Solusi untuk masalah ini adalah dengan menggunakan JavaScript untuk menangani tombol \textit{choose}, sehingga pemain tidak dapat mengirimkan data apabila belum memilih karakter. Setelah itu, tombol \textit{choose}  milik pemain yang telah memilih karakter akan dinonaktifkan, sehingga tidak dapat ditekan dua kali. Berikut merupakan potongan kode dari solusi masalah ini:
+		
+\begin{lstlisting}[caption={Proses menangani tombol \textit{choose}}, label={lst:tombolChoose2},captionpos=b]
+function requestToJoin(){
+	socket.emit('requestToJoin', {
+		id: socket.id,
+		room: $('#code').val()
+	});
+}
+\end{lstlisting}
+	\end{itemize}
+\end{enumerate}
+
+Pengujian fungsional terbagi menjadi dua, yaitu pengujian fungsional pada \textit{PC} dan pada \textit{smartphone}.
 
 \textbf{PC} \\
 \begin{tabular}{|p{0.28cm}| p{3.5cm}| p{7cm}| p{2.5cm}|} \hline
@@ -207,7 +300,7 @@ Pengujian fungsional dilakukan untuk mengetahui kesesuaian reaksi perangkat luna
 \subsection{Pengujian Eksperimental}
 
 \begin{enumerate}
-	\item \textbf{Pengujian \textit{Cross-Browser}}
+	\item \textbf{Pengujian \textit{Cross-Platform}}
 	
-	\item \textbf{Pengujian Pada Responden}
+	\item \textbf{Pengujian \textit{latency}}
 \end{enumerate}

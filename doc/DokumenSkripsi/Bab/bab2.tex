@@ -16,7 +16,7 @@ Beberapa kelas yang terdapat pada \textit{Node.js} adalah sebagai berikut:
 \subsection{HTTP}
 \textit{Interfaces} \textit{HTTP} pada \textit{Node.js} digunakan untuk menangani \textit{request} dari protokol \textit{HTTP} yang secara \textit{native} sulit untuk digunakan \cite{dahl:09:nodejsdocs}. \textit{Interface} ini akan menangani protokol \textit{HTTP} dengan tidak melakukan \textit{buffer} pada seluruh \textit{request} atau \textit{responses}.
 
-Berikut akan dijelaskan salah satu kelas yang ada pada \textit{interface} \textit{HTTP}.
+Subbab berikut akan menjelaskan salah satu kelas yang ada pada \textit{interface} \textit{HTTP}.
 
 \begin{enumerate}
 %	\item \textbf{http.IncomingMessage} \\ 
@@ -367,14 +367,10 @@ Salah satu method yang dimiliki oleh modul \textit{Path} adalah :
 Pada aplikasi berbasis \textit{Node.js}, setiap \textit{file} yang terdapat dalam pembangunan aplikasi dianggap sebagai modul-modul yang terpisah satu sama lain \cite{dahl:09:nodejsdocs}. Variabel dan fungsi yang terdapat pada satu \textit{file}, atau modul, hanya dapat digunakan pada satu lingkup modul tersebut. Suatu modul tidak dapat menggunakan variabel atau fungsi yang terdapat pada modul lainnya. Oleh karena itu, apabila variabel dan fungsi yang terdapat pada satu modul dapat digunakan oleh modul yang lain, diperlukan cara tertentu. Cara tersebut dapat dilakukan seperti berikut:
 
 \begin{lstlisting}
-module.exports = functions
-
-\\OR
-
-module.exports = object
+module.exports = functions || object
 \end{lstlisting}
 
-\textit{module.exports} merupakan objek yang dibentuk oleh sistem \textit{Module}. Dengan menggunakan cara ini, suatu modul dapat berubah menjadi global dan dapat diakses oleh modul-modul lain.
+\textit{module.exports} merupakan objek yang dibentuk oleh sistem \textit{Module}. \textit{Functions} dan \textit{object} merupakan fungsi dan objek yang merupakan elemen-elemen dari modul tertentu, yang dapat dirubah menjadi global agar dapat diakses oleh modul lain. Dengan menggunakan cara ini, suatu modul dapat berubah menjadi global dan dapat diakses oleh modul-modul lain.
 
 %------------- END OF NODE.JS --------------
 
@@ -389,7 +385,7 @@ var app = express();
 
 Dengan begitu, fitur-fitur yang terdapat pada \textit{Express.js} dapat digunakan untuk pengembangan aplikasi tertentu.
 
-subbab-subbab berikut akan menjelaskan kelas-kelas yang terdapat pada \textit{Express.js}.
+Subbab-subbab berikut akan menjelaskan kelas-kelas yang terdapat pada \textit{Express.js}.
 
 \subsection{express()}
 Untuk membuat aplikasi \textit{Express}, langkah yang dilakukan adalah sebagai berikut:
