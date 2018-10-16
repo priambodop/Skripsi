@@ -272,35 +272,126 @@ function requestToJoin(){
 Pengujian fungsional yang dilakukan terbagi menjadi dua, yaitu pengujian fungsional pada \textit{PC} dan pada \textit{smartphone}.
 
 \textbf{PC} \\
-\begin{tabular}{|p{0.28cm}| p{3.5cm}| p{7cm}| p{2.5cm}|} \hline
-	No. & Aksi Pengguna & Reaksi yang diharapkan & Reaksi perangkat lunak \\ \hline
-	1 & Pengguna menjalankan aplikasi & Halaman \textit{home} akan ditampilkan & sesuai \\ \hline
-	2 & Pengguna menekan tombol \textit{start} & Halaman akan diarahkan menuju halaman pemintaan bergabung & sesuai \\ \hline
-	3 & Pengguna melakukan proses sinkronisasi \textit{PC} dan \textit{smartphone}. & Jika pemain pertama berhasil bergabung kedalam \textit{room}, maka pada layar \textit{PC} akan muncul pesan "Player 1 has join the room" & sesuai \\ \hline
-	 &  & Jika pemain kedua berhasil bergabung kedalam \textit{room}, maka pada layar \textit{PC} akan muncul pesan "Player 2 has join the room", kemudian halaman langsung diarahkan menuju halaman pemilihan karakter & sesuai \\ \hline
-	4 & Pengguna melakukan proses pemilihan karakter & Jika para pemain memilih karakter, maka kedua karakter yang dipilih akan ditampilkan kelayar \textit{PC} & sesuai \\ \hline
-	 &  & Jika para pemain telah menetapkan karakter yang dipilih, maka halaman akan diarahkan menuju halaman permainan & sesuai \\ \hline
-	5 & Pengguna mulai memainkan permainan & Karakter milik pemain bergerak melalui lintasan lari selama permainan dan akan diarahkan kehalaman permainan berakhir apabila ada yang menyentuh garis akhir lebih dulu & sesuai \\ \hline
-	6 & Pengguna menekan tombol \textit{exit} & Permainan berakhir dan halaman diarahkan kembali menuju halaman \textit{home} & sesuai \\ \hline
-\end{tabular} \\
+\begin{table}[H]
+	\centering
+	\caption{Tabel Pengujian Fungsional pada \textit{PC}}
+	\begin{tabular}{|p{0.35cm}| p{3.5cm}| p{7cm}| p{2.5cm}|} \hline
+		No. & Aksi Pengguna & Reaksi yang diharapkan & Reaksi perangkat lunak \\ \hline
+		1 & Pengguna menjalankan aplikasi & Halaman \textit{home} akan ditampilkan & sesuai \\ \hline
+		2 & Pengguna menekan tombol \textit{start} & Halaman akan diarahkan menuju halaman pemintaan bergabung & sesuai \\ \hline
+		3 & Pengguna melakukan proses sinkronisasi \textit{PC} dan \textit{smartphone}. & Jika pemain pertama berhasil bergabung kedalam \textit{room}, maka pada layar \textit{PC} akan muncul pesan "Player 1 has join the room" & sesuai \\ \hline
+		&  & Jika pemain kedua berhasil bergabung kedalam \textit{room}, maka pada layar \textit{PC} akan muncul pesan "Player 2 has join the room", kemudian halaman langsung diarahkan menuju halaman pemilihan karakter & sesuai \\ \hline
+		4 & Pengguna melakukan proses pemilihan karakter & Jika para pemain memilih karakter, maka kedua karakter yang dipilih akan ditampilkan kelayar \textit{PC} & sesuai \\ \hline
+		&  & Jika para pemain telah menetapkan karakter yang dipilih, maka halaman akan diarahkan menuju halaman permainan & sesuai \\ \hline
+		5 & Pengguna mulai memainkan permainan & Karakter milik pemain bergerak melalui lintasan lari selama permainan dan akan diarahkan kehalaman permainan berakhir apabila ada yang menyentuh garis akhir lebih dulu & sesuai \\ \hline
+		6 & Pengguna menekan tombol \textit{exit} & Permainan berakhir dan halaman diarahkan kembali menuju halaman \textit{home} & sesuai \\ \hline
+	\end{tabular}
+	\label{table:fungsionalPC}
+\end{table} 
 
 \textbf{Smartphone} \\
-\begin{tabular}{|p{0.28cm}| p{3.5cm}| p{7cm}| p{2.5cm}|} \hline
-	No. & Aksi Pengguna & Reaksi yang diharapkan & Reaksi perangkat lunak \\ \hline
-	1 & Penggunan menjalankan aplikasi & Halaman \textit{home} ditampilkan & sesuai \\ \hline 
-	2 & Pengguna menekan tombol \textit{join} & Halaman akan diarahkan menuju halaman permintaan bergabung & sesuai \\ \hline
-	3 & Pengguna memasukan kode \textit{room} dan menekan tombol \textit{send} & Jika kode \textit{room} sesuai, maka akan muncul pesan "Welcome to the game !" & sesuai \\ \hline
-	 & & Jika kedua pemain berhasil bergabung, maka halaman akan diarahkan menuju halaman pemilihan karakter & sesuai \\ \hline
-	4 & Pengguna menekan karakter pada layar \textit{smartphone} & Karakter yang ditekan akan ditampilkan dilayar \textit{PC} & sesuai \\ \hline
-	 & & Jika kedua pemain telah memilih karakter, maka halaman akan diarahkan menuju halaman permainan & sesuai \\ \hline
-	5 & Pengguna menekan tombol telapak kaki secara berulang selama permainan & Karakter pada layar \textit{PC} akan bergerak & sesuai\\ \hline
-	 & & Jika ada pemain yang lebih dulu mencapai garis akhir, maka halaman akan diarahkan menuju halaman permainan berakhir & sesuai \\ \hline
-	6 & Pengguna mengakhiri permainan & Halaman diarahkan kembali menuju halaman \textit{home} & sesuai \\ \hline
-\end{tabular}
+\begin{table}[H]
+	\centering
+	\caption{Tabel Pengujian Fungsional pada \textit{smartphone}}
+	\begin{tabular}{|p{0.35cm}| p{3.5cm}| p{7cm}| p{2.5cm}|} \hline
+		No. & Aksi Pengguna & Reaksi yang diharapkan & Reaksi perangkat lunak \\ \hline
+		1 & Penggunan menjalankan aplikasi & Halaman \textit{home} ditampilkan & sesuai \\ \hline 
+		2 & Pengguna menekan tombol \textit{join} & Halaman akan diarahkan menuju halaman permintaan bergabung & sesuai \\ \hline
+		3 & Pengguna memasukan kode \textit{room} dan menekan tombol \textit{send} & Jika kode \textit{room} sesuai, maka akan muncul pesan "Welcome to the game !" & sesuai \\ \hline
+		& & Jika kedua pemain berhasil bergabung, maka halaman akan diarahkan menuju halaman pemilihan karakter & sesuai \\ \hline
+		4 & Pengguna menekan karakter pada layar \textit{smartphone} & Karakter yang ditekan akan ditampilkan dilayar \textit{PC} & sesuai \\ \hline
+		& & Jika kedua pemain telah memilih karakter, maka halaman akan diarahkan menuju halaman permainan & sesuai \\ \hline
+		5 & Pengguna menekan tombol telapak kaki secara berulang selama permainan & Karakter pada layar \textit{PC} akan bergerak & sesuai\\ \hline
+		& & Jika ada pemain yang lebih dulu mencapai garis akhir, maka halaman akan diarahkan menuju halaman permainan berakhir & sesuai \\ \hline
+		6 & Pengguna mengakhiri permainan & Halaman diarahkan kembali menuju halaman \textit{home} & sesuai \\ \hline
+	\end{tabular}
+	\label{table:fungsionalSmartphone}
+\end{table}
 \subsection{Pengujian Eksperimental}
+Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{smartphone} dan \textit{PC} yang berbeda-beda. Setiap responden diminta untuk mengakses URL yang diberikan melalui \textit{smartphone} dan \textit{PC} milik masing-masing dan memastikan apakah fungsi dari setiap halaman yang ditampilkan sudah berjalan. Pengujian eksperimental terbagi menjadi dua, yaitu pengujian \textit{cross-platform} dan pengujian \textit{latency}.
 
 \begin{enumerate}
-	\item \textbf{Pengujian \textit{Cross-Platform}}
+	\item \textbf{Pengujian \textit{Cross-Platform}} \\
+	Pengujian \textit{cross-platform} dilakukan terhadap jenis \textit{smartphone} dan jenis \textit{browser} yang berbeda-beda. Pengujian ini dilakukan untuk memastikan setiap fungsi dari setiap halaman yang ditampilkan sudah berjalan diseluruh \textit{platform}. Dari beberapa responden yang sudah melakukan pengujian, didapatkan hasil sebagai berikut:
 	
-	\item \textbf{Pengujian \textit{latency}}
+	\begin{enumerate}
+		\item \textbf{Pengujian pertama} \\
+		Jenis \textit{smartphone} pemain 1: iPhone 7 \\
+		Jenis \textit{browser} pemain 1: Safari\\
+		Jaringan internet pemain 1: Telkomsel\\
+		
+		Jenis \textit{smartphone} pemain 2: iPhone 7 Plus\\
+		Jenis \textit{browser} pemain 2: Google Chrome\\
+		Jaringan internet pemain 2: Telkomsel\\
+		
+		Jenis \textit{PC}: Macbook 13" mid 2014\\
+		Jenis \textit{browser PC}: Google Chrome\\
+		Jaringan internet \textit{PC}: Wifi UNPAR9\\
+		
+		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada pengujian fungsional \textit{PC} dan \textit{smartphone}, seluruh fungsi telah berjalan dan sesuai.
+		
+		\item \textbf{Pengujian kedua} \\
+		Jenis \textit{smartphone} pemain 1: Samsung Galaxy S4\\
+		Jenis \textit{browser} pemain 1: Google Chrome\\
+		Jaringan internet pemain 1: Wifi Megavision\\
+		
+		Jenis \textit{smartphone} pemain 2: Motorola Moto G (5S Plus)\\
+		Jenis \textit{browser} pemain 2: Dolphin Browser\\
+		Jaringan internet pemain 2: Wifi Megavision\\
+		
+		Jenis \textit{PC}: Asus A450L\\
+		Jenis \textit{browser PC}: Google Chrome\\
+		Jaringan internet \textit{PC}: Wifi Megavision\\
+		
+		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada pengujian fungsional \textit{PC} dan \textit{smartphone}, seluruh fungsi telah berjalan dan sesuai.
+		
+		\item \textbf{Pengujian ketiga} \\
+		Jenis \textit{smartphone} pemain 1: iPhone 7 Plus\\
+		Jenis \textit{browser} pemain 1: Google Chrome\\
+		Jaringan internet pemain 1: Telkomsel\\
+		
+		Jenis \textit{smartphone} pemain 2: iPhone 7 Plus\\
+		Jenis \textit{browser} pemain 2: Safari\\
+		Jaringan internet pemain 2: Telkomsel\\
+		
+		Jenis \textit{PC}: Asus ROG FX\\
+		Jenis \textit{browser PC}: Google Chrome\\
+		Jaringan internet \textit{PC}: Wifi UNPAR9\\
+		
+		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada pengujian fungsional \textit{PC} dan \textit{smartphone}, seluruh fungsi telah berjalan dan sesuai.
+		
+		\item \textbf{Pengujian keempat} \\
+		Jenis \textit{smartphone} pemain 1: iPhone 7\\
+		Jenis \textit{browser} pemain 1: Google Chrome\\
+		Jaringan internet pemain 1: Telkomsel\\
+		
+		Jenis \textit{smartphone} pemain 2: Xiaomi mi note 3\\
+		Jenis \textit{browser} pemain 2: Google Chrome\\
+		Jaringan internet pemain 2: Telkomsel\\
+		
+		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
+		Jenis \textit{browser PC}: Google Chrome\\
+		Jaringan internet \textit{PC}: Wifi The Kiosk\\
+		
+		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada pengujian fungsional \textit{PC} dan \textit{smartphone}, seluruh fungsi telah berjalan dan sesuai.
+		
+		\item \textbf{Pengujian kelima} \\
+		Jenis \textit{smartphone} pemain 1: Samsung J7 Pro\\
+		Jenis \textit{browser} pemain 1: Google Chrome\\
+		Jaringan internet pemain 1: Telkomsel\\
+		
+		Jenis \textit{smartphone} pemain 2: iPhone 7 Plus\\
+		Jenis \textit{browser} pemain 2: Google Chrome\\
+		Jaringan internet pemain 2: Telkomsel\\
+		
+		Jenis \textit{PC}: Asus ROG FX\\
+		Jenis \textit{browser PC}: Google Chrome\\
+		Jaringan internet \textit{PC}: Wifi UNPAR9\\
+		
+		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada pengujian fungsional \textit{PC} dan \textit{smartphone}, seluruh fungsi telah berjalan dan sesuai.
+	\end{enumerate}
+	
+	
+	\item \textbf{Pengujian \textit{latency}} \\
+	Pengujian ini dilakukan untuk meneliti jumlah \textit{latency} yang dihasilkan dari implementasi Socket.io. Pengujian \textit{latency} yang dilakukan berfokus pada halaman \textit{gameplay}, saat kedua pemain memainkan permainan Finger For Life. \textit{Latency} yang dihasilkan adalah nilai selisih antara waktu awal \textit{client} menekan tombol kaki pada layar \textit{smartphone}, dan karakter pada layar \textit{PC} bergerak. Dari beberapa responden yang melakukan pengujian, didapatkan beberapa hasil seperti berikut:
 \end{enumerate}
