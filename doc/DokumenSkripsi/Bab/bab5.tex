@@ -256,9 +256,9 @@ document.getElementById("nextButton").disabled = true;
 		\textit{Error} ini terjadi karena adanya kesalahan pengiriman data pada saat proses bergabung kedalam \textit{room}. Yang masuk kedalam \textit{room} hanya satu pemain saja, sedangkan pemain kedua tidak mengirimkan data kepada \textit{server} sehingga tidak masuk kedalam \textit{room}.
 		
 		\item \textbf{Solusi:} \\
-		Solusi untuk masalah ini adalah dengan menggunakan JavaScript untuk menangani tombol \textit{choose}, sehingga pemain tidak dapat mengirimkan data apabila belum memilih karakter. Setelah itu, tombol \textit{choose}  milik pemain yang telah memilih karakter akan dinonaktifkan, sehingga tidak dapat ditekan dua kali. Berikut merupakan potongan kode dari solusi masalah ini:
+		Solusi dari masalah ini adalah dengan menggunakan JavaScript, untuk menangani proses permintaan bergabung agar kedua pemain dapat masuk kedalam room. Berikut merupakan potongan kode dari solusi masalah ini:
 		
-\begin{lstlisting}[caption={Proses menangani tombol \textit{choose}}, label={lst:tombolChoose2},captionpos=b]
+\begin{lstlisting}[caption={Proses menangani memancarkan \textit{event}}, label={lst:submitEvent},captionpos=b]
 function requestToJoin(){
 	socket.emit('requestToJoin', {
 		id: socket.id,
@@ -393,21 +393,116 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 	
 	
 	\item \textbf{Pengujian \textit{latency}} \\
-	Pengujian ini dilakukan untuk meneliti jumlah \textit{latency} yang dihasilkan dari implementasi Socket.io. Pengujian \textit{latency} yang dilakukan berfokus pada halaman \textit{gameplay}, saat kedua pemain memainkan permainan Finger For Life. \textit{Latency} yang dihasilkan adalah nilai selisih antara waktu awal \textit{client} menekan tombol kaki pada layar \textit{smartphone}, dan karakter pada layar \textit{PC} bergerak. Dari beberapa responden yang melakukan pengujian, didapatkan beberapa hasil seperti berikut:
+	Pengujian ini dilakukan untuk meneliti jumlah \textit{latency} yang dihasilkan dari implementasi Socket.io. Pengujian \textit{latency} yang dilakukan berfokus pada halaman \textit{gameplay}, saat kedua pemain memainkan permainan Finger For Life. \textit{Latency} yang dihitung adalah perbandingan waktu antara pemain menekan tombol kaki pada layar \textit{smartphone} hingga karakter pada layar \textit{PC} bergerak. 
+	
+	
+	
+	Dari beberapa responden yang melakukan pengujian, didapatkan beberapa hasil seperti berikut:
 	
 	\begin{enumerate}
-		\item \textbf{Pengujian Pertama}
+		\item \textbf{Pengujian Pertama} \\ 
+		Jenis \textit{smartphone} pemain 1: Samsung J7\\
+		Jenis \textit{browser} pemain 1: Internet (Default Browser Android)\\
+		Jaringan internet pemain 1: Wifi UNPAR2\\
 		
-		\item \textbf{Pengujian Kedua}
+		Jenis \textit{smartphone} pemain 2: LG Q6+\\
+		Jenis \textit{browser} pemain 2: Google Chrome\\
+		Jaringan internet pemain 2: Wifi UNPAR2\\
 		
-		\item \textbf{Pengujian Ketiga}
+		Jenis \textit{PC}: HP Pavilion G4\\
+		Jenis \textit{browser PC} : Mozilla Firefox\\
+		Jaringan internet \textit{PC}: Wifi UNPAR2\\
 		
-		\item \textbf{Pengujian Keempat}
+		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 203 \textit{millisecond}, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 203 \textit{millisecond}.
 		
-		\item \textbf{Pengujian Kelima}
+		\item \textbf{Pengujian Kedua} \\ 
+		Jenis \textit{smartphone} pemain 1: iPhone 7\\
+		Jenis \textit{browser} pemain 1: Google Chrome\\
+		Jaringan internet pemain 1: Telkomsel\\
 		
-		\item \textbf{Pengujian Keenam}
+		Jenis \textit{smartphone} pemain 2: Xiaomi Mi Note 3\\
+		Jenis \textit{browser} pemain 2: Google Chrome\\
+		Jaringan internet pemain 2: Telkomsel\\
 		
-		\item \textbf{Pengujian Ketujuh}
+		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
+		Jenis \textit{browser PC} : Google Chrome\\
+		Jaringan internet \textit{PC}: Wifi Telkomsel\\
+		
+		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 277 \textit{millisecond}, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 298 \textit{millisecond}.
+		
+		\item \textbf{Pengujian Ketiga} \\ 
+		Jenis \textit{smartphone} pemain 1: coolpad e502\\
+		Jenis \textit{browser} pemain 1: Google Chrome\\
+		Jaringan internet pemain 1: Telkomsel\\
+		
+		Jenis \textit{smartphone} pemain 2: Oppo F7\\
+		Jenis \textit{browser} pemain 2: Google Chrome\\
+		Jaringan internet pemain 2: Telkomsel\\
+		
+		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
+		Jenis \textit{browser PC} : Google Chrome\\
+		Jaringan internet \textit{PC}: Wifi Telkomsel\\
+		
+		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 556 \textit{millisecond}, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 567 \textit{millisecond}.
+		
+		\item \textbf{Pengujian Keempat} \\ 
+		Jenis \textit{smartphone} pemain 1: Sony Xperia M5\\
+		Jenis \textit{browser} pemain 1: Google Chrome\\
+		Jaringan internet pemain 1: Wifi UNPAR2\\
+		
+		Jenis \textit{smartphone} pemain 2: Oppo F3\\
+		Jenis \textit{browser} pemain 2: Google Chrome\\
+		Jaringan internet pemain 2: Wifi UNPAR2\\
+		
+		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
+		Jenis \textit{browser PC} : Google Chrome\\
+		Jaringan internet \textit{PC}: Wifi UNPAR2\\
+		
+		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 398 \textit{millisecond}, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 396 \textit{millisecond}.
+		
+%		\item \textbf{Pengujian Kelima} \\ 
+%		Jenis \textit{smartphone} pemain 1: \\
+%		Jenis \textit{browser} pemain 1: \\
+%		Jaringan internet pemain 1: \\
+%		
+%		Jenis \textit{smartphone} pemain 2: \\
+%		Jenis \textit{browser} pemain 2: \\
+%		Jaringan internet pemain 2: \\
+%		
+%		Jenis \textit{PC}: \\
+%		Jenis \textit{browser PC} : \\
+%		Jaringan internet \textit{PC}: \\
+%		
+%		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah <latency>, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah <latency>.
+%		
+%		\item \textbf{Pengujian Keenam} \\
+%		Jenis \textit{smartphone} pemain 1: \\
+%		Jenis \textit{browser} pemain 1: \\
+%		Jaringan internet pemain 1: \\
+%		
+%		Jenis \textit{smartphone} pemain 2: \\
+%		Jenis \textit{browser} pemain 2: \\
+%		Jaringan internet pemain 2: \\
+%		
+%		Jenis \textit{PC}: \\
+%		Jenis \textit{browser PC} : \\
+%		Jaringan internet \textit{PC}: \\
+%		
+%		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah <latency>, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah <latency>.
+%		
+%		\item \textbf{Pengujian Ketujuh} \\ 
+%		Jenis \textit{smartphone} pemain 1: \\
+%		Jenis \textit{browser} pemain 1: \\
+%		Jaringan internet pemain 1: \\
+%		
+%		Jenis \textit{smartphone} pemain 2: \\
+%		Jenis \textit{browser} pemain 2: \\
+%		Jaringan internet pemain 2: \\
+%		
+%		Jenis \textit{PC}: \\
+%		Jenis \textit{browser PC} : \\
+%		Jaringan internet \textit{PC}: \\
+%		
+%		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah <latency>, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah <latency>.
 	\end{enumerate}
 \end{enumerate}
