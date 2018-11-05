@@ -7,14 +7,14 @@ Pada bab ini akan dijelaskan landasan teori mengenai Node.js, Express.js, Socket
 \section{Node.js}
 \label{sec:Node.js}
 
-\textit{Node.js} adalah \textit{JavaScript runtime} yang dibangun berdasarkan \textit{V8} yang merupakan \textit{JavaScript engine} milik perusahaan \textit{Google} \cite{dahl:09:nodejsdocs}. \textit{Node.js} memiliki model \textit{event-driven}, dan \textit{non-blocking I/O} yang membuat teknologi tersebut efisien dalam implementasinya. Teknologi ini menyediakan beberapa kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
+\textit{Node.js} adalah \textit{platform} untuk menjalankan JavaScript yang dibangun berdasarkan \textit{V8} yang merupakan \textit{engine} JavaScript milik perusahaan \textit{Google} \cite{dahl:09:nodejsdocs}. \textit{Node.js} memiliki model \textit{event-driven} yang berarti seluruh aksi akan dilakukan berdasarkan suatu \textit{event} yang dipancarkan, dan \textit{non-blocking I/O} yang berarti suatu aksi dalam Node.js akan langsung dilakukan tanpa harus menunggu aksi sebelumnya selesai. Teknologi ini menyediakan beberapa kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
 
-Subbab berikut akan menjelaskan beberapa kelas yang dimiliki oleh Node.js.
+Subbab - subbab berikut akan menjelaskan beberapa kelas yang dimiliki oleh Node.js.
 
 \subsection{HTTP}
-\textit{Interface} \textit{HTTP} pada \textit{Node.js} digunakan untuk menangani \textit{request} dari protokol \textit{HTTP} yang secara \textit{native} sulit untuk digunakan \cite{dahl:09:nodejsdocs}. \textit{Interface} ini akan menangani protokol \textit{HTTP} dengan tidak melakukan \textit{buffer} pada seluruh \textit{request} atau \textit{responses}.
+\textit{HTTP} merupakan suatu \textit{interface} pada \textit{Node.js} digunakan untuk menangani \textit{request} dari protokol HTTP yang secara \textit{native} sulit untuk digunakan \cite{dahl:09:nodejsdocs}. \textit{Interface} ini akan menangani protokol \textit{HTTP} dengan tidak melakukan \textit{buffer} pada seluruh \textit{request} atau \textit{responses}.
 
-Berikut akan dijelaskan salah satu kelas yang ada pada \textit{interface} \textit{HTTP}.
+Berikut akan dijelaskan salah satu kelas yang dimiliki oleh \textit{interface} \textit{HTTP}.
 
 \begin{enumerate}
 %	\item \textbf{http.IncomingMessage} \\ 
@@ -104,7 +104,7 @@ Berikut akan dijelaskan salah satu kelas yang ada pada \textit{interface} \texti
 %	
 	Salah satu \textit{Method} yang dimiliki oleh kelas ini adalah:
 	\begin{itemize}
-		\item \textbf{server.listen()} \\ Memulai \textit{server HTTP} melakukan proses \textit{listening} untuk suatu koneksi.
+		\item \textbf{server.listen()} \\ \textit{Method} ini akan memulai \textit{server HTTP} untuk melakukan proses \textit{listening} suatu koneksi.
 	\end{itemize}
 %		\item \textbf{server.setTimeout([msecs][,callback])} \\ \textbf{Parameter:}
 %		\begin{itemize}
@@ -124,22 +124,22 @@ Berikut akan dijelaskan salah satu kelas yang ada pada \textit{interface} \texti
 %	\end{itemize}
 \end{enumerate} 
 
-Salah satu \textit{method} yang dimiliki oleh \textit{HTTP} adalah sebagai berikut:
+\textit{Interface HTTP} memiliki beberapa \textit{method} yang akan membantu dalam proses pengembangan suatu aplikasi. Salah satu \textit{method} yang dimiliki oleh \textit{HTTP} adalah sebagai berikut:
 \begin{itemize}
 	\item \textbf{http.createServer([options][,requestListener])} \\ 
 	\textbf{Parameter:}
 	\begin{itemize}
 		\item \textbf{options} objek-objek sebagai berikut:
 			\begin{itemize}
-				\item \textbf{IncomingMessage} menentukan objek dari kelas \textit{IncomingMessage} yang akan digunakan.
-				\item \textbf{ServerResponse} menentukan objek dari kelas \textit{ServerResponse} yang akan digunakan.
+				\item \textbf{IncomingMessage} menentukan objek dari kelas \textit{IncomingMessage} yang akan digunakan Kelas tersebut memiliki objek \textit{request}, dimana objek tersebut merepresentasikan suatu permintaan yang dikirimkan oleh \textit{client}.
+				\item \textbf{ServerResponse} menentukan objek dari kelas \textit{ServerResponse} yang akan digunakan. Kelas tersebut memiliki objek \textit{response}, dimana objek tersebut merepresentasikan suatu respon dari \textit{server} atas permintaan yang dikirimkan oleh \textit{client}.
 			\end{itemize}
 			
 		\item \textbf{requestListener} fungsi yang akan secara otomatis ditambahkan pada \textit{event} \textit{'request'} milik kelas \textit{http.Server}.
 	\end{itemize}
 	\textbf{Kembalian:} objek \textit{http.Server}
 	
-	\textit{Method} ini akan membuat objek \textit{http.Server} untuk menangani \textit{request} dari \textit{client} dan memberikan \textit{response} kepada \textit{client}. Fungsi yang diberikan pada \textit{method} ini akan dipanggil satu kali setiap \textit{request} dibuat kepada \textit{server}.
+	\textit{Method} ini akan membuat objek \textit{http.Server} untuk menangani \textit{request} dari \textit{client} dan memberikan \textit{response} kepada \textit{client}. Fungsi yang diberikan pada \textit{method} ini akan dipanggil satu kali pada saat setiap \textit{request} dikirimkan kepada \textit{server}.
 	
 %	\item \textbf{http.request(options[,callback])} \\ 
 %	\textbf{Parameter:}
@@ -191,13 +191,15 @@ Salah satu \textit{method} yang dimiliki oleh \textit{HTTP} adalah sebagai berik
 \end{itemize}
 
 \subsection{Path}
-Modul \textit{Path} menyediakan fungsi untuk mengatur akses suatu \textit{file} dan direktori \cite{dahl:09:nodejsdocs}. Modul tersebut dapat diakses dengan cara sebagai berikut:
+\textit{Path}merupakan suatu \textit{Interface} yang menyediakan fungsi untuk mengatur akses suatu berkas dan direktori \cite{dahl:09:nodejsdocs}. Modul tersebut dapat diakses dengan cara sebagai berikut:
 
 \begin{lstlisting}
 const path = require('path');
 \end{lstlisting}
 
-Salah satu method yang dimiliki oleh modul \textit{Path} adalah : 
+Dengan cara tersebut, maka variabel \textit{path} akan mendapatkan kumpulan fungsi yang dimiliki oleh \textit{interface Path}. Dengan begitu, variabel tersebut dapat memanggil setiap \textit{method} milik \textit{Path} disaat yang diperlukan. 
+
+Salah satu method yang dimiliki oleh \textit{interface Path} adalah sebagai berikut: 
 
 \begin{itemize}
 	\item \textbf{path.join([...paths])} \\ 
@@ -363,35 +365,31 @@ Salah satu method yang dimiliki oleh modul \textit{Path} adalah :
 %\end{enumerate}
 
 \subsection{Module}
-Pada aplikasi berbasis \textit{Node.js}, setiap \textit{file} yang terdapat dalam pembangunan aplikasi dianggap sebagai modul-modul yang terpisah satu sama lain \cite{dahl:09:nodejsdocs}. Variabel dan fungsi yang terdapat pada satu \textit{file}, atau modul, hanya dapat digunakan pada satu lingkup modul tersebut. Suatu modul tidak dapat menggunakan variabel atau fungsi yang terdapat pada modul lainnya. Oleh karena itu, apabila variabel dan fungsi yang terdapat pada satu modul dapat digunakan oleh modul yang lain, diperlukan cara tertentu. Cara tersebut dapat dilakukan seperti berikut:
+Pada aplikasi berbasis \textit{Node.js}, setiap berkas yang terdapat dalam pembangunan aplikasi dianggap sebagai modul-modul yang terpisah satu sama lain \cite{dahl:09:nodejsdocs}. Variabel dan fungsi yang terdapat pada satu berkas, atau modul, hanya dapat digunakan pada satu lingkup modul tersebut. Suatu modul tidak dapat menggunakan variabel atau fungsi yang terdapat pada modul lainnya. Oleh karena itu, apabila variabel dan fungsi yang terdapat pada satu modul dapat digunakan oleh modul yang lain, diperlukan cara tertentu. Cara tersebut dapat dilakukan seperti berikut:
 
 \begin{lstlisting}
 module.exports = functions || object
 \end{lstlisting}
 
-\textit{module.exports} merupakan objek yang dibentuk oleh sistem \textit{Module}. \textit{Functions} dan \textit{object} merupakan fungsi dan objek yang merupakan elemen-elemen dari modul tertentu, yang dapat dirubah menjadi global agar dapat diakses oleh modul lain. Dengan menggunakan cara ini, suatu modul dapat berubah menjadi global dan dapat diakses oleh modul-modul lain.
+\textit{module.exports} merupakan objek yang dibentuk oleh sistem \textit{Module}. \textit{Functions} dan \textit{object} merupakan fungsi dan objek yang merupakan elemen-elemen dari modul tertentu, yang diubah menjadi global agar dapat diakses oleh modul lain. Dengan menggunakan cara ini, suatu modul dapat berubah menjadi global dan dapat diakses oleh modul-modul lain.
 
 %------------- END OF NODE.JS --------------
 
 \section{Express.js}
 \label{sec:Express.js}
 
-\textit{Express.js} merupakan \textit{framework} aplikasi web untuk \textit{Node.js} \cite{tj:10:expressjs}. \textit{Express.js} menyediakan fitur-fitur untuk pengembangan web dan aplikasi \textit{mobile} yang efisien dalam jangka waktu yang lama. \textit{Framework} ini digunakan untuk mengatur struktur direktori dalam pengembangan aplikasi permainan berbasis web. Untuk dapat menggunakan \textit{Express.js}, dapat dilakukan langkah sebagai berikut: 
+Express.js merupakan suatu \textit{framework} aplikasi web untuk Node.js yang menyediakan kumpulan fitur yang memiliki sifat \textit{robust}, yang berarti dapat bertahan untuk waktu yang lama \cite{tj:10:expressjs}. \textit{Framework} ini digunakan untuk mengatur struktur direktori dalam pengembangan aplikasi web, sehingga untuk proses pemeliharaan aplikasi web dapat dilakukan secara efisien. 
+
+Subbab-subbab berikut akan menjelaskan kelas-kelas yang terdapat pada Express.js
+
+\subsection{express()}
+Kelas ini dibutuhkan untuk mengakses seluruh fitur yang disediakan pada Express.js. Untuk dapat mengakses seluruh fitur Express.js, langkah yang harus dilakukan adalah sebagai berikut: 
 \begin{lstlisting}
 var express = require('express');
 var app = express();
 \end{lstlisting}
 
-Dengan begitu, fitur-fitur yang terdapat pada Express.js dapat digunakan untuk pengembangan aplikasi tertentu.
-
-Subbab-subbab berikut akan menjelaskan kelas-kelas yang terdapat pada Express.js
-
-\subsection{express()}
-Untuk menggunakan fitur-fitur Express.js, langkah yang dilakukan adalah sebagai berikut:
-\begin{lstlisting}
-const express = require('express');
-const app = express();
-\end{lstlisting}
+Variabel \textit{express} akan menetapkan seluruh fitur yang dimiliki oleh modul \textit{'express'}, sehingga variabel tersebut dapat menggunakan seluruh fitur yang tersedia. Variabel \textit{app} akan melakukan proses instansiasi objek dari variabel \textit{express} dengan menetapkan fungsi \textit{express()}. Dengan begitu, fitur-fitur yang terdapat pada Express.js sudah dapat digunakan untuk pengembangan aplikasi web.
 
 Beberapa \textit{method} yang dimiliki oleh fungsi \textit{express()} adalah sebagai berikut:
 
@@ -409,14 +407,14 @@ Beberapa \textit{method} yang dimiliki oleh fungsi \textit{express()} adalah seb
 	\item \textbf{express.static(root, [,options])} \\
 	\textbf{Parameter:}
 	\begin{itemize}
-		\item \textbf{root} \\ tipe: \textbf{String} \\ Menentukan direktori \textit{root} yang akan digunakan untuk menyediakan \textit{static file}.
+		\item \textbf{root} \\ tipe: \textbf{String} \\ Menentukan direktori sumber utama yang akan digunakan untuk menyediakan berkas yang memiliki sifat statis. Berkas yang memiliki sifat statis dapat dikirimkan kepada \textit{client} tanpa harus dibangkitkan, dimodifikasi, atau dilakukan proses tertentu terlebih dahulu.
 		\item \textbf{options} Objek-objek seperti berikut:
 			\begin{itemize}
-				\item \textbf{dotfiles} menentukan bagaimana mengatasi suatu \textit{dotfiles} (suatu \textit{file} atau direktori yang dimulai dengan tanda ".").
+				\item \textbf{dotfiles} menentukan bagaimana mengatasi suatu \textit{dotfiles} (suatu berkas atau direktori yang dimulai dengan tanda ".").
 			\end{itemize}
 	\end{itemize}
 	
-	\textit{Method} ini akan menyediakan cara agar dapat menggunakan \textit{static file} yang ada.
+	\textit{Method} ini menyediakan cara agar dapat menggunakan berkas yang memiliki sifat statis yang ada. Berkas tersebut disimpan dalam suatu direktori lokal yang dapat diakses didalam proses pengembangan aplikasi web.
 	
 	\item \textbf{express.Router([options])} \\
 	\textbf{Parameter:}
@@ -427,13 +425,26 @@ Beberapa \textit{method} yang dimiliki oleh fungsi \textit{express()} adalah seb
 		\end{itemize}
 	\end{itemize}
 
-	\textit{Method} ini akan membuat objek \textit{router} yang dapat digunakan dengan menambahkan \textit{middleware} dan \textit{method HTTP} seperti \textit{get, post,} dan \textit{put}.
+	\textit{Method} ini akan membuat objek \textit{router} \ref{subsec:router} yang dapat digunakan untuk menangani permintaan dari \textit{client} pada saat \textit{client} mengakses \textit{URI} tertentu.
 	 
 	
 \end{itemize}
 
 \subsection{Application}
-Kelas ini akan menangani berbagai proses yang terjadi dalam aplikasi \textit{Express} seperti melakukan proses \textit{routing} terhadap \textit{HTTP requests}, mengatur berjalannya \textit{middleware}, \textit{rendering} sebuah \textit{HTML views}, dan mendaftarkan \textit{template engine} tertentu \cite{tj:10:expressjsapi}. Untuk dapat melakukan fungsi-fungsi tersebut dapat dilakukan langkah berikut:
+\label{subsec:application}
+
+Objek dari kelas ini akan menangani beberapa hal seperti berikut:
+
+\begin{itemize}
+	\item Proses \textit{routing}. \\
+	Proses ini mengatur respon yang akan diberikan saat suatu \textit{client} mengakses \textit{URI (Uniform Resource Identifier)}, yang merupakan alamat dari suatu aplikasi tertentu.
+	
+	\item Mengatur jalannya \textit{middleware}.  \\
+	\textit{Middleware} adalah suatu fungsi yang memiliki akses pada objek-objek yang berada didalam siklus \textit{request-response} aplikasi tertentu. Objek-objek tersebut adalah objek \textit{Request (req)}, objek \textit{Response (res)}, dan fungsi \textit{next},
+\end{itemize}
+
+
+Kelas ini akan menangani berbagai proses yang terjadi dalam aplikasi \textit{Express} seperti melakukan proses \textit{routing} terhadap \textit{HTTP requests}, mengatur berjalannya \textit{middleware}, \textit{rendering} sebuah \textit{HTML views}, dan mendaftarkan \textit{template engine} tertentu. Untuk dapat melakukan fungsi-fungsi tersebut dapat dilakukan langkah berikut:
 
 \begin{lstlisting}
 const express = require('express');
@@ -567,7 +578,7 @@ Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 %\end{itemize}
 
 \subsection{Response}
-Sebuah objek dari kelas \textit{Response} akan merepresentasikan respon \textit{HTTP} yang dikirim oleh \textit{Express} pada saat menerima \textit{HTTP request} \cite{tj:10:expressjsapi}.
+Sebuah objek dari kelas \textit{Response} akan merepresentasikan respon HTTP yang dikirim oleh Express pada saat menerima permintaan HTTP. Didalam pengembangan aplikasi web, objek dari kelas \textit{Response} cenderung direpresentasikan dengan variabel \textit{res}.
 
 Salah satu properti yang dimiliki oleh kelas ini adalah sebagai berikut:
 
@@ -610,9 +621,9 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} adalah sebag
 	
 	\item \textbf{res.render(view[, locals][, callback])} \\ \textbf{Parameter:}
 	\begin{itemize}
-		\item \textbf{view} suatu \textit{string} yang menunjukan \textit{path} dari suatu \textit{view file}.
-		\item \textbf{locals} suatu objek yang memiliki properti yang menunjukan variabel lokal dari \textit{view}.
-		\item \textbf{callback} suatu fungsi \textit{callback}. 
+		\item \textbf{view}, suatu \textit{string} yang menunjukan \textit{path} dari suatu \textit{view file}.
+		\item \textbf{locals}, suatu objek yang memiliki properti yang menunjukan variabel lokal dari \textit{view}.
+		\item \textbf{callback}, suatu fungsi yang menjadi argumen didalam fungsi lain, dimana fungsi \textit{callback} akan menjalankan perintah tertentu. 
 	\end{itemize}
 	
 	\textit{Method} ini berfungsi untuk merubah \textit{view file} dan mengirim \textit{file} tersebut kepada \textit{client}.
@@ -643,10 +654,10 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} adalah sebag
 	
 	\item \textbf{res.status(code)} \\ \textbf{Parameter:}
 	\begin{itemize}
-		\item \textbf{code} kode status \textit{HTTP}.
+		\item \textbf{code} kode status HTTP.
 	\end{itemize}
 	
-	\textit{Method} ini akan menetapkan kode status \textit{HTTP} untuk respon. 
+	\textit{Method} ini akan menetapkan kode status HTTP untuk respon kepada \textit{client}. 
 	
 %	Berikut merupakan contoh implementasi \textit{method} ini:
 %\begin{lstlisting}
@@ -667,6 +678,13 @@ Beberapa \textit{method} yang terdapat pada kelas \textit{Response} adalah sebag
 %\end{lstlisting}
 	
 \end{itemize}
+
+\subsection{Router}
+\label{subsec:router}
+
+\textit{Router} adalah suatu objek yang dapat mengatur bagaimana \textit{URI (Uniform Resource Identifier)}, yang merupakan alamat suatu aplikasi melakukan respon pada saat \textit{client} mengakses \textit{URI} tersebut. Proses tersebut dapat disebut sebagai \textit{routing}.
+
+Proses \textit{routing} akan menentukan fungsi \textit{callback} yang akan menangani permintaan dari \textit{client}. Fungsi tersebut akan dipanggil saat ada permintaan dari \textit{client} atau ada pemanggilan dari suatu \textit{method} milik HTTP. Dengan kata lain, suatu aplikasi akan selalu melakukan proses \textit{listen}, yang berarti menunggu apabila ada permintaan dari \textit{client} yang kemudian dicocokan dengan \textit{route} yang sesuai. Apabila permintaan \textit{client} dengan \textit{route} yang ada telah cocok, maka fungsi \textit{callback} yang telah ditetapkan akan dieksekusi.
 
 %\subsection{Router}
 %Objek dari kelas \textit{Router} merupakan \textit{instance} dari \textit{middleware} dan \textit{routes}. Setiap aplikasi \textit{Express} memiliki \textit{router} secara \textit{built-in}. 
