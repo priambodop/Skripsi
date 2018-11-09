@@ -925,33 +925,36 @@ Proses \textit{routing} akan menentukan fungsi \textit{callback} yang akan menan
 \section{Socket.io}
 \label{sec:Socket.io}
 
-Socket.io merupakan teknologi yang memungkinkan sebuah aplikasi untuk melakukan komunikasi dua arah secara \textit{real-time} \cite{rauch:11:socketiodocs}. Socket.io dapat dijalankan di setiap \textit{platform, browser}, dan gawai.
+Socket.io merupakan teknologi yang memungkinkan sebuah aplikasi untuk melakukan komunikasi dua arah secara \textit{real-time} \cite{rauch:11:socketiodocs}. Socket.io dapat berjalan di setiap \textit{platform, browser}, dan gawai.
+
+Teknologi Socket.io memanfaatkan teknologi \textit{socket} dalam proses implementasinya.
+\textit{Socket} merupakan suatu \textit{endpoint} didalam hubungan komunikasi dua arah antara dua program yang berjalan didalam jaringan tertentu.\textit{Endpoint} adalah suatu entitas yang merupakan titik akhir dari suatu komunikasi, dimana entitas tersebut terdiri dari kombinasi alamat \textit{IP} dan nomor \textit{port}. \textit{Socket} akan terikat dengan nomor \textit{port} agar \textit{TCP}, yang mengatur koneksi internet, dapat mengidentifikasi suatu aplikasi untuk data yang akan dikirimkan.
 
 Sebelum dapat menggunakan Socket.io, Node.js harus sudah tersedia pada sistem komputer. Apabila hal tersebut sudah dilakukan, maka proses \textit{install} Socket.io dapat dilakukan dengan menggunakan \textit{command line tools} atau sejenisnya. Langkah tersebut adalah sebagai berikut:
 \begin{lstlisting}
 npm install socket.io
 \end{lstlisting}
 
-Dengan melakukan proses tersebut, aplikasi yang dibuat sudah dapat mengakses fitur-fitur yang dimiliki oleh Socket.io.
+Dengan melakukan proses tersebut, aplikasi yang akan dibuat sudah dapat mengakses fitur-fitur yang dimiliki oleh Socket.io.
 
 Socket.io dibagi menjadi dua \textit{API}, yaitu \textit{Server API} dan \textit{Client API}. Subbab-subbab berikut akan menjelaskan dua \textit{API} yang dimiliki oleh Socket.io
 
 \subsection{Server API}
-Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi didalam \textit{server} \cite{rauch:11:socketioserverapi}. Berikut akan dijelaskan kelas-kelas yang dimiliki oleh \textit{Server API}.
+Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi didalam \textit{server}. Berikut akan dijelaskan kelas-kelas yang dimiliki oleh \textit{Server API}.
 
 \begin{enumerate}
 	\item \textbf{Server} \\ 
-	Kelas ini merupakan inti untuk dapat menangani proses yang terjadi dalam \textit{socket.io server}. Kelas ini memiliki konstruktor seperti berikut: 
+	Kelas ini merupakan kelas inti untuk dapat menangani proses yang terjadi dalam \textit{server} Socket.io. Kelas ini memiliki konstruktor seperti berikut: 
 	\begin{itemize}
 		\item \textbf{new Server(httpServer[, options])} \\ 
 		\textbf{Parameter:}
 		\begin{itemize}
 			\item \textbf{httpServer} \\ tipe: \textbf{http.Server} \\ \textit{Server} yang akan dituju.
-			\item \textbf{options} \\ tipe: \textbf{Object} \\ Parameter ini dapat berupa berbagai jenis objek. Objek-objek tersebut yaitu sebagai berikut: 
+			\item \textbf{options} \\ tipe: \textbf{Object} \\ Parameter ini dapat berupa berbagai jenis objek. Salah satu dari objek tersebut adalah sebagai berikut:
 			\begin{itemize}
 				\item \textbf{path} \\ tipe: \textbf{String} \\ Nama dari path yang akan ditangkap oleh \textit{server} (contoh: \textit{/socket.io}).
 				
-				\item \textbf{serveClient} \\ tipe: \textbf{Boolean} \\ Menunjukan apakah \textit{server} akan melayani \textit{file} dari \textit{client} atau tidak.
+%				\item \textbf{serveClient} \\ tipe: \textbf{Boolean} \\ Menunjukan apakah \textit{server} akan melayani \textit{file} dari \textit{client} atau tidak.
 				
 %				\item \textbf{adapter} \\ tipe: \textbf{Adapter} \\ Objek yang akan mengatur beberapa \textit{socket} untuk menerima koneksi, dan mengirimkan pesan antara satu \textit{socket} dengan \textit{socket} lainnya.
 %				
@@ -1023,7 +1026,7 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 	
 	\end{itemize}
 
-	Beberapa \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut: 
+	Salah satu \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut: 
 	
 		\begin{itemize}
 %			\item \textbf{server.serveClient([value])} \\ 
@@ -1127,7 +1130,7 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 		\end{itemize}
 
 	\item \textbf{Namespace} \\ 
-	Kelas ini merepresentasikan kumpulan \textit{sockets} yang terhubung dalam lingkup yang diidentifikasi oleh nama \textit{path}. \textit{Client} akan selalu terhubung ke \textit{/}, yang merupakan (\textit{namespace} utama), kemudian dapat terhubung ke \textit{namespace} lain saat berada dalam koneksi yang sama.
+	Kelas ini merepresentasikan kumpulan \textit{sockets} yang terhubung dalam lingkup yang diidentifikasi oleh nama \textit{path}. \textit{Namespace} merupakan suatu \textit{endpoint} atau \textit{path} yang ditetapkan kepada suatu \textit{socket} tertentu. \textit{Client} akan selalu terhubung ke \textit{/}, yang merupakan (\textit{namespace} utama), kemudian dapat terhubung ke \textit{namespace} lain saat berada dalam koneksi yang sama.
 	
 %	Beberapa properti yang dimiliki oleh kelas ini yaitu sebagai berikut:
 %	\begin{itemize}
@@ -1135,14 +1138,14 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 %		\item \textbf{namespace.adapter} \\tipe: \textbf{string} \\ \textit{Adapter} yang digunakan untuk \textit{namespace} tertentu.
 %	\end{itemize}
 
-	Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu:
+	Beberapa \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut:
 	\begin{itemize}
 		\item \textbf{namespace.emit(eventName[, ...args])} \\
-		Berfungsi untuk memancarkan suatu \textit{event} pada seluruh \textit{clients} yang terhubung. \\
+		Berfungsi untuk memancarkan suatu \textit{event} pada seluruh \textit{client} yang terhubung. \\
 		\textbf{Parameter:}
 		\begin{itemize}
-			\item \textbf{eventName} \\tipe: \textbf{String} \\ Nama dari \textit{event}.
-			\item \textbf{args} \\ Argumen tambahan.
+			\item \textbf{eventName} \\tipe: \textbf{String} \\ Nama dari suatu \textit{event} yang akan dipancarkan.
+			\item \textbf{args} \\ Argumen tertentu yang akan dikirimkan bersamaan dengan \textit{event} yang dipancarkan.
 		\end{itemize}
 %		Contoh implementasi:
 %\begin{lstlisting}
@@ -1153,7 +1156,7 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 %\end{lstlisting}
 		
 		\item \textbf{namespace.to(room)} \\ 
-		Berfungsi untuk memancarkan \textit{event} kepada \textit{client} yang sudah bergabung dalam \textit{room} tertentu. \\ 
+		Berfungsi untuk memancarkan \textit{event} kepada \textit{client} yang berada didalam \textit{room} tertentu. \\ 
 		\textbf{Parameter:}
 		\begin{itemize}
 			\item \textbf{room} \\tipe: \textbf{String} \\ Nama dari \textit{room}.
