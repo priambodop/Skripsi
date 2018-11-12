@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
+    user-scalable=0, shrink-to-fit=no">
+
+    <title>Finger For Life</title>
+    <link rel="stylesheet" href="stylesheets/homeStyle.css">
+  </head>
+  <body>
+    <div class="stage-area">
+
+    </div>
+
+    <template id="homePage">
+      <section id="titles">
+        <div class="container">
+          <div class="title_container">
+            <div class="title" id="left">
+              <object type="image/svg+xml" data="images/finga.svg"></object>
+            </div>
+
+            <div class="title">
+              <div class="word">
+                <p>Finger <br> For <br> Life</p>
+              </div>
+              <div class="buttons">
+                <button id="startButton" onclick="startClicked()">START</button>
+                <button id="joinButton" onclick="joinClicked()">JOIN</button>
+              </div>
+            </div>
+
+            <div class="title" id="right">
+              <object type="image/svg+xml" data="images/finga.svg"></object>
+            </div>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <!-- Mobile Page -->
+    <template id="mobilePage">
+      <link rel="stylesheet" href="stylesheets/mobileStyle.css">
+      <div class="formContainer">
+        <p id="command">Enter the code from the desktop below:</p>
+        <!-- <form> -->
+          <input id="code" type="number" autocomplete="off" autofocus> <br>
+          <button id="requestButton" onclick="requestToJoin()">SEND</button>
+        <!-- </form> -->
+      </div>
+      <p id="joined"></p>
+
+      <!-- Character Page Mobile -->
+      <template id="charMobile">
+        <link rel="stylesheet" href="stylesheets/charMobileStyle.css">
+        <section id="char_section">
+        <div class="container_char">
+          <div class="word_select">
+            <h1>Please select a character and press "choose" to play the game.</h1>
+          </div>
+
+          <div class="charList">
+
+            <input type="radio" name="radioChar" id="char1" value="1" onclick="selectChar()">
+            <label for="char1"><img src="images/BrocoDude.png" alt="finger"></label>
+
+            <input type="radio" name="radioChar" id="char2" value="2" onclick="selectChar()">
+            <label for="char2"><img src="images/DabuDonut.png" alt="finger"></label>
+
+            <input type="radio" name="radioChar" id="char3" value="3" onclick="selectChar()">
+            <label for="char3"><img src="images/GrapeYoda.png" alt="finger"></label>
+
+            <input type="radio" name="radioChar" id="char4" value="4" onclick="selectChar()">
+            <label for="char4"><img src="images/SummerEgg.png" alt="finger"></label>
+
+          </div>
+
+          <div class="send_button">
+              <button onclick="sendChar()" id="nextButton">CHOOSE</button>
+          </div>
+        </div>
+      </section>
+        <script src="/javascripts/charMobileScript.js"></script>
+
+        <!-- GamePlay Mobile Page -->
+        <template id="gamePlayMobile">
+          <link rel="stylesheet" href="stylesheets/gamePlayMobileStyle.css">
+          <div class="gameplay_container">
+            <div id="instruction">
+
+            </div>
+
+            <div class="step_container">
+              <span id="step" onclick="stepClicked()">
+                <img src="images/stepUp.png">
+              </span>
+
+              <span id="step" onclick="stepClicked()">
+                <img src="images/stepUpRight.png">
+              </span>
+            </div>
+
+          </div>
+
+          <template id="winningMobile">
+            <link rel="stylesheet" href="stylesheets/winningMobileStyle.css">
+            <div class="gameOverContainer">
+              <div id="gameOver">
+
+              </div>
+            </div>
+
+            <script src="/javascripts/winningMobileScript.js"></script>
+          </template>
+
+          <script src="/javascripts/gamePlayMobileScript.js"></script>
+        </template>
+
+      </template>
+
+      <script src="/javascripts/mobileScript.js"></script>
+    </template>
+    <!-- Mobile Page ends here -->
+
+    <!-- Sync Page -->
+    <template id="syncPage">
+      <link rel="stylesheet" href="stylesheets/syncStyle.css">
+      <div class="pageContainer">
+        <div class="step1">
+          <div class="step1Title">
+            <h1>SYNC STEP 1</h1>
+          </div>
+          <p>Enter the link below in your smartphone or tablet browser.<br>
+            click join to play the game.</p>
+          <div class="link">
+            <p>fingerforlife.herokuapp.com</p>
+          </div>
+        </div>
+
+        <div class="step2">
+          <div class="step2Title">
+            <h1>SYNC STEP 2</h1>
+          </div>
+          <p>Enter the code below<br> on the mobile site.</p>
+          <div class="wrapperCode">
+            <p id="roomId"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="player">
+        <div class="player1wrap">
+          <div id="player1"></div>
+        </div>
+        <div class="player2wrap">
+          <div id="player2"></div>
+        </div>
+
+      </div>
+
+      <!-- Choose a Char Page Desktop -->
+      <template id="charDesktop">
+        <link rel="stylesheet" href="stylesheets/charDesktopStyle.css">
+        <section id="char_desktop_section">
+        <div class="container_char_desktop">
+          <div class="word_select_desktop">
+            <h1>Choose a character on your mobile site.</h1>
+          </div>
+
+          <div class="player_char_container">
+            <div class="player_1_char">
+              <div id="image_1_char">
+
+              </div>
+
+              <div id="char_1_name">
+
+              </div>
+            </div>
+
+            <div class="player_2_char">
+              <div id="image_2_char">
+
+              </div>
+
+              <div id="char_2_name">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+        <!-- Game Play Page on Desktop  -->
+        <template id="gamePlayDesktop">
+          <link rel="stylesheet" href="stylesheets/gamePlayDesktopStyle.css">
+
+          <div class="canvasContainer">
+            <canvas id="canvasGpDesktop" width="900" height="600"></canvas>
+          </div>
+
+          <script src="/javascripts/gamePlayDesktopScript.js"></script>
+
+          <!-- Winning Page on Desktop -->
+          <template id="winningDesktop">
+            <link rel="stylesheet" href="stylesheets/winningDesktopStyle.css">
+
+
+              <span class="canvasWinStageContainer">
+                <canvas id="canvasWinStage" width="400" height="600"></canvas>
+              </span>
+
+              <span class="navigatorContainer">
+                <button id="exitButton" onclick="toHomePage()">Exit</button>
+              </span>
+
+
+            <script src="/javascripts/winningDesktopScript.js"></script>
+          </template>
+
+        </template>
+
+        <script src="/javascripts/charDesktopScript.js"></script>
+      </template>
+
+      <script src="/javascripts/syncScript.js"></script>
+    </template>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="javascripts/libs/jquery-3.3.1.min.js"></script>
+    <script src="javascripts/homeScript.js"></script>
+
+  </body>
+
+</html>

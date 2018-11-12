@@ -23,7 +23,11 @@ Lingkungan implementasi terbagi menjadi dua bagian, yaitu lingkungan perangkat k
 		\item \textbf{Server} \\
 		\begin{enumerate}
 			\item \textbf{Heroku} \\
-			Heroku merupakan \textit{cloud platform} yang menyediakan fitur yang dapat membantu pengguna untuk dapat memiliki alamat domain. Spesifikasi Heroku yang digunakan oleh Finger For Life akan dijelaskan sebagai berikut:
+			Heroku merupakan \textit{cloud platform} yang menyediakan fitur-fitur yang membantu pengguna untuk dapat memiliki alamat domain. \footnote{\url{https://www.heroku.com/what}} Dengan menggunakan Heroku, pengembang aplikasi dapat menaruh aplikasi yang sudah dibuat seluruhnya di \textit{cloud}. Heroku dapat menjalankan aplikasi berbasis beberapa bahasa pemrograman. Salah satu bahasa pemrograman yang didudukung oleh Heroku adalah Node.js.
+			
+			Dengan menggunakan Heroku, proses konfigurasi, penyesuaian, dan pengaturan aplikasi dapat dilakukan secara sederhana dan efisien. Proses infrastruktur dalam pengaturan \textit{URL} akan sepenuhnya dilakukan oleh Heroku. Dengan begitu, pengembang aplikasi dapat fokus terhadap pembangunan aplikasi.
+			
+			Spesifikasi Heroku yang digunakan didalam pengembangan Finger For Life akan dijelaskan sebagai berikut:
 			
 			\begin{tabular}{ |p{1.5cm}|p{1.5cm}|p{2cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
 			\hline
@@ -64,19 +68,19 @@ Lingkungan implementasi terbagi menjadi dua bagian, yaitu lingkungan perangkat k
 Hasil implementasi berupa aplikasi berbasis web yang berjalan berdasarkan Node.js. Aplikasi dapat diakses pada jaringan internet dengan URL \url{http://fingerforlife.herokuapp.com}. Aplikasi Finger For Life terdiri dari beberapa halaman. Halaman tersebut terbagi menjadi dua bagian, yaitu halaman pada \textit{PC} dan pada \textit{smartphone}. Halaman-halaman tersebut antara lain:
 
 \begin{enumerate}
-	\item \textbf{Halaman \textit{home}} \\
+	\item \textbf{Halaman Utama} \\
 	\textbf{PC} \\
-	Halaman \textit{home} pada \textit{PC} digunakan pengguna untuk memulai permainan. Pada halaman ini terdapat tombol \textit{start} yang berfungsi untuk meminta akses masuk kedalam permainan. Apabila pengguna menekan tombol tersebut, maka pengguna akan diarahkan kehalaman selanjutnya. Tangkapan layar dari halaman \textit{home} pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb1_home}.
+	Halaman utama pada \textit{PC} digunakan pengguna untuk memulai permainan. Pada halaman ini terdapat tombol \textit{start} yang berfungsi untuk meminta akses masuk kedalam permainan. Apabila pengguna menekan tombol tersebut, maka pengguna akan diarahkan kehalaman selanjutnya. Tangkapan layar dari halaman utama pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb1_home}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.25]{Gambar/realWeb1_home}
-	\caption{Halaman \textit{Home}}
+	\caption{Halaman utama}
 	\label{fig:realWeb1_home}
 \end{figure}
 
 	\textbf{Smartphone} \\
-	Halaman \textit{home} pada \textit{smartphone} digunakan pengguna untuk memulai permainan. Pada halaman ini terdapat tombol \textit{join} yang berfungsi untuk meminta akses masuk kedalam permainan. Apabila pengguna menekan tombol tersebut, maka pengguna akan diarahkan kehalaman selanjutnya. Tangkapan layar dari halaman \textit{home} pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone1_home}.
+	Halaman utama pada \textit{smartphone} digunakan pengguna untuk memulai permainan. Pada halaman ini terdapat tombol \textit{join} yang berfungsi untuk meminta akses masuk kedalam permainan. Apabila pengguna menekan tombol tersebut, maka pengguna akan diarahkan kehalaman selanjutnya. Tangkapan layar dari halaman utama pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone1_home}.
 	
 	\begin{figure}[H]
 		\centering
@@ -87,23 +91,23 @@ Hasil implementasi berupa aplikasi berbasis web yang berjalan berdasarkan Node.j
 
 	\item \textbf{Halaman permintaan bergabung}\\
 	\textbf{PC} \\
-	Halaman \textit{sync} pada \textit{PC} berguna untuk proses sinkronisasi antara \textit{PC} dan \textit{smartphone}. Halaman ini menyediakan kode \textit{room} yang harus dikirimkan oleh pengguna melalui \textit{smartphone}. Apabila kode yang dikirimkan pengguna sesuai, maka pengguna akan bergabung kedalam \textit{room} permainan. Apabila kode tidak sesuai, maka pengguna tidak bisa bergabung kedalam \textit{room} permainan. Tangkapan layar dari halaman \textit{sync} pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb2_sync}.
+	Halaman permintaan bergabung pada \textit{PC} berguna untuk proses sinkronisasi antara \textit{PC} dan \textit{smartphone}. Halaman ini menyediakan kode \textit{room} yang harus dikirimkan oleh pengguna melalui \textit{smartphone}. Apabila kode yang dikirimkan pengguna sesuai, maka pengguna akan bergabung kedalam \textit{room} permainan. Apabila kode tidak sesuai, maka pengguna tidak bisa bergabung kedalam \textit{room} permainan. Tangkapan layar dari halaman permintaan bergabung pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb2_sync}.
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.25]{Gambar/realWeb2_sync}
-		\caption{Halaman \textit{Home}}
+		\caption{Halaman permintaan bergabung}
 		\label{fig:realWeb2_sync}
 	\end{figure}
 	
 	
 	\textbf{Smartphone} \\
-	Halaman \textit{sync} pada \textit{smarpthone} berguna untuk proses sinkronisasi antara \textit{PC} dan \textit{smartphone}. Pengguna dapat mengisi kolom dengan kode yang didapatkan dari halaman web pada \textit{PC}, kemudian menekan tombol \textit{Send}. Apabila kode yang dikirimkan sesuai, maka akan muncul teks yang menunjukan berhasil bergabung kedalam \textit{room}. Apabila tidak sesuai, maka akan muncul teks yang menunjukan tidak berhasil bergabung kedalam \textit{room}. Tangkapan layar dari halaman \textit{sync} pada \textit{PC} dapat dilihat pada gambar \ref{fig:realPhone2_sync}.
+	Halaman permintaan bergabung pada \textit{smarpthone} berguna untuk proses sinkronisasi antara \textit{PC} dan \textit{smartphone}. Pengguna dapat mengisi kolom dengan kode yang didapatkan dari halaman web pada \textit{PC}, kemudian menekan tombol \textit{send}. Apabila kode yang dikirimkan sesuai, maka akan muncul teks yang menunjukan berhasil bergabung kedalam \textit{room}. Apabila tidak sesuai, maka akan muncul teks yang menunjukan tidak berhasil bergabung kedalam \textit{room}. Tangkapan layar dari halaman permintaan bergabung pada \textit{PC} dapat dilihat pada gambar \ref{fig:realPhone2_sync}.
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.2]{Gambar/realPhone2_sync}
-		\caption{Halaman \textit{Home}}
+		\caption{Halaman permintaan bergabung}
 		\label{fig:realPhone2_sync}
 	\end{figure}
 	
@@ -114,59 +118,59 @@ Hasil implementasi berupa aplikasi berbasis web yang berjalan berdasarkan Node.j
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.25]{Gambar/realWeb3_char}
-		\caption{Halaman \textit{Home}}
+		\caption{Halaman pemilihan karakter}
 		\label{fig:realWeb3_char}
 	\end{figure}
 	
 	\textbf{Smartphone} \\
-	Halaman pemilihan karakter pada \textit{smartphone} akan menampilkan daftar karakter permainan Finger For Life. Pemain dapat memilih satu karakter yang ditampilkan, kemudia menekan tombol \textit{choose} untuk menetapkan karakter tersebut. Karakter yang telah ditetapkan akan dapat dimainkan saat permainan dimulai. Apabila kedua pemain telah menetapkan karakter, maka halaman akan berganti kehalaman selanjutnya. Tangkapan layar dari halaman pemilihan karakter pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone3_char}.
+	Halaman pemilihan karakter pada \textit{smartphone} akan menampilkan daftar karakter permainan Finger For Life. Pemain dapat memilih satu karakter yang ditampilkan, kemudian menekan tombol \textit{choose} untuk menetapkan karakter tersebut. Karakter yang telah ditetapkan akan dapat dimainkan saat permainan dimulai. Apabila kedua pemain telah menetapkan karakter, maka halaman akan berganti kehalaman selanjutnya. Tangkapan layar dari halaman pemilihan karakter pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone3_char}.
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.2]{Gambar/realPhone3_char}
-		\caption{Halaman \textit{Home}}
+		\caption{Halaman pemilihan karakter}
 		\label{fig:realPhone3_char}
 	\end{figure}
 	
-	\item \textbf{Halaman Permainan} \\
+	\item \textbf{Halaman Memulai Permainan} \\
 	\textbf{PC} \\
-	Halaman ini menampilkan lintasan lari dan kedua karakter yang dapat dimainkan. Karakter pada layar dapat bergerak melalui lintasan lari apabila pemain menekan tombol yang ada pada halaman \textit{smartphone}. Tangkapan layar dari halaman \textit{gameplay} pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb4_game}.
+	Halaman ini menampilkan lintasan lari dan kedua karakter yang dapat dimainkan. Karakter pada layar dapat bergerak melalui lintasan lari apabila pemain menekan tombol yang ada pada halaman \textit{smartphone}. Tangkapan layar dari halaman memulai permainan pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb4_game}.
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.25]{Gambar/realWeb4_game}
-		\caption{Halaman \textit{Home}}
+		\caption{Halaman memulai permainan}
 		\label{fig:realWeb4_game}
 	\end{figure}
 	
 	\textbf{Smartphone} \\
-	Halaman ini menampilkan tombol telapak kaki yang dapat ditekan oleh pemain. Tombol tersebut berfungsi untuk menggerakan karakter miliknya yang ditampilkan dihalaman \textit{PC}. Pemain yang pertama kali menggerakan karakter hingga mencapai garis akhir menjadi pemenang, dan halaman akan berganti kehalaman selanjutnya. Tangkapan layar dari halaman \textit{gameplay} pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone4_game}.
+	Halaman ini menampilkan tombol telapak kaki yang dapat ditekan oleh pemain. Tombol tersebut berfungsi untuk menggerakan karakter miliknya yang ditampilkan dihalaman \textit{PC}. Pemain yang pertama kali menggerakan karakter hingga mencapai garis akhir menjadi pemenang, dan halaman akan berganti kehalaman selanjutnya. Tangkapan layar dari halaman memulai permainan pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone4_game}.
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.2]{Gambar/realPhone4_game}
-		\caption{Halaman \textit{Home}}
+		\caption{Halaman memulai permainan}
 		\label{fig:realPhone4_game}
 	\end{figure}
 	
 	
-	\item \textbf{Halaman Permainan Berakhir} \\
+	\item \textbf{Halaman Mengakhiri Permainan} \\
 	\textbf{PC} \\
-	Halaman ini menampilkan pemain yang memenangkan permainan. Pemenang pertama akan ditampilkan dipodium posisi atas, sedangkan pemenang kedua akan ditampilkan dipodium posisi bawah. Pemain dapat menekan tombol \textit{exit} untuk keluar dari permainan. Tangkapan layar dari halaman \textit{game over} pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb5_over}.
+	Halaman ini menampilkan pemain yang memenangkan permainan. Pemenang pertama akan ditampilkan dipodium posisi atas, sedangkan pemenang kedua akan ditampilkan dipodium posisi bawah. Pemain dapat menekan tombol \textit{exit} untuk keluar dari permainan. Tangkapan layar dari halaman mengakhiri permainan pada \textit{PC} dapat dilihat pada gambar \ref{fig:realWeb5_over}.
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.25]{Gambar/realWeb5_over}
-		\caption{Halaman \textit{Home}}
+		\caption{Halaman mengakhiri permainan}
 		\label{fig:realWeb5_over}
 	\end{figure}
 
 	\textbf{Smartphone} \\
-	Halaman ini menampilkan teks yang menunjukan posisi pemenang. Pemenang pertama akan ditampilkan teks yang menunjukan posisi pertama, sedangkan pemenang kedua akan ditampilkan teks yang menunjukan posisi kedua. Tangkapan layar dari halaman \textit{game over} pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone5_over}.
+	Halaman ini menampilkan teks yang menunjukan posisi pemenang. Pemenang pertama akan ditampilkan teks yang menunjukan posisi pertama, sedangkan pemenang kedua akan ditampilkan teks yang menunjukan posisi kedua. Tangkapan layar dari halaman mengakhiri permainan pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone5_over}.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.2]{Gambar/realPhone5_over}
-		\caption{Halaman \textit{Home}}
+		\caption{Halaman mengakhiri permainan}
 		\label{fig:realPhone5_over}
 	\end{figure}
 
@@ -181,10 +185,10 @@ Hasil implementasi berupa aplikasi berbasis web yang berjalan berdasarkan Node.j
 Pengujian fungsional dilakukan untuk mengetahui kesesuaian reaksi perangkat lunak dengan reaksi yang diharapkan berdasarkan aksi pengguna terhadap perangkat lunak. Pada saat pengujian fungsional dilakukan, penulis menemukan beberapa masalah yang muncul pada program aplikasi. Masalah tersebut muncul pada beberapa tahapan saat program dijalankan. Berdasarkan masalah-masalah yang ditemukan, penulis juga mendapatkan solusi atas masalah yang ada. Berikut akan dijelaskan beberapa masalah yang ditemukan, beserta proses memecahkan masalah yang telah dilakukan.
 
 \begin{enumerate}
-	\item \textbf{Halaman \textit{home}}
+	\item \textbf{Halaman utama}
 	\begin{itemize}
 		\item \textbf{Masalah:} \\
-		Tampilan home pada smartphone terkadang muncul gambar jari. Masalah ini ditemukan pada \textit{smartphone} dengan resolusi layar yang berbeda-beda. Apabila ada \textit{smartphone} dengan resolusi lebih besar dibanding yang lainnya, maka gambar jari muncul dilayar.
+		Tampilan halaman utama pada \textit{smartphone} terkadang muncul gambar jari. Masalah ini ditemukan pada \textit{smartphone} dengan resolusi layar yang berbeda-beda. Apabila ada \textit{smartphone} dengan resolusi lebih besar dibanding yang lainnya, maka gambar jari muncul dilayar.
 		
 		\item \textbf{Solusi:} \\
 		Solusi dari masalah ini adalah dengan menggunakan fitur dari CSS yaitu \textit{@media querry}. Fitur ini dapat mengatur pada resolusi berapakah suatu elemen ditampilkan kelayar. Berikut merupakan potongan kode solusi dari masalah ini.
@@ -209,7 +213,7 @@ Pengujian fungsional dilakukan untuk mengetahui kesesuaian reaksi perangkat luna
 		\item \textbf{Masalah:} \\
 		Pada saat kedua pemain menyelesaikan permainan dan menekan tombol \textit{exit}, kemudian kedua pemain akan mengulang permainan dengan menuju ke halaman permintaan bergabung. Pada tahap ini, salah satu pemain tidak dapat bergabung kedalam \textit{room}. \\
 		
-		\textit{Error} ini terjadi akibat penggunaan elemen jQuery pada halaman permintaan bergabung, yaitu elemen \textit{.submit()}. Pada saat pemain akan bermain kedua kalinya dan sampai dihalaman permintaan bergabung, elemen \textit{submit()} akan mengirimkan kode room lebih dari satu kali. Dengan begitu, \textit{server} akan mengira bahwa ada dua pemain yang sudah bergabung, sehingga halaman langsung berpindah kehalaman selanjutnya. Padahal pemain kedua belum mengisi kode \textit{room} dan belum mengirimkan ke \textit{server}.
+		\textit{Error} ini terjadi akibat penggunaan elemen jQuery pada halaman permintaan bergabung, yaitu elemen \textit{.submit()}. Pada saat pemain akan bermain kedua kalinya dan sampai dihalaman permintaan bergabung, elemen \textit{submit()} akan mengirimkan kode \textit{room} lebih dari satu kali. Dengan begitu, \textit{server} akan mengira bahwa ada dua pemain yang sudah bergabung, sehingga halaman langsung berpindah kehalaman selanjutnya. Padahal pemain kedua belum mengisi kode \textit{room} dan belum mengirimkan ke \textit{server}.
 		
 		\item \textbf{Solusi:} \\
 		Solusi dari masalah ini adalah dengan menghilangkan elemen \textit{submit()}, kemudian diganti dengan menggunakan Socket.io untuk memancarkan \textit{event} pada saat tombol \textit{send} ditekan. Berikut merupakan potongan kode dari solusi masalah ini.
@@ -227,7 +231,7 @@ function requestToJoin(){
 	\item \textbf{Halaman pemilihan karakter}
 	\begin{itemize}
 		\item \textbf{Masalah:} \\
-		Pada saat salah satu pemain menekan tombol \textit{choose} dua kali, halaman langsung pindah kehalaman \textit{gameplay} disaat pemain kedua belum memilih karakter. \\
+		Pada saat salah satu pemain menekan tombol \textit{choose} dua kali, halaman langsung pindah kehalaman memulai permainan disaat pemain kedua belum memilih karakter. \\
 		
 		\textit{Error} terjadi karena pada saat pemain menekan tombol choose, seluruh data langsung dikirimkan ke \textit{server} sehingga \textit{server} menangkap sudah ada satu pemain yang berhasil mengirimkan data karakter. Apabila ditekan dua kali, maka akan dianggap sudah ada dua pemain yang mengirimkan data karakter. Dengan begitu halaman pun berpindah.
 		
@@ -279,7 +283,7 @@ Pengujian fungsional yang dilakukan terbagi menjadi dua, yaitu pengujian fungsio
 	\caption{Tabel Pengujian Fungsional pada \textit{PC}}
 	\begin{tabular}{|p{0.35cm}| p{3.5cm}| p{7cm}| p{2.5cm}|} \hline
 		No. & Aksi Pengguna & Reaksi yang diharapkan & Reaksi perangkat lunak \\ \hline
-		1 & Pengguna menjalankan aplikasi & Halaman \textit{home} akan ditampilkan & sesuai \\ \hline
+		1 & Pengguna menjalankan aplikasi & Halaman utama akan ditampilkan & sesuai \\ \hline
 		2 & Pengguna menekan tombol \textit{start} & Halaman akan diarahkan menuju halaman pemintaan bergabung & sesuai \\ \hline
 		3 & Pengguna melakukan proses sinkronisasi \textit{PC} dan \textit{smartphone}. & Jika pemain pertama berhasil bergabung kedalam \textit{room}, maka pada layar \textit{PC} akan muncul pesan "Player 1 has join the room" & sesuai \\ \hline
 		&  & Jika pemain kedua berhasil bergabung kedalam \textit{room}, maka pada layar \textit{PC} akan muncul pesan "Player 2 has join the room", kemudian halaman langsung diarahkan menuju halaman pemilihan karakter & sesuai \\ \hline
@@ -297,7 +301,7 @@ Pengujian fungsional yang dilakukan terbagi menjadi dua, yaitu pengujian fungsio
 	\caption{Tabel Pengujian Fungsional pada \textit{smartphone}}
 	\begin{tabular}{|p{0.35cm}| p{3.5cm}| p{7cm}| p{2.5cm}|} \hline
 		No. & Aksi Pengguna & Reaksi yang diharapkan & Reaksi perangkat lunak \\ \hline
-		1 & Penggunan menjalankan aplikasi & Halaman \textit{home} ditampilkan & sesuai \\ \hline 
+		1 & Penggunan menjalankan aplikasi & Halaman utama ditampilkan & sesuai \\ \hline 
 		2 & Pengguna menekan tombol \textit{join} & Halaman akan diarahkan menuju halaman permintaan bergabung & sesuai \\ \hline
 		3 & Pengguna memasukan kode \textit{room} dan menekan tombol \textit{send} & Jika kode \textit{room} sesuai, maka akan muncul pesan "Welcome to the game !" & sesuai \\ \hline
 		& & Jika kedua pemain berhasil bergabung, maka halaman akan diarahkan menuju halaman pemilihan karakter & sesuai \\ \hline
@@ -305,7 +309,7 @@ Pengujian fungsional yang dilakukan terbagi menjadi dua, yaitu pengujian fungsio
 		& & Jika kedua pemain telah memilih karakter, maka halaman akan diarahkan menuju halaman permainan & sesuai \\ \hline
 		5 & Pengguna menekan tombol telapak kaki secara berulang selama permainan & Karakter pada layar \textit{PC} akan bergerak & sesuai\\ \hline
 		& & Jika ada pemain yang lebih dulu mencapai garis akhir, maka halaman akan diarahkan menuju halaman permainan berakhir & sesuai \\ \hline
-		6 & Pengguna mengakhiri permainan & Halaman diarahkan kembali menuju halaman \textit{home} & sesuai \\ \hline
+		6 & Pengguna mengakhiri permainan & Halaman diarahkan kembali menuju halaman utama & sesuai \\ \hline
 	\end{tabular}
 	\label{table:fungsionalSmartphone}
 \end{table}
@@ -314,7 +318,7 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 
 \begin{enumerate}
 	\item \textbf{Pengujian \textit{Cross-Platform}} \\
-	Pengujian \textit{cross-platform} dilakukan terhadap jenis \textit{smartphone} dan jenis \textit{browser} yang berbeda-beda. Pengujian ini dilakukan untuk memastikan setiap fungsi dari setiap halaman yang ditampilkan sudah berjalan diseluruh \textit{platform}. Dari beberapa responden yang sudah melakukan pengujian, didapatkan hasil sebagai berikut:
+	Pengujian \textit{cross-platform} merupakan pengujian yang dilakukan terhadap jenis \textit{smartphone} dan jenis \textit{PC} yang berbeda-beda. Pengujian ini dilakukan untuk memastikan setiap fungsi dari setiap halaman yang ditampilkan sudah berjalan diseluruh \textit{platform}. Dari beberapa responden yang sudah melakukan pengujian, didapatkan hasil sebagai berikut:
 	
 	\begin{enumerate}
 		\item \textbf{Pengujian pertama} \\
@@ -397,7 +401,7 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 	
 	
 	\item \textbf{Pengujian \textit{latency}} \\
-	Pengujian ini dilakukan untuk meneliti jumlah \textit{latency} yang dihasilkan dari implementasi Socket.io. Pengujian \textit{latency} yang dilakukan berfokus pada halaman \textit{gameplay}, saat kedua pemain memainkan permainan Finger For Life. \textit{Latency} yang dihitung adalah perbandingan waktu antara pemain menekan tombol kaki pada layar \textit{smartphone} hingga karakter pada layar \textit{PC} bergerak. 
+	\textit{Latency} merupakan kecepatan yang dihasilkan pada saat pengiriman data dari \textit{client} menuju \textit{server} maupun sebaliknya. Pengujian ini dilakukan untuk meneliti jumlah \textit{latency} yang dihasilkan dari implementasi Socket.io. Pengujian \textit{latency} yang dilakukan berfokus pada halaman \textit{gameplay}, saat kedua pemain memainkan permainan Finger For Life. \textit{Latency} yang dihitung adalah perbandingan waktu antara pemain menekan tombol kaki pada layar \textit{smartphone} hingga karakter pada layar \textit{PC} bergerak. 
 	
 	Dari beberapa responden yang melakukan pengujian, didapatkan beberapa hasil seperti berikut:
 	
