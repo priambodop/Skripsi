@@ -1,0 +1,29 @@
+.canvasWinStageContainer{
+  margin: auto;
+}
+
+#exitButton{
+  width: 250px;
+  height: 80px;
+
+  border-radius: 30px;
+  border-width: 5pt;
+  border-color: #DB0A5B;
+  border-style:inset;
+  background-color: #F2784B;
+
+  font-family: "fingerfunny";
+  text-align: center;
+
+  font-size: 30pt;
+  color: white;
+}
+
+#exitButton:hover{
+  background-color: #F54707;
+}
+
+.stage-area{
+  background-color: #26C281;
+  padding-left: 400px;
+}

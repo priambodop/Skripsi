@@ -1,0 +1,22 @@
+/* #stepButton{
+  background: url('images/stepUp.png') 100px 100px no-repeat;
+} */
+#instruction{
+  font-size: 20pt;
+  font-family: Arial;
+  text-align: center;
+}
+
+.step_container{
+  text-align: center;
+  margin-top: 150px;
+  margin-bottom: 150px;
+}
+
+#step img{
+  height: 200px;
+}
+
+#step{
+  padding: 20px;
+}

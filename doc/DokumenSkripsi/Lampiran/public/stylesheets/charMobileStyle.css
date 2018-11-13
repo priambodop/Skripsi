@@ -1,0 +1,64 @@
+.container_char{
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+  /* border: 2px solid red; */
+}
+
+.word_select{
+  font-family: Arial;
+  text-align: center;
+  /* border: 2px solid blue; */
+}
+
+.charList{
+  text-align: center;
+  padding: 20px;
+  /* border: 2px solid black; */
+}
+
+.charList input[type=radio]{
+  display: none;
+}
+
+input[type=radio]:checked + label img{
+  border-radius: 30px;
+  border-width: 5pt;
+  border-color: #DB0A5B;
+  border-style:inset;
+  background-color: #F2784B;
+  padding: 5px;
+}
+
+.charList label{
+  padding: 20px;
+}
+
+.charList label img{
+  height: 200px;
+}
+
+.send_button{
+  padding: 20px;
+  text-align: center;
+  /* border: 2px solid green; */
+}
+
+.send_button button{
+  width: 100%;
+  height: 70px;
+  padding: 0;
+  border-radius: 30px;
+  border-width: 5pt;
+  border-color: #DB0A5B;
+  border-style:inset;
+  background-color: #F2784B;
+  font-family: "fingerfunny";
+  text-align: center;
+  font-size: 30pt;
+  color: white;
+}
+
+.send_button button:hover, .send_button button:focus{
+  background-color: #F54707;
+}

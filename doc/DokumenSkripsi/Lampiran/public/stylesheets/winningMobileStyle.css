@@ -1,0 +1,10 @@
+.gameOverContainer{
+  margin: auto;
+  padding: 10px;
+}
+
+.gameOverContainer #gameOver{
+  font-family: 'fingerfunny';
+  font-size: 80pt;
+  text-align: center;
+}
