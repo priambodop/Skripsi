@@ -7,12 +7,12 @@ Pada bab ini akan dijelaskan landasan teori mengenai Node.js, Express.js, Socket
 \section{Node.js}
 \label{sec:Node.js}
 
-\textit{Node.js} adalah \textit{platform} untuk menjalankan JavaScript yang dibangun berdasarkan \textit{V8} yang merupakan \textit{engine} JavaScript milik perusahaan \textit{Google} \cite{dahl:09:nodejsdocs}. \textit{Node.js} memiliki model \textit{event-driven} yang berarti seluruh aksi akan dilakukan berdasarkan suatu \textit{event} yang dipancarkan, dan \textit{non-blocking I/O} yang berarti suatu aksi dalam Node.js akan langsung dilakukan tanpa harus menunggu aksi sebelumnya selesai. Teknologi ini menyediakan beberapa kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
+\textit{Node.js} adalah sebuah \textit{platform} untuk menjalankan JavaScript yang dibangun berdasarkan \textit{V8} yang merupakan \textit{engine} JavaScript milik perusahaan \textit{Google} \cite{nodeFound:09:nodejsdocs}. \textit{Node.js} memiliki model \textit{event-driven} yang berarti seluruh aksi akan dilakukan berdasarkan suatu \textit{event} yang dipancarkan, dan \textit{non-blocking I/O} yang berarti suatu aksi dalam Node.js akan langsung dilakukan tanpa harus menunggu aksi sebelumnya selesai. Teknologi ini menyediakan beberapa kelas yang berfungsi untuk mengimplementasi fitur-fitur yang dimiliki.
 
 Subbab - subbab berikut akan menjelaskan beberapa kelas yang dimiliki oleh Node.js.
 
 \subsection{HTTP}
-\textit{HTTP} merupakan suatu \textit{interface} pada \textit{Node.js} digunakan untuk menangani \textit{request} dari protokol HTTP yang secara \textit{native} sulit untuk digunakan \cite{dahl:09:nodejsdocs}. \textit{Interface} ini akan menangani protokol \textit{HTTP} dengan tidak melakukan \textit{buffer} pada seluruh \textit{request} atau \textit{responses}.
+\textit{HTTP} merupakan suatu \textit{interface} pada \textit{Node.js} yang digunakan untuk menangani \textit{request} dari protokol HTTP\cite{nodeFound:09:nodejsdocs}. \textit{Interface} ini akan menangani protokol HTTP dengan tidak melakukan \textit{buffer}, yang berarti menyimpan sementara seluruh data yang akan dikirimkan, pada seluruh \textit{request} atau \textit{responses}.
 
 Berikut akan dijelaskan salah satu kelas yang dimiliki oleh \textit{interface} \textit{HTTP}.
 
@@ -87,6 +87,7 @@ Berikut akan dijelaskan salah satu kelas yang dimiliki oleh \textit{interface} \
 %	\end{itemize}
 	
 	\item \textbf{http.Server} \\ 
+	Kelas ini akan menciptakan objek \textit{server} HTTP, yang akan menangani setiap \textit{request} yang dilakukan oleh \textit{client}. Salah satu \textit{Method} yang dimiliki oleh kelas ini adalah:
 %	Kelas ini merupakan turunan dari \textit{net.Server}. \textit{Event} yang dimiliki kelas ini yaitu sebagai berikut:
 %	\begin{itemize}
 %		\item \textbf{'close'} \\ Dipancarkan apabila \textit{server} sudah ditutup.
@@ -102,9 +103,8 @@ Berikut akan dijelaskan salah satu kelas yang dimiliki oleh \textit{interface} \
 %		\item \textbf{server.timeout} \\ Mengembalikan \textit{number} yang menandakan \textit{timeout} dalam milidetik.
 %	\end{itemize}
 %	
-	Salah satu \textit{Method} yang dimiliki oleh kelas ini adalah:
 	\begin{itemize}
-		\item \textbf{server.listen()} \\ \textit{Method} ini akan memulai \textit{server HTTP} untuk melakukan proses \textit{listening} suatu koneksi.
+		\item \textbf{server.listen()} \\ \textit{Method} ini akan memulai \textit{server} HTTP untuk melakukan proses \textit{listening} suatu koneksi.
 	\end{itemize}
 %		\item \textbf{server.setTimeout([msecs][,callback])} \\ \textbf{Parameter:}
 %		\begin{itemize}
@@ -191,9 +191,9 @@ Berikut akan dijelaskan salah satu kelas yang dimiliki oleh \textit{interface} \
 \end{itemize}
 
 \subsection{Path}
-\textit{Path}merupakan suatu \textit{Interface} yang menyediakan fungsi untuk mengatur akses suatu berkas dan direktori \cite{dahl:09:nodejsdocs}. Modul tersebut dapat diakses dengan cara sebagai berikut:
+\textit{Path} merupakan suatu \textit{Interface} yang menyediakan fungsi untuk mengatur akses suatu berkas dan direktori. \textit{Interface} tersebut dapat diakses dengan cara sebagai berikut:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Akses modul \textit{path}}, label={lst:modulPath, captionpos=b}]
 const path = require('path');
 \end{lstlisting}
 
@@ -365,9 +365,9 @@ Salah satu method yang dimiliki oleh \textit{interface Path} adalah sebagai beri
 %\end{enumerate}
 
 \subsection{Module}
-Pada aplikasi berbasis \textit{Node.js}, setiap berkas yang terdapat dalam pembangunan aplikasi dianggap sebagai modul-modul yang terpisah satu sama lain \cite{dahl:09:nodejsdocs}. Variabel dan fungsi yang terdapat pada satu berkas, atau modul, hanya dapat digunakan pada satu lingkup modul tersebut. Suatu modul tidak dapat menggunakan variabel atau fungsi yang terdapat pada modul lainnya. Oleh karena itu, apabila variabel dan fungsi yang terdapat pada satu modul dapat digunakan oleh modul yang lain, diperlukan cara tertentu. Cara tersebut dapat dilakukan seperti berikut:
+Pada aplikasi berbasis \textit{Node.js}, setiap berkas yang terdapat dalam pembangunan aplikasi dianggap sebagai modul-modul yang terpisah satu sama lain. Variabel dan fungsi yang terdapat pada satu berkas, atau modul, hanya dapat digunakan pada satu lingkup modul tersebut. Suatu modul tidak dapat menggunakan variabel atau fungsi yang terdapat pada modul lainnya. Oleh karena itu, apabila variabel dan fungsi yang terdapat pada satu modul dapat digunakan oleh modul yang lain, diperlukan cara tertentu. Cara tersebut dapat dilakukan seperti berikut:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Proses \textit{export} fungsi dan objek dari satu modul ke modul lain}, label={lst:modulExport}, captionpos=b]
 module.exports = functions || object
 \end{lstlisting}
 
@@ -378,18 +378,19 @@ module.exports = functions || object
 \section{Express.js}
 \label{sec:Express.js}
 
-Express.js merupakan suatu \textit{framework} aplikasi web untuk Node.js yang menyediakan kumpulan fitur yang memiliki sifat \textit{robust}, yang berarti dapat bertahan untuk waktu yang lama \cite{tj:10:expressjs}. \textit{Framework} ini digunakan untuk mengatur struktur direktori dalam pengembangan aplikasi web, sehingga untuk proses pemeliharaan aplikasi web dapat dilakukan secara efisien. 
+Express.js merupakan suatu \textit{framework} aplikasi web untuk Node.js yang menyediakan kumpulan fitur yang memiliki sifat \textit{robust}, yang berarti dapat bertahan untuk waktu yang lama selama pengembangan aplikasi berjalan \cite{tj:10:expressjs}. \textit{Framework} ini digunakan untuk mengatur struktur direktori dalam pengembangan aplikasi web, sehingga untuk proses pemeliharaan aplikasi web dapat dilakukan secara efisien. 
 
 Subbab-subbab berikut akan menjelaskan kelas-kelas yang terdapat pada Express.js
 
 \subsection{express()}
 Kelas ini dibutuhkan untuk mengakses seluruh fitur yang disediakan pada Express.js. Untuk dapat mengakses seluruh fitur Express.js, langkah yang harus dilakukan adalah sebagai berikut: 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Mengakses fitur \textit{express()}}, label={lst:express()}, captionpos=b]
 var express = require('express');
 var app = express();
 \end{lstlisting}
 
-Variabel \textit{express} akan menetapkan seluruh fitur yang dimiliki oleh modul \textit{'express'}, sehingga variabel tersebut dapat menggunakan seluruh fitur yang tersedia. Variabel \textit{app} akan melakukan proses instansiasi objek dari variabel \textit{express} dengan menetapkan fungsi \textit{express()}. Dengan begitu, fitur-fitur yang terdapat pada Express.js sudah dapat digunakan untuk pengembangan aplikasi web.
+Variabel \textit{express} akan menetapkan seluruh fitur yang dimiliki oleh modul \textit{'express'}, sehingga variabel tersebut dapat menggunakan seluruh fitur yang tersedia. Dengan begitu, fitur-fitur yang terdapat pada Express.js sudah dapat digunakan untuk pengembangan aplikasi web.
+%Variabel \textit{app} akan melakukan proses instansiasi objek dari variabel \textit{express} dengan menetapkan fungsi \textit{express()}.
 
 Beberapa \textit{method} yang dimiliki oleh fungsi \textit{express()} adalah sebagai berikut:
 
@@ -925,7 +926,7 @@ Proses \textit{routing} akan menentukan fungsi \textit{callback} yang akan menan
 \section{Socket.io}
 \label{sec:Socket.io}
 
-Socket.io merupakan teknologi yang memungkinkan sebuah aplikasi untuk melakukan komunikasi dua arah secara \textit{real-time} \cite{rauch:11:socketiodocs}. Socket.io dapat berjalan di setiap \textit{platform, browser}, dan gawai.
+Socket.io merupakan teknologi yang memungkinkan sebuah aplikasi untuk melakukan komunikasi dua arah secara \textit{real-time} \cite{damien:11:socketiodocs}. Socket.io dapat berjalan di setiap \textit{platform, browser}, dan gawai.
 
 Teknologi Socket.io memanfaatkan teknologi \textit{socket} dalam proses implementasinya.
 \textit{Socket} merupakan suatu \textit{endpoint} didalam hubungan komunikasi dua arah antara dua program yang berjalan didalam jaringan tertentu.\textit{Endpoint} adalah suatu entitas yang merupakan titik akhir dari suatu komunikasi, dimana entitas tersebut terdiri dari kombinasi alamat \textit{IP} dan nomor \textit{port}. \textit{Socket} akan terikat dengan nomor \textit{port} agar \textit{TCP}, yang mengatur koneksi internet, dapat mengidentifikasi suatu aplikasi untuk data yang akan dikirimkan.
@@ -1083,7 +1084,7 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 			\item \textbf{server.listen(port[, options])} \\
 			\textbf{Parameter:} 
 			\begin{itemize}
-				\item \textbf{port} \\tipe: \textbf{Number} \\ Nomor yang akan digunakan untuk melakukan koneksi kepada \textit{server}
+				\item \textbf{port} \\tipe: \textbf{Number} \\ Nomor yang akan digunakan untuk melakukan koneksi kepada \textit{server}.
 				\item \textbf{options} \\tipe: \textbf{Object} \\ Parameter ini dapat berupa berbagai jenis objek.
 			\end{itemize}
 			\textit{Method} ini akan melakukan koneksi kepada \textit{server} dengan menggunakan \textit{port} yang terdapat pada parameter.
@@ -1159,9 +1160,9 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 		Berfungsi untuk memancarkan \textit{event} kepada \textit{client} yang berada didalam \textit{room} tertentu. \\ 
 		\textbf{Parameter:}
 		\begin{itemize}
-			\item \textbf{room} \\tipe: \textbf{String} \\ Nama dari \textit{room}.
+			\item \textbf{room} \\tipe: \textbf{String} \\ kode suatu \textit{room} milik beberapa \textit{client} yang terkoneksi ke Socket.io.
 		\end{itemize}
-		\textbf{Kembalian:} \textit{namespace}. \\
+%		\textbf{Kembalian:} \textit{namespace}.
 %		Contoh implementasi:
 %\begin{lstlisting}
 %const io = require('socket.io')();
@@ -1191,24 +1192,25 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 	\end{itemize}
 	
 	\item \textbf{Socket} \\
-	Kelas ini merupakan kelas yang mendasar untuk berinteraksi dengan \textit{browser} milik \textit{client}. \textit{Socket} merupakan milik \textit{namespace} tertentu dan menggunakan kelas \textit{Client} untuk berkomunikasi. Dalam setiap \textit{namespace}, dapat ditentukan suatu \textit{room} yang dimana sebuah \textit{socket} dapat bergabung atau keluar. Kelas ini pun merupakan turunan dari \textit{EventEmitter} milik \textit{Node.js}. Kelas ini melakukan \textit{override} pada \textit{method emit} milik \textit{EventEmitter}, dan tidak memodifikasi \textit{method} lain.
+	Kelas ini merupakan kelas yang mendasar untuk berinteraksi dengan \textit{browser} milik \textit{client}. \textit{Socket} merupakan milik \textit{namespace} tertentu dan menggunakan kelas \textit{Client} untuk berkomunikasi. Dalam setiap \textit{namespace}, dapat ditentukan suatu \textit{room} yang dimana sebuah \textit{socket} dapat bergabung atau keluar. 
+%	Kelas ini pun merupakan turunan dari \textit{EventEmitter} milik Node.js. Kelas ini melakukan \textit{override} pada \textit{method emit} milik \textit{EventEmitter}, dan tidak memodifikasi \textit{method} lain.
 	
-	Beberapa properti yang dimiliki oleh kelas ini yaitu sebagai berikut:
+	Beberapa properti yang dimiliki oleh kelas ini adalah sebagai berikut:
 	\begin{itemize}
 		\item \textbf{socket.id} \\ Tanda pengenal unik untuk sesi saat ini, yang didapatkan dari kelas \textit{Client}.
 		\item \textbf{socket.rooms} \\ Objek yang menandakan \textit{room} dari \textit{client} saat ini.
 	\end{itemize}
 
-	Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu sebagai berikut:
+	Beberapa \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut:
 	\begin{itemize}
 		\item \textbf{socket.join(room[, callback])} \\
 		Berfungsi untuk menambah \textit{client} ke \textit{room}. \\
 		\textbf{Parameter:}
 		\begin{itemize}
 			\item \textbf{room} \\tipe: \textbf{String} \\ Nama \textit{room}.
-			\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi \textit{callback}.
+			\item \textbf{callback} \\tipe: \textbf{Function} \\ Fungsi yang menangani proses tertentu yang menjadi masukan didalam parameter fungsi lain.
 		\end{itemize}
-		\textbf{Kembalian:} \textit{Socket}.
+%		\textbf{Kembalian:} Objek \textit{Socket}.
 		
 %		Contoh implementasi:
 %	\begin{lstlisting}
@@ -1250,18 +1252,17 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 \end{enumerate}
 
 \subsection{Client API}
-\textit{Client API} digunakan untuk menangani proses pengaturan koneksi yang terjadi pada bagian \textit{client}\cite{rauch:11:socketioclientapi}. Agar dapat menggunakan \textit{API} yang tersedia, \textit{client} harus menambahkan \textit{url} pada \textit{syntax script} didalam \textit{html} yang bersangkutan. Hal tersebut dapat dilakukan seperti berikut:
+\textit{Client API} digunakan untuk menangani proses pengaturan koneksi yang terjadi pada bagian \textit{client}. Agar dapat menggunakan \textit{API} yang tersedia, \textit{client} harus menambahkan \textit{url} pada JavaScript didalam HTML yang bersangkutan. Hal tersebut dapat dilakukan seperti berikut:
 
 \begin{lstlisting}
 	<script src="/socket.io/socket.io.js"></script>
 \end{lstlisting}
 
-Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
+Kelas-kelas yang ada pada \textit{Client API} adalah sebagai berikut:
 \begin{enumerate}
 	\item \textbf{IO} \\
-	Untuk dapat menggunakan fungsi yang ada pada \textit{IO}, dapat dilakukan langkah seperti berikut:
+	Kelas ini digunakan untuk menyediakan fitur-fitur yang akan digunakan pada bagian \textit{client}. Untuk dapat menggunakan fungsi yang ada pada \textit{IO}, dapat dilakukan langkah seperti berikut:
 \begin{lstlisting}
-	
 //berfungsi untuk melayani file client
 <script src="/socket.io/socket.io.js"></script>
 \end{lstlisting}
@@ -1271,7 +1272,7 @@ Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
 %const io = require('socket.io-client');
 %\end{lstlisting}
 	
-	\textit{Method} yang dimiliki oleh kelas ini yaitu sebagai berikut:
+	\textit{Method} yang dimiliki oleh kelas ini adalah sebagai berikut:
 	\begin{itemize}
 		\item \textbf{io([url][, options])} \\
 		Berfungsi untuk membuat objek baru dari kelas \textit{Manager} dengan \textit{url}, dan akan menggunakan objek kelas \textit{Manager} yang sudah ada untuk pemanggilan selanjutnya, apabila \textit{multiplex} pada parameter \textit{option} bernilai \textit{true}. Objek \textit{Socket} akan dikembalikan untuk \textit{namespace} yang sudah ditentukan oleh nama \textit{path} pada \textit{URL}, dengan nilai \textit{default} /. \\
@@ -1280,7 +1281,7 @@ Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
 			\item \textbf{url} \\tipe: \textbf{String} \\ Nama \textit{URL}.
 			\item \textbf{options} \\tipe: \textbf{Object} \\ Parameter ini dapat berupa beberapa jenis objek, seperti milik kelas \textit{Manager}
 		\end{itemize}
-		\textbf{Kembalian:} \textit{Socket}
+%		\textbf{Kembalian:} Objek \textit{Socket}
 		
 	\end{itemize}
 	
@@ -1325,13 +1326,13 @@ Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
 	
 	\item \textbf{Socket}
 	
-	Salah satu properti yang dimiliki oleh kelas ini yaitu:
+	Salah satu properti yang dimiliki oleh kelas ini adalah:
 	
 	\begin{itemize}
-		\item \textbf{socket.id} \\ \textit{Identifier} unik yang dimiliki oleh satu \textit{socket} untuk satu sesi. Properti ini akan mempunyai nilai segera setelah koneksi terhubung, dan akan diperbarui setelah melakukan koneksi ulang.
+		\item \textbf{socket.id} \\ Identifikasi unik yang dimiliki oleh satu \textit{client} untuk satu sesi. Properti ini akan mempunyai nilai segera setelah koneksi terhubung, dan akan diperbarui setelah melakukan koneksi ulang.
 	\end{itemize}
 	
-	Beberapa \textit{method} yang dimiliki oleh kelas ini yaitu:
+	Beberapa \textit{method} yang dimiliki oleh kelas ini adalah:
 	
 	\begin{itemize}
 		
@@ -1363,17 +1364,10 @@ Kelas-kelas yang ada pada \textit{Client API} yaitu sebagai berikut:
 		\item \textbf{args} \\ Argumen tambahan (opsional).
 		\item \textbf{ack} \\tipe: \textbf{Function} \\ Fungsi tambahan (opsional).
 	\end{itemize}
-	Contoh implementasi:
-\begin{lstlisting}
-socket.emit('ferret', 'tobi', (data) => {
-	console.log(data);
-});
-\end{lstlisting}
-	
 %	\item \textbf{socket.close()} \\ Berfungsi untuk menutup \textit{socket} secara manual.
 	\end{itemize}
 
-	Beberapa \textit{events} yang ada pada kelas ini yaitu sebagai berikut:
+	Beberapa \textit{events} yang ada pada kelas ini adalah sebagai berikut:
 	\begin{itemize}
 		\item \textbf{connect} \\ Akan dipancarkan apabila berhasil melakukan koneksi dan setelah melakukan koneksi ulang.
 		\item \textbf{disconnect} \\ Akan dipancarkan apabila \textit{server} memutus koneksi atau \textit{client} memutus koneksi.
@@ -1808,44 +1802,44 @@ Beberapa \textit{method} yang dimiliki oleh \textit{interface} ini adalah sebaga
 \section{jQuery}
 \label{sec:jQuery}
 
-jQuery merupakan pustaka JavaScript yang menyediakan fitur-fitur untuk mengatur berbagai elemen HTML \cite{mit:06:jquery}. Pustaka ini memiliki fitur-fitur seperti memanipulasi berkas HTML, menangani suatu \textit{event}, dan mengatur jalannya animasi. jQuery dapat menyediakan fitur-fitur untuk menangani berbagai hal tersebut yang berjalan di berbagai \textit{browser} yang berbeda.
+jQuery merupakan pustaka JavaScript yang menyediakan fitur-fitur untuk mengatur berbagai elemen HTML \cite{jqFound:06:jQueryAPI}. Pustaka ini memiliki fitur-fitur seperti memanipulasi berkas HTML, menangani suatu \textit{event}, dan mengatur jalannya animasi. jQuery dapat menyediakan fitur-fitur untuk menangani berbagai hal tersebut yang berjalan di berbagai \textit{browser} yang berbeda.
 
 Subbab-subbab berikut akan menjelaskan beberapa \textit{method} yang dimiliki oleh jQuery.
 
 \subsection{.submit(handler)}
-\textit{Method} ini akan menyambungkan \textit{handler} suatu \textit{event} dengan \textit{"submit"} yang merupakan \textit{event} dari JavaScript, atau memancarkan \textit{event} tersebut kepada elemen tertentu \cite{mit:06:jQueryAPI}. 
+\textit{Method} ini akan menyambungkan \textit{handler} suatu \textit{event} dengan \textit{"submit"} yang merupakan \textit{event} dari JavaScript, atau memancarkan \textit{event} tersebut kepada elemen tertentu. 
 
 \textbf{Parameter:}
 \begin{itemize}
 	\item \textbf{handler}, Fungsi yang akan dieksekusi setiap suatu \textit{event} dipancarkan.
 \end{itemize}
 
-Berikut merupakan contoh penggunaan dari \textit{method} ini:
-
-\begin{lstlisting}
-// HTML
-<form id="target">
-<input type="text" value="Hello there">
-<input type="submit" value="Go">
-</form>
-
-// JQUERY
-$( "#target" ).submit(function( event ) {
-alert( "Handler for .submit() called." );
-event.preventDefault();
-});
-\end{lstlisting}
+%Berikut merupakan contoh penggunaan dari \textit{method} ini:
+%
+%\begin{lstlisting}
+%// HTML
+%<form id="target">
+%<input type="text" value="Hello there">
+%<input type="submit" value="Go">
+%</form>
+%
+%// JQUERY
+%$( "#target" ).submit(function( event ) {
+%alert( "Handler for .submit() called." );
+%event.preventDefault();
+%});
+%\end{lstlisting}
 
 \subsection{.val()}
-\textit{Method} ini akan mendapatkan nilai dari elemen-elemen \textit{form} seperti \textbf{input}, \textit{select}, dan \textit{textarea} \cite{mit:06:jQueryAPI}. \\
+\textit{Method} ini akan mendapatkan nilai dari elemen-elemen \textit{form} seperti \textbf{input}, \textit{select}, dan \textit{textarea}. \\
 \textbf{Kembalian:} \textit{String, Number, Array}.
 
 \subsection{.html()}
-\textit{Method} ini akan mendapatkan konten HTML dari elemen pertama yang ada didalam kumpulan elemen-elemen yang sesuai ~\cite{mit:06:jQueryAPI}. \\
+\textit{Method} ini akan mendapatkan konten HTML dari elemen pertama yang ada didalam kumpulan elemen-elemen yang sesuai. \\
 \textbf{Kembalian:} \textit{String}
 
 \subsection{.preventDefault()}
-Apabila \textit{method} ini dieksekusi, maka aksi \textit{default} dari suatu \textit{event} tidak akan dieksekusi \cite{mit:06:jQueryAPI}.
+Apabila \textit{method} ini dieksekusi, maka aksi \textit{default} dari suatu \textit{event} tidak akan dieksekusi.
 
 \section{Content Template element}
 \label{sec:template}
