@@ -1,7 +1,7 @@
 \chapter{Analisis}
 \label{chap:analisis}
 
-Pada bab ini akan dijelaskan mengenai analisis aplikasi sejenis, analisis alur permainan Finger For Life, analisis pengembangan web, analisis \textit{use case}, analisis arsitektur Finger For Life, analisis Socket.io.
+Pada bab ini akan dijelaskan mengenai analisis aplikasi sejenis, analisis alur permainan Finger For Life, analisis pengembangan web, analisis \textit{use case}, analisis arsitektur Finger For Life, dan analisis Socket.io.
 
 \section{Analisis Aplikasi Sejenis}
 \label{sec:AirConsole}
@@ -196,7 +196,7 @@ Dari ketiga percobaan yang sudah dilakukan, ada beberapa hal yang dapat diperbai
 
 
 \section{Analisis Alur Permainan Finger For Life}
-\label{alur}
+\label{sec:alur}
 
 Web yang akan dikembangkan merupakan aplikasi permainan berbasis web yang bernama Finger For Life. Jenis permainan ini adalah kompetisi balap lari yang dilakukan oleh dua pemain. Tujuan dari permainan ini adalah mencapai garis akhir lintasan lari lebih dulu untuk menjadi pemenang. Untuk dapat memainkan permainan ini, para pemain harus menyiapkan beberapa hal seperti berikut:
 
@@ -248,7 +248,7 @@ Para pemain harus menyediakan satu perangkat komputer \textit{PC}, dimana \texti
 \end{enumerate}
 
 \section{Analisis Pengembangan Web}
-\label{pengembangan}
+\label{sec:pengembangan}
 
 Penjelasan pustaka-pustaka yang dibutuhkan untuk pengembangan Finger For Life sudah dijelaskan pada bab \ref{chap:teori}. Pada subbab ini akan dijelaskan bagaimana pustaka-pustaka tersebut digunakan dalam proses implementasi aplikasi permainan berbasis web Finger For Life.
 
@@ -256,7 +256,7 @@ Penjelasan pustaka-pustaka yang dibutuhkan untuk pengembangan Finger For Life su
 	\item \textbf{Node.js} \\
 	\begin{enumerate}
 		\item \textbf{HTTP}
-		\textit{API} HTTP digunakan pada bagian \textit{server}. Web yang akan dikembangkan akan menggunakan \textit{server} HTTP untuk menyediakan akses ke alamat web yang dapat diakses oleh \textit{client}. HTTP \textit{server} akan diintegrasikan dengan Socket.io, dimana HTTP \textit{server} akan menjadi masukan parameter yang dibutuhkan Socket.io.
+		\textit{Interface} HTTP digunakan pada bagian \textit{server}. Web yang akan dikembangkan akan menggunakan \textit{server} HTTP untuk menyediakan akses ke alamat web yang dapat diakses oleh \textit{client}. HTTP \textit{server} akan diintegrasikan dengan Socket.io, dimana HTTP \textit{server} akan menjadi masukan parameter yang dibutuhkan Socket.io.
 		
 		Contoh penggunaan HTTP \textit{server} akan dijelaskan sebagai berikut:
 \begin{lstlisting}[caption={Contoh penggunaan \textit{interface} \textit{HTTP}}, label={lst:nodeHTTP}, captionpos=b]
@@ -271,11 +271,11 @@ var io = socketIO(httpServer);
 
 Bagian pertama potongan kode merupakan proses yang dilakukan untuk mendapatkan fungsi-fungsi yang tersedia dari masing-masing modul. Dengan melakukan proses tersebut, maka dapat dibuat variabel baru untuk melakukan proses inisialisasi yang dilakukan pada bagian kedua potongan kode.
 
-Variabel \textit{app} menginisialisasi Express.js yang akan menjadi \textit{function handler}, yang merupakan fungsi yang menjadi masukan suatu parameter fungsi lain. Variabel \textit{httpServer} akan menginisialisasi objek \textit{server} HTTP dengan menggunakan fungsi \textit{createServer()}, dimana fungsi tersebut akan memiliki masukan yang berupa variabel \textit{app}. Agar aplikasi dapat melakukan koneksi kepada Socket.io, maka \textit{server} HTTP harus terintegrasi dengan Socket.io. Proses tersebut dilakukan dengan cara menginisialisasi variabel \textit{io} dengan memberi masukan variabel \textit{httpServer} kedalam fungsi \textit{socketIO()}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.
+Variabel \textit{app} menginisialisasi Express.js yang akan menjadi fungsi \textit{handler}, yang merupakan fungsi yang menjadi masukan suatu parameter fungsi lain. Variabel \textit{httpServer} akan menginisialisasi objek \textit{server} HTTP dengan menggunakan fungsi \textit{createServer()}, dimana fungsi tersebut akan memiliki masukan yang berupa variabel \textit{app}. Agar aplikasi dapat melakukan koneksi kepada Socket.io, maka \textit{server} HTTP harus terintegrasi dengan Socket.io. Proses tersebut dilakukan dengan cara menginisialisasi variabel \textit{io} dengan memberi masukan variabel \textit{httpServer} kedalam fungsi \textit{socketIO()}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.
 
 %Variabel tersebut akan disambungkan dengan HTTP \textit{server}, dengan menggunakan variabel \textit{httpServer}. Setelah variabel \textit{httpServer} diinisialisasi, variabel \textit{io} dapat diintegrasikan dengan HTTP \textit{server} agar dapat menggunakan Socket.io sebagai \textit{server}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.
 		
-		Salah satu \textit{method} yang dimiliki oleh HTTP adalah sebagai berikut:
+		Salah satu \textit{method} yang dimiliki oleh \textit{interface HTTP} adalah sebagai berikut:
 		
 		\begin{itemize}
 			\item \textbf{http.createServer([options][,requestListener])} \\
@@ -304,7 +304,7 @@ Baris pertama dan kedua pada potongan kode merupakan proses untuk mendapatkan fu
 		Salah satu kelas yang dimiliki oleh HTTP adalah sebagai berikut:
 		\begin{itemize}
 			\item \textbf{http.Server} \\
-			Kelas ini akan menciptakan objek \textit{server} HTTP, yang akan menangani setiap \textit{request} yang dilakukan oleh \textit{client}. Salah satu \textit{method} yang dimiliki oleh kelas ini adalah:
+			Kelas ini akan menciptakan objek \textit{server} HTTP, yang akan menangani setiap permintaan yang dilakukan oleh \textit{client}. Salah satu \textit{method} yang dimiliki oleh kelas ini adalah:
 			
 			\begin{itemize}
 				\item \textbf{server.listen()} \\
@@ -319,6 +319,7 @@ Baris pertama dan kedua pada potongan kode merupakan proses untuk mendapatkan fu
 						\item \textbf{options} \\ Objek-objek yang dibutuhkan untuk masukan. Berikut salah satu contoh objek tersebut:
 						
 						\textbf{port}, nomor yang akan dituju oleh \textit{server} untuk melakukan koneksi.
+						
 						\item \textbf{callback} \\ Fungsi yang menangani proses tertentu yang menjadi masukan didalam parameter fungsi lain.
 					\end{itemize}
 					\textbf{Kembalian:} Objek \textit{server}.
@@ -395,6 +396,30 @@ app.use('/', homeRouter);
 			
 %			\item \textbf{app.listen(port, [hostname], [backlog], [callback])} \\
 		\end{itemize}
+	
+		\item \textbf{Response} \\
+		\begin{itemize}
+			\item \textbf{res.render(view[, locals][, callback])} \\
+			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menampilkan halaman HTML yang berada didalam parameter. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+\begin{lstlisting}
+router.get('/', function(req, res, next) {
+	res.render('home', { title: 'Home Pages' });
+});
+\end{lstlisting}
+			Potongan kode tersebut menunjukan bahwa apabila \textit{client} mengakses \textit{path '/'}, yang merupakan halaman utama dari web, maka objek \textit{res} akan menampilkan halaman HTML dari berkas yang bernama \textit{'home'}.
+		\end{itemize}
+	
+		\item \textbf{Router} \\
+		\begin{itemize}
+			\item \textbf{router.METHOD()} \\
+			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk mengatasi permintaan \textit{client} yang menggunakan salah satu \textit{method} milik protokol HTTP. Salah satu \textit{method} yang dipakai adalah \textit{.get()}. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+\begin{lstlisting}
+router.get('/', function(req, res, next) {
+	res.render('home', { title: 'Home Pages' });
+});
+\end{lstlisting}
+			Potongan kode tersebut menunjukan bahwa objek \textit{router} akan menjalankan perintah yang berada didalam fungsi tersebut apabila \textit{client} mengakses \textit{path '/'} menggunakan \textit{method .get()}.
+		\end{itemize}
 	\end{enumerate}
 	
 	\item \textbf{Socket.io}
@@ -460,14 +485,14 @@ var myRoom = socket.room
 
 			\end{itemize}
 		
-			Beberapa \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut:
+			Salah \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut:
 			\begin{itemize}
 				\item \textbf{socket.join(room[, callback])} \\
 				Pada pengembangan Finger For Life, \textit{method} ini berfungsi untuk menambahkan \textit{client} kedalam \textit{room} tertentu. Pada aplikasi web yang akan dibangun, permainan dapat dimainkan oleh beberapa \textit{client}. Untuk dapat membedakan pasangan-pasangan pemain yang sedang bermain, digunakan \textit{room} agar terbagi menjadi beberapa ruang dalam permainan. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
 \begin{lstlisting}
 socket.join('room305');
 \end{lstlisting}
-				\textit{Method} ini akan menambahkan \textit{client} kedalam \textit{room305}, yang nantinya dapat diidentifikasi melalui properi \textit{socket.room}.
+				\textit{Method} ini akan menambahkan \textit{client} kedalam \textit{room305}, yang nantinya dapat diidentifikasi melalui properti \textit{socket.room}.
 
 			\end{itemize}
 		\end{enumerate}
@@ -489,13 +514,13 @@ var socket = io();
 			\item \textbf{Socket}
 			\begin{itemize}
 				\item \textbf{socket.on(eventName, callback)} \\
-				Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menyediakan fungsi yang akan menangani \textit{event} yang dipancarkan. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+				Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menyediakan fungsi yang akan menangkap \textit{event} yang dipancarkan. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
 \begin{lstlisting}
 socket.on('sendEvent', function(){
 	console.log('An event has been sent');
 });
 \end{lstlisting}
-\textit{Method} ini akan menyediakan fungsi untuk yang akan menangani saat \textit{event sendEvent} dipancarkan. Fungsi tersebut akan menampilkan pesan \textit{And event has been sent}.
+\textit{Method} ini akan menyediakan fungsi yang akan menangani saat \textit{event sendEvent} dipancarkan. Fungsi tersebut akan menampilkan pesan \textit{An event has been sent}.
 				
 				\item \textbf{socket.emit(eventName[, ..args][, ack])} \\
 				Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk memancarkan suatu \textit{event} kepada satu \textit{socket} saja. \textit{Event} hanya akan dipancarkan kepada \textit{server} Socket.io. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
@@ -662,7 +687,7 @@ $('form').submit(function(e){
 	e.preventDefault();
 });
 \end{lstlisting}
-		\textit{Method} ini akan mengakses elemen \textit{form} dari HTML, dan mencegah aksi \textit{default} dari \textit{method submit()} dilakukan.
+		\textit{Method} ini akan mengakses elemen \textit{form} dari HTML, dan mencegah aksi \textit{default} dari \textit{method submit()} dilakukan. Aksi \textit{default} yang dilakukan adalah melakukan \textit{reload} pada halaman web.
 	\end{enumerate}
 	
 	\item \textbf{The Content Template element} \\
@@ -695,9 +720,10 @@ Elemen ini memiliki \textit{id} dengan nama \textit{homePage}, dimana elemen ini
 \end{enumerate}
 
 \section{Analisis \textit{Use Case}}
+\label{sec:usecase}
 
 \subsection{Diagram \textit{Use Case}}
-\label{usecase}
+\label{subsec:diagram_usecase}
 
 Diagram \textit{use case} pada permainan berbasis web yang akan dibangun hanya mengandung satu aktor, yaitu pemain. Diagram \textit{use case} dapat dilihat pada Gambar \ref{fig:usecase_pemain}.
 
@@ -732,7 +758,7 @@ Berdasarkan hasil analisis pada subbab \ref{alur}, akan dibentuk empat \textit{u
 		
 		\item Deskripsi: Melakukan permintaan untuk bergabung dengan \textit{room} yang sudah tersedia
 		
-		\item Kondisi awal: Pemain telah membuka halaman \textit{join} pada \textit{browser smartphone} dan mengisi \textit{form} dengan kode yang telah disediakan
+		\item Kondisi awal: Pemain telah membuka halaman permintaan bergabung pada \textit{browser smartphone} dan mengisi \textit{form} dengan kode yang telah disediakan
 		
 		\item Kondisi akhir: Pemain bergabung kedalam \textit{room}
 		
@@ -838,7 +864,7 @@ Arsitektur Finger For Life dapat dilihat pada Gambar \ref{fig:ars_fingerforlife}
 
 Komunikasi antara \textit{client} dengan \textit{client} tidak dapat dilakukan secara langsung. Komunikasi tersebut harus melewati \textit{server} terlebih dahulu. 
 
-Finger For Life dibangun diatas Node.js. Seluruh berkas serta folder yang dibutuhkan untuk membangun aplikasi permainan ini diatur dengan menggunakan Express.js. Proses pengiriman dan penerimaan data secara \textit{realtime} dilakukan menggunakan Socket.io. Dalam permainan ini, animasi akan dilakukan dengan menggunakan Canvas API.
+Finger For Life dibangun diatas Node.js. Seluruh berkas serta direktori yang dibutuhkan untuk membangun aplikasi permainan ini diatur dengan menggunakan Express.js. Proses pengiriman dan penerimaan data secara \textit{realtime} dilakukan menggunakan Socket.io. Dalam permainan ini, animasi akan dilakukan dengan menggunakan Canvas API. Seluruh proses memodifikasi elemen HTML akan dilakukan dengan menggunakan jQuery. Halaman-halaman yang dibutuhkan untuk ditampilkan kelayar akan diatur dengan menggunakan The Content Template element.
 
 \section{Analisis Socket.io}
 Pada pengembangan Finger For Life digunakan banyak fitur yang telah disediakan oleh Socket.io. Teknologi ini digunakan untuk proses sinkronisasi antara \textit{smartphone} dengan \textit{PC} dan komunikasi secara \textit{real-time} antara \textit{client} dan \textit{server}. Seperti yang sudah dijelaskan pada subbab \ref{alur}, ada beberapa tahap yang harus dilakukan sebelum dapat memainkan aplikasi permainan berbasis web ini. Tahap tersebut banyak menggunakan pustaka Socket.io dalam proses implementasinya.
