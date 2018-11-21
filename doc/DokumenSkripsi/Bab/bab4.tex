@@ -1,40 +1,40 @@
 \chapter{Perancangan}
 \label{chap:perancangan}
 
-Pada bab ini akan dijelaskan mengenai perancangan aplikasi yang akan dibangun meliputi diagram kelas rinci beserta deskripsi dan fungsinya, dan perancangan antarmuka.
+Pada bab ini akan dijelaskan mengenai perancangan aplikasi yang akan dibangun meliputi \textit{sequence} diagram, antarmuka, dan struktur direktori.
 
-\section{Perancangan Sequence Diagram}
+\section{Perancangan \textit{Sequence} Diagram}
 
-Pada \textit{sequence} diagram akan dibahas mengenai jalannya koneksi Socket.io dari awal koneksi mulai tersambung hingga koneksi terputus. \textit{Sequence} diagram meliputi \textit{sequence} permintaan bergabung, \textit{sequence} memilih karakter, \textit{sequence} memulai permainan, \textit{sequence} mengakhiri permainan.
+Pada \textit{sequence} diagram akan dibahas mengenai jalannya koneksi Socket.io dari awal koneksi mulai tersambung hingga koneksi terputus. \textit{Sequence} diagram meliputi \textit{sequence} permintaan bergabung, \textit{sequence} memilih karakter, \textit{sequence} memulai permainan, dan \textit{sequence} mengakhiri permainan.
 
 \subsection{\textit{Sequence} Permintaan Bergabung}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.25]{Gambar/JoinRoom}
-	\caption{Proses melakukan koneksi ke \textit{socket.io} dan bergabung kedalam \textit{room}.}
+	\caption{Proses melakukan koneksi ke Socket.io dan bergabung kedalam \textit{room}.}
 	\label{fig:1_JoinRoom}
 \end{figure}
 
-Pada awal permainan, \textit{client} pertama yang melakukan koneksi pada \textit{server} adalah \textit{PC}, yang berperan sebagai \textit{host} dalam permainan seperti yang dijelaskan pada Gambar \ref{fig:1_JoinRoom}.\textit{Host} akan menyediakan suatu kode yang berguna sebagai \textit{room} untuk kedua pemain yang akan bergabung dengan melakukan koneksi ke \textit{server}. \textit{Room} yang disediakan hanya akan menerima tiga \textit{client} saja, yaitu \textit{host}, \textit{player1}, dan \textit{player2}. 
+Pada awal permainan, \textit{client} pertama yang melakukan koneksi pada Socket.io adalah \textit{PC}, yang berperan sebagai \textit{host} dalam permainan seperti yang dijelaskan pada Gambar \ref{fig:1_JoinRoom}.\textit{Host} akan menyediakan suatu kode yang berguna sebagai \textit{room} untuk kedua pemain yang akan bergabung dengan melakukan koneksi ke \textit{server}. \textit{Room} yang disediakan hanya akan menerima tiga \textit{client} saja, yaitu \textit{host}, \textit{player1}, dan \textit{player2}. 
 
 \textit{Host} akan mengirimkan \textit{event} yang menandakan akan bergabung kedalam room, \textit{event} tersebut adalah \textbf{hostJoinRoom(id, room)}. \textit{Event} ini memiliki data yang akan dikirimkan kepada \textit{server}, data-data tersebut dijelaskan sebagai berikut:
 \begin{itemize}
 	\item \textbf{id}, identifikasi unik yang dimiliki masing-masing \textit{client} yang terkoneksi dengan Socket.io.
-	\item \textbf{room}, suatu \textit{string} yang menandakan ruangan dimana \textit{client} hanya akan melakukan komunikasi didalam ruangan tersebut.
+	\item \textbf{room}, suatu \textit{String} yang menandakan ruangan dimana \textit{client} hanya akan melakukan komunikasi didalam ruangan tersebut.
 \end{itemize}
 
 Data-data tersebut akan dikirimkan ke \textit{server} dan akan dimasukan kedalam suatu \textit{array} yang diproses oleh kelas \textit{Users}. Kelas ini memiliki \textit{array} dengan nama \textit{userArray} yang menyimpan seluruh \textit{client} yang telah terkoneksi dengan Socket.io. Kelas \textit{Users} akan bertanggung jawab dalam menyambung koneksi maupun memutus koneksi antara \textit{client} dan \textit{server}.
 
-Setelah \textit{host} terkoneksi dengan Socket.io, maka \textit{room} milik \textit{host} sudah tersedia dan para pemain dapat bergabung kedalam \textit{room} tersebut. Untuk dapat mulai bermain, para pemain harus memasukan kode \textit{room} yang disediakan di halaman \textit{host} kedalah \textit{form} yang ada dihalaman \textit{browser} pada \textit{smartphone}. Pemain akan mengirimkan \textit{event} \textbf{requestToJoin(id, room)} pada \textit{server}. Data yang dikirimkan oleh pemain sama dengan data yang dikirimkan oleh \textit{host}. 
+Setelah \textit{host} terkoneksi dengan Socket.io, maka \textit{room} milik \textit{host} sudah tersedia dan para pemain dapat bergabung kedalam \textit{room} tersebut. Untuk dapat mulai bermain, para pemain harus memasukan kode \textit{room} yang disediakan di halaman \textit{host} kedalam \textit{form} yang ada dihalaman \textit{browser} pada \textit{smartphone}. Pemain akan mengirimkan \textit{event} \textbf{requestToJoin(id, room)} pada \textit{server}. Data yang dikirimkan oleh pemain sama dengan data yang dikirimkan oleh \textit{host}. 
 
 Setelah \textit{event} tersebut diterima oleh \textit{server}, maka akan dilakukan pengecekan apakah pemain dapat bergabung atau tidak kedalam \textit{room}. Pengecekan akan dilakukan didalam kelas \textit{Users}. Pengecekan tersebut dilakukan dengan menggunakan \textit{method} \textbf{isRoomExist(room)}. Beberapa pengecekan yang dilakukan \textit{method} ini akan dijelaskan sebagai berikut:
 \begin{enumerate}
-	\item Memeriksa apakah data \textit{room} didalam \textit{array} ada yang sesuai dengan parameter \textit{room}.
+	\item Memeriksa apakah data \textit{room} didalam \textit{userArray} ada yang sesuai dengan parameter \textit{room}.
 	\item Memeriksa apakah jumlah yang ada didalam \textit{room} yang dimaksud sudah lebih dari tiga atau belum.
 \end{enumerate}
 
-Apabila kedua hal diatas terpenuhi, maka pemain akan terkoneksi ke \textit{socket.io} dan bergabung ke dalam \textit{room}. \textit{Server} akan mengirimkan \textit{event} \textbf{requestAccepted(id, room)} kepada seluruh \textit{client} yang berada di \textit{room} tersebut. \textit{Event} tersebut akan ditangkap oleh \textit{host} yang berfungsi untuk mencatat sudah ada berapa pemain yang berhasil masuk kedalam \textit{room}. \textit{Server} pun akan mengirimkan \textit{event} \textbf{joinAccepted('Welcome to the game :)')} kepada pemain yang berhasil bergabung kedalam \textit{room}. \textit{Event} tersebut berfungsi untuk memberikan \textit{feedback} kepada pemain bahwa pemain telah berhasil bergabung kedalam permainan.
+Apabila kedua hal diatas terpenuhi, maka pemain akan terkoneksi ke Socket.io dan bergabung kedalam \textit{room}. \textit{Server} akan mengirimkan \textit{event} \textbf{requestAccepted(id, room)} kepada seluruh \textit{client} yang berada didalam \textit{room} tersebut. \textit{Event} tersebut akan ditangkap oleh \textit{host} yang berfungsi untuk mencatat sudah ada berapa pemain yang berhasil masuk kedalam \textit{room}. \textit{Server} pun akan mengirimkan \textit{event} \textbf{joinAccepted('Welcome to the game :)')} kepada pemain yang berhasil bergabung kedalam \textit{room}. \textit{Event} tersebut berfungsi untuk memberikan \textit{feedback} kepada pemain bahwa pemain telah berhasil bergabung kedalam permainan.
 
 Apabila kedua hal diatas tidak terpenuhi, maka pemain tidak dapat terkoneksi ke Socket.io. \textit{Server} akan mengirimkan \textit{event} \textbf{joinRejected('The room is not exist')} kepada pemain. \textit{Event} tersebut berfungsi sebagai \textit{feedback} kepada pemain yang tidak dapat bergabung. Pemain pertama yang berhasil bergabung akan berperan sebagai \textit{Player1}. Setelah satu pemain bergabung, maka \textit{server} akan menunggu untuk pemain kedua agar permainan dapat dimulai. Pemain kedua akan melakukan hal yang sama dengan pemain pertama untuk dapat bergabung kedalam room.
 
@@ -49,14 +49,14 @@ Setelah \textit{room} berisi tiga \textit{client}, maka \textit{host} akan mengi
 	\label{fig:2_ChooseCharacter}
 \end{figure}
 
-Halaman ini merupakan halaman yang dituju oleh para pemain yang telah berhasil melakukan koneksi dan bergabung kedalam \textit{room}. Para pemain akan memilih karakter yang ada dihalaman \textit{browser} pada \textit{smartphone}, dimana karakter yang dipilih akan muncul dihalaman \textit{browser} pada \textit{PC}.Seperti yang dijelaskan pada Gambar \ref{fig:2_ChooseCharacter}, pemain yang memilih karakter tertentu akan mengirimkan \textit{event} \textbf{selectingChar(val, id)} kepada \textit{server}. Data-data yang dikirimkan akan dijelaskan sebagai berikut:
+Halaman ini merupakan halaman yang dituju oleh para pemain yang telah berhasil melakukan koneksi dan bergabung kedalam \textit{room}. Para pemain akan memilih karakter yang ada dihalaman \textit{browser} pada \textit{smartphone}, dimana karakter yang dipilih akan muncul dihalaman \textit{browser} pada \textit{PC}. Seperti yang dijelaskan pada Gambar \ref{fig:2_ChooseCharacter}, pemain yang memilih karakter tertentu akan mengirimkan \textit{event} \textbf{selectingChar(val, id)} kepada \textit{server}. Data-data yang dikirimkan akan dijelaskan sebagai berikut:
 \begin{itemize}
 	\item \textbf{val}, identifikasi unik yang dimiliki oleh masing-masing karakter.
 	\item \textbf{id}, identifikasi unik yang dimiliki masing-masing \textit{client} yang terkoneksi dengan Socket.io.
 \end{itemize}
 Setelah \textit{event} tersebut diterima oleh \textit{server}, maka server akan mengirimkan \textit{event} \textbf{charSelecting(val, id)} kepada \textit{host}. \textit{Event} tersebut berfungsi untuk menampilkan karakter yang dipilih oleh pemain dihalaman \textit{PC}.
 
-Apabila pemain akan menetapkan karakter yang telah ditampilkan dihalaman \textit{PC}, maka \textit{pemain} akan mengirimkan \textit{event} \textbf{sendingChar(val,id,marker)} kepada \textit{server}. Data-data tersebut sama seperti yang dikirimkan oleh \textit{event} sebelumnya, hanya saja ada tambahan data \textbf{marker} pada parameter. Data tambahan tersebut berfungsi sebagai penanda bahwa sudah ada satu pemain yang telah menetapkan karakter yang akan dimainkan. Setelah \textit{server} menerima \textit{event} tersebut, maka \textit{server} akan meneruskan data-data yang sudah diterima pada \textit{host} dengan mengirimkan \textit{event} \textbf{charSent(val,id,marker)}. Apabila \textit{event} tersebut telah diterima oleh \textit{host}, maka karakter telah dimiliki oleh pemain yang menetapkannya.
+Apabila pemain akan menetapkan karakter yang telah ditampilkan dihalaman \textit{PC}, maka \textit{pemain} akan mengirimkan \textit{event} \textbf{sendingChar(val,id,marker)} kepada \textit{server}. Data-data tersebut sama seperti yang dikirimkan oleh \textit{event} sebelumnya, hanya saja ada tambahan data \textbf{marker} pada parameter. Data tambahan tersebut berfungsi sebagai penanda bahwa sudah ada satu pemain yang telah menetapkan karakter yang akan dimainkan. Setelah \textit{server} menerima \textit{event} tersebut, maka \textit{server} akan meneruskan data-data yang sudah diterima kepada \textit{host} dengan mengirimkan \textit{event} \textbf{charSent(val,id,marker)}. Apabila \textit{event} tersebut telah diterima oleh \textit{host}, maka karakter telah dimiliki oleh pemain yang menetapkannya.
 
 Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karakter yang akan dimainkan. Apabila kedua pemain telah menetapkan karakter yang akan dimainkan, \textit{host} akan memancarkan \textit{event} \textbf{charIsReady(playerData)}.Data yang dikirimkan merupakan suatu objek \textit{array} yang berisi data para pemain dan data karakter yang telah dipilih.\textit{Event} tersebut berfungsi untuk memberi informasi kepada \textit{server} untuk pindah kehalaman selanjutnya.
 
@@ -69,11 +69,11 @@ Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karak
 	\label{fig:3_GameBegin}
 \end{figure}
 
-Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{startTheGame(playerData)}. Seperti yang dijelaskan pada Gambar \ref{fig:3_GameBegin}, data yang dikirimkan merupakan data yang didapatkan dari \textit{event} sebelumnya. \textit{Event} tersebut akan diterima oleh seluruh \textit{client} yang berada didalam \textit{room} tertentu, yang kemudian akan memulai permainannya. \textit{Host} akan mengeksekusi \textit{method} \textbf{init()} dan \textbf{beginCountDown(3)} untuk memulai permainan. \textit{Method} \textbf{init()} berfungsi untuk mulai menggambar lintasan lari di halaman \textit{PC} yang akan menjadi tempat para karakter dimainkan. \textit{Method} \textbf{beginCountDown(3)} berfungsi untuk melakukan hitungan mundur selama tiga detik sebelum permainan dapat dimulai. 
+Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{startTheGame(playerData)}. Seperti yang dijelaskan pada Gambar \ref{fig:3_GameBegin}, data yang dikirimkan merupakan data yang didapatkan dari \textit{event} sebelumnya. \textit{Event} tersebut akan diterima oleh seluruh \textit{client} yang berada didalam \textit{room} tertentu, yang kemudian akan memulai permainannya. \textit{Host} akan mengeksekusi \textit{method} \textbf{init()} dan \textbf{beginCountDown(3)} untuk memulai permainan. \textit{Method} \textbf{init()} berfungsi untuk mulai menggambar lintasan lari di halaman \textit{PC} yang akan menjadi tempat para karakter dimainkan. \textit{Method} \textbf{beginCountDown(3)} berfungsi untuk menampilkan hitungan mundur selama tiga detik sebelum permainan dapat dimulai. 
 
 Para pemain yang menerima \textit{event} \textbf{startTheGame(playerData)} akan mengeksekusi \textit{method} \textbf{showInstruction(3)}. \textit{Method} tersebut berfungsi untuk menampilkan instruksi untuk memainkan permainan selama tiga detik. Apabila hitungan mundur telah selesai, maka permainan akan dimulai.
 
-Permainan dilakukan dengan cara menekan tombol-tombol yang ada pada halaman \textit{smartphone}. Apabila pemain menekan tombol, maka \textit{event} \textbf{stepClicked(id)} akan dipancarkan. \textit{Server} akan menerima \textit{event} tersebut, yang kemudian akan meneruskannya dengan memancarkan \textit{event} \textbf{moveThePlayer(id)} kepada \textit{host}. Setelah \textit{event} tersebut diterima oleh \textit{host}, maka \textit{host} akan menjalankan \textit{method} tertentu untuk menggerakan karakter milik pemain. Apabila \textit{Player1} yang menekan tombol, maka \textit{method} \textbf{readyPlayerOne()} akan dieksekusi oleh \textit{host}. Apabila \textit{Player2}, maka \textbf{readyPlayerTwo()} akan dieksekusi. Kedua \textit{Method} tersebut berfungsi untuk memindahkan posisi karakter milik pemain dari posisi semula hingga posisi tertentu. Permainan akan berakhir apabila ada karakter yang menyentuh garis akhir pertama kali.
+Permainan dilakukan dengan cara menekan tombol berbentuk telapak kaki yang ada pada halaman \textit{smartphone}. Apabila pemain menekan tombol, maka \textit{event} \textbf{stepClicked(id)} akan dipancarkan. \textit{Server} akan menerima \textit{event} tersebut, yang kemudian akan meneruskannya dengan memancarkan \textit{event} \textbf{moveThePlayer(id)} kepada \textit{host}. Setelah \textit{event} tersebut diterima oleh \textit{host}, maka \textit{host} akan menjalankan \textit{method} tertentu untuk menggerakan karakter milik pemain. Apabila \textit{Player1} yang menekan tombol, maka \textit{method} \textbf{readyPlayerOne()} akan dieksekusi oleh \textit{host}. Apabila \textit{Player2}, maka \textbf{readyPlayerTwo()} yang akan dieksekusi. Kedua \textit{Method} tersebut berfungsi untuk memindahkan posisi karakter milik pemain dari posisi semula hingga posisi tertentu. Permainan akan berakhir apabila ada karakter yang menyentuh garis akhir pertama kali.
 
 Apabila ada pemain yang berhasil menyentuh garis akhir, maka \textit{host} akan memancarkan \textit{event} \textbf{sendingTheWinner(playerWin, playerCharArr)}. Data-data yang dikirimkan akan dijelaskan sebagai berikut:
 \begin{itemize}
@@ -105,7 +105,7 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di
 	
 	\textbf{PC}
 	
-	Halaman ini merupakan halaman utama yang pertama kali dituju oleh pengguna yang menggunakan \textit{PC}. Komponen halaman ini terdiri dari dua buah gambar jari yang melambangkan permainan, teks yang menunjukan nama permainan yaitu \textit{finger for life}, dan tombol \textit{start} yang digunakan untuk memulai permainan. Rancangan antarmuka halaman \textit{home} dapat dilihat pada Gambar \ref{fig:web1_home}
+	Halaman ini merupakan halaman utama yang pertama kali dituju oleh pengguna yang menggunakan \textit{PC}. Komponen halaman ini terdiri dari dua buah gambar jari yang melambangkan permainan, teks yang menunjukan nama permainan yaitu \textit{Finger For Life}, dan tombol \textit{start} yang digunakan untuk memulai permainan. Rancangan antarmuka halaman utama dapat dilihat pada Gambar \ref{fig:web1_home}
 
 \begin{figure}[H]
 	\centering
@@ -116,12 +116,12 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di
 
 	\textbf{Smartphone}
 	
-	Halaman ini merupakan halaman utama yang pertama kali dituju oleh pengguna yang menggunakan \textit{smartphone}. Komponen halaman ini terdiri dari teks yang menunjukan nama permainan yaitu \textit{finger for life}, dan tombol \textit{join} yang digunakan untuk memulai permainan. Rancangan antarmuka halaman \textit{home} dapat dilihat pada Gambar \ref{fig:mob1_home}.
+	Halaman ini merupakan halaman utama yang pertama kali dituju oleh pengguna yang menggunakan \textit{smartphone}. Komponen halaman ini terdiri dari teks yang menunjukan nama permainan yaitu \textit{Finger For Life}, dan tombol \textit{join} yang digunakan untuk memulai permainan. Rancangan antarmuka halaman utama dapat dilihat pada Gambar \ref{fig:mob1_home}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/mob1_home}
-	\caption{Halaman pada \textit{mobile} yang menunjukan halaman utama saat \textit{client} mengakses alamat web.}
+	\caption{Halaman pada \textit{smartphone} yang menunjukan halaman utama saat \textit{client} mengakses alamat web.}
 	\label{fig:mob1_home}
 \end{figure}
 
@@ -129,18 +129,18 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di
 	
 	\textbf{PC}
 	
-	Halaman ini menampilkan suatu perintah yang dapat dilakukan oleh pengguna apabila akan bergabung kedalam permainan. Halaman ini pun menyediakan suatu kode untuk para pemain dimana kode tersebut akan berfungsi sebagai suatu \textit{room} bagi para pemain. Pada halaman ini akan dilakukan proses sinkronisasi untuk para pengguna, apakah berhasil bergabung dalam permainan atau tidak. Apabila berhasil, maka akan muncul suatu teks yang menunjukan suatu pemain telah berhasil bergabung. Apabila tidak, maka tidak akan menampilkan apapun dan halaman tidak akan menuju ke halaman selanjutnya sebelum ada dua pemain yang berhasil bergabung. Rancangan antarmuka halaman permintaan bergabung pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web2_sync}.
+	Halaman ini menampilkan suatu perintah yang dapat dilakukan oleh pengguna apabila akan bergabung kedalam permainan. Halaman ini menyediakan suatu kode untuk para pemain dimana kode tersebut akan berfungsi sebagai suatu \textit{room} bagi para pemain. Pada halaman ini akan dilakukan proses sinkronisasi untuk para pengguna, dan akan dilakukan pengecekan apakah berhasil bergabung dalam permainan atau tidak. Apabila berhasil, maka akan muncul suatu teks yang menunjukan seorang pemain telah berhasil bergabung. Apabila tidak, maka tidak akan menampilkan apapun dan halaman tidak akan menuju ke halaman selanjutnya sebelum ada dua pemain yang berhasil bergabung. Rancangan antarmuka halaman permintaan bergabung pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web2_sync}.
 	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.1]{Gambar/web2_sync}
-	\caption{Halaman pada \textit{PC} yang menampilkan langkah untuk bergabung kedalam permainan}
+	\caption{Halaman pada \textit{PC} yang menampilkan langkah untuk bergabung kedalam permainan.}
 	\label{fig:web2_sync}
 \end{figure}
 
 	\textbf{Smartphone}
 	
-	Halaman ini berfungsi untuk melakukan permintaan untuk bergabung kedalam permainan. Komponen halaman ini terdiri dari kolom kode, dan tombol \textit{send}. \textit{client} harus mengisi kode yang disediakan dihalaman \textit{PC} kedalam kolom kode. Setelah mengisi kode, maka \textit{client} harus menekan tombol \textit{send} untuk mengirim kode tersebut kepada \textit{server} untuk dilakukan pengecekan. Rancangan antarmuka halaman permintaan bergabung pada \textit{smartphone} dapat dilihat pada Gambar \ref{fig:mob2_sync1}.
+	Halaman ini berfungsi untuk melakukan permintaan untuk bergabung kedalam permainan. Komponen halaman ini terdiri dari kolom untuk mengisi kode, dan tombol \textit{send}. \textit{client} harus mengisi kode yang disediakan dihalaman \textit{PC} kedalam kolom. Setelah mengisi kode, maka \textit{client} harus menekan tombol \textit{send} untuk mengirim kode tersebut kepada \textit{server} untuk dilakukan pengecekan. Rancangan antarmuka halaman permintaan bergabung pada \textit{smartphone} dapat dilihat pada Gambar \ref{fig:mob2_sync1}.
 	
 \begin{figure}[H]
 	\centering
@@ -153,7 +153,7 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di
 
 	\textbf{PC}
 	
-	Halaman ini akan menampilkan karakter yang telah dipilih oleh pemain. Apabila karakter belum memilih karakter yang akan dimainkan, maka halaman ini belum menampilkan apapun. Rancangan antarmuka halaman memilih karakter pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web3_char}.
+	Halaman ini akan menampilkan karakter yang telah dipilih oleh pemain. Apabila pemain belum memilih karakter yang akan dimainkan, maka halaman ini belum menampilkan apapun. Rancangan antarmuka halaman memilih karakter pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web3_char}.
 	
 \begin{figure}[H]
 	\centering
@@ -174,11 +174,11 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di
 	\label{fig:mob3_char1}
 \end{figure}
 
-\item Antarmuka halaman Memulai permainan
+\item Antarmuka halaman Memulai Permainan
 
 	\textbf{PC}
 	
-	Halaman ini menampilkan arena permainan untuk para pemain. Komponen halaman ini terdiri dari suatu gambar lintasan lari, dan karakter yang telah dipilih pada halaman sebelumnya. Rancangan antarmuka halaman \textit{gameplay} pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web5_gameplay2}.
+	Halaman ini menampilkan arena permainan untuk para pemain. Komponen halaman ini terdiri dari suatu gambar lintasan lari, dan karakter yang telah dipilih pada halaman sebelumnya. Rancangan antarmuka halaman memulai permainan pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web5_gameplay2}.
 	
 \begin{figure}[H]
 	\centering
@@ -192,21 +192,36 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di
 		
 		\item \textit{Host} akan mulai menggambar karakter pada layar \textit{PC} setelah mendapatkan data-data yang dikirimkan melalui \textit{event startTheGame}.
 		
-		 
+		
 	\end{itemize}
 	
-	Untuk menampilkan karakter kelayar \textit{PC} saat proses animasi, dibutuhkan teknologi \textit{CanvasAPI} untuk menggambar karakter agar ditampilkan kelayar \textit{PC}. \textit{CanvasAPI} akan menciptakan objek \textit{canvas}, yang akan digunakan sebagai wadah dalam menggambar seluruh elemen yang diperlukan untuk permainan. Pada aplikasi permainan ini, objek \textit{Canvas} akan dibuat dengan ukuran panjang 900 piksel, dan lebar 600 piksel. Untuk memulai proses animasi, ada beberapa langkah yang harus dilakukan. Langkah-langkah tersebut dijelaskan sebagai berikut:
+	Untuk menampilkan karakter kelayar \textit{PC} saat proses animasi, dibutuhkan teknologi Canvas API untuk menggambar karakter agar ditampilkan kelayar \textit{PC}. Canvas API akan menciptakan objek \textit{canvas}, yang akan digunakan sebagai wadah dalam menggambar seluruh elemen yang diperlukan untuk permainan. Pada aplikasi permainan ini, objek \textit{canvas} akan dibuat dengan ukuran panjang 900 piksel, dan lebar 600 piksel. Untuk memulai proses animasi, ada beberapa langkah yang harus dilakukan. Langkah-langkah tersebut dijelaskan sebagai berikut:
+	
 	\begin{enumerate}
-		\item Objek \textit{Canvas} akan menetapkan properti \textit{globalCompositeOperation} dengan nilai \textit{destination-over}. Nilai tersebut akan menyebabkan objek yang ditaruh didalam \textit{canvas} saat ini, akan berada dibelakang objek yang sudah ditaruh sebelumnya.
+		\item \textbf{Menghapus isi \textit{canvas}} \\
+		Untuk memulai animasi, langkah pertama yang harus dilakukan adalah menghapus seluruh elemen yang berada di dalam \textit{canvas}. Langkah tersebut dilakukan untuk menghilangkan bentuk atau elemen lain yang sudah digambar sebelumnya didalam \textit{canvas}, sehingga dapat menggambar suatu \textit{frame}, yang merupakan tempat dimana animasi akan berlangsung. Proses menghapus akan dilakukan dengan menggunakan \textit{method clearRect(0, 0, 900, 600)}. Dengan \textit{method} tersebut, seluruh elemen yang ada didalam \textit{canvas} dengan ukuran panjang 900 piksel dan lebar 600 piksel akan dihilangkan.
 		
-		\item \textit{State}, yang merupakan keadaan dari objek \textit{canvas}, akan diubah ulang dengan cara menghilangkan seluruh objek yang berada didalam \textit{canvas}. Proses tersebut akan dilakukan dengan menggunakan \textit{method clearRect(0, 0, 900, 600)}. Dengan \textit{method} tersebut, seluruh elemen yang ada didalam \textit{canvas} dengan ukuran panjang 900 piksel dan lebar 600 piksel akan dihilangkan.  
+		\item \textbf{Menyimpan \textit{state} milik \textit{canvas}} \\
+		\textit{State} adalah kondisi saat ini dari objek \textit{canvas}. Apabila akan dilakukan perubahan seperti merubah warna bentuk, transformasi bentuk, atau hal lainnya yang akan menyebabkan perubahan pada \textit{state} dari \textit{canvas}, maka \textit{state} harus disimpan setiap ada perubahan. Proses penyimpanan \textit{state} akan dilakukan dengan menggunakan \textit{method save()}.
 		
-		\item Proses pembaruan animasi akan dilakukan kepada seluruh pemain. Apabila pemain berada pada posisi x dan y tertentu, maka \textit{state} dari \textit{canvas} akan disimpan dengan menggunakan \textit{save()}. Setelah itu, karakter milik kedua pemain akan digambar ke \textit{canvas} dengan menggunakan \textit{drawImage()}. Setelah proses tersebut selesai, maka seluruh \textit{state} dari \textit{canvas} akan dikembalikan ke \textit{state} sebelumnya dengan menggunakan \textit{restore()}.
+		\item \textbf{Menggambar elemen untuk animasi} \\
+		Pada langkah ini, elemen yang akan diproses untuk animasi akan digambar kedalam \textit{canvas}. Elemen yang digambar dapat berupa bentuk bangunan, gambar, maupun tulisan. Proses menggambar kedalam \textit{canvas} akan dilakukan dengan menggunakan \textit{method drawImage()}.
 		
-		\item Setelah proses pengecekan selesai, \textit{state} dari \textit{canvas} akan dikembalikan ke \textit{state} sebelumnya dengan menggunakan \textit{restore()}. Setelah itu akan dilakukan proses penggambaran lintasan lari dengan menggunakan drawImage(). Posisi lintasan lari yang digambar akan berada dibelakang gambar karakter yang sudah digambar sebelumnya. 
-		
-		\item Proses ini akan diulang kembali dari awal selama waktu permainan berjalan.
+		\item \textbf{Mengembalikan \textit{state} dari \textit{canvas}} \\
+		Beberapa \textit{state} dari \textit{canvas} yang sudah disimpan, harus dikembalikan seluruhnya agar kembali ke \textit{state} pertama sebelum ada perubahan apapun. Hal tersebut dilakukan sebelum menggambar \textit{frame} baru untuk proses animasi selanjutnya. Proses mengembalikan \textit{state} dari \textit{canvas} akan dilakukan dengan menggunakan \textit{method restore()}. Proses animasi akan diulang kembali mulai dari langkah pertama.
 	\end{enumerate}
+	
+%	\begin{enumerate}
+%		\item Objek \textit{Canvas} akan menetapkan properti \textit{globalCompositeOperation} dengan nilai \textit{destination-over}. Nilai tersebut akan menyebabkan objek yang ditaruh didalam \textit{canvas} saat ini, akan berada dibelakang objek yang sudah ditaruh sebelumnya.
+%		
+%		\item \textit{State}, yang merupakan keadaan dari objek \textit{canvas}, akan diubah ulang dengan cara menghilangkan seluruh objek yang berada didalam \textit{canvas}. Proses tersebut akan dilakukan dengan menggunakan \textit{method clearRect(0, 0, 900, 600)}. Dengan \textit{method} tersebut, seluruh elemen yang ada didalam \textit{canvas} dengan ukuran panjang 900 piksel dan lebar 600 piksel akan dihilangkan.  
+%		
+%		\item Proses pembaruan animasi akan dilakukan kepada seluruh pemain. Apabila pemain berada pada posisi x dan y tertentu, maka \textit{state} dari \textit{canvas} akan disimpan dengan menggunakan \textit{save()}. Setelah itu, karakter milik kedua pemain akan digambar ke \textit{canvas} dengan menggunakan \textit{drawImage()}. Setelah proses tersebut selesai, maka seluruh \textit{state} dari \textit{canvas} akan dikembalikan ke \textit{state} sebelumnya dengan menggunakan \textit{restore()}.
+%		
+%		\item Setelah proses pengecekan selesai, \textit{state} dari \textit{canvas} akan dikembalikan ke \textit{state} sebelumnya dengan menggunakan \textit{restore()}. Setelah itu akan dilakukan proses penggambaran lintasan lari dengan menggunakan drawImage(). Posisi lintasan lari yang digambar akan berada dibelakang gambar karakter yang sudah digambar sebelumnya. 
+%		
+%		\item Proses ini akan diulang kembali dari awal selama waktu permainan berjalan.
+%	\end{enumerate}
 
 	\textbf{Smartphone}
 	
@@ -288,7 +303,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 				\textbf{Kembalian:} Objek \textit{Users}
 				
 				\item \textbf{IsRoomExist(room)} \\
-				\textit{Method} ini akan memeriksa apakah parameter \textit{room} cocok dengan \textit{room} yang ada didalam \textit{userArray}. \\
+				\textit{Method} ini akan memeriksa apakah parameter \textit{room} cocok dengan \textit{room} milik \textit{client} yang ada didalam \textit{userArray}. \\
 				\textbf{Parameter:}
 				\begin{itemize}
 					\item \textbf{room}, kode \textit{room} yang akan dicek.
@@ -317,7 +332,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 				\begin{itemize}
 					\item \textbf{room}, kode \textit{room} milik pengguna.
 				\end{itemize}
-				\textbf{Kembalian:} \textit{Array} objek Users
+				\textbf{Kembalian:} \textit{Array} objek \textit{Users}
 			\end{itemize}
 			
 		\end{itemize}
@@ -328,9 +343,9 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 		Properti yang dimiliki oleh berkas ini akan dijelaskan sebagai berikut:
 		\begin{itemize}
 			\item \textbf{app}, variabel yang mendapatkan seluruh fitur dari berkas lain dengan nama \textit{app.js}.
-			\item \textbf{http}, variabel yang mendapatkan seluruh fitur dari modul HTTP.
+			\item \textbf{http}, variabel yang mendapatkan seluruh fitur dari modul \textit{HTTP}.
 			\item \textbf{socketIO}, variabel yang mendapatkan seluruh fitur dari modul Socket.io.
-			\item \textbf{{Users}}, variabel yang mendapatkan seluruh fitur dari kelas \textit{Users} dari berkas \textit{Users.js}.
+			\item \textbf{{Users}}, variabel yang mendapatkan seluruh fitur dari kelas \textit{Users} dari berkas \textit{users.js}.
 			\item \textbf{port}, nilai \textit{port} yang akan dituju oleh \textit{server}.
 			\item \textbf{server}, objek HTTP \textit{server} yang memiliki argumen variabel \textit{app} yang berfungsi sebagai \textit{handler} apabila ada koneksi yang masuk.
 			\item \textbf{io}, objek Socket.io yang memiliki argumen \textit{server}. Objek ini akan menangkap \textit{event} dengan nama \textit{connection} yang dipancarkan oleh \textit{client}.
@@ -339,7 +354,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 		\textit{Method-method} yang dimiliki oleh berkas ini akan dijelaskan sebagai berikut:
 		\begin{itemize}
 			\item \textbf{normalizePort(val)} \\
-			\textit{Method} ini berfungsi untuk mengubah bentuk parameter \textit{val} menjadi \textit{String, Integer}, atau \textit{false}. //
+			\textit{Method} ini berfungsi untuk mengubah bentuk parameter \textit{val} menjadi \textit{String, Integer}, atau \textit{Boolean}. //
 			\textbf{Parameter:}
 			\begin{itemize}
 				\item \textbf{val}, parameter \textit{port}
@@ -359,8 +374,14 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 			\item \textbf{socket.on('sendingTheWinner', (winner) => {...})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{sendingTheWinner} yang dipancarkan oleh \textit{client} setelah ada pemenang permainan.
 			
+			\item \textbf{socket.on('getTheMessage', (message) => {...})} \\
+			Berfungsi untuk menangkap \textit{event} \textbf{getTheMessage} yang dipancarkan oleh \textit{client} pada saat ada salah satu pemain yang telah menyentuh garis akhir dari permainan.
+			
 			\item \textbf{socket.on('goBackHome', (msg) => {...})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{goBackHome} yang dipancarkan oleh \textit{client} pada saat pemain menekan tombol \textit{exit} untuk kembali kehalaman utama.
+			
+			\item \textbf{socket.on('ping', (message) => {...})} \\
+			Berfungsi untuk menangkap \textit{event} \textbf{ping} yang dipancarkan oleh \textit{client} untuk menghitung \textit{latency} pada saat pemain menekan tombol telapak kaki pada layar \textit{smartphone}, dan karakter digerakan pada layar \textit{PC}.
 			
 			\item \textbf{socket.on('roomFull', (msg) => {...})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{roomFull} yang dipancarkan oleh \textit{client} pada saat \textit{room} telah terisi penuh.
@@ -380,8 +401,8 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 			\item \textbf{socket.on('requestToJoin', (msg) => {...})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{requestToJoin} yang dipancarkan oleh \textit{client} pada saat melakukan proses permintaan bergabung.
 			
-			\item \textbf{socket.on('disconnect', () => {...})} \\
-			Berfungsi untuk menangkap \textit{event} \textbf{disconnect} yang dipancarkan oleh \textit{client} pada saat koneksi telah terputus.
+%			\item \textbf{socket.on('disconnect', () => {...})} \\
+%			Berfungsi untuk menangkap \textit{event} \textbf{disconnect} yang dipancarkan oleh \textit{client} pada saat koneksi telah terputus.
  		\end{itemize}
 	\end{enumerate}
 	
@@ -394,7 +415,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 		\label{fig:direktori_public}
 	\end{figure}
 	
-	Direktori ini menyimpan seluruh berkas yang memiliki sifat \textit{static}. Berikut akan dijelaskan isi dari direktori ini:
+	Direktori ini menyimpan seluruh berkas yang memiliki sifat statis, yang artinya tidak perlu dibangkitkan, dimodifikasi, atau diubah terlebih dahulu sebelum diberikan kepada \textit{client}. Berikut akan dijelaskan isi dari direktori ini:
 	\begin{enumerate}
 		\item \textbf{Dirketori images} \\
 		Direktori ini berisi gambar-gambar yang dibutuhkan untuk ditampilkan dibeberapa halaman yang terdapat didalam web. Berikut merupakan daftar isi dari gambar-gambar yang ada didalam direktori ini: 
@@ -441,18 +462,21 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 			\begin{itemize}
 				\item \textbf{toGamePlayDesktop()} \\
 				Berfungsi untuk memindahkan halaman kehalaman memulai permainan.
+				
+				\item \textbf{beginWaiting(beginCounter)} \\
+				Berfungsi untuk melakukan hitungan mundur selama satu detik sebelum memanggil \textit{method} \textbf{toGamePlayDesktop()} untuk berpindah kehalaman memulai permainan.
 			\end{itemize}
 		
 			\textit{Event} Socket.io yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
 				\item \textbf{socket.on('charSelecting', function(msg)\{\})} \\
-				Berfungsi untuk menangkap \textit{event} charSelecting yang dipancarkan oleh \textit{server} pada saat karakter yang dipilih akan ditampilkan ke layar \textit{PC}.
+				Berfungsi untuk menangkap \textit{event} \textit{charSelecting} yang dipancarkan oleh \textit{server} pada saat karakter yang dipilih akan ditampilkan ke layar \textit{PC}.
 				
 				\item \textbf{socket.on('charSent', function(msg)\{\})} \\
-				Berfungsi untuk menangkap \textit{event} charSent yang dipancarkan oleh \textit{server} untuk memeriksa apakah kedua pemain telah menetapkan karakter untuk pindah kehalaman selanjutnya.
+				Berfungsi untuk menangkap \textit{event} \textit{charSent} yang dipancarkan oleh \textit{server} untuk memeriksa apakah kedua pemain telah menetapkan karakter untuk pindah kehalaman selanjutnya.
 			\end{itemize}
 			
-			\item \textbf{charMobileScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman pemilihan karakter pada \textit{smarthone} pada saat diakses oleh \textit{client}.
+			\item \textbf{charMobileScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman pemilihan karakter pada \textit{smartphone} pada saat diakses oleh \textit{client}.
 			
 			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
@@ -812,7 +836,27 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 	
 	
 	\item \textbf{Berkas app.js} \\ 
-	Berkas ini berfungsi sebagai modul utama, yang mengatur akses dari berbagai folder dan berkas yang ada pada struktur web ini.
+	Berkas ini berfungsi sebagai modul utama, yang mengatur akses dari berbagai folder dan berkas yang ada pada struktur direktori aplikasi web ini.
+	
+	Beberapa atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
+	\begin{itemize}
+		\item \textbf{express}, atribut ini akan mengakses seluruh fitur yang disediakan oleh modul \textit{'express'}.
+		
+		\item \textbf{path}, atribut ini akan mengakses seluruh fitur yang disediakan oleh modul \textit{'path'}.
+		
+		\item \textbf{cookieParser}, atribut ini akan mengakses seluruh fitur yang disediakan oleh modul \textit{'cookie-parser'}.
+		
+		\item \textbf{homeRouter}, atribut ini akan mengakses seluruh fitur yang disediakan oleh modul \textit{'homeRoutes'}.
+	\end{itemize}
+	
+	\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
+	\begin{itemize}
+		\item app.set('views', path.join(\_\_dirname, 'views')), \textit{method} ini akan mengatur penampilan halaman web agar menggunakan seluruh berkas yang berada didalam folder \textit{views}.
+		
+		\item \textbf{app.set('view engine', 'ejs')}, \textit{method} ini akan menetapkan \textit{view engine} dengan nilai \textit{ejs}.
+		
+		\item \textbf{app.use('/', homeRouter)}, \textit{method} ini akan menetapkan akses yang diberikan kepada \textit{client} apabila mengakses alamat web Finger For Life. Kembalian akan berupa variabel \textit{homeRouter} yang akan menampilkan halaman utama dari web.
+	\end{itemize}
 	
 %	\item \textbf{Berkas .gitignore} \\
 %	Berkas ini berfungsi untuk kebutuhan penyimpanan direktori di \textit{github}, dimana isi dari berkas ini tidak akan disimpan oleh \textit{github}.

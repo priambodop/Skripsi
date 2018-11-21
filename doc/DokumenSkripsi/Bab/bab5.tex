@@ -23,11 +23,11 @@ Lingkungan implementasi terbagi menjadi dua bagian, yaitu lingkungan perangkat k
 		\item \textbf{Server} \\
 		\begin{enumerate}
 			\item \textbf{Heroku} \\
-			Heroku merupakan \textit{cloud platform} yang menyediakan fitur-fitur yang membantu pengguna untuk dapat memiliki alamat domain. \footnote{\url{https://www.heroku.com/what}} Dengan menggunakan Heroku, pengembang aplikasi dapat menaruh aplikasi yang sudah dibuat seluruhnya di \textit{cloud}. Heroku dapat menjalankan aplikasi berbasis beberapa bahasa pemrograman. Salah satu bahasa pemrograman yang didudukung oleh Heroku adalah Node.js.
+			Heroku adalah \textit{cloud platform} yang menyediakan fitur-fitur yang membantu pengguna untuk dapat memiliki alamat domain \footnote{\url{https://www.heroku.com/what}}. Dengan menggunakan Heroku, pengembang aplikasi dapat menaruh aplikasi yang sudah dibuat seluruhnya di \textit{cloud}. Heroku dapat menjalankan aplikasi berbasis beberapa bahasa pemrograman. Salah satu bahasa pemrograman yang didudukung oleh Heroku adalah Node.js.
 			
 			Dengan menggunakan Heroku, proses konfigurasi, penyesuaian, dan pengaturan aplikasi dapat dilakukan secara sederhana dan efisien. Proses infrastruktur dalam pengaturan \textit{URL} akan sepenuhnya dilakukan oleh Heroku. Dengan begitu, pengembang aplikasi dapat fokus terhadap pembangunan aplikasi.
 			
-			Spesifikasi Heroku yang digunakan didalam pengembangan Finger For Life akan dijelaskan sebagai berikut:
+			Spesifikasi Heroku yang digunakan didalam pengembangan Finger For Life adalah sebagai berikut:
 			
 			\begin{tabular}{ |p{1.5cm}|p{1.5cm}|p{2cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
 			\hline
@@ -243,7 +243,7 @@ Pengujian fungsional dilakukan untuk mengetahui kesesuaian reaksi perangkat luna
 		\item \textbf{Solusi:} \\
 		Solusi dari masalah ini adalah dengan menghilangkan elemen \textit{submit()}, kemudian diganti dengan menggunakan Socket.io untuk memancarkan \textit{event} pada saat tombol \textit{send} ditekan. Berikut merupakan potongan kode dari solusi masalah ini.
 		
-\begin{lstlisting}[caption={Proses memancarkan \textit{event}}, label={lst:emitEvent},captionpos=b]
+\begin{lstlisting}[caption={Proses memancarkan \textit{event}}, label={lst:emitEvent}, captionpos=b]
 function requestToJoin(){
 	socket.emit('requestToJoin', {
 		id: socket.id,
@@ -426,7 +426,7 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 	
 	
 	\item \textbf{Pengujian \textit{latency}} \\
-	\textit{Latency} merupakan kecepatan yang dihasilkan pada saat pengiriman data dari \textit{client} menuju \textit{server} maupun sebaliknya. Pengujian ini dilakukan untuk meneliti jumlah \textit{latency} yang dihasilkan dari implementasi Socket.io. Pengujian \textit{latency} yang dilakukan berfokus pada halaman \textit{gameplay}, saat kedua pemain memainkan permainan Finger For Life. \textit{Latency} yang dihitung adalah perbandingan waktu antara pemain menekan tombol kaki pada layar \textit{smartphone} hingga karakter pada layar \textit{PC} bergerak. 
+	\textit{Latency} merupakan kecepatan yang dihasilkan pada saat pengiriman data dari \textit{client} menuju \textit{server} maupun sebaliknya. Pengujian ini dilakukan untuk meneliti jumlah \textit{latency} yang dihasilkan dari implementasi Socket.io. Pengujian \textit{latency} yang dilakukan berfokus pada halaman memulai permainan, saat kedua pemain memainkan permainan Finger For Life. \textit{Latency} yang dihitung adalah perbandingan waktu antara pemain menekan tombol kaki pada layar \textit{smartphone} hingga karakter pada layar \textit{PC} bergerak. 
 	
 	Dari beberapa responden yang melakukan pengujian, didapatkan beberapa hasil seperti berikut:
 	
@@ -444,7 +444,7 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 		Jenis \textit{browser PC} : Mozilla Firefox\\
 		Jaringan internet \textit{PC}: Wifi UNPAR2\\
 		
-		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 203 \textit{millisecond}, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 203 \textit{millisecond}.
+		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 203 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 203 milidetik.
 		
 		\item \textbf{Pengujian Kedua} \\ 
 		Jenis \textit{smartphone} pemain 1: iPhone 7\\
@@ -459,7 +459,7 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 		Jenis \textit{browser PC} : Google Chrome\\
 		Jaringan internet \textit{PC}: Wifi Telkomsel\\
 		
-		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 277 \textit{millisecond}, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 298 \textit{millisecond}.
+		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 277 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 298 milidetik.
 		
 		\item \textbf{Pengujian Ketiga} \\ 
 		Jenis \textit{smartphone} pemain 1: coolpad e502\\
@@ -474,7 +474,7 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 		Jenis \textit{browser PC} : Google Chrome\\
 		Jaringan internet \textit{PC}: Wifi Telkomsel\\
 		
-		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 556 \textit{millisecond}, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 567 \textit{millisecond}.
+		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 556 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 567 milidetik.
 		
 		\item \textbf{Pengujian Keempat} \\ 
 		Jenis \textit{smartphone} pemain 1: Sony Xperia M5\\
@@ -489,7 +489,7 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 		Jenis \textit{browser PC} : Google Chrome\\
 		Jaringan internet \textit{PC}: Wifi UNPAR2\\
 		
-		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 398 \textit{millisecond}, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 396 \textit{millisecond}.
+		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 398 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 396 milidetik.
 		
 %		\item \textbf{Pengujian Kelima} \\ 
 %		Jenis \textit{smartphone} pemain 1: \\
