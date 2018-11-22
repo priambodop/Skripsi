@@ -26,19 +26,19 @@ Pada awal permainan, \textit{client} pertama yang melakukan koneksi pada Socket.
 
 Data-data tersebut akan dikirimkan ke \textit{server} dan akan dimasukan kedalam suatu \textit{array} yang diproses oleh kelas \textit{Users}. Kelas ini memiliki \textit{array} dengan nama \textit{userArray} yang menyimpan seluruh \textit{client} yang telah terkoneksi dengan Socket.io. Kelas \textit{Users} akan bertanggung jawab dalam menyambung koneksi maupun memutus koneksi antara \textit{client} dan \textit{server}.
 
-Setelah \textit{host} terkoneksi dengan Socket.io, maka \textit{room} milik \textit{host} sudah tersedia dan para pemain dapat bergabung kedalam \textit{room} tersebut. Untuk dapat mulai bermain, para pemain harus memasukan kode \textit{room} yang disediakan di halaman \textit{host} kedalam \textit{form} yang ada dihalaman \textit{browser} pada \textit{smartphone}. Pemain akan mengirimkan \textit{event} \textbf{requestToJoin(id, room)} pada \textit{server}. Data yang dikirimkan oleh pemain sama dengan data yang dikirimkan oleh \textit{host}. 
+Setelah \textit{host} terkoneksi dengan Socket.io, maka suatu \textit{room} sudah tersedia dan para pemain dapat bergabung kedalam \textit{room} tersebut. Untuk dapat mulai bermain, para pemain harus memasukan kode \textit{room} yang disediakan di halaman \textit{host} kedalam \textit{form} yang ada dihalaman \textit{browser} pada \textit{smartphone}. Pemain akan mengirimkan \textit{event} \textbf{requestToJoin(id, room)} pada \textit{server}. Data yang dikirimkan oleh pemain sama dengan data yang dikirimkan oleh \textit{host}. 
 
-Setelah \textit{event} tersebut diterima oleh \textit{server}, maka akan dilakukan pengecekan apakah pemain dapat bergabung atau tidak kedalam \textit{room}. Pengecekan akan dilakukan didalam kelas \textit{Users}. Pengecekan tersebut dilakukan dengan menggunakan \textit{method} \textbf{isRoomExist(room)}. Beberapa pengecekan yang dilakukan \textit{method} ini akan dijelaskan sebagai berikut:
+Setelah \textit{event} tersebut diterima oleh \textit{server}, maka akan dilakukan pengecekan apakah pemain dapat bergabung atau tidak kedalam \textit{room}. Pengecekan akan dilakukan didalam kelas \textit{Users}. Pengecekan tersebut dilakukan dengan menggunakan \textit{method} \textbf{isRoomExist(room)}. Beberapa pengecekan yang dilakukan \textit{method} ini akan melakukan proses seperti berikut:
 \begin{enumerate}
-	\item Memeriksa apakah data \textit{room} didalam \textit{userArray} ada yang sesuai dengan parameter \textit{room}.
-	\item Memeriksa apakah jumlah yang ada didalam \textit{room} yang dimaksud sudah lebih dari tiga atau belum.
+	\item Memeriksa apakah data kode \textit{room} didalam \textit{userArray} ada yang sesuai dengan parameter \textit{room}.
+	\item Memeriksa apakah jumlah \textit{client} yang ada didalam \textit{room} yang dimaksud sudah lebih dari tiga atau belum.
 \end{enumerate}
 
 Apabila kedua hal diatas terpenuhi, maka pemain akan terkoneksi ke Socket.io dan bergabung kedalam \textit{room}. \textit{Server} akan mengirimkan \textit{event} \textbf{requestAccepted(id, room)} kepada seluruh \textit{client} yang berada didalam \textit{room} tersebut. \textit{Event} tersebut akan ditangkap oleh \textit{host} yang berfungsi untuk mencatat sudah ada berapa pemain yang berhasil masuk kedalam \textit{room}. \textit{Server} pun akan mengirimkan \textit{event} \textbf{joinAccepted('Welcome to the game :)')} kepada pemain yang berhasil bergabung kedalam \textit{room}. \textit{Event} tersebut berfungsi untuk memberikan \textit{feedback} kepada pemain bahwa pemain telah berhasil bergabung kedalam permainan.
 
 Apabila kedua hal diatas tidak terpenuhi, maka pemain tidak dapat terkoneksi ke Socket.io. \textit{Server} akan mengirimkan \textit{event} \textbf{joinRejected('The room is not exist')} kepada pemain. \textit{Event} tersebut berfungsi sebagai \textit{feedback} kepada pemain yang tidak dapat bergabung. Pemain pertama yang berhasil bergabung akan berperan sebagai \textit{Player1}. Setelah satu pemain bergabung, maka \textit{server} akan menunggu untuk pemain kedua agar permainan dapat dimulai. Pemain kedua akan melakukan hal yang sama dengan pemain pertama untuk dapat bergabung kedalam room.
 
-Setelah \textit{room} berisi tiga \textit{client}, maka \textit{host} akan mengirimkan \textit{event} \textbf{roomFull(room)} kepada \textit{server}. \textit{Event} tersebut menandakan bahwa \textit{room} sudah tidak dapat menerima \textit{client} yang akan bergabung. Setelah \textit{event} tersebut diterima oleh \textit{server}, maka \textit{event} \textbf{toCharPage()} akan dipancarkan oleh \textit{server} kepada seluruh \textit{client} yang ada didalam \textit{room} tersebut. \textit{Event} ini berfungsi untuk mengganti halaman saat ini ke halaman selanjutnya.
+Setelah \textit{room} berisi tiga \textit{client}, maka \textit{host} akan mengirimkan \textit{event} \textbf{roomFull(room)} kepada \textit{server}. \textit{Event} tersebut menandakan bahwa \textit{room} sudah tidak dapat menerima \textit{client} yang akan bergabung. Setelah \textit{event} tersebut diterima oleh \textit{server}, maka \textit{event} \textbf{toCharPage()} akan dikirimkan oleh \textit{server} kepada seluruh \textit{client} yang ada didalam \textit{room} tersebut. \textit{Event} ini berfungsi untuk mengganti halaman saat ini ke halaman selanjutnya.
 
 \subsection{\textit{Sequence} Memilih Karakter}
 
@@ -58,7 +58,7 @@ Setelah \textit{event} tersebut diterima oleh \textit{server}, maka server akan 
 
 Apabila pemain akan menetapkan karakter yang telah ditampilkan dihalaman \textit{PC}, maka \textit{pemain} akan mengirimkan \textit{event} \textbf{sendingChar(val,id,marker)} kepada \textit{server}. Data-data tersebut sama seperti yang dikirimkan oleh \textit{event} sebelumnya, hanya saja ada tambahan data \textbf{marker} pada parameter. Data tambahan tersebut berfungsi sebagai penanda bahwa sudah ada satu pemain yang telah menetapkan karakter yang akan dimainkan. Setelah \textit{server} menerima \textit{event} tersebut, maka \textit{server} akan meneruskan data-data yang sudah diterima kepada \textit{host} dengan mengirimkan \textit{event} \textbf{charSent(val,id,marker)}. Apabila \textit{event} tersebut telah diterima oleh \textit{host}, maka karakter telah dimiliki oleh pemain yang menetapkannya.
 
-Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karakter yang akan dimainkan. Apabila kedua pemain telah menetapkan karakter yang akan dimainkan, \textit{host} akan memancarkan \textit{event} \textbf{charIsReady(playerData)}.Data yang dikirimkan merupakan suatu objek \textit{array} yang berisi data para pemain dan data karakter yang telah dipilih.\textit{Event} tersebut berfungsi untuk memberi informasi kepada \textit{server} untuk pindah kehalaman selanjutnya.
+Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karakter yang akan dimainkan. Apabila kedua pemain telah menetapkan karakter yang akan dimainkan, \textit{host} akan memancarkan \textit{event} \textbf{charIsReady(playerData)}. Data yang dikirimkan merupakan suatu objek \textit{array} yang berisi data para pemain dan data karakter yang telah dipilih.\textit{Event} tersebut berfungsi untuk memberi informasi kepada \textit{server} untuk pindah kehalaman selanjutnya.
 
 \subsection{\textit{Sequence} Memulai Permainan}
 
@@ -69,11 +69,11 @@ Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karak
 	\label{fig:3_GameBegin}
 \end{figure}
 
-Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{startTheGame(playerData)}. Seperti yang dijelaskan pada Gambar \ref{fig:3_GameBegin}, data yang dikirimkan merupakan data yang didapatkan dari \textit{event} sebelumnya. \textit{Event} tersebut akan diterima oleh seluruh \textit{client} yang berada didalam \textit{room} tertentu, yang kemudian akan memulai permainannya. \textit{Host} akan mengeksekusi \textit{method} \textbf{init()} dan \textbf{beginCountDown(3)} untuk memulai permainan. \textit{Method} \textbf{init()} berfungsi untuk mulai menggambar lintasan lari di halaman \textit{PC} yang akan menjadi tempat para karakter dimainkan. \textit{Method} \textbf{beginCountDown(3)} berfungsi untuk menampilkan hitungan mundur selama tiga detik sebelum permainan dapat dimulai. 
+Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{startTheGame(playerData)}. Seperti yang dijelaskan pada Gambar \ref{fig:3_GameBegin}, data yang dikirimkan merupakan data yang didapatkan dari \textit{event} sebelumnya. \textit{Event} tersebut akan diterima oleh seluruh \textit{client} yang berada didalam \textit{room} tertentu, yang kemudian akan memulai permainannya. Untuk memulai permainan, \textit{host} akan mengeksekusi \textit{method} \textbf{init()} dan \textbf{beginCountDown(3)}. \textit{Method} \textbf{init()} berfungsi untuk mulai menggambar lintasan lari di halaman \textit{PC} yang akan menjadi tempat para karakter dimainkan. \textit{Method} \textbf{beginCountDown(3)} berfungsi untuk menampilkan hitungan mundur selama tiga detik sebelum permainan dapat dimulai. 
 
-Para pemain yang menerima \textit{event} \textbf{startTheGame(playerData)} akan mengeksekusi \textit{method} \textbf{showInstruction(3)}. \textit{Method} tersebut berfungsi untuk menampilkan instruksi untuk memainkan permainan selama tiga detik. Apabila hitungan mundur telah selesai, maka permainan akan dimulai.
+Para pemain yang menerima \textit{event} \textbf{startTheGame(playerData)} akan mengeksekusi \textit{method} \textbf{showInstruction(3)}. \textit{Method} tersebut berfungsi untuk menampilkan instruksi untuk memainkan permainan selama tiga detik pada \textit{smartphone}. Apabila hitungan mundur telah selesai, maka permainan akan dimulai.
 
-Permainan dilakukan dengan cara menekan tombol berbentuk telapak kaki yang ada pada halaman \textit{smartphone}. Apabila pemain menekan tombol, maka \textit{event} \textbf{stepClicked(id)} akan dipancarkan. \textit{Server} akan menerima \textit{event} tersebut, yang kemudian akan meneruskannya dengan memancarkan \textit{event} \textbf{moveThePlayer(id)} kepada \textit{host}. Setelah \textit{event} tersebut diterima oleh \textit{host}, maka \textit{host} akan menjalankan \textit{method} tertentu untuk menggerakan karakter milik pemain. Apabila \textit{Player1} yang menekan tombol, maka \textit{method} \textbf{readyPlayerOne()} akan dieksekusi oleh \textit{host}. Apabila \textit{Player2}, maka \textbf{readyPlayerTwo()} yang akan dieksekusi. Kedua \textit{Method} tersebut berfungsi untuk memindahkan posisi karakter milik pemain dari posisi semula hingga posisi tertentu. Permainan akan berakhir apabila ada karakter yang menyentuh garis akhir pertama kali.
+Permainan dilakukan dengan cara menekan tombol berbentuk telapak kaki yang ada pada halaman \textit{smartphone}. Apabila pemain menekan tombol, maka \textit{event} \textbf{stepClicked(id)} akan dipancarkan. \textit{Server} akan menerima \textit{event} tersebut, yang kemudian akan mengirim \textit{event} \textbf{moveThePlayer(id)} kepada \textit{host}. Setelah \textit{event} tersebut diterima oleh \textit{host}, maka \textit{host} akan menjalankan \textit{method} tertentu untuk menggerakan karakter milik pemain. Apabila \textit{Player1} yang menekan tombol, maka \textit{method} \textbf{readyPlayerOne()} akan dieksekusi oleh \textit{host}. Apabila \textit{Player2}, maka \textbf{readyPlayerTwo()} yang akan dieksekusi. Kedua \textit{Method} tersebut berfungsi untuk memindahkan posisi karakter milik pemain dari posisi semula hingga posisi tertentu. Permainan akan berakhir apabila ada karakter yang menyentuh garis akhir pertama kali.
 
 Apabila ada pemain yang berhasil menyentuh garis akhir, maka \textit{host} akan memancarkan \textit{event} \textbf{sendingTheWinner(playerWin, playerCharArr)}. Data-data yang dikirimkan akan dijelaskan sebagai berikut:
 \begin{itemize}
@@ -90,7 +90,7 @@ Apabila ada pemain yang berhasil menyentuh garis akhir, maka \textit{host} akan 
 	\label{fig:4_WinningPage}
 \end{figure}
 
-Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{getTheWinner(winner)} dengan data-data yang diterima dari \textit{event} sebelumnya. Seperti yang dijelaskan pada Gambar \ref{fig:4_WinningPage}, \textit{host} akan menerima \textit{event} tersebut dan akan mengeksekusi \textit{method} \textbf{drawWinner(playerWin)}. \textit{Method} tersebut berfungsi untuk menampilkan karakter milik para pemain diatas gambar podium yang telah selesai bermain. Parameter \textbf{playerWin} berfungsi untuk mengetahui pemain nomor berapa yang menduduki posisi pertama. Dengan begitu, pemenang akan ditampilkan pada podium atas, sedangkan pihak yang kalah di podium bawah.
+Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{getTheWinner(winner)} dengan data-data pada parameter yang diterima dari \textit{event} sebelumnya. Seperti yang dijelaskan pada Gambar \ref{fig:4_WinningPage}, \textit{host} akan menerima \textit{event} tersebut dan akan mengeksekusi \textit{method} \textbf{drawWinner(playerWin)}. \textit{Method} tersebut berfungsi untuk menampilkan karakter milik para pemain diatas gambar podium yang telah selesai bermain. Parameter \textbf{playerWin} berfungsi untuk mengetahui pemain nomor berapa yang menduduki posisi pertama. Dengan begitu, pemenang akan ditampilkan pada podium atas, sedangkan pihak yang kalah di podium bawah.
 
 \textit{Event} \textbf{getTheWinner(winner)} pun akan diterima oleh para pemain, yang kemudia para pemain akan memancarkan \textit{event} \textbf{getTheMessage(theWinnerId)} kepada \textit{server}. Server tersebut akan memberi informasi kepada \textit{server} \textit{socket.id} milik pemain yang memenangkan permainan. Setelah \textit{server} menerima \textit{event} tersebut, maka \textit{server} akan mengirim \textit{event} kembali kepada pemain. \textit{Server} akan memancarkan \textit{event} \textbf{winning('YOU WIN')} kepada pihak yang menang, dimana \textit{event} tersebut akan menampilkan pesan \textbf{'YOU WIN'} dilayar \textit{smartphone}. Sedangkan untuk pihak yang kalah, \textit{server} akan memancarkan \textit{event} \textbf{losing('YOU LOSE')}.
 
@@ -102,7 +102,7 @@ Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{getTheWi
 \section{Perancangan Antarmuka}
 \label{sec:antarmuka}
 
-Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di \textit{PC} dan \textit{smartphone}.
+Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di \textit{PC} dan \textit{smartphone}. Subbab berikut akan 
 
 \begin{enumerate}
 	\item Antarmuka halaman utama
@@ -133,7 +133,7 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di
 	
 	\textbf{PC}
 	
-	Halaman ini menampilkan suatu perintah yang dapat dilakukan oleh pengguna apabila akan bergabung kedalam permainan. Halaman ini menyediakan suatu kode untuk para pemain dimana kode tersebut akan berfungsi sebagai suatu \textit{room} bagi para pemain. Pada halaman ini akan dilakukan proses sinkronisasi untuk para pengguna, dan akan dilakukan pengecekan apakah berhasil bergabung dalam permainan atau tidak. Apabila berhasil, maka akan muncul suatu teks yang menunjukan seorang pemain telah berhasil bergabung. Apabila tidak, maka tidak akan menampilkan apapun dan halaman tidak akan menuju ke halaman selanjutnya sebelum ada dua pemain yang berhasil bergabung. Rancangan antarmuka halaman permintaan bergabung pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web2_sync}.
+	Halaman ini menampilkan suatu perintah yang dapat dilakukan oleh pengguna apabila akan bergabung kedalam permainan. Halaman ini menyediakan suatu kode untuk para pemain dimana kode tersebut akan berfungsi sebagai suatu \textit{room} bagi para pemain. Pada halaman ini akan dilakukan proses sinkronisasi antara \textit{smartphone} dan \textit{PC}, dan akan dilakukan pengecekan apakah berhasil bergabung dalam permainan atau tidak. Apabila berhasil, maka akan muncul suatu teks yang menunjukan seorang pemain telah berhasil bergabung. Apabila tidak, maka tidak akan menampilkan apapun dan halaman tidak akan menuju ke halaman selanjutnya sebelum ada dua pemain yang berhasil bergabung. Rancangan antarmuka halaman permintaan bergabung pada \textit{PC} dapat dilihat pada Gambar \ref{fig:web2_sync}.
 	
 \begin{figure}[H]
 	\centering
@@ -144,7 +144,7 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di
 
 	\textbf{Smartphone}
 	
-	Halaman ini berfungsi untuk melakukan permintaan untuk bergabung kedalam permainan. Komponen halaman ini terdiri dari kolom untuk mengisi kode, dan tombol \textit{send}. \textit{client} harus mengisi kode yang disediakan dihalaman \textit{PC} kedalam kolom. Setelah mengisi kode, maka \textit{client} harus menekan tombol \textit{send} untuk mengirim kode tersebut kepada \textit{server} untuk dilakukan pengecekan. Rancangan antarmuka halaman permintaan bergabung pada \textit{smartphone} dapat dilihat pada Gambar \ref{fig:mob2_sync1}.
+	Halaman ini berfungsi untuk melakukan permintaan bergabung kedalam permainan. Komponen halaman ini terdiri dari kolom untuk mengisi kode, dan tombol \textit{send}. \textit{client} harus mengisi kode yang disediakan dihalaman \textit{PC} kedalam kolom. Setelah mengisi kode, maka \textit{client} harus menekan tombol \textit{send} untuk mengirim kode tersebut kepada \textit{server} untuk dilakukan pengecekan. Rancangan antarmuka halaman permintaan bergabung pada \textit{smartphone} dapat dilihat pada Gambar \ref{fig:mob2_sync1}.
 	
 \begin{figure}[H]
 	\centering
@@ -192,9 +192,9 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di
 \end{figure}
 	Untuk menampilkan karakter yang telah dipilih kelayar \textit{PC}, ada beberapa langkah yang harus dilakukan. Langkah-langkah tersebut akan dijelaskan sebagai berikut:
 	\begin{itemize}
-		\item \textit{Client} akan mengirimkan nilai dari karakter tertentu yang dipilih. Nilai tersebut dikirimkan melalui \textit{event} Socket.io yang dipancarkan dengan nama \textit{sendingChar}. \textit{Server} akan menangkap \textit{event} tersebut, kemudian akan memancarkan \textit{event} dengan nama \textit{startTheGame}, dimana \textit{event} tersebut akan ditangkap oleh \textit{host} untuk memulai permainan.
+		\item \textit{Client} akan mengirimkan nilai dari karakter tertentu yang dipilih. Nilai tersebut dikirimkan melalui \textit{event} Socket.io yang dipancarkan oleh \textit{client} dengan nama \textit{sendingChar}. \textit{Server} akan menangkap \textit{event} tersebut, kemudian akan memancarkan \textit{event} dengan nama \textit{startTheGame}, dimana \textit{event} tersebut akan ditangkap oleh \textit{host} untuk memulai permainan.
 		
-		\item \textit{Host} akan mulai menggambar karakter pada layar \textit{PC} setelah mendapatkan data-data yang dikirimkan melalui \textit{event startTheGame}.
+		\item \textit{Host} akan menggambar karakter pada layar \textit{PC} setelah mendapatkan data-data dari \textit{event startTheGame}.
 		
 		
 	\end{itemize}
@@ -271,7 +271,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{Gambar/direktori}
-	\caption{Direktori seluruh folder dan \textit{file}.}
+	\caption{Seluruh direktori dan berkas yang digunakan didalam pengembangan aplikasi Finger For Life}
 	\label{fig:direktori}
 \end{figure}
 
@@ -293,7 +293,16 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 			\item Berkas \textbf{users.js}  \\
 			Berkas ini merupakan suatu kelas yang berfungsi untuk menyimpan seluruh \textit{client} yang terkoneksi pada Socket.io. Seluruh data pengguna yang akan memainkan permainan web akan disimpan dan diatur oleh berkas ini.
 			
-			Kelas \textit{Users} memiliki konstruktor yang menginisialisasi variabel \textit{array} dengan nama \textit{userArray}. Variabel ini bertanggung jawab untuk menyimpan seluruh \textit{client} yang terkoneksi ke Socket.io.
+			Kelas \textit{Users} memiliki konstruktor yang menginisialisasi variabel \textit{array} dengan nama \textit{userArray}.
+			
+			Konstruktor yang dimiliki oleh berkas ini adalah sebagai berikut:
+\begin{lstlisting}[caption={konstruktor milik kelas \textit{Users}}, label={lst:konstruktorUsers}, captionpos=b]
+constructor(){
+	this.userArray = [];
+}
+\end{lstlisting}
+			
+			Variabel \textit{userArray} bertanggung jawab untuk menyimpan seluruh \textit{client} yang terkoneksi ke Socket.io.
 			
 			\textit{Method-method} yang dimiliki oleh berkas ini akan dijelaskan sebagai berikut:
 			\begin{itemize}
@@ -307,7 +316,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 				\textbf{Kembalian:} Objek \textit{Users}
 				
 				\item \textbf{IsRoomExist(room)} \\
-				\textit{Method} ini akan memeriksa apakah parameter \textit{room} cocok dengan \textit{room} milik \textit{client} yang ada didalam \textit{userArray}. \\
+				\textit{Method} ini akan memeriksa apakah parameter \textit{room} cocok dengan kode \textit{room} milik \textit{client} yang ada didalam \textit{userArray}. \\
 				\textbf{Parameter:}
 				\begin{itemize}
 					\item \textbf{room}, kode \textit{room} yang akan dicek.
@@ -346,13 +355,14 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 		
 		Properti yang dimiliki oleh berkas ini akan dijelaskan sebagai berikut:
 		\begin{itemize}
-			\item \textbf{app}, variabel yang mendapatkan seluruh fitur dari berkas lain dengan nama \textit{app.js}.
+			\item \textbf{app}, variabel yang mendapatkan seluruh fitur dari berkas lain yang bernama \textit{app.js}.
 			\item \textbf{http}, variabel yang mendapatkan seluruh fitur dari modul \textit{HTTP}.
 			\item \textbf{socketIO}, variabel yang mendapatkan seluruh fitur dari modul Socket.io.
 			\item \textbf{{Users}}, variabel yang mendapatkan seluruh fitur dari kelas \textit{Users} dari berkas \textit{users.js}.
 			\item \textbf{port}, nilai \textit{port} yang akan dituju oleh \textit{server}.
 			\item \textbf{server}, objek HTTP \textit{server} yang memiliki argumen variabel \textit{app} yang berfungsi sebagai \textit{handler} apabila ada koneksi yang masuk.
-			\item \textbf{io}, objek Socket.io yang memiliki argumen \textit{server}. Objek ini akan menangkap \textit{event} dengan nama \textit{connection} yang dipancarkan oleh \textit{client}.
+			\item \textbf{io}, \textit{server} yang akan menangani koneksi Socket.io antara \textit{client} dan \textit{server}. 
+%			memiliki argumen \textit{server}. Objek ini akan menangkap \textit{event} dengan nama \textit{connection} yang dipancarkan oleh \textit{client}.
 		\end{itemize}
 	
 		\textit{Method-method} yang dimiliki oleh berkas ini akan dijelaskan sebagai berikut:
@@ -365,44 +375,49 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 			\end{itemize}
 			\textbf{Kembalian:} Objek \textit{String, Integer,} atau \textit{Boolean}. 
 			
+			\item \textbf{app.set('port', port)} \\
+			\textit{Method} ini akan menetapkan nilai yang dimiliki oleh variabel \textit{port}, kepada nama \textit{'port'} yang digunakan untuk mengatur perilaku \textit{server}.
+			
 		\end{itemize}
 	
 		\textit{Event} Socket.io yang dimiliki berkas ini akan dijelaskan sebagai berikut:
 		\begin{itemize}
-			\item \textbf{io.on('connection', (socket) => {...})} \\
+			\item \textbf{io.on('connection', (socket) => \{\})} \\
 			Berfungsi untuk menangani suatu koneksi Socket.io yang baru tersambung.
 			
-			\item \textbf{socket.on('hostJoinRoom', (msg) => {...})} \\ 
+			\item \textbf{socket.on('hostJoinRoom', (msg) => \{\})} \\ 
 			Berfungsi untuk menangkap \textit{event} \textbf{hostJoinRoom} yang dipancarkan oleh \textit{host} pada saat akan masuk kedalam room.
 			
-			\item \textbf{socket.on('sendingTheWinner', (winner) => {...})} \\
+			\item \textbf{socket.on('sendingTheWinner', (winner) => \{\})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{sendingTheWinner} yang dipancarkan oleh \textit{client} setelah ada pemenang permainan.
 			
-			\item \textbf{socket.on('getTheMessage', (message) => {...})} \\
+			\item \textbf{socket.on('getTheMessage', (message) => \{\})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{getTheMessage} yang dipancarkan oleh \textit{client} pada saat ada salah satu pemain yang telah menyentuh garis akhir dari permainan.
 			
-			\item \textbf{socket.on('goBackHome', (msg) => {...})} \\
+			\item \textbf{socket.on('goBackHome', (msg) => \{\})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{goBackHome} yang dipancarkan oleh \textit{client} pada saat pemain menekan tombol \textit{exit} untuk kembali kehalaman utama.
 			
-			\item \textbf{socket.on('ping', (message) => {...})} \\
+			\item \textbf{socket.on('ping', (message) => \{\})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{ping} yang dipancarkan oleh \textit{client} untuk menghitung \textit{latency} pada saat pemain menekan tombol telapak kaki pada layar \textit{smartphone}, dan karakter digerakan pada layar \textit{PC}.
 			
-			\item \textbf{socket.on('roomFull', (msg) => {...})} \\
+			\item \textbf{socket.emit('pong', message)} \\ Berfungsi untuk memancarkan \textit{event} \textbf{pong} yang digunakan untuk memberi informasi kepada \textit{host} agar menghitung \textit{latency} pada saat \textit{client} menekan tombol telapak kaki pada layar \textit{smartphone}
+			
+			\item \textbf{socket.on('roomFull', (msg) => \{\})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{roomFull} yang dipancarkan oleh \textit{client} pada saat \textit{room} telah terisi penuh.
 			
-			\item \textbf{socket.on('selectingChar', (msg) => {...})} \\
+			\item \textbf{socket.on('selectingChar', (msg) => \{\})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{selectingChar} yang dipancarkan oleh \textit{client} pada saat karakter telah dipilih oleh pemain untuk menampilkan karakter kelayar \textit{PC}.
 			
-			\item \textbf{socket.on('sendingChar', (msg) => {...})} \\
+			\item \textbf{socket.on('sendingChar', (msg) => \{\})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{sendingChar} yang dipancarkan oleh \textit{client} pada saat karakter telah ditetapkan oleh pemain.
 			
-			\item \textbf{socket.on('charIsReady', (msg) => {...})} \\
+			\item \textbf{socket.on('charIsReady', (msg) => \{\})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{charIsReady} yang dipancarkan oleh \textit{client} pada saat kedua karakter telah ditetapkan oleh kedua pemain.
 			
-			\item \textbf{socket.on('stepClicked', (message) => {...})} \\
+			\item \textbf{socket.on('stepClicked', (message) => \{\})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{stepClicked} yang dipancarkan oleh \textit{client} pada saat tombol telapak kaki ditekan oleh pemain.
 			
-			\item \textbf{socket.on('requestToJoin', (msg) => {...})} \\
+			\item \textbf{socket.on('requestToJoin', (msg) => \{\})} \\
 			Berfungsi untuk menangkap \textit{event} \textbf{requestToJoin} yang dipancarkan oleh \textit{client} pada saat melakukan proses permintaan bergabung.
 			
 %			\item \textbf{socket.on('disconnect', () => {...})} \\
@@ -450,7 +465,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 			\item \textbf{Direktori libs} \\
 			Direktori ini berisi berkas yang berfungsi untuk mengatur pengiriman data melewati \textit{form}. Berikut isi dari folder ini:
 			\begin{itemize}
-				\item \textbf{jquery-3.3.1.min.js} \\ Berkas ini merupakan jQuery yang menyediakan fungsi-fungsi dalam pengiriman dan penerimaan data yang dilakukan \textit{client} dan \textit{server}. 
+				\item \textbf{jquery-3.3.1.min.js} \\ Berkas ini merupakan jQuery yang menyediakan fungsi-fungsi untuk pengiriman dan penerimaan data yang dilakukan \textit{client} dan \textit{server}. 
 			\end{itemize}
 		
 			\item \textbf{charDesktopScript.js}, Berkas ini berfungsi untuk mengatur bagaimana perilaku halaman pemilihan karakter pada \textit{PC} pada saat diakses oleh \textit{client}.
@@ -491,6 +506,8 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 			\begin{itemize}
 				\item \textbf{selectChar()} \\
 				Berfungsi untuk mengirimkan nilai karakter yang telah dipilih oleh pemain.
+				
+				\item \textbf{waitForCall(beginCounter)} \\ Berfungsi untuk melakukan hitungan mundur selama satu detik sebelum berpindah kehalaman memulai permainan.
 			\end{itemize}
 			
 			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
@@ -576,6 +593,8 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 				\item \textbf{socket.on('moveThePlayer', function(msg){...})}\\
 				Berfungsi untuk menangkap \textit{event} moveThePlayer yang dipancarkan oleh \textit{server} saat tombol telapak kaki ditekan oleh pemain.
 				
+				\item \textbf{socket.on('pong'), function(startTime)\{\}} \\ Berfungsi untuk menangkap \textit{event} \textbf{pong} yang dipancarkan oleh \textit{server} untuk menghitung \textit{latency} pada saat karakter bergerak pada layar \textit{PC}.
+				
 				\item \textbf{socket.on('startTheGame', function(msg){...})}\\
 				Berfungsi untuk menangkap \textit{event} startTheGame yang dipancarkan oleh \textit{server} pada saat akan memulai permainan dengan menggambar aset-aset yang dibutuhkan ke layar \textit{PC}.
 				
@@ -621,6 +640,8 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 				
 				\item \textbf{socket.on('toWinnerPage', function()\{...\})}\\
 				Berfungsi untuk menangkap \textit{event} toWinnerPage yang dipancarkan oleh \textit{server} pada saat permainan telah selesai.
+				
+				\item \textbf{socket.emit('ping'), startTime} \\ Berfungsi untuk mengirimkan \textit{event} \textbf{ping} pada saat tombol telapak kaki ditekan, untuk menghitung \textit{latency}. Parameter \textit{startTime} adalah waktu saat ini pada saat tombol ditekan.
 				
 				\item \textbf{socket.emit('stepClicked',\{playerId\})} \\
 				Berfungsi untuk memancarkan \textit{event} stepClicked pada saat pemain menekan tombol telapak kaki dilayar \textit{smartphone}.
@@ -714,7 +735,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 					\item \textbf{room} kode \textit{room} milik \textit{client}
 				\end{itemize}
 			
-				\item \textbf{socket.emit('roomFull', \{room\})} \\
+				\item \textbf{socket.emit('roomFull', {room})} \\
 				Berfungsi untuk memancarkan \textit{event} hostJoinRoom pada saat \textit{room} sudah terisi penuh.	
 				
 			\end{itemize}
