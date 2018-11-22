@@ -44,7 +44,7 @@ Setelah \textit{room} berisi tiga \textit{client}, maka \textit{host} akan mengi
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.35]{Gambar/ChooseCharacter}
+	\includegraphics[scale=0.38]{Gambar/ChooseCharacter}
 	\caption{Proses memilih karakter.}
 	\label{fig:2_ChooseCharacter}
 \end{figure}
@@ -64,7 +64,7 @@ Pemain kedua pun akan melakukan hal yang sama untuk memilih dan menetapkan karak
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.33]{Gambar/GameBegin}
+	\includegraphics[scale=0.35]{Gambar/GameBegin}
 	\caption{Proses memulai permainan.}
 	\label{fig:3_GameBegin}
 \end{figure}
@@ -85,14 +85,18 @@ Apabila ada pemain yang berhasil menyentuh garis akhir, maka \textit{host} akan 
 \subsection{\textit{Sequence} Mengakhiri Permainan}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.33]{Gambar/WinningPage}
+	\includegraphics[scale=0.33]{Gambar/WinningPage_2}
 	\caption{Menampilkan para pemain yang telah selesai bermain.}
 	\label{fig:4_WinningPage}
 \end{figure}
 
-Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{getTheWinner(playerWin, playerCharArr)} dengan data-data yang diterima dari \textit{event} sebelumnya. Seperti yang dijelaskan pada Gambar \ref{fig:4_WinningPage} \textit{host} akan menerima \textit{event} tersebut dan akan mengeksekusi \textit{method} \textbf{drawWinner()}. \textit{Method} tersebut berfungsi untuk menampilkan karakter milik para pemenang yang telah selesai bermain. Para pemain akan menerima \textit{event} yang dipancarkan oleh \textit{server} dan mengeksekusi \textit{method} \textbf{showGameOver()}. \textit{Method} ini akan menampilkan teks yang menunjukan bahwa permainan telah selesai.
+Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{getTheWinner(winner)} dengan data-data yang diterima dari \textit{event} sebelumnya. Seperti yang dijelaskan pada Gambar \ref{fig:4_WinningPage}, \textit{host} akan menerima \textit{event} tersebut dan akan mengeksekusi \textit{method} \textbf{drawWinner(playerWin)}. \textit{Method} tersebut berfungsi untuk menampilkan karakter milik para pemain diatas gambar podium yang telah selesai bermain. Parameter \textbf{playerWin} berfungsi untuk mengetahui pemain nomor berapa yang menduduki posisi pertama. Dengan begitu, pemenang akan ditampilkan pada podium atas, sedangkan pihak yang kalah di podium bawah.
 
-Apabila pemain menekan tombol \textit{exit} yang ada dihalaman \textit{browser} pada \textit{PC}, maka \textit{host} akan memancarkan \textit{event} \textbf{goBackHome()}. \textit{Event} tersebut akan diterima oleh \textit{server} dan akan diteruskan dengan memancarkan \textit{event} \textbf{backHome()}. Seluruh \textit{client} didalam \textit{room} yang menerima \textit{event} tersebut akan kembali kehalaman utama dan koneksi Socket.io pun akan terputus.
+\textit{Event} \textbf{getTheWinner(winner)} pun akan diterima oleh para pemain, yang kemudia para pemain akan memancarkan \textit{event} \textbf{getTheMessage(theWinnerId)} kepada \textit{server}. Server tersebut akan memberi informasi kepada \textit{server} \textit{socket.id} milik pemain yang memenangkan permainan. Setelah \textit{server} menerima \textit{event} tersebut, maka \textit{server} akan mengirim \textit{event} kembali kepada pemain. \textit{Server} akan memancarkan \textit{event} \textbf{winning('YOU WIN')} kepada pihak yang menang, dimana \textit{event} tersebut akan menampilkan pesan \textbf{'YOU WIN'} dilayar \textit{smartphone}. Sedangkan untuk pihak yang kalah, \textit{server} akan memancarkan \textit{event} \textbf{losing('YOU LOSE')}.
+
+%Pada tahap ini, \textit{server} akan memancarkan \textit{event} \textbf{getTheWinner(playerWin, playerCharArr)} dengan data-data yang diterima dari \textit{event} sebelumnya. Seperti yang dijelaskan pada Gambar \ref{fig:4_WinningPage} \textit{host} akan menerima \textit{event} tersebut dan akan mengeksekusi \textit{method} \textbf{drawWinner()}. \textit{Method} tersebut berfungsi untuk menampilkan karakter milik para pemenang yang telah selesai bermain. Para pemain akan menerima \textit{event} yang dipancarkan oleh \textit{server} dan mengeksekusi \textit{method} \textbf{showGameOver()}. \textit{Method} ini akan menampilkan teks yang menunjukan bahwa permainan telah selesai.
+%
+%Apabila pemain menekan tombol \textit{exit} yang ada dihalaman \textit{browser} pada \textit{PC}, maka \textit{host} akan mengeksekusi fungsi \textbf{toHomePage()} yang berfungsi untuk memancarkan \textit{event} \textbf{goBackHome()}. \textit{Event} tersebut akan diterima oleh \textit{server} dan akan diteruskan dengan memancarkan \textit{event} \textbf{backHome()}. Seluruh \textit{client} didalam \textit{room} yang menerima \textit{event} tersebut akan kembali kehalaman utama dan koneksi Socket.io pun akan terputus.
 
 
 \section{Perancangan Antarmuka}
@@ -354,7 +358,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 		\textit{Method-method} yang dimiliki oleh berkas ini akan dijelaskan sebagai berikut:
 		\begin{itemize}
 			\item \textbf{normalizePort(val)} \\
-			\textit{Method} ini berfungsi untuk mengubah bentuk parameter \textit{val} menjadi \textit{String, Integer}, atau \textit{Boolean}. //
+			\textit{Method} ini berfungsi untuk mengubah bentuk parameter \textit{val} menjadi \textit{String, Integer}, atau \textit{Boolean}. \\
 			\textbf{Parameter:}
 			\begin{itemize}
 				\item \textbf{val}, parameter \textit{port}
@@ -420,18 +424,18 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 		\item \textbf{Dirketori images} \\
 		Direktori ini berisi gambar-gambar yang dibutuhkan untuk ditampilkan dibeberapa halaman yang terdapat didalam web. Berikut merupakan daftar isi dari gambar-gambar yang ada didalam direktori ini: 
 		\begin{itemize}
-			\item \textbf{BrocoDude.png} gambar karakter brokoli dengan ukuran besar, yaitu 1746 × 2454 piksel.
-			\item \textbf{brocoDudeTiny.png} gambar karakter brokoli dengan ukuran kecil, yaitu 65 × 92 piksel.
-			\item \textbf{DabuDonut.png} gambar karakter donat dengan ukuran besar, yaitu 1746 × 2454 piksel.
-			\item \textbf{dabuDonut.png} gambar karakter donat dengan ukuran kecil, yaitu 65 × 92 piksel.
+			\item \textbf{BrocoDude.png} gambar karakter brokoli dengan ukuran besar, yaitu lebar 1746 dan tinggi 2454 piksel.
+			\item \textbf{brocoDudeTiny.png} gambar karakter brokoli dengan ukuran kecil, yaitu lebar 65 dan tinggi 92 piksel.
+			\item \textbf{DabuDonut.png} gambar karakter donat dengan ukuran besar, yaitu lebar 1746 dan tinggi 2454 piksel.
+			\item \textbf{dabuDonut.png} gambar karakter donat dengan ukuran kecil, yaitu lebar 65 dan tinggi 92 piksel.
 			\item \textbf{finga.png} gambar jari yang ditampilkan dihalaman awal.
-			\item \textbf{GrapeYoda.png} gambar karakter anggur dengan ukuran besar, yaitu 1746 × 2454 piksel.
-			\item \textbf{grapeYodaTiny.png} gambar karakter anggur dengan ukuran kecil, yaitu 65 × 92 piksel.
+			\item \textbf{GrapeYoda.png} gambar karakter anggur dengan ukuran besar, yaitu lebar 1746 dan tinggi 2454 piksel.
+			\item \textbf{grapeYodaTiny.png} gambar karakter anggur dengan ukuran kecil, yaitu lebar 65 dan tinggi 92 piksel.
 			\item \textbf{stepUp.png} gambar telapak kaki kiri yang ditampilkan dihalaman pengendali.
 			\item \textbf{stepUpRight.png} gambar telapak kaki kanan yang ditampilkan dihalaman pengendali.
 			\item \textbf{grapeYodaTiny.png} gambar karakter anggur dengan ukuran kecil.
-			\item \textbf{SummerEgg.png} gambar karakter telur mata sapi dengan ukuran besar, yaitu 1746 × 2454 piksel.
-			\item \textbf{summerEggTiny.png} gambar karakter telur mata sapi dengan ukuran kecil, yaitu 65 × 92 piksel.
+			\item \textbf{SummerEgg.png} gambar karakter telur mata sapi dengan ukuran besar, yaitu lebar 1746 dan tinggi 2454 piksel.
+			\item \textbf{summerEggTiny.png} gambar karakter telur mata sapi dengan ukuran kecil, yaitu lebar 65 dan tinggi 92 piksel.
 			\item \textbf{timer1.png} gambar angka 1 yang ditampilkan saat hitungan mundur.
 			\item \textbf{timer2.png} gambar angka 2 yang ditampilkan saat hitungan mundur.
 			\item \textbf{timer3.png} gambar angka 3 yang ditampilkan saat hitungan mundur.
@@ -657,13 +661,13 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 			
 			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
-				\item \textbf{socket.on('connect',function()/{.../})} \\
-				Berfungsi untuk menangkap \textit{event} connect yang dipancarkan apabila \textit{client} berhasil tersambung ke Socket.io.
+				\item \textbf{socket.on('connect',function(){...})} \\
+				Berfungsi untuk menangkap \textit{event} \textit{connect} yang dipancarkan apabila \textit{client} berhasil tersambung ke Socket.io.
 				
-				\item \textbf{socket.on('joinSucceed', function(msg)\{...\})} \\
+				\item \textbf{socket.on('joinSucceed', function(msg){...})} \\
 				Berfungsi untuk menangkap \textit{event} joinSucceed yang dipancarkan oleh \textit{server} apabila \textit{client} berhasil bergabung kedalam \textit{room}.
 				
-				\item \textbf{socket.on('joinRejected', function(msg)\{...\})} \\
+				\item \textbf{socket.on('joinRejected', function(msg){...})} \\
 				Berfungsi untuk menangkap \textit{event} joinRejected yang dipancarkan oleh \textit{server} apabila \textit{client} tidak berhasil bergabung kedalam \textit{room}.
 				
 				\item \textbf{socket.on('toCharPage')} \\
@@ -760,19 +764,26 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 			
 			Atribut yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
-				\item \textbf{gameOverEl}, elemen HTML berupa teks.
+				\item \textbf{game\_over}, elemen HTML berupa teks yang memiliki \textit{id gameOver}.
 			\end{itemize}
 			
 			\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
-				\item \textbf{showGameOver()} \\
-				Berfungsi untuk menampilkan teks yang menandakan permainan sudah selesai.
-				
 				\item \textbf{backToHome()} \\
 				Berfungsi untuk memindahkan halaman ke halaman awal.
 			\end{itemize}
 			
 			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
+			\begin{itemize}
+				\item \textbf{socket.on('getTheWinner',function(msg){})}, berfungsi untuk menangkap \textit{event} \textit{getTheWinner} yang kemudian akan mengeksekusi fungsi untuk menangani \textit{event} tersebut.
+				
+				\item \textbf{socket.on('backHome'), function(msg){}}, berfungsi untuk menangkap \textit{event} \textit{backHome} yang akan mengeksekusi fungsi untuk kembali kehalaman utama.
+				
+				\item \textbf{socket.on('winning', function(msg){})}, berfungsi untuk menangkap \textit{event} \textit{winning} dan akan menampilkan pesan \textit{'YOU WIN'}.
+				
+				\item \textbf{socket.on('losing', function(msg){})}, berfungsi untuk menangkap \textit{event} \textit{losing} dan akan menampilkan pesan \textit{'YOU LOSE'}.
+			\end{itemize}
+			
 			
 		\end{enumerate}
 		\item \textbf{Folder stylesheets} \\ 
@@ -851,7 +862,7 @@ Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun
 	
 	\textit{Method} yang dimiliki oleh berkas ini adalah sebagai berikut:
 	\begin{itemize}
-		\item app.set('views', path.join(\_\_dirname, 'views')), \textit{method} ini akan mengatur penampilan halaman web agar menggunakan seluruh berkas yang berada didalam folder \textit{views}.
+		\item \textbf{app.set('views', path.join(\_\_dirname, 'views'))}, \textit{method} ini akan mengatur penampilan halaman web agar menggunakan seluruh berkas yang berada didalam folder \textit{views}.
 		
 		\item \textbf{app.set('view engine', 'ejs')}, \textit{method} ini akan menetapkan \textit{view engine} dengan nilai \textit{ejs}.
 		
