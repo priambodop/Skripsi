@@ -37,7 +37,7 @@ Lingkungan implementasi terbagi menjadi dua bagian, yaitu lingkungan perangkat k
 			\end{tabular}
 			
 			\item \textbf{Node.js} \\
-			Node.js merupakan JavaScript \textit{runtime} yang menyediakan fitur untuk mengeksekusi JavaScript dilingkungan lokal. Pengembangan Finger For Life menggunakan Node.js sebagai dasar penggunaan JavaScript dalam hal pengaturan \textit{server} maupun \textit{client}. Versi Node.js yang dipakai adalah 8.11.4.
+			Node.js merupakan \textit{platform} atau lingkungan yang menyediakan fitur untuk mengeksekusi JavaScript pada web \textit{server}. Pengembangan Finger For Life menggunakan Node.js sebagai dasar penggunaan JavaScript dalam hal pengaturan \textit{server}. Versi Node.js yang dipakai adalah 8.11.4.
 			
 			\item \textbf{Socket.io} \\
 			Socket.io merupakan teknologi yang menyediakan fitur komunikasi dua arah secara \textit{real-time} antara \textit{client} dan \textit{server}. Pengembangan Finger For Life menggunakan Socket.io sebagai cara komunikasi berdasarkan \textit{event} antara \textit{client} dan \textit{server}. Dengan menggunakan Socket.io, maka proses komunikasi dalam permainan menjadi lebih efisien. Versi Socket.io yang dipakai adalah 2.0.4.
@@ -53,7 +53,7 @@ Lingkungan implementasi terbagi menjadi dua bagian, yaitu lingkungan perangkat k
 			Pengembangan Finger For Life menggunakan Canvas API untuk membuat elemen-elemen grafis didalam web. Canvas API digunakan untuk membuat animasi permainan pada saat pemain menggerakan karakter yang ada dilintasan lari.
 			
 			\item \textbf{jQuery} \\
-			Pengembangan Finger For Life menggunakan Canvas API untuk mengatur akses elemen-elemen html yang ada didalam berkas-berkas tertentu. jQuery pun digunakan untuk mengirimkan data dalam bentuk form yang sudah diisi oleh pengguna. Versi jQuery yang dipakai adalah 3.3.1.
+			Pengembangan Finger For Life menggunakan Canvas API untuk mengatur akses elemen-elemen HTML yang ada didalam berkas-berkas tertentu. jQuery pun digunakan untuk mengirimkan data dalam bentuk form yang sudah diisi oleh pengguna. Versi jQuery yang dipakai adalah 3.3.1.
 			
 			\item \textbf{The Content Template element} \\
 			Pengembangan Finger For Life menggunakan The Content Template element untuk menampilkan kumpulan elemen HTML kelayar dengan menggunakan elemen <template>. 
@@ -191,13 +191,31 @@ Hasil implementasi berupa aplikasi berbasis web yang berjalan berdasarkan Node.j
 	\end{figure}
 
 	\textbf{Smartphone} \\
-	Halaman ini menampilkan teks yang menunjukan posisi pemenang. Pemenang pertama akan ditampilkan teks yang menunjukan posisi pertama, sedangkan pemenang kedua akan ditampilkan teks yang menunjukan posisi kedua. Tangkapan layar dari halaman mengakhiri permainan pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone5_over}.
+	Halaman ini menampilkan teks yang menunjukan posisi pemenang. Pemenang pertama akan ditampilkan teks yang menunjukan memenangkan permainan, sedangkan pemenang kedua akan ditampilkan teks yang menunjukan kalah dari permainan. Tangkapan layar dari halaman mengakhiri permainan pada \textit{smartphone} dapat dilihat pada gambar \ref{fig:realPhone5_over}.
+	
 	\begin{figure}[H]
-		\centering
-		\includegraphics[scale=0.2]{Gambar/realPhone5_over}
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[scale=0.2]{Gambar/realPhone5_over2}
+			\caption{Pemain menang.}
+			\label{subfig:realPhone5_over2}
+		\end{subfigure}
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[scale=0.2]{Gambar/realPhone5_over3}
+			\caption{Pemain kalah.}
+			\label{subfig:realPhone5_over3}
+		\end{subfigure}
 		\caption{Halaman mengakhiri permainan pada \textit{smartphone}}
 		\label{fig:realPhone5_over}
 	\end{figure}
+	
+%	\begin{figure}[H]
+%		\centering
+%		\includegraphics[scale=0.2]{Gambar/realPhone5_over}
+%		\caption{Halaman mengakhiri permainan pada \textit{smartphone}}
+%		\label{fig:realPhone5_over}
+%	\end{figure}
 
 \end{enumerate}
 
@@ -213,7 +231,7 @@ Pengujian fungsional dilakukan untuk mengetahui kesesuaian reaksi perangkat luna
 	\item \textbf{Halaman utama}
 	\begin{itemize}
 		\item \textbf{Masalah:} \\
-		Tampilan halaman utama pada \textit{smartphone} terkadang muncul gambar jari, dimana seharusnya gambar jadi hanya muncul dihalaman utama pada \textit{PC}. Masalah ini ditemukan pada \textit{smartphone} dengan resolusi layar yang besar, yaitu dengan ukuran lebar lebih dari 1260 piksel.
+		Tampilan halaman utama pada \textit{smartphone} terkadang muncul gambar jari, dimana seharusnya gambar jari hanya muncul dihalaman utama pada \textit{PC}. Masalah ini ditemukan pada \textit{smartphone} dengan resolusi layar yang besar, yaitu dengan ukuran lebar lebih dari 1260 piksel.
 		
 		\item \textbf{Solusi:} \\
 		Solusi dari masalah ini adalah dengan menggunakan fitur dari CSS yaitu \textit{@media querry}. Fitur ini dapat mengatur pada resolusi berapakah suatu elemen ditampilkan kelayar. Berikut merupakan potongan kode solusi dari masalah ini:
@@ -536,4 +554,6 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 %		
 %		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah <latency>, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah <latency>.
 	\end{enumerate}
+
+	Dari beberapa pengujian yang dilakukan, dapat disimpulkan bahwa rata-rata \textit{latency} yang dihasilkan oleh aplikasi adalah 362 milidetik.
 \end{enumerate}

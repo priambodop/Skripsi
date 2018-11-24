@@ -15,8 +15,6 @@ var dataOfPlayer;
 var player1Val = 0;
 var player2Val = 0;
 
-var winner = 0;
-
 var timerArray = [];
 var charArray = [];
 
@@ -80,14 +78,6 @@ socket.on('playerDisconnected', function(playerId){
 
 socket.on('startTheGame', function(msg){
   init();
-
-  //debug purpose
-  dataOfPlayer = msg;
-  console.log(dataOfPlayer);
-  console.log(`data of player 1: ${dataOfPlayer[0].playerId}`);
-  console.log(`data of player 2: ${dataOfPlayer[1].playerId}`);
-  // ends here
-
   beginCountDown(3, msg);
 });
 
@@ -141,14 +131,11 @@ function beginGamePlay(){
 }
 
 function reachFinishLine(player){
-  if (winner == 0) {
-    winner = player;
-  }
   socket.emit('sendingTheWinner',{
-    playerWin: winner,
-    playerCharArr: arrOfPlayerChar
+    playerWin: player,
+    playerCharArr: arrOfPlayerChar,
+    winnerId: dataOfPlayer[player-1].playerId
   });
-  // toWinningPage();
 }
 
 function toWinningPage(){
@@ -175,11 +162,7 @@ function readyPlayerOne(){
     }else if(yPosition1 > 250){
       console.log('right curve');
        // RIGHT CURVE
-
       ctx.save();
-
-      console.log(`xPosition1: ${xPosition1}`);
-      console.log(`yPosition1: ${yPosition1}`);
 
       if(yPosition1 > 300) {
         xPosition1 += 0.2;
@@ -196,7 +179,6 @@ function readyPlayerOne(){
     }else if(xPosition1 > 150 && yPosition1 >= 250){
       console.log('middle row');
       // MIDDLE ROW
-
       xPosition1 -= 0.5;
       ctx.save();
 
@@ -266,12 +248,7 @@ function readyPlayerTwo(){
   }else if(yPosition2 > 190){
     console.log('right curve 2');
      // RIGHT CURVE
-
     ctx.save();
-
-    console.log(`xPosition2: ${xPosition2}`);
-    console.log(`yPosition2: ${yPosition2}`);
-
     if(yPosition2 > 250) {
       if (yPosition2 > 340) {
         xPosition2 += 0.7;
@@ -316,7 +293,7 @@ function readyPlayerTwo(){
     ctx.drawImage(player2Char, xPosition2, yPosition2);
     ctx.drawImage(player1Char, xPosition1, yPosition1);
     ctx.restore();
-  }else if(xPosition2 < 700 && yPosition2 >= 65){
+  }else if(xPosition2 < 655 && yPosition2 >= 65){
     console.log('top row 2');
     ctx.save();
     xPosition2 += 0.5;

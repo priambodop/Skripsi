@@ -44,14 +44,6 @@ function requestToJoin(){
       room: $('#code').val()
     });
   }
-
-  // $('form').submit(function(e){
-  //   e.preventDefault();
-  //   socket.emit('requestToJoin', {
-  //     id: socket.id,
-  //     room: $('#code').val()
-  //   });
-  // });
 }
 
 //redirecting to a charMobile page.

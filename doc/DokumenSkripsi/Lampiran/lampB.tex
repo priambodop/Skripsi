@@ -55,6 +55,7 @@ var users = new Users();
 * Listen to socket.io connection
 */
 io.on('connection', function(socket){
+console.log('Client has been connected to socket.io');
 
 socket.on('hostJoinRoom', (msg) => {
 	socket.join(msg.room);
@@ -67,12 +68,18 @@ socket.on('sendingTheWinner', (winner) => {
 	io.to(user.room).emit('getTheWinner', winner);
 
 	io.to(user.room).emit('toWinnerPage', winner);
+}),
 
+socket.on('getTheMessage', (message) => {
+	if (message.theWinnerId == socket.id) {
+		socket.emit('winning', 'YOU WIN');
+	}else{
+		socket.emit('losing', 'YOU LOSE');
+	}
 }),
 
 socket.on('goBackHome', (msg) => {
 	var user = users.getUser(socket.id);
-	users.removeRoom(user.room);
 	io.to(user.room).emit('backHome', msg);
 }),
 
@@ -99,6 +106,7 @@ socket.on('sendingChar', (msg) => {
 }),
 
 socket.on('charIsReady', (msg) => {
+	console.log(`data is received ${msg}`);
 	var user = users.getUser(socket.id);
 	io.to(user.room).emit('startTheGame', msg);
 }),
@@ -108,11 +116,6 @@ socket.on('stepClicked', (message) => {
 	io.to(user.room).emit('moveThePlayer', socket.id);
 }),
 
-//debug purpose
-socket.on('charMobile', (msg) => {
-	socket.emit('CharMobileAccepted', msg);
-}),
-
 // When a user requesting to join the game
 socket.on('requestToJoin', function(msg){
 	var check = users.isRoomExist(msg.room);
@@ -120,21 +123,30 @@ socket.on('requestToJoin', function(msg){
 
 	if (check === true) {
 		if (roomList.length === 3) {
-		socket.emit('joinRejected', 'The room is already full');
+			socket.emit('joinRejected', 'The room is already full');
 		}
-	else{
-		socket.join(msg.room);
-		users.removeUser(msg.id);
-		users.addUser(msg.id, msg.room);
+		else{
+			socket.join(msg.room);
+			users.removeUser(msg.id);
+			users.addUser(msg.id, msg.room);
 
-	io.to(user.room).emit('requestAccepted', msg);
-	socket.emit('joinSucceed', 'Welcome to the game !');
-	}
+
+			io.to(user.room).emit('requestAccepted', msg);
+			socket.emit('joinSucceed', 'Welcome to the game !');
+
+		}
 
 	}else{
-	socket.emit('joinRejected', 'The room is not exist');
+		socket.emit('joinRejected', 'The room is not exist');
 	}
-	});
+});
+
+ socket.on('disconnect', () => {
+   console.log('Client has been disconnected');
+   var user = users.getUser(socket.id);
+   io.to(user.room).emit('playerDisconnected', socket.id);
+   users.removeUser(socket.id);
+ });
 });
 
 /**
@@ -145,7 +157,6 @@ server.listen(port, (req, res) => {
 	console.log("Listening to " + port);
 });
 
-
 /**
 * Normalize a port into a number, string, or false.
 */
@@ -154,16 +165,18 @@ function normalizePort(val) {
 	var port = parseInt(val, 10);
 
 	if (isNaN(port)) {
-	// named pipe
-	return val;
+		// named pipe
+		return val;
 	}
 
 	if (port >= 0) {
-	// port number
-	return port;
+		// port number
+		return port;
 	}
 
 	return false;
 }
+
+
 
 \end{lstlisting}

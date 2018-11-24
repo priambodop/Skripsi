@@ -19,7 +19,6 @@ socket.on('charSent', function(msg){
   if (mark == 2) {
     mark = 0;
     waitForCall(1);
-    // toGamePlayMobile();
   }
 });
 
@@ -45,8 +44,6 @@ function selectChar(){
     id: socket.id
   });
 
-  //debug purpose
-  console.log(`Player is choosing char number ${valButton}`);
 }
 
 function toGamePlayMobile(){

@@ -1,13 +1,3 @@
-//debug purpose begin
-console.log(`char desktop id is ${socket.id}`);
-
-socket.emit('charDesktop', 'Char Desktop is connecting to socket.io');
-
-socket.on('charDesktopAcc', function(msg){
-  console.log(msg);
-});
-//debug purpose end
-
 var marker = 0;
 var playerData = [];
 var timeoutID;
@@ -63,7 +53,6 @@ socket.on('charSent', function(msg){
       charValue: msg.val
     };
     playerData[0] = playerData1;
-    console.log(`this is value play 1 : ${msg.val}`);
     if (msg.val == 1) {
       play1.innerHTML = 'Broco Dude';
     }else if (msg.val == 2) {
@@ -80,7 +69,6 @@ socket.on('charSent', function(msg){
       charValue: msg.val
     };
     playerData[1] = playerData2;
-    console.log(`this is value play 2 : ${msg.val}`);
     if (msg.val == 1) {
       play2.innerHTML = 'Broco Dude';
     }else if (msg.val == 2) {
@@ -95,10 +83,6 @@ socket.on('charSent', function(msg){
   if (marker == 2) {
     marker = 0;
     beginWaiting(1);
-
-    // toGamePlayDesktop();
-    // console.log(`Player data: ${playerData[0].playerId}`);
-    // socket.emit('charIsReady', playerData);
   }
 });
 

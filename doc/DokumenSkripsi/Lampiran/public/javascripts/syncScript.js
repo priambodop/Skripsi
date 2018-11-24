@@ -47,15 +47,9 @@ function getRandInt(){
 function requestAccepted(msg){
   var rom = text.toString();
 
-  //debug purpose
-  console.log(`this is room: ${rom}`);
-  console.log(`sum of player: ${player}`);
-
   if (msg.room === rom) {
     if (player == 0) {
 
-      //debug purpose
-      console.log(`Player with id: ${msg.id} is joined`);
 
       var player1 = {
         id: msg.id,
@@ -66,13 +60,8 @@ function requestAccepted(msg){
       var play1 = document.getElementById("player1");
       play1.innerHTML = '<p>PLAYER 1 HAS JOIN THE GAME</p>';
       player++;
-
-      //debug purpose
-      console.log(`after player1 joining: ${player}`);
     }else {
 
-      //debug purpose
-      console.log(`Player with id: ${msg.id} is joined`);
 
       var player2 = {
         id: msg.id,
@@ -85,7 +74,6 @@ function requestAccepted(msg){
       var play2 = document.getElementById("player2");
       play2.innerHTML = '<p>PLAYER 2 HAS JOIN THE GAME</p>';
       socket.emit('roomFull', {
-        // id: msg.id,
         room: msg.room
       });
       player = 0;

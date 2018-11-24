@@ -40,16 +40,6 @@ class Users{
     return tempUser;
   }
 
-  removeRoom(room){
-    var tempRoom = this.userArray.filter((user) => user.room === room);
-
-    if (tempRoom) {
-      this.userArray = this.userArray.filter((user) => user.room !== room);
-    }
-
-    return tempRoom;
-  }
-
   getUserList(room){
     var userList = this.userArray.filter((user) => user.room === room);
     var idList = userList.map((user) => userList.id);
