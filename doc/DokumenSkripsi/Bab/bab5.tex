@@ -9,7 +9,7 @@ Bab ini terdiri dari dua bagian, yaitu Implementasi Perangkat Lunak dan Pengujia
 
 Lingkungan implementasi terbagi menjadi dua bagian, yaitu lingkungan perangkat keras dan lingkungan perangkat lunak. Kedua bagian tersebut akan dijelaskan sebagai berikut:
 \begin{enumerate}
-	\item \textbf{Lingkungan Perangkat Keras} \\
+	\item \textbf{Lingkungan Perangkat Keras}
 	\begin{enumerate}
 		\item \textbf{Komputer}: Macbook Pro (Retina, 13 inch, Mid 2014)
 		\item \textbf{Prosesor}: 2.6 GHz Intel Core i5
@@ -20,7 +20,7 @@ Lingkungan implementasi terbagi menjadi dua bagian, yaitu lingkungan perangkat k
 	\item \textbf{Lingkungan Perangkat Lunak} \\
 	Lingkungan perangkat lunak terbagi menjadi dua bagian yaitu, lingkungan pada \textit{server} dan \textit{client}. Kedua bagian tersebut akan dijelaskan sebagai berikut:
 	\begin{enumerate}
-		\item \textbf{Server} \\
+		\item \textbf{Server}
 		\begin{enumerate}
 			\item \textbf{Heroku} \\
 			Heroku adalah \textit{cloud platform} yang menyediakan fitur-fitur yang membantu pengguna untuk dapat memiliki alamat domain \footnote{\url{https://www.heroku.com/what}}. Dengan menggunakan Heroku, pengembang aplikasi dapat menaruh aplikasi yang sudah dibuat seluruhnya di \textit{cloud}. Heroku dapat menjalankan aplikasi berbasis beberapa bahasa pemrograman. Salah satu bahasa pemrograman yang didudukung oleh Heroku adalah Node.js.
@@ -254,7 +254,7 @@ Pengujian fungsional dilakukan untuk mengetahui kesesuaian reaksi perangkat luna
 	\item \textbf{Halaman permintaan bergabung}
 	\begin{itemize}
 		\item \textbf{Masalah:} \\
-		Pada saat kedua pemain menyelesaikan permainan dan menekan tombol \textit{exit}, kemudian kedua pemain akan mengulang permainan dengan menuju ke halaman permintaan bergabung. Pada tahap ini, salah satu pemain tidak dapat bergabung kedalam \textit{room}. \\
+		Pada saat kedua pemain menyelesaikan permainan dan menekan tombol \textit{exit}, kemudian kedua pemain akan mengulang permainan dengan menuju ke halaman permintaan bergabung. Pada tahap ini, salah satu pemain tidak dapat bergabung kedalam \textit{room}.
 		
 		\textit{Error} ini terjadi akibat penggunaan elemen jQuery pada halaman permintaan bergabung, yaitu elemen \textit{.submit()}. Pada saat pemain akan bermain kedua kalinya dan sampai dihalaman permintaan bergabung, elemen \textit{submit()} akan mengirimkan kode \textit{room} lebih dari satu kali. Dengan begitu, \textit{server} akan mengira bahwa ada dua pemain yang sudah bergabung, sehingga halaman langsung berpindah kehalaman selanjutnya. Padahal pemain kedua belum mengisi kode \textit{room} dan belum mengirimkan ke \textit{server}.
 		
@@ -274,7 +274,7 @@ function requestToJoin(){
 	\item \textbf{Halaman pemilihan karakter}
 	\begin{itemize}
 		\item \textbf{Masalah:} \\
-		Pada saat salah satu pemain menekan tombol \textit{choose} dua kali, halaman langsung pindah kehalaman memulai permainan disaat pemain kedua belum memilih karakter. \\
+		Pada saat salah satu pemain menekan tombol \textit{choose} dua kali, halaman langsung pindah kehalaman memulai permainan disaat pemain kedua belum memilih karakter.
 		
 		\textit{Error} terjadi karena pada saat pemain menekan tombol choose, seluruh data langsung dikirimkan ke \textit{server} sehingga \textit{server} menangkap sudah ada satu pemain yang berhasil mengirimkan data karakter. Apabila ditekan dua kali, maka akan dianggap sudah ada dua pemain yang mengirimkan data karakter. Dengan begitu halaman pun berpindah.
 		
@@ -300,7 +300,7 @@ document.getElementById("nextButton").disabled = true;
 	\item \textbf{Halaman pemilihan karakter}
 	\begin{itemize}
 		\item \textbf{Masalah:} \\
-		Pada saat memilih karakter, setelah ditekan karakternya pada \textit{smartphone}, karakter tidak muncul dilayar \textit{PC}.\\
+		Pada saat memilih karakter, setelah ditekan karakternya pada \textit{smartphone}, karakter tidak muncul dilayar \textit{PC}.
 		
 		\textit{Error} ini terjadi karena adanya kesalahan pengiriman data pada saat proses bergabung kedalam \textit{room}. Yang masuk kedalam \textit{room} hanya satu pemain saja, sedangkan pemain kedua tidak mengirimkan data kepada \textit{server} sehingga tidak masuk kedalam \textit{room}.
 		
@@ -319,11 +319,11 @@ function requestToJoin(){
 \end{enumerate}
 
 Pengujian fungsional yang dilakukan terbagi menjadi dua, yaitu pengujian fungsional pada \textit{PC} dan pada \textit{smartphone}.
-
-\textbf{PC} \\
+\begin{itemize}
+	\item \textbf{Pengujian fungsional pada \textit{PC}}
 \begin{table}[H]
 	\centering
-	\caption{Tabel Pengujian Fungsional pada \textit{PC}}
+	\caption{Tabel Pengujian fungsional pada \textit{PC}}
 	\begin{tabular}{|p{0.35cm}| p{3.5cm}| p{7cm}| p{2.5cm}|} \hline
 		No. & Aksi Pengguna & Reaksi yang diharapkan & Reaksi perangkat lunak \\ \hline
 		1 & Pengguna menjalankan aplikasi & Halaman utama akan ditampilkan & sesuai \\ \hline
@@ -333,12 +333,12 @@ Pengujian fungsional yang dilakukan terbagi menjadi dua, yaitu pengujian fungsio
 		4 & Pengguna melakukan proses pemilihan karakter & Jika para pemain memilih karakter, maka kedua karakter yang dipilih akan ditampilkan kelayar \textit{PC} & sesuai \\ \hline
 		&  & Jika para pemain telah menetapkan karakter yang dipilih, maka halaman akan diarahkan menuju halaman permainan & sesuai \\ \hline
 		5 & Pengguna mulai memainkan permainan & Karakter milik pemain bergerak melalui lintasan lari selama permainan dan akan diarahkan kehalaman permainan berakhir apabila ada yang menyentuh garis akhir lebih dulu & sesuai \\ \hline
-		6 & Pengguna menekan tombol \textit{exit} & Permainan berakhir dan halaman diarahkan kembali menuju halaman \textit{home} & sesuai \\ \hline
+		6 & Pengguna menekan tombol \textit{exit} & Permainan berakhir dan halaman diarahkan kembali menuju halaman utama & sesuai \\ \hline
 	\end{tabular}
 	\label{table:fungsionalPC}
-\end{table} 
-
-\textbf{Smartphone} \\
+\end{table}
+	
+	\item \textbf{Pengujian fungsional pada \textit{smartphone}}
 \begin{table}[H]
 	\centering
 	\caption{Tabel Pengujian Fungsional pada \textit{smartphone}}
@@ -356,6 +356,7 @@ Pengujian fungsional yang dilakukan terbagi menjadi dua, yaitu pengujian fungsio
 	\end{tabular}
 	\label{table:fungsionalSmartphone}
 \end{table}
+\end{itemize} 
 \subsection{Pengujian Eksperimental}
 Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{smartphone} dan \textit{PC} yang berbeda-beda. Setiap responden diminta untuk mengakses URL yang diberikan melalui \textit{smartphone} dan \textit{PC} milik masing-masing dan memastikan apakah fungsi dari setiap halaman yang ditampilkan sudah berjalan. Pengujian eksperimental terbagi menjadi dua, yaitu pengujian \textit{cross-platform} dan pengujian \textit{latency}.
 

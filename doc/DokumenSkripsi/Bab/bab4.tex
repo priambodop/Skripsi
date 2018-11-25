@@ -265,6 +265,7 @@ Antarmuka yang dirancang terbagi menjadi dua bagian, yaitu antarmuka yang ada di
 \end{enumerate}
 
 \section{Perancangan Struktur Direktori}
+\label{sec:direktori}
 
 Bagian ini akan membahas mengenai perancangan struktur direktori untuk membangun web. Struktur direktori meliputi beberapa direktori dan berkas yang memiliki fungsi berbeda-beda. Folder beserta berkas yang digunakan akan dijelaskan sebagai berikut:
 
@@ -512,17 +513,17 @@ constructor(){
 			
 			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
-				\item \textbf{socket.on('charSent', function(msg){})} \\ 
+				\item \textbf{socket.on('charSent', function(msg)\{\})} \\ 
 				Berfungsi untuk menangkap \textit{event} charSent yang dipancarkan oleh \textit{server} untuk memeriksa apakah kedua pemain telah menetapkan karakter untuk pindah kehalaman selanjutnya.
 				
-				\item \textbf{socket.emit('selectingChar', {val, id})} \\
+				\item \textbf{socket.emit('selectingChar', \{val, id\})} \\
 				Berfungsi untuk memancarkan \textit{event} selectingChar saat pemain telah memilih karakter. Data yang dikirimkan adalah:
 				\begin{itemize}
 					\item \textbf{val}, nilai karakter berupa \textit{integer}.
 					\item \textbf{id}, identifikasi unik Socket.io milik pemain.
 				\end{itemize}
 			
-				\item \textbf{socket.on('sendingChar', {val, id, marker})} \\
+				\item \textbf{socket.on('sendingChar', \{val, id, marker\})} \\
 				Berfungsi untuk memancarkan \textit{event} sendingChar saat pemain telah menetapkan karakter yang dipilih. Data yang dikirimkan adalah:
 				\begin{itemize}
 					\item \textbf{val}, nilai karakter berupa \textit{integer}.
@@ -590,18 +591,18 @@ constructor(){
 			
 			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
-				\item \textbf{socket.on('moveThePlayer', function(msg){...})}\\
+				\item \textbf{socket.on('moveThePlayer', function(msg)\{\})}\\
 				Berfungsi untuk menangkap \textit{event} moveThePlayer yang dipancarkan oleh \textit{server} saat tombol telapak kaki ditekan oleh pemain.
 				
-				\item \textbf{socket.on('pong'), function(startTime)\{\}} \\ Berfungsi untuk menangkap \textit{event} \textbf{pong} yang dipancarkan oleh \textit{server} untuk menghitung \textit{latency} pada saat karakter bergerak pada layar \textit{PC}.
+				\item \textbf{socket.on('pong', function(startTime)\{\})} \\ Berfungsi untuk menangkap \textit{event} \textbf{pong} yang dipancarkan oleh \textit{server} untuk menghitung \textit{latency} pada saat karakter bergerak pada layar \textit{PC}.
 				
-				\item \textbf{socket.on('startTheGame', function(msg){...})}\\
+				\item \textbf{socket.on('startTheGame', function(msg)\{\})}\\
 				Berfungsi untuk menangkap \textit{event} startTheGame yang dipancarkan oleh \textit{server} pada saat akan memulai permainan dengan menggambar aset-aset yang dibutuhkan ke layar \textit{PC}.
 				
-				\item \textbf{socket.on('toWinnerPage', function(){})} \\
+				\item \textbf{socket.on('toWinnerPage', function()\{\})} \\
 				Berfungsi untuk menangkap \textit{event} toWinnerPage yang dipancarkan oleh \textit{server} yang memindahkan halaman ke halaman pemenang.
 				
-				\item \textbf{socket.emit('sendingTheWinner', {playerWin,playerCharArr})} \\
+				\item \textbf{socket.emit('sendingTheWinner', \{playerWin,playerCharArr\})} \\
 				Berfungsi untuk memancarkan \textit{event} sendingTheWinner pada saat pemain telah mencapai garis akhir. Data yang dikirimkan adalah:
 				\begin{itemize}
 					\item \textbf{playerWin}, pemenang yang mencapai garis akhir lebih dulu.
@@ -635,10 +636,10 @@ constructor(){
 			
 			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
-				\item \textbf{socket.on('startTheGame', function()\{...\})}\\
+				\item \textbf{socket.on('startTheGame', function()\{\})}\\
 				Berfungsi untuk menangkap \textit{event} startTheGame yang dipancarkan oleh \textit{server} saat permainan akan segera dimulai.
 				
-				\item \textbf{socket.on('toWinnerPage', function()\{...\})}\\
+				\item \textbf{socket.on('toWinnerPage', function()\{\})}\\
 				Berfungsi untuk menangkap \textit{event} toWinnerPage yang dipancarkan oleh \textit{server} pada saat permainan telah selesai.
 				
 				\item \textbf{socket.emit('ping'), startTime} \\ Berfungsi untuk mengirimkan \textit{event} \textbf{ping} pada saat tombol telapak kaki ditekan, untuk menghitung \textit{latency}. Parameter \textit{startTime} adalah waktu saat ini pada saat tombol ditekan.
@@ -682,13 +683,13 @@ constructor(){
 			
 			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
-				\item \textbf{socket.on('connect',function(){...})} \\
+				\item \textbf{socket.on('connect',function()\{\})} \\
 				Berfungsi untuk menangkap \textit{event} \textit{connect} yang dipancarkan apabila \textit{client} berhasil tersambung ke Socket.io.
 				
-				\item \textbf{socket.on('joinSucceed', function(msg){...})} \\
+				\item \textbf{socket.on('joinSucceed', function(msg)\{\})} \\
 				Berfungsi untuk menangkap \textit{event} joinSucceed yang dipancarkan oleh \textit{server} apabila \textit{client} berhasil bergabung kedalam \textit{room}.
 				
-				\item \textbf{socket.on('joinRejected', function(msg){...})} \\
+				\item \textbf{socket.on('joinRejected', function(msg)\{\})} \\
 				Berfungsi untuk menangkap \textit{event} joinRejected yang dipancarkan oleh \textit{server} apabila \textit{client} tidak berhasil bergabung kedalam \textit{room}.
 				
 				\item \textbf{socket.on('toCharPage')} \\
@@ -796,13 +797,13 @@ constructor(){
 			
 			\textit{Event} yang dimiliki oleh berkas ini adalah sebagai berikut:
 			\begin{itemize}
-				\item \textbf{socket.on('getTheWinner',function(msg){})}, berfungsi untuk menangkap \textit{event} \textit{getTheWinner} yang kemudian akan mengeksekusi fungsi untuk menangani \textit{event} tersebut.
+				\item \textbf{socket.on('getTheWinner',function(msg)\{\})}, berfungsi untuk menangkap \textit{event} \textit{getTheWinner} yang kemudian akan mengeksekusi fungsi untuk menangani \textit{event} tersebut.
 				
-				\item \textbf{socket.on('backHome'), function(msg){}}, berfungsi untuk menangkap \textit{event} \textit{backHome} yang akan mengeksekusi fungsi untuk kembali kehalaman utama.
+				\item \textbf{socket.on('backHome'), function(msg)\{\}}, berfungsi untuk menangkap \textit{event} \textit{backHome} yang akan mengeksekusi fungsi untuk kembali kehalaman utama.
 				
-				\item \textbf{socket.on('winning', function(msg){})}, berfungsi untuk menangkap \textit{event} \textit{winning} dan akan menampilkan pesan \textit{'YOU WIN'}.
+				\item \textbf{socket.on('winning', function(msg)\{\})}, berfungsi untuk menangkap \textit{event} \textit{winning} dan akan menampilkan pesan \textit{'YOU WIN'}.
 				
-				\item \textbf{socket.on('losing', function(msg){})}, berfungsi untuk menangkap \textit{event} \textit{losing} dan akan menampilkan pesan \textit{'YOU LOSE'}.
+				\item \textbf{socket.on('losing', function(msg)\{\})}, berfungsi untuk menangkap \textit{event} \textit{losing} dan akan menampilkan pesan \textit{'YOU LOSE'}.
 			\end{itemize}
 			
 			
