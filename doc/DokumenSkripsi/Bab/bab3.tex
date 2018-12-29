@@ -6,7 +6,9 @@ Pada bab ini akan dijelaskan mengenai analisis aplikasi sejenis, analisis alur p
 \section{Analisis Aplikasi Sejenis}
 \label{sec:AirConsole}
 
-Salah satu aplikasi sejenis permainan berbasis web dengan memanfaatkan \textit{smartphone} sebagai pengendali adalah AirConsole. Aplikasi tersebut memanfaatkan \textit{browser}, \textit{smartphone}, \textit{PC}, dan juga jaringan internet untuk dapat menggunakannya. Aplikasi ini dikembangkan oleh N-Dream AG \footnote{\url{https://www.airconsole.com/}, diakses 4 Desember 2017}.
+Penelitian yang dilakukan akan membangun aplikasi permainan berbasis web yang memanfaatkan teknologi \textit{smartphone} dan \textit{PC}. Aplikasi tersebut dinamakan Finger For Life. Aplikasi ini membutuhkan \textit{PC} yang akan berperan sebagai \textit{console} yang akan menyediakan permainan dan \textit{smartphone} yang akan berperan sebagai pengendali permainan. Aplikasi Finger For Life adalah permainan balap lari yang dapat dikendalikan dengan menggunakan \textit{smartphone}. Tujuan permainan ini adalah menggerakan karakter di layar \textit{PC} dengan menggunakan \textit{smartphone} untuk mencapai garis akhir lebih dulu. Aplikasi ini memiliki beberapa langkah yang harus dilakukan agar \textit{smartphone} dan \textit{PC} dapat tersambung satu sama lain. Oleh karena itu, akan dilakukan analisis aplikasi sejenis yang memanfaatkan \textit{smartphone} dan \textit{PC} untuk memainkan permainan.
+
+Salah satu aplikasi sejenis permainan berbasis web yang memanfaatkan \textit{smartphone} sebagai pengendali adalah AirConsole. Aplikasi tersebut memanfaatkan \textit{browser}, \textit{smartphone}, \textit{PC}, dan juga jaringan internet untuk dapat menggunakannya. Aplikasi ini dikembangkan oleh N-Dream AG \footnote{\url{https://www.airconsole.com/}, diakses 4 Desember 2017}.
 
 \textbf{Analisis AirConsole} 
 
@@ -206,44 +208,93 @@ Web yang akan dikembangkan merupakan aplikasi permainan berbasis web yang bernam
 	\item \textbf{Jaringan Internet}.
 \end{itemize}
 
-Para pemain harus menyediakan satu perangkat komputer \textit{PC}, dimana \textit{PC} tersebut akan berfungsi sebagai \textit{console}, dan dua \textit{smartphone} yang akan berfungsi sebagai \textit{controller}. \textit{PC} akan memiliki peran sebagai \textit{host} yang menciptakan suatu \textit{room}, dimana \textit{room} tersebut merupakan sebuah kode ruang permainan dimana kedua pemain dapat bergabung kedalamnya. Ketiga perangkat tersebut akan membutuhkan jaringan internet untuk dapat mengakses alamat web yang harus dituju. Setelah ketiga perangkat tersebut tersedia, maka para pemain dapat membuka \textit{browser} untuk mengakses alamat web permainan Finger For Life. Alamat permainan tersebut adalah \url{http://fingerforlife.herokuapp.com/}. Agar para pemain dapat mulai memainkan permainan ini, ada beberapa tahap yang harus dilakukan. Tahap-tahap yang dilakukan akan dibagi menjadi dua, yaitu yang terjadi pada bagian \textit{PC}, dan pada \textit{smartphone}. Tahap-tahap tersebut akan dijelaskan sebagai berikut:
+Para pemain harus menyediakan satu perangkat komputer \textit{PC}, dimana \textit{PC} tersebut akan berfungsi sebagai \textit{console}, dan dua \textit{smartphone} yang akan berfungsi sebagai \textit{controller}. \textit{PC} akan memiliki peran sebagai \textit{host} yang menciptakan suatu \textit{room}, dimana \textit{room} tersebut merupakan sebuah kode ruang permainan dimana kedua pemain dapat bergabung kedalamnya. Ketiga perangkat tersebut membutuhkan jaringan internet untuk dapat mengakses alamat aplikasi web yang dibangun. 
+
+Alamat aplikasi permainan Finger For Life adalah \url{http://fingerforlife.herokuapp.com/}. Agar para pemain dapat mulai memainkan permainan ini, ada beberapa tahap yang harus dilakukan. Tahap-tahap yang dilakukan akan dibagi menjadi dua, yaitu yang terjadi pada bagian \textit{PC}, dan pada \textit{smartphone}. Tahap-tahap tersebut akan dijelaskan sebagai berikut:
 
 \begin{enumerate}
-	\item \textbf{Permintaan Bergabung} \\
+	\item \textbf{Permintaan Bergabung}
 	
-	\textbf{PC} \\
-	Saat \textit{client} mengakses alamat web Finger For Life pada \textit{PC}, \textit{client} akan ditujukan kehalaman utama. Halaman ini terdapat tombol \textit{start} yang harus ditekan oleh \textit{client} agar dapat bergabung kedalam permainan. Setelah tombol \textit{start} ditekan, \textit{client} akan ditujukan kehalaman permintaan bergabung. 
-	
-	Pada tahap ini, halaman pada \textit{PC} akan menunjukan perintah untuk mengakses alamat web Finger For Life pada \textit{browser} di kedua \textit{smartphone}. Halaman ini pun akan menunjukan kode yang harus dikirimkan oleh para pemain. Kode tersebut merupakan \textit{room} yang akan menyimpan tiga \textit{client} pada saat permainan dimulai. Ketiga \textit{client} tersebut adalah \textit{host}, pemain pertama, dan pemain kedua. Para pemain harus mengirimkan kode tersebut kepada \textit{host}, sehingga \textit{smartphone} pemain dapat tersambung dengan \textit{PC}. Kode yang tersedia berfungsi untuk proses verifikasi, apakah kode yang dikirimkan dari \textit{smartphone} sama dengan yang ada di \textit{PC} atau tidak. Proses tersebut menentukan apakah \textit{client} dapat bergabung kedalam \textit{room} atau tidak. \\
-	
-	\textbf{Smartphone} \\
-	Saat \textit{client} mengakses alamat web Finger For Life pada \textit{smarthone}, \textit{client} akan ditujukan kehalaman utama. Halaman ini terdapat tombol \textit{join} yang harus ditekan oleh \textit{client} agar dapat bergabung kedalam permainan. Setelah tombol \textit{join} ditekan, \textit{client} akan ditujukan kehalaman permintaan bergabung.
-	
-	Pada halaman ini, \textit{client} harus mengisi form yang tersedia dengan kode \textit{room} dari \textit{PC}. Setelah kode dikirimkan, maka \textit{client} akan segera mendapatkan pesan yang menandakan apakah sudah berhasil bergabung kedalam \textit{room} atau tidak. Apabila pemain yang bergabung masih berjumlah satu, maka \textit{room} masih menunggu untuk pemain lainnya bergabung. \textit{Room} akan ditutup apabila pemain yang bergabung sudah berjumlah dua pemain. Setelah tahap ini selesai, maka akan ditujukan ke halaman lain untuk tahap berikutnya.
-	
-	\item \textbf{Memilih Karakter} \\
-	
-	\textbf{PC} \\
-	Para pemain yang telah bergabung akan segera ditujukan kehalaman memilih karakter. Pada halaman ini, akan muncul karakter yang telah dipilih oleh para pemain. Pada tahap ini, kedua pemain harus menetapkan karakter yang merepresentasikan para pemain dalam permainan. Apabila kedua pemain belum menetapkan karakter, maka tidak dapat menuju ke tahap selanjutnya.
+	\textbf{PC}
+	\begin{enumerate}
+		\item Saat \textit{client} mengakses alamat web Finger For Life pada \textit{PC}, \textit{client} akan diarahkan ke halaman utama yang terdapat tombol \textit{start}.
+		\item Tekan tombol \textit{start} untuk mengarah ke halaman permintaan bergabung.
+		\item Halaman pada \textit{PC} akan menunjukan perintah untuk mengakses alamat web Finger For Life pada \textit{browser} di kedua \textit{smartphone} dan menampilkan kode yang harus dikirimkan oleh para pemain.
+		\item Kode yang ditampilkan merupakan \textit{room} yang akan menyimpan tiga \textit{client} pada saat permainan dimulai. Ketiga \textit{client} tersebut adalah \textit{host}, pemain pertama, dan pemain kedua.
+	\end{enumerate}
+%	Saat \textit{client} mengakses alamat web Finger For Life pada \textit{PC}, \textit{client} akan diarahkan ke halaman utama. Pada halaman ini terdapat tombol \textit{start} yang harus ditekan oleh \textit{client} agar dapat bergabung kedalam permainan. Setelah tombol \textit{start} ditekan \textit{client} akan ditujukan kehalaman permintaan bergabung. 
+%	
+%	Pada tahap ini, halaman pada \textit{PC} akan menunjukan perintah untuk mengakses alamat web Finger For Life pada \textit{browser} di kedua \textit{smartphone}. Halaman ini akan menunjukan kode yang harus dikirimkan oleh para pemain. Kode tersebut merupakan \textit{room} yang akan menyimpan tiga \textit{client} pada saat permainan dimulai. Ketiga \textit{client} tersebut adalah \textit{host}, pemain pertama, dan pemain kedua. Para pemain harus mengirimkan kode tersebut kepada \textit{host}, sehingga \textit{smartphone} pemain dapat tersambung dengan \textit{PC}. Kode yang tersedia berfungsi untuk proses verifikasi, apakah kode yang dikirimkan dari \textit{smartphone} sama dengan yang ada di \textit{PC} atau tidak. Proses tersebut menentukan apakah \textit{client} dapat bergabung kedalam \textit{room} atau tidak. \\
 	
 	\textbf{Smartphone}
-	Halaman ini akan menunjukan daftar karakter yang dapat dipilih oleh para pemain. Karakter yang dipilih akan ditunjukan dilayar \textit{PC}. Apabila pemain akan menetapkan karakter yang dipilih, maka pemain dapat menekan tombol \textit{choose}. Setelah kedua pemain menetapkan karakter masing-masing, maka akan dituju kehalaman selanjutnya.
+	\begin{enumerate}
+		\item Saat \textit{client} mengakses alamat web Finger For Life pada \textit{smarthone}, \textit{client} akan diarahkan ke halaman utama yang terdapat tombol \textit{join}.
+		\item Tekan tombol \textit{join} untuk mengarah ke halaman permintaan bergabung.
+		\item Isi form yang tersedia dengan kode \textit{room} dari \textit{PC}.
+		\item Setelah kode dikirimkan maka \textit{client} akan segera mendapatkan pesan yang menandakan apakah sudah berhasil bergabung kedalam \textit{room} atau tidak
+		\item \textit{Room} akan ditutup apabila pemain yang bergabung sudah berjumlah dua pemain dan halaman pada layar \textit{smartphone} dan \textit{PC} akan diarahkan ke halaman lain untuk tahap berikutnya.
+	\end{enumerate}
+%	Saat \textit{client} mengakses alamat web Finger For Life pada \textit{smarthone}, \textit{client} akan diarahkan ke halaman utama. Halaman ini terdapat tombol \textit{join} yang harus ditekan oleh \textit{client} agar dapat bergabung kedalam permainan. Setelah tombol \textit{join} ditekan, \textit{client} akan ditujukan kehalaman permintaan bergabung.
+%	
+%	Pada halaman ini, \textit{client} harus mengisi form yang tersedia dengan kode \textit{room} dari \textit{PC}. Setelah kode dikirimkan, maka \textit{client} akan segera mendapatkan pesan yang menandakan apakah sudah berhasil bergabung kedalam \textit{room} atau tidak. Apabila pemain yang bergabung masih berjumlah satu, maka \textit{room} masih menunggu untuk pemain lainnya bergabung. \textit{Room} akan ditutup apabila pemain yang bergabung sudah berjumlah dua pemain. Setelah tahap ini selesai, maka akan ditujukan ke halaman lain untuk tahap berikutnya.
+	
+	\item \textbf{Memilih Karakter}
+	
+	\textbf{PC}
+	\begin{enumerate}
+		\item Halaman ini akan menampilkan karakter yang telah dipilih oleh para pemain.
+		\item Halaman pada layar \textit{PC} tidak akan mengarah ke halaman selanjutnya apabila kedua pemain belum menetapkan karakter. 
+	\end{enumerate}
+%	Para pemain yang telah bergabung akan segera ditujukan kehalaman memilih karakter. Pada halaman ini, akan muncul karakter yang telah dipilih oleh para pemain. Pada tahap ini, kedua pemain harus menetapkan karakter yang merepresentasikan para pemain dalam permainan. Apabila kedua pemain belum menetapkan karakter, maka tidak dapat menuju ke tahap selanjutnya.
+	
+	\textbf{Smartphone}
+	\begin{enumerate}
+		\item Halaman ini akan menunjukan daftar karakter yang dapat dipilih oleh para pemain.
+		\item Tekan salah satu karakter untuk dipilih dan karakter akan muncul di halaman layar \textit{PC}.
+		\item Tekan tombol \textit{choose} untuk menetapkan karakter yang telah dipilih.
+		\item Setelah kedua pemain menetapkan karakter masing-masing, maka halaman pada layar \textit{smartphone} dan \textit{PC} akan diarahkan ke halaman lain untuk tahap berikutnya.
+	\end{enumerate}
+%	Halaman ini akan menunjukan daftar karakter yang dapat dipilih oleh para pemain. Karakter yang dipilih akan ditunjukan dilayar \textit{PC}. Apabila pemain akan menetapkan karakter yang dipilih, maka pemain dapat menekan tombol \textit{choose}. Setelah kedua pemain menetapkan karakter masing-masing, maka akan dituju kehalaman selanjutnya.
 	
 	\item \textbf{Memainkan Permainan}
+
+	\textbf{PC}
+	\begin{enumerate}
+		\item Halaman ini akan menampilkan hitungan mundul selama tiga detik sebelum permainan dimulai.
+		\item Lintasan lari dan dua karakter milik para pemain akan ditampilkan.
+		\item Pemain harus menggerakan karakter melalui lintasan untuk mencapai garis akhir.
+		\item Apabila salah satu karakter telah menyentuh garis akhir maka halaman pada \textit{PC} akan diarahkan ke halaman selanjutnya.
+	\end{enumerate}
+%	Permainan sudah dapat dimainkan pada tahap ini. Sebelum permainan dimulai, halaman \textit{PC} akan menampilkan hitungan mundul selama tiga detik. Setelah waktu tiga detik selesai, maka akan ditampilkan lintasan lari yang harus dilalui para pemain, dan dua karakter yang sudah ditetapkan oleh kedua pemain. Karakter tersebut akan berlari melalui lintasan untuk mencapai garis akhir. Pemain yang lebih dulu mencapai garis akhir akan menjadi pemenang.
 	
-	\textbf{PC} \\
-	Permainan sudah dapat dimainkan pada tahap ini. Sebelum permainan dimulai, halaman \textit{PC} akan menampilkan hitungan mundul selama tiga detik. Setelah waktu tiga detik selesai, maka akan ditampilkan lintasan lari yang harus dilalui para pemain, dan dua karakter yang sudah ditetapkan oleh kedua pemain. Karakter tersebut akan berlari melalui lintasan untuk mencapai garis akhir. Pemain yang lebih dulu mencapai garis akhir akan menjadi pemenang.
+	\textbf{Smartphone}
+	\begin{enumerate}
+		\item Halaman ini akan menampilkan instruksi untuk memainkan permainan ini.
+		\item Tombol telapak kaki kanan dan kiri akan ditampilkan.
+		\item Tekan tombol telapak kaki berulang kali untuk menggerakan karakter yang ada di halaman layar \textit{PC}.
+		\item Halaman pada \textit{smartphone} akan diarahkan ke halaman selanjutnya apabila salah satu karakter telah menyentuh garis akhir.
+	\end{enumerate}
+%	Pada saat hitungan mundur dilakukan dihalaman \textit{PC}, halaman \textit{smartphone} akan menampilkan instruksi untuk memainkan permainan ini. Instruksi tersebut menunjukan perintah untuk menekan tombol kaki kiri dan kanan untuk menggerakan karakter yang ada dilayar \textit{PC}. Setelah \textit{coundown} selesai, maka halaman akan menampilkan dua telapak kaki yang berfungsi sebagai tombol. Untuk dapat menggerakan karakter, pemain harus menekan kedua tombol tersebut secara berulang. Apabila sudah ada pemain yang mencapai garis akhir, maka halaman akan dituju kehalaman selanjutnya.
 	
-	\textbf{Smartphone} \\
-	Pada saat hitungan mundur dilakukan dihalaman \textit{PC}, halaman \textit{smartphone} akan menampilkan instruksi untuk memainkan permainan ini. Instruksi tersebut menunjukan perintah untuk menekan tombol kaki kiri dan kanan untuk menggerakan karakter yang ada dilayar \textit{PC}. Setelah \textit{coundown} selesai, maka halaman akan menampilkan dua telapak kaki yang berfungsi sebagai tombol. Untuk dapat menggerakan karakter, pemain harus menekan kedua tombol tersebut secara berulang. Apabila sudah ada pemain yang mencapai garis akhir, maka halaman akan dituju kehalaman selanjutnya.
+	\item \textbf{Mengakhiri Permainan}
 	
-	\item \textbf{Mengakhiri Permainan} \\
+	\textbf{PC}
+	\begin{enumerate}
+		\item Halaman pada \textit{PC} akan menampilkan para pemain yang telah menyelesaikan permainan.
+		\item Podium yang menempatkan para pemenang sesuai posisi nomor urut masing-masing akan ditampilkan.
+		\item Karakter milik pemenang akan ditampilkan di podium nomor satu, dan pemain yang kalah di podium nomor dua.
+		\item Tekan tombol \textit{exit} untuk keluar dari permainan dan halaman akan diarahkan kembali ke halaman utama.
+	\end{enumerate}
+%	Halaman ini akan menampilkan pemenang yang berhasil mencapai garis akhir lebih dulu. Halaman ini menampilkan podium yang menempatkan para pemenang sesuai posisi nomor urut masing-masing. Pada tahap ini, karakter milik pemenang akan ditampilkan di podium nomor satu, dan pemain selanjutnya dinomor dua. Untuk mengakhiri permainan, pemain harus menekan tombol \textit{exit} yang terdapat dihalaman ini. Apabila tombol tersebut ditekan, maka halaman akan menuju kembali ke halaman utama dan koneksi Socket.io pun akan terputus.
 	
-	\textbf{PC} \\
-	Halaman ini akan menampilkan pemenang yang berhasil mencapai garis akhir lebih dulu. Halaman ini menampilkan podium yang menempatkan para pemenang sesuai posisi nomor urut masing-masing. Pada tahap ini, karakter milik pemenang akan ditampilkan di podium nomor satu, dan pemain selanjutnya dinomor dua. Untuk mengakhiri permainan, pemain harus menekan tombol \textit{exit} yang terdapat dihalaman ini. Apabila tombol tersebut ditekan, maka halaman akan menuju kembali ke halaman utama dan koneksi Socket.io pun akan terputus.
-	
-	\textbf{Smartphone} \\
-	Pada halaman ini akan ditampilkan teks yang menunjukan posisi pemenang. Apabila pemain lebih dulu mencapai garis akhir, maka akan ditampilkan teks \textit{YOU WIN}. Pemain yang kalah akan ditampilkan teks \textit{YOU LOSE}. Setelah tombol \textit{exit} dilayar \textit{PC} ditekan, maka permainan telah berakhir, dan halaman akan menuju kembali kehalaman utama.
+	\textbf{Smartphone}
+	\begin{enumerate}
+		\item Pada halaman ini akan ditampilkan teks yang menunjukan posisi pemenang.
+		\item Pemain yang lebih dulu mencapai garis akhir akan ditampilkan teks \textit{YOU WIN}.
+		\item Pemain yang kalah akan ditampilkan teks \textit{YOU LOSE}.
+		\item Setelah tombol \textit{exit} di halaman layar \textit{PC} ditekan, maka permainan akan berakhir dan halaman akan diarahkan kembali ke halaman utama.
+	\end{enumerate}
+%	Pada halaman ini akan ditampilkan teks yang menunjukan posisi pemenang. Apabila pemain lebih dulu mencapai garis akhir, maka akan ditampilkan teks \textit{YOU WIN}. Pemain yang kalah akan ditampilkan teks \textit{YOU LOSE}. Setelah tombol \textit{exit} dilayar \textit{PC} ditekan, maka permainan telah berakhir, dan halaman akan menuju kembali kehalaman utama.
 	
 \end{enumerate}
 
