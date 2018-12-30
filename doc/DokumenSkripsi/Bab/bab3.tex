@@ -298,7 +298,21 @@ Alamat aplikasi permainan Finger For Life adalah \url{http://fingerforlife.herok
 	
 \end{enumerate}
 
-\section{Analisis Pengembangan Web}
+\section{Analisis Arsitektur Aplikasi Finger For Life}
+Arsitektur Finger For Life dapat dilihat pada Gambar \ref{fig:ars_fingerforlife} . Jumlah \textit{Client} dalam permainan ini adalah tiga. \textit{Client} tersebut antara lain \textit{host}, \textit{player 1}, dan \textit{player 2}. Apabila \textit{player 1} akan mengirimkan data untuk diproses oleh \textit{host}, maka data tersebut akan dikirimkan terlebih dahulu kepada \textit{server}, kemudian dilanjutkan kepada \textit{host}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{Gambar/ars_fingerforlife}
+	\caption{Arsitektur Finger For Life}
+	\label{fig:ars_fingerforlife}
+\end{figure}
+
+Komunikasi antara \textit{client} dengan \textit{client} tidak dapat dilakukan secara langsung. Komunikasi tersebut harus melewati \textit{server} terlebih dahulu. 
+
+Finger For Life dibangun diatas Node.js. Seluruh berkas serta direktori yang dibutuhkan untuk membangun aplikasi permainan ini diatur dengan menggunakan Express.js. Proses pengiriman dan penerimaan data secara \textit{realtime} dilakukan menggunakan Socket.io. Dalam permainan ini, animasi akan dilakukan dengan menggunakan Canvas API. Seluruh proses memodifikasi elemen HTML akan dilakukan dengan menggunakan jQuery. Halaman-halaman yang dibutuhkan untuk ditampilkan kelayar akan diatur dengan menggunakan The Content Template element.
+
+\section{Analisis Kebutuhan Perangkat Lunak}
 \label{sec:pengembangan}
 
 Penjelasan pustaka-pustaka yang dibutuhkan untuk pengembangan Finger For Life sudah dijelaskan pada bab \ref{chap:teori}. Pada subbab ini akan dijelaskan bagaimana pustaka-pustaka tersebut digunakan dalam proses implementasi aplikasi permainan berbasis web Finger For Life.
@@ -307,49 +321,38 @@ Penjelasan pustaka-pustaka yang dibutuhkan untuk pengembangan Finger For Life su
 	\item \textbf{Node.js}
 	\begin{enumerate}
 		\item \textbf{HTTP} \\
-		\textit{Interface} HTTP digunakan pada bagian \textit{server}. Web yang akan dikembangkan akan menggunakan \textit{server} HTTP untuk menyediakan akses ke alamat web yang dapat diakses oleh \textit{client}. HTTP \textit{server} akan diintegrasikan dengan Socket.io, dimana HTTP \textit{server} akan menjadi masukan parameter yang dibutuhkan Socket.io.
+		\textit{Interface} HTTP digunakan pada bagian \textit{server}. Web yang akan dikembangkan akan menggunakan \textit{server} HTTP untuk menyediakan akses ke alamat web yang dapat diakses oleh \textit{client}. HTTP \textit{server} akan diintegrasikan dengan Socket.io dimana HTTP \textit{server} akan menjadi masukan parameter pada saat \textit{server} Socket.io diinisialisasi.
 		
-		Contoh penggunaan HTTP \textit{server} akan dijelaskan sebagai berikut:
-\begin{lstlisting}[caption={Contoh penggunaan \textit{interface} \textit{HTTP}}, label={lst:nodeHTTP}, captionpos=b]
-var express = require('express');
-var http = require('http');
-var socketIO = require('socket.io');
+%		Contoh penggunaan HTTP \textit{server} akan dijelaskan sebagai berikut:
+%\begin{lstlisting}[caption={Contoh penggunaan \textit{interface} \textit{HTTP}}, label={lst:nodeHTTP}, captionpos=b]
+%var express = require('express');
+%var http = require('http');
+%var socketIO = require('socket.io');
+%
+%var app = express();
+%var httpServer = http.createServer(app);
+%var io = socketIO(httpServer);
+%\end{lstlisting}
+%
+%Bagian pertama potongan kode merupakan proses yang dilakukan untuk mendapatkan fungsi-fungsi yang tersedia dari masing-masing modul. Dengan melakukan proses tersebut, maka dapat dibuat variabel baru untuk melakukan proses inisialisasi yang dilakukan pada bagian kedua potongan kode.
+%
+%Variabel \textit{app} menginisialisasi Express.js yang akan menjadi fungsi \textit{handler}, yang merupakan fungsi yang menjadi masukan suatu parameter fungsi lain. Variabel \textit{httpServer} akan menginisialisasi objek \textit{server} HTTP dengan menggunakan fungsi \textit{createServer()}, dimana fungsi tersebut akan memiliki masukan yang berupa variabel \textit{app}. Agar aplikasi dapat melakukan koneksi kepada Socket.io, maka \textit{server} HTTP harus terintegrasi dengan Socket.io. Proses tersebut dilakukan dengan cara menginisialisasi variabel \textit{io} dengan memberi masukan variabel \textit{httpServer} kedalam fungsi \textit{socketIO()}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.
 
-var app = express();
-var httpServer = http.createServer(app);
-var io = socketIO(httpServer);
-\end{lstlisting}
-
-Bagian pertama potongan kode merupakan proses yang dilakukan untuk mendapatkan fungsi-fungsi yang tersedia dari masing-masing modul. Dengan melakukan proses tersebut, maka dapat dibuat variabel baru untuk melakukan proses inisialisasi yang dilakukan pada bagian kedua potongan kode.
-
-Variabel \textit{app} menginisialisasi Express.js yang akan menjadi fungsi \textit{handler}, yang merupakan fungsi yang menjadi masukan suatu parameter fungsi lain. Variabel \textit{httpServer} akan menginisialisasi objek \textit{server} HTTP dengan menggunakan fungsi \textit{createServer()}, dimana fungsi tersebut akan memiliki masukan yang berupa variabel \textit{app}. Agar aplikasi dapat melakukan koneksi kepada Socket.io, maka \textit{server} HTTP harus terintegrasi dengan Socket.io. Proses tersebut dilakukan dengan cara menginisialisasi variabel \textit{io} dengan memberi masukan variabel \textit{httpServer} kedalam fungsi \textit{socketIO()}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.
-
-%Variabel tersebut akan disambungkan dengan HTTP \textit{server}, dengan menggunakan variabel \textit{httpServer}. Setelah variabel \textit{httpServer} diinisialisasi, variabel \textit{io} dapat diintegrasikan dengan HTTP \textit{server} agar dapat menggunakan Socket.io sebagai \textit{server}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.
-		
+%Variabel tersebut akan disambungkan dengan HTTP \textit{server}, dengan menggunakan variabel \textit{httpServer}. Setelah variabel \textit{httpServer} diinisialisasi, variabel \textit{io} dapat diintegrasikan dengan HTTP \textit{server} agar dapat menggunakan Socket.io sebagai \textit{server}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.		
 		Salah satu \textit{method} yang dimiliki oleh \textit{interface HTTP} adalah sebagai berikut:
-		
 		\begin{itemize}
 			\item \textbf{http.createServer([options][,requestListener])} \\
-%			\textit{Method} ini digunakan untuk menciptakan \textit{server} \textit{HTTP} milik Node.js. \\
-%			\textbf{Parameter:}
-%			\begin{itemize}
-%				\item \textbf{options}, objek-objek sebagai berikut:
-%				\begin{itemize}
-%					\item \textbf{IncomingMessage}, objek yang menangani pesan masuk dari \textit{client}.
-%					\item \textbf{ServerResponse}, objek yang menangani respon dari \textit{server}.
-%				\end{itemize}
-%				\item \textbf{requestListener}, fungsi tertentu yang menangani proses pengiriman data pada \textit{server}.
-%			\end{itemize}
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk membangun \textit{server} HTTP. Berikut merupakan contoh penggunaan dalam pengembangan Finger For Life:
-\begin{lstlisting}[caption={Contoh penggunaan \textit{method createServer(options[,requestListener])}}, label={lst:nodeCreateServer}, captionpos=b]
-const express = require('express');
-const http = require('http');
-
-var app = express();
-var httpServer = http.createServer(app);
-\end{lstlisting}
-
-Baris pertama dan kedua pada potongan kode merupakan proses untuk mendapatkan fungsi dari masing-masing modul. Baris keempat merupakan proses inisialisasi Express.js yang dilakukan variabel \textit{app}. Baris selanjutnya merupakan proses menciptakan HTTP \textit{server} dengan menyambungkan variabel \textit{app} kedalam parameter.			
+			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk membangun \textit{server} HTTP. \textit{Server} ini akan diintegrasikan dengan Socket.io sehingga aplikasi Finger For Life dapat melakukan koneksi antara \textit{smartphone} dan \textit{PC}. Dengan begitu, \textit{method} ini diperlukan di dalam proses implementasi agar koneksi Socket.io dapat dibangun pada aplikasi permainan tersebut.
+%			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk membangun \textit{server} HTTP. Berikut merupakan contoh penggunaan dalam pengembangan Finger For Life:
+%\begin{lstlisting}[caption={Contoh penggunaan \textit{method createServer(options[,requestListener])}}, label={lst:nodeCreateServer}, captionpos=b]
+%const express = require('express');
+%const http = require('http');
+%
+%var app = express();
+%var httpServer = http.createServer(app);
+%\end{lstlisting}
+%
+%Baris pertama dan kedua pada potongan kode merupakan proses untuk mendapatkan fungsi dari masing-masing modul. Baris keempat merupakan proses inisialisasi Express.js yang dilakukan variabel \textit{app}. Baris selanjutnya merupakan proses menciptakan HTTP \textit{server} dengan menyambungkan variabel \textit{app} kedalam parameter.			
 		\end{itemize}
 	
 		Salah satu kelas yang dimiliki oleh HTTP adalah sebagai berikut:
@@ -361,7 +364,9 @@ Baris pertama dan kedua pada potongan kode merupakan proses untuk mendapatkan fu
 				\item \textbf{server.listen()} \\
 				\textit{Method} ini akan memulai \textit{server} HTTP untuk melakukan proses \textit{listening}, yang berarti \textit{server} akan mencari suatu \textit{event} yang dikirimkan oleh \textit{client} kepada \textit{server}. 
 				
-				Pada pengembangan Finger For Life, \textit{method} yang digunakan adalah \textit{method} yang berasal dari \textit{interface} \textit{Net} \footnote{\url{https://nodejs.org/dist/latest-v10.x/docs/api/net.html\#net\_server\_listen\_options\_callback}, diakses 14 November 2018} yang masih dimiliki Node.js. \textit{Method} yang digunakan memiliki sifat yang sama dengan \textit{method} \textit{server.listen()}, namun ada tambahan masukan pada parameternya. Berikut merupakan \textit{method} dari \textit{interface} \textit{Net}:
+				Pada pengembangan Finger For Life, \textit{method} yang digunakan adalah \textit{method} yang berasal dari \textit{interface} \textit{Net} \footnote{\url{https://nodejs.org/dist/latest-v10.x/docs/api/net.html\#net\_server\_listen\_options\_callback}, diakses 14 November 2018} yang masih dimiliki Node.js. \textit{Method} yang digunakan memiliki sifat yang sama dengan \textit{method} \textit{server.listen()}, namun ada tambahan masukan pada parameternya. 
+				
+				Tambahan parameter tersebut adalah suatu nomor \textit{port} berupa \textit{String} yang akan dituju oleh \textit{server} untuk melakukan koneksi. Berikut merupakan \textit{method server.listen()} yang dipakai di dalam pengembangan Finger For Life:
 				
 				\begin{itemize}
 					\item \textbf{server.listen(options[, callback])} \\
@@ -375,74 +380,81 @@ Baris pertama dan kedua pada potongan kode merupakan proses untuk mendapatkan fu
 					\end{itemize}
 					\textbf{Kembalian:} Objek \textit{server}.
 					
-			Contoh penggunaan \textit{method} ini didalam pengembangan Finger For Life adalah sebagai berikut:
-\begin{lstlisting}[caption={Contoh penggunaan \textit{method server.listen(options[, callback])}}, label={lst:nodeListen}, captionpos=b]
-server.listen(port, (req, res) => {
-console.log("Listening to " + port);
-});
-\end{lstlisting}
-			\textit{Method} ini akan melakukan koneksi kepada variabel \textit{port}, yang kemudian akan mengeksekusi fungsi \textit{callback}. Fungsi tersebut akan mengeluarkan suatu teks pada konsol yaitu \textit{Listening to (port)}.
+%			Contoh penggunaan \textit{method} ini didalam pengembangan Finger For Life adalah sebagai berikut:
+%\begin{lstlisting}[caption={Contoh penggunaan \textit{method server.listen(options[, callback])}}, label={lst:nodeListen}, captionpos=b]
+%server.listen(port, (req, res) => {
+%console.log("Listening to " + port);
+%});
+%\end{lstlisting}
+%			\textit{Method} ini akan melakukan koneksi kepada variabel \textit{port}, yang kemudian akan mengeksekusi fungsi \textit{callback}. Fungsi tersebut akan mengeluarkan suatu teks pada konsol yaitu \textit{Listening to (port)}.
 				\end{itemize}
 			\end{itemize}
 		\end{itemize}
 	
 		\item \textbf{Path} \\
-		Path digunakan untuk mengatur akses dari suatu direktori dan berkas didalam pengembangan Finger For Life. Salah satu \textit{method} yang dimiliki oleh modul ini adalah sebagai berikut:
+		Modul Path digunakan untuk mengatur akses dari suatu direktori dan berkas di dalam pengembangan aplikasi Finger For Life. Pada pengembangan aplikasi ini, akan dibutuhkan suatu cara yang cepat untuk mengakses berkas-berkas yang memiliki sifat statis di suatu direktori tertentu. Oleh karena itu, modul ini akan digunakan di dalam proses implementasi pengembangan aplikasi Finger For Life. Salah satu \textit{method} yang dimiliki oleh modul ini adalah sebagai berikut:
 		
 		\begin{itemize}
 			\item \textbf{path.join(...path)} \\
-			Berikut merupakan contoh implementasi dari \textit{method} ini:
-\begin{lstlisting}[caption={contoh implementasi \textit{method join()}}]
-path.join(__dirname + 'public');
-\end{lstlisting} 
+			\textit{Method} ini akan menerima parameter yang merepresentasikan lokasi direktori dari berkas yang akan diakses. Proses implementasi aplikasi Finger For Life akan dilakukan di berbagai direktori dan berkas yang berbeda-beda. Oleh karena itu, untuk mengakses suatu berkas yang diperlukan dari direktori yang berbeda \textit{method join(...path)} diperlukan di dalam pengembangan aplikasi.
+%			Berikut merupakan contoh implementasi dari \textit{method} ini:
+%\begin{lstlisting}[caption={contoh implementasi \textit{method join()}}]
+%path.join(__dirname + 'public');
+%\end{lstlisting} 
 			
-			\textit{Method} ini menerima parameter \textbf{\_\_dirname}, yang merepresentasikan lokasi direktori dari berkas saat ini yang sedang dimanipulasi. Parameter tambahan yang diterima \textit{method} ini adalah \textbf{public}, yang merepresentasikan nama direktori yang akan disambungkan dengan parameter sebelumnya.
+%			\textit{Method} ini menerima parameter \textbf{\_\_dirname}, yang merepresentasikan lokasi direktori dari berkas saat ini yang sedang dimanipulasi. Parameter tambahan yang diterima \textit{method} ini adalah \textbf{public}, yang merepresentasikan nama direktori yang akan disambungkan dengan parameter sebelumnya.
 		\end{itemize}
 		
 		\item \textbf{Module} \\
-		Dalam pengembangan Finger For Life, Module digunakan untuk memberikan akses pada direktori atau berkas lain untuk mendapatkan fungsi dari satu berkas tertentu. Contoh implementasi dari Module adalah sebagai berikut:
-\begin{lstlisting}[caption={proses \textit{export} suatu modul}]
-module.exports = app;
-\end{lstlisting}
-Potongan kode ini akan diletakan dibaris paling bawah suatu berkas. Dengan melakukan proses ini, maka berkas dan direktori lain akan dapat menggunakan fungsi-fungsi dari modul tersebut .
+		Di dalam pengembangan aplikasi Finger For Life, Module digunakan untuk memberikan akses pada direktori atau berkas lain untuk mendapatkan fungsi atau atribut dari satu berkas tertentu. Seluruh berkas yang ada di dalam aplikasi berbasis Node.js akan dianggap sebagai suatu modul yang terpisah satu sama lain. Satu modul tidak dapat memakai fungsi dan atribut yang berada di dalam modul lain. Oleh karena itu, Module digunakan untuk memberi akses dari satu modul kepada modul lain untuk dapat menggunakan fungsi dan atribut yang ada di dalam modul tersebut.
+%		Contoh implementasi dari Module adalah sebagai berikut:
+%\begin{lstlisting}[caption={proses \textit{export} suatu modul}]
+%module.exports = app;
+%\end{lstlisting}
+%Potongan kode ini akan diletakan dibaris paling bawah suatu berkas. Dengan melakukan proses ini, maka berkas dan direktori lain akan dapat menggunakan fungsi-fungsi dari modul tersebut .
 	\end{enumerate}
 	
 	\item \textbf{Express.js}
 	\begin{enumerate}
 		\item \textbf{express()}
+		Modul express akan digunakan untuk menciptakan objek Express di dalam pengembangan aplikasi Finger For Life. Objek ini yang akan bertanggung jawab untuk menggunakan seluruh fitur yang disediakan Express.js. Modul ini memiliki beberapa \textit{method} yang diperlukan di dalam pengembangan aplikasi Finger For Life. \textit{Method-method} tersebut akan dijelaskan sebagai berikut:
+		
 		\begin{itemize}
 			\item \textbf{express.static(root, [,options])} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menyediakan akses kepada suatu modul agar dapat mengakses modul-modul lainnya. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method} .static()}]
-express.static(path.join(__dirname, 'public'))
-\end{lstlisting}
-			\textit{Method} ini akan menerima parameter yang merepresentasikan direktori yang bersifat \textit{static}. Dengan melakukan proses ini, maka modul saat ini akan dapat mengakses setiap modul yang ada pada direktori \textbf{public}.
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk menyediakan akses kepada modul lain untuk mendapatkan fungsi atau atribut yang dimiliki oleh satu modul tertentu. Modul yang dapat diakses bersifat statis yang artinya seluruh elemen yang ada di dalam modul tersebut dapat langsung diberikan tanpa harus dibangkitkan atau dimanipulasi terlebih dahulu. 
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method} .static()}]
+%express.static(path.join(__dirname, 'public'))
+%\end{lstlisting}
+%			\textit{Method} ini akan menerima parameter yang merepresentasikan direktori yang bersifat \textit{static}. Dengan melakukan proses ini, maka modul saat ini akan dapat mengakses setiap modul yang ada pada direktori \textbf{public}.
 			
 			\item \textbf{express.Router([options])} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk mendapatkan fungsi yang dimiliki oleh modul Router. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-			
-\begin{lstlisting}[caption={Proses mendapatkan fungsi dari modul \textit{Router}}]
-var router = express.Router();
-\end{lstlisting}
-			Potongan kode tersebut menunjukan proses inisialisasi dari variabel \textit{router} untuk mendapatkan fungsi yang dimiliki oleh modul \textbf{Router}.
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk mendapatkan fungsi yang dimiliki oleh modul \textit{Router}. \textit{Method} ini dibutuhkan untuk proses inisialisasi suatu objek \textit{router} yang akan digunakan di dalam proses implementasi.
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%			
+%\begin{lstlisting}[caption={Proses mendapatkan fungsi dari modul \textit{Router}}]
+%var router = express.Router();
+%\end{lstlisting}
+%			Potongan kode tersebut menunjukan proses inisialisasi dari variabel \textit{router} untuk mendapatkan fungsi yang dimiliki oleh modul \textbf{Router}.
 		\end{itemize}
 	
 		\item \textbf{Application}
 		\begin{itemize}
 			\item \textbf{app.set(name, value)} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menetapkan suatu nilai tertentu kepada parameter \textbf{name}. Contoh implentasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method} .set()}]
-app.set('view engine', 'ejs');
-\end{lstlisting}
-Potongan kode tersebut menunjukan bahwa nilai \textit{ejs} akan ditetapkan kepada \textit{view engine}. Dengan begitu, \textit{view engine} akan mengembalikan \textit{ejs} apabila diperlukan untuk diakses. 
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk menetapkan suatu nilai tertentu milik parameter \textit{value} kepada parameter \textbf{name}. Di dalam proses implementasi aplikasi Finger For Life akan dibutuhkan suatu cara untuk menetapkan suatu nilai kepada variabel tertentu. Dengan begitu, \textit{method} ini dibutuhkan agar proses tersebut dapat ditangani. 
+%			Contoh implentasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method} .set()}]
+%app.set('view engine', 'ejs');
+%\end{lstlisting}
+%Potongan kode tersebut menunjukan bahwa nilai \textit{ejs} akan ditetapkan kepada \textit{view engine}. Dengan begitu, \textit{view engine} akan mengembalikan \textit{ejs} apabila diperlukan untuk diakses. 
 			
 			\item \textbf{app.use([path,] callback[, callback...])} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menetapkan fungsi untuk menangani \textit{path} yang telah ditentukan. Apabila pengguna mengakses \textit{path} '/', maka \textit{homeRouter} akan dieksekusi.
-			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method} .use()}]
-app.use('/', homeRouter);
-\end{lstlisting}
-			Potongan kode tersebut menunjukan bahwa apabila suatu \textit{client} mengakses \textit{path} yang tersedia, maka Express.js akan mengarahkan halaman web menuju \textit{homeRouter}.
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk menetapkan parameter fungsi \textit{callback} yang sesuai dengan parameter \textit{path} yang telah ditentukan sebelumnya. Di dalam proses implementasi aplikasi Finger For Life akan dibutuhkan suatu cara untuk menangani permintaan dari \textit{client} yang mengakses \textit{path} tertentu. Dengan begitu, \textit{method} ini dibutuhkan agar proses tersebut dapat ditangani.
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method} .use()}]
+%app.use('/', homeRouter);
+%\end{lstlisting}
+%			Potongan kode tersebut menunjukan bahwa apabila suatu \textit{client} mengakses \textit{path} yang tersedia, maka Express.js akan mengarahkan halaman web menuju \textit{homeRouter}.
 			
 %			\item \textbf{app.listen(port, [hostname], [backlog], [callback])} \\
 		\end{itemize}
@@ -450,25 +462,28 @@ app.use('/', homeRouter);
 		\item \textbf{Response}
 		\begin{itemize}
 			\item \textbf{res.render(view[, locals][, callback])} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menampilkan halaman HTML yang berada didalam parameter. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method} .render()}]
-router.get('/', function(req, res, next) {
-	res.render('home', { title: 'Home Pages' });
-});
-\end{lstlisting}
-			Potongan kode tersebut menunjukan bahwa apabila \textit{client} mengakses \textit{path '/'}, yang merupakan halaman utama dari web, maka objek \textit{res} akan menampilkan halaman HTML dari berkas yang bernama \textit{'home'}.
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk mengubah seluruh elemen HTML yang berada di dalam parameter sehingga dapat ditampilkan kepada \textit{client}. \textit{Method} ini akan digunakan di dalam proses implementasi aplikasi Finger For Life untuk menampilkan halaman-halaman pada saat aplikasi dijalankan.
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method} .render()}]
+%router.get('/', function(req, res, next) {
+%	res.render('home', { title: 'Home Pages' });
+%});
+%\end{lstlisting}
+%			Potongan kode tersebut menunjukan bahwa apabila \textit{client} mengakses \textit{path '/'}, yang merupakan halaman utama dari web, maka objek \textit{res} akan menampilkan halaman HTML dari berkas yang bernama \textit{'home'}.
 		\end{itemize}
 	
 		\item \textbf{Router}
 		\begin{itemize}
 			\item \textbf{router.METHOD()} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk mengatasi permintaan \textit{client} yang menggunakan salah satu \textit{method} milik protokol HTTP. Salah satu \textit{method} yang dipakai adalah \textit{.get()}. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method} .get()}]
-router.get('/', function(req, res, next) {
-	res.render('home', { title: 'Home Pages' });
-});
-\end{lstlisting}
-			Potongan kode tersebut menunjukan bahwa objek \textit{router} akan menjalankan perintah yang berada didalam fungsi tersebut apabila \textit{client} mengakses \textit{path '/'} menggunakan \textit{method .get()}.
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk mengatasi permintaan \textit{client} yang menggunakan salah satu \textit{method} milik protokol HTTP. Salah satu \textit{method} yang dipakai adalah \textit{get()}. Pada saat \textit{client} melakukan permintaan dengan menggunakan \textit{method get()}, \textit{router} akan digunakan untuk menangani permintaan tersebut dengan memanggil fungsi \textit{callback} yang telah ditentukan sebelumnya. 
+			
+%			 Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method} .get()}]
+%router.get('/', function(req, res, next) {
+%	res.render('home', { title: 'Home Pages' });
+%});
+%\end{lstlisting}
+%			Potongan kode tersebut menunjukan bahwa objek \textit{router} akan menjalankan perintah yang berada didalam fungsi tersebut apabila \textit{client} mengakses \textit{path '/'} menggunakan \textit{method .get()}.
 		\end{itemize}
 	\end{enumerate}
 	
@@ -480,39 +495,50 @@ router.get('/', function(req, res, next) {
 			\item \textbf{Server}
 			\begin{itemize}
 				\item \textbf{new Server(httpServer[, options])} \\
-				Pada pengembangan Finger For Life, konstruktor dari kelas ini dipakai untuk membuat \textit{server} Socket.io berdasarkan \textit{server} HTTP milik Node.js. Contoh implementasi dari konstruktor ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi konstruktor kelas \textit{Server}}]
-const http = require('http');
-const socketIO = require('Socket.io');
-const express = require('express');
-
-var app = express();
-var httpServer = http.createServer(app);
-var io = socketIO(httpServer);
-\end{lstlisting}
-				Bagian pertama potongan kode merupakan proses yang dilakukan untuk mendapatkan fungsi-fungsi yang tersedia dari masing-masing modul. Dengan melakukan proses tersebut, maka dapat dibuat variabel baru untuk melakukan proses inisialisasi yang dilakukan pada bagian kedua potongan kode.
-
-				Variabel \textit{app} menginisialisasi Express.js yang akan melakukan penanganan fungsi \textit{server}. Variabel tersebut akan disambungkan dengan HTTP \textit{server}, dengan menggunakan variabel \textit{server}. Setelah variabel \textit{httpServer} diinisialisasi, variabel \textit{io} dapat diintegrasikan dengan HTTP \textit{server} agar dapat menggunakan Socket.io sebagai \textit{server}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.
+				Pada pengembangan aplikasi Finger For Life, konstruktor dari kelas ini dipakai untuk membangun \textit{server} Socket.io yang diintegrasikan dengan \textit{server} HTTP milik Node.js. Proses tersebut dilakukan agar koneksi Socket.io dapat dibangun di dalam aplikasi Finger For Life. Apabila koneksi Socket.io telah dibangun maka koneksi antara \textit{smartphone} dan \textit{PC} dapat dilakukan.
+				
+%				Contoh implementasi dari konstruktor ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi konstruktor kelas \textit{Server}}]
+%const http = require('http');
+%const socketIO = require('Socket.io');
+%const express = require('express');
+%
+%var app = express();
+%var httpServer = http.createServer(app);
+%var io = socketIO(httpServer);
+%\end{lstlisting}
+%				Bagian pertama potongan kode merupakan proses yang dilakukan untuk mendapatkan fungsi-fungsi yang tersedia dari masing-masing modul. Dengan melakukan proses tersebut, maka dapat dibuat variabel baru untuk melakukan proses inisialisasi yang dilakukan pada bagian kedua potongan kode.
+%
+%				Variabel \textit{app} menginisialisasi Express.js yang akan melakukan penanganan fungsi \textit{server}. Variabel tersebut akan disambungkan dengan HTTP \textit{server}, dengan menggunakan variabel \textit{server}. Setelah variabel \textit{httpServer} diinisialisasi, variabel \textit{io} dapat diintegrasikan dengan HTTP \textit{server} agar dapat menggunakan Socket.io sebagai \textit{server}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.
 				
 			\end{itemize}
 		
 			\item \textbf{Namespace}
+			Beberapa \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut:
 			\begin{itemize}
 				\item \textbf{namespace.emit(eventName[, ...args])} \\
-				Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk memancarkan suatu \textit{event} apabila terjadi aksi yang dilakukan oleh \textit{client} maupun \textit{server}. Dengan menggunakan \textit{method} ini, \textit{event} akan dipancarkan ke seluruh \textit{client} yang terhubung kepada Socket.io. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method .emit()} }]
-io.emit('buttonClicked', 'Send this to every client');
-\end{lstlisting}
-
-				\textit{Method} tersebut akan memancarkan \textit{event} \textit{buttonClicked} kepada seluruh \textit{client}, dan mengirimkan pesan berupa teks yang bertuliskan \textit{Send this to every client}.
+				Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk memancarkan suatu \textit{event} apabila terjadi aksi yang dilakukan oleh \textit{client} maupun \textit{server}. Dengan menggunakan \textit{method} ini \textit{event} akan dipancarkan ke seluruh \textit{client} yang terhubung kepada Socket.io. 
+				
+				Komunikasi antara \textit{client} dan \textit{server} akan berjalan berdasarkan suatu \textit{event} yang dipancarkan. Oleh karena itu, \textit{method} ini dibutuhkan agar proses tersebut dapat ditangani.
+				
+%				Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method .emit()} }]
+%io.emit('buttonClicked', 'Send this to every client');
+%\end{lstlisting}
+%
+%				\textit{Method} tersebut akan memancarkan \textit{event} \textit{buttonClicked} kepada seluruh \textit{client}, dan mengirimkan pesan berupa teks yang bertuliskan \textit{Send this to every client}.
 				
 				\item \textbf{namespace.to(room)} \\
-				Pada pengembangan Finger For Life, \textit{method} ini akan digunakan untuk memancarkan suatu \textit{event} kepada \textit{client} yang hanya berada didalam \textit{room} tertentu. \textit{Client} yang tidak berada didalam \textit{room} tidak akan mendapatkan \textit{event} yang dipancarkan. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-
-\begin{lstlisting}[caption={Implementasi \textit{method .to()} }]
-io.to('928799').emit('requestAccepted', message);
-\end{lstlisting}
-				\textit{Method} ini akan memancarkan \textit{event} \textit{requestAccepted} kepada \textit{client} yang berada didalam \textit{room} \textit{928799}. \textit{Event} tersebut akan mengirimkan data yang direpresentasikan oleh parameter \textit{message}.
+				Pada pengembangan aplikasi Finger For Life, \textit{method} ini akan digunakan untuk memancarkan suatu \textit{event} kepada \textit{client} yang hanya berada didalam \textit{room} tertentu. \textit{Client} yang tidak berada didalam \textit{room} tidak dapat menangkap \textit{event} yang telah dipancarkan. 
+				
+				Pada saat aplikasi Finger For Life dijalankan, akan terdapat beberapa \textit{client} yang akan bermain. \textit{Client-client} tersebut akan dipisahkan berdasarkan \textit{room} yang berbeda-beda. \textit{Client} yang berada di satu \textit{room} tidak dapat melakukan komunikasi dengan \textit{client} yang ada di \textit{room} lain. Oleh karena itu, \textit{method} ini dibutuhkan di dalam proses implementasi untuk memenuhi kebutuhan tersebut.
+				
+%				Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%
+%\begin{lstlisting}[caption={Implementasi \textit{method .to()} }]
+%io.to('928799').emit('requestAccepted', message);
+%\end{lstlisting}
+%				\textit{Method} ini akan memancarkan \textit{event} \textit{requestAccepted} kepada \textit{client} yang berada didalam \textit{room} \textit{928799}. \textit{Event} tersebut akan mengirimkan data yang direpresentasikan oleh parameter \textit{message}.
 
 			\end{itemize}
 		
@@ -520,83 +546,97 @@ io.to('928799').emit('requestAccepted', message);
 			Beberapa properti yang dimiliki oleh kelas ini adalah sebagai berikut:
 			\begin{itemize}
 				\item \textbf{socket.id} \\
-				Pada pengembangan Finger For Life, properti ini berfungsi untuk mendapatkan identifikasi unik Socket.io milik setiap \textit{client} yang sudah melakukan koneksi dengan Socket.io. Contoh implementasi dari properti ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi properti \textit{socket.id} }]
-var socketID = socket.id
-\end{lstlisting}
-				Variabel ini akan mendapatkan identifikasi unik Socket.io yang dimiliki oleh \textit{client}. 
+				Pada pengembangan aplikasi Finger For Life, properti ini berfungsi untuk mendapatkan identifikasi unik Socket.io milik setiap \textit{client} yang sudah melakukan koneksi dengan Socket.io. Pada saat aplikasi dijalankan, \textit{client} dan \textit{server} akan berkomunikasi satu sama lain. \textit{Server} memerlukan tanda pengenal untuk dapat membedakan antara satu \textit{client} dengan yang lainnya. Oleh karena itu, properti ini dibutuhkan di dalam proses implementasi agar kebutuhan tersebut dapat ditangani.
+				
+%				Contoh implementasi dari properti ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi properti \textit{socket.id} }]
+%var socketID = socket.id
+%\end{lstlisting}
+%				Variabel ini akan mendapatkan identifikasi unik Socket.io yang dimiliki oleh \textit{client}. 
 				
 				\item \textbf{socket.room} \\
-				Pada pengembangan Finger For Life, properti ini digunakan untuk mengidentifikasi \textit{client} berdasarkan \textit{room} yang dimasukinya. Contoh implementasi dari properti ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi properti \textit{socket.room} }]
-var myRoom = socket.room
-\end{lstlisting}
-				Variabel ini akan mendapatkan nilai \textit{room} yang dimiliki oleh \textit{client}.
+				Pada pengembangan aplikasi Finger For Life, properti ini digunakan untuk mengidentifikasi \textit{client} berdasarkan \textit{room} yang dimasukinya. Pada saat aplikasi dijalankan, akan terdapat beberapa \textit{client} yang akan memainkan permainan. Seluruh \textit{client} akan berada di dalam \textit{room} yang berbeda-beda dan akan berkomunikasi dengan \textit{server}. Agar \textit{server} dapat membedakan satu \textit{client} yang berada di \textit{room} tertentu dengan \textit{room} yang lain maka properti ini dibutuhkan di dalam proses implementasi.
+				
+%				Contoh implementasi dari properti ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi properti \textit{socket.room} }]
+%var myRoom = socket.room
+%\end{lstlisting}
+%				Variabel ini akan mendapatkan nilai \textit{room} yang dimiliki oleh \textit{client}.
 
 			\end{itemize}
 		
 			Salah \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut:
 			\begin{itemize}
 				\item \textbf{socket.join(room[, callback])} \\
-				Pada pengembangan Finger For Life, \textit{method} ini berfungsi untuk menambahkan \textit{client} kedalam \textit{room} tertentu. Pada aplikasi web yang akan dibangun, permainan dapat dimainkan oleh beberapa \textit{client}. Untuk dapat membedakan pasangan-pasangan pemain yang sedang bermain, digunakan \textit{room} agar terbagi menjadi beberapa ruang dalam permainan. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method .join()} }]
-socket.join('room305');
-\end{lstlisting}
-				\textit{Method} ini akan menambahkan \textit{client} kedalam \textit{room305}, yang nantinya dapat diidentifikasi melalui properti \textit{socket.room}.
+				Pada pengembangan aplikasi Finger For Life, \textit{method} ini berfungsi untuk menambahkan \textit{client} kedalam \textit{room} tertentu. Pada aplikasi web yang akan dibangun, permainan dapat dimainkan oleh beberapa \textit{client}. Untuk dapat membedakan pasangan-pasangan pemain yang sedang bermain, \textit{room} digunakan agar terbagi menjadi beberapa ruang di dalam permainan. Dengan begitu, \textit{method} ini dibutuhkan agar kebutuhan tersebut dapat terpenuhi. 
+				
+%				Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method .join()} }]
+%socket.join('room305');
+%\end{lstlisting}
+%				\textit{Method} ini akan menambahkan \textit{client} kedalam \textit{room305}, yang nantinya dapat diidentifikasi melalui properti \textit{socket.room}.
 			\end{itemize}
 		\end{enumerate}
-	
 		
 		\item \textbf{Client API}
 		\begin{enumerate}
 			\item \textbf{IO}
 			\begin{itemize}
 				\item \textbf{io([url][, options])} \\
-				Pada pengembangan Finger For Life, \textit{method} ini digunakan agar \textit{client} dapat menggunakan fungsi-fungsi yang dimiliki oleh Socket.io. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi proses inisialisasi \textit{socket.io} pada \textit{client}}]
-var socket = io();
-\end{lstlisting}
-				Variabel ini akan menginisialisasi Socket.io \textit{client}, sehingga fungsi-fungsi yang tersedia dapat digunakan.
+				Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan agar \textit{client} dapat menggunakan fungsi-fungsi yang dimiliki oleh Socket.io. \textit{Method} ini dibutuhkan untuk proses inisialisasi Socket.io pada bagian \textit{client}.
+%				Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi proses inisialisasi \textit{socket.io} pada \textit{client}}]
+%var socket = io();
+%\end{lstlisting}
+%				Variabel ini akan menginisialisasi Socket.io \textit{client}, sehingga fungsi-fungsi yang tersedia dapat digunakan.
 			\end{itemize}
 		
 			\item \textbf{Socket}
 			\begin{itemize}
 				\item \textbf{socket.on(eventName, callback)} \\
-				Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menyediakan fungsi yang akan menangkap \textit{event} yang dipancarkan. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method .on()} pada \textit{client} }]
-socket.on('sendEvent', function(){
-	console.log('An event has been sent');
-});
-\end{lstlisting}
-\textit{Method} ini akan menyediakan fungsi yang akan menangani saat \textit{event sendEvent} dipancarkan. Fungsi tersebut akan menampilkan pesan \textit{An event has been sent}.
+				Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk menyediakan fungsi yang akan menangkap \textit{event} yang dipancarkan. Pada saat aplikasi dijalankan, komunikasi antara \textit{client} dan \textit{server} akan berjalan berdasarkan \textit{event} yang dipancarkan. Untuk dapat menangkap \textit{event-event} yang telah dipancarkan dibutuhkan suatu cara tertentu. Oleh karena itu, \textit{method} ini akan digunakan untuk memenuhi kebutuhan tersebut.
+				
+%				Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method .on()} pada \textit{client} }]
+%socket.on('sendEvent', function(){
+%	console.log('An event has been sent');
+%});
+%\end{lstlisting}
+%\textit{Method} ini akan menyediakan fungsi yang akan menangani saat \textit{event sendEvent} dipancarkan. Fungsi tersebut akan menampilkan pesan \textit{An event has been sent}.
 				
 				\item \textbf{socket.emit(eventName[, ..args][, ack])} \\
-				Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk memancarkan suatu \textit{event} kepada satu \textit{socket} saja. \textit{Event} hanya akan dipancarkan kepada \textit{server} Socket.io. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method emit()} pada \textit{client} }]
-socket.emit('sendMessage', 'It works.');
-\end{lstlisting}
-\textit{Method} ini akan memancarkan \textit{event sendMessage} dengan mengirimkan pesan \textit{It works}.
+				Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk memancarkan suatu \textit{event} kepada satu \textit{client} saja. \textit{Event} hanya akan dipancarkan kepada \textit{server} Socket.io. 
+				
+%				Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method emit()} pada \textit{client} }]
+%socket.emit('sendMessage', 'It works.');
+%\end{lstlisting}
+%\textit{Method} ini akan memancarkan \textit{event sendMessage} dengan mengirimkan pesan \textit{It works}.
 			\end{itemize}
 			
 			Beberapa \textit{event} yang dimiliki oleh kelas ini adalah sebagai berikut:
 			\begin{itemize}
 				\item \textbf{connect} \\
-				Pada pengembangan Finger For Life, \textit{event} ini berfungsi untuk menangani koneksi yang dilakukan oleh \textit{client} apabila sudah berhasil terhubung ke Socket.io. Contoh implementasi dari \textit{event} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{event connect} pada \textit{client} }]
-socket.on('connect', function(){
-	console.log('Connected to the server!');
-});
-\end{lstlisting}
-				\textit{Event} ini akan menampilkan suatu pesan berupa teks yang menunjukan sudah berhasil terkoneksi ke Socket.io, apabila \textit{client} telah melakukan koneksi ke Socket.io.
+				Pada pengembangan Finger For Life, \textit{event} ini berfungsi untuk menangani koneksi yang dilakukan oleh \textit{client} apabila sudah berhasil terhubung ke Socket.io. \textit{Event} ini akan ditangkap oleh \textit{client} dan akan mengeksekusi fungsi tertentu apabila koneksi kepada Socket.io telah terbangun. 
+				
+%				Contoh implementasi dari \textit{event} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{event connect} pada \textit{client} }]
+%socket.on('connect', function(){
+%	console.log('Connected to the server!');
+%});
+%\end{lstlisting}
+%				\textit{Event} ini akan menampilkan suatu pesan berupa teks yang menunjukan sudah berhasil terkoneksi ke Socket.io, apabila \textit{client} telah melakukan koneksi ke Socket.io.
 
 				\item \textbf{disconnect} \\
-				Pada pengembangan Finger For Life, \textit{event} ini digunakan untuk menangani koneksi Socket.io yang terputus. Contoh implementasi dari \textit{event} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{event disconnect} pada \textit{client} }]
-socket.on('disconnect', function(){
-	console.log('Disconnected from the server.');
-});
-\end{lstlisting}
-				\textit{Event} ini akan menampilkan suatu pesan berupa teks yang menunjukan koneksi yang terputus ke Socket.io.
+				Pada pengembangan Finger For Life, \textit{event} ini digunakan untuk menangani koneksi Socket.io yang terputus. \textit{Event} ini akan ditangkap oleh \textit{client} dan akan mengeksekusi fungsi tertentu apabila koneksi dengan Socket.io sudah terputus.
+				
+%				Contoh implementasi dari \textit{event} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{event disconnect} pada \textit{client} }]
+%socket.on('disconnect', function(){
+%	console.log('Disconnected from the server.');
+%});
+%\end{lstlisting}
+%				\textit{Event} ini akan menampilkan suatu pesan berupa teks yang menunjukan koneksi yang terputus ke Socket.io.
 
 			\end{itemize}
 		\end{enumerate}
@@ -607,57 +647,62 @@ socket.on('disconnect', function(){
 		\item \textbf{Animation}
 		\begin{itemize}
 			\item \textbf{setInterval(func, delay[, param1, param2, ...])} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menampilkan animasi dengan cara mengeksekusi fungsi yang ada selama waktu \textit{delay} yang telah ditentukan. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method setInterval()}}]
-setInterval(showCountDown, 1000);
-\end{lstlisting}
-\textit{Method} ini akan mengeksekusi \textit{method} \textit{showCountDown} selama waktu delay 1000 \textit{millisecond}.
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk menampilkan animasi dengan cara mengeksekusi fungsi yang ada di dalam parameter selama waktu \textit{delay} yang telah ditentukan oleh parameter \textit{delay}. Pada saat \textit{client} memainkan aplikasi permainan, layar \textit{PC} akan menampilkan hitungan mundur selama tiga detik. Proses tersebut membutuhkan \textit{method} ini agar dapat terpenuhi.  
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method setInterval()}}]
+%setInterval(showCountDown, 1000);
+%\end{lstlisting}
+%\textit{Method} ini akan mengeksekusi \textit{method} \textit{showCountDown} selama waktu delay 1000 \textit{millisecond}.
 			
 			\item \textbf{clearInterval(intervalID)} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk memberhentikan pengulangan eksekusi \textit{method} yang sedang dilakukan oleh \textit{method setInterval()}. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method clearInterval()}}]
-var timer = setInterval(showCountDown, 1000);
-
-clearInterval(timer);
-\end{lstlisting}
-			\textit{Method} ini akan mengakhiri pengulangan eksekusi variabel \textit{timer}, yang merupakan \textit{method setInterval()}.			
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk memberhentikan pengulangan eksekusi fungsi yang sedang dilakukan oleh \textit{method setInterval()}. Pada saat \textit{client} memainkan aplikasi permainan, layar \textit{PC} akan menampilkan hitungan mundur selama tiga detik. Untuk memberhentikan proses pengulangan selama tiga detik, maka dibutuhkan suatu cara tertentu. Oleh karena itu, \textit{method} ini dibutuhkan agar proses tersebut dapat terpenuhi.
+%			Pada saat aplikasi dijalankan, karakter akan bergerak setelah tombol pada \textit{smartphone} ditekan. Karakter tersebut akan berjalan selama beberapa waktu dengan menggunakan \textit{method setInterval()}. Agar karakter yang sedang bergerak berhenti maka dibutuhkan suatu cara tertentu. Oleh karena itu, \textit{method} ini digunakan agar proses tersebut dapat ditangani. 
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method clearInterval()}}]
+%var timer = setInterval(showCountDown, 1000);
+%
+%clearInterval(timer);
+%\end{lstlisting}
+%			\textit{Method} ini akan mengakhiri pengulangan eksekusi variabel \textit{timer}, yang merupakan \textit{method setInterval()}.			
 			
 			\item \textbf{requestAnimationFrame(callback)} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk melakukan animasi dengan interaksi dari pemain. Apabila pemain menekan tombol tertentu, maka \textit{method} ini akan dieksekusi untuk melakukan proses animasi pada permainan. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method requestAnimationFrame()}}]
-function readyPlayerOne(){
-ctx.globalCompositeOperation = 'destination-over';
-ctx.clearRect(0, 0, 900, 600);
-ctx.save();
-
-progressPlayer1 += 1;
-
-ctx.restore();
-ctx.drawImage(track, 0, 0);
-
-if (progressPlayer1 < 40) {
-	aniFrame = requestAnimationFrame(readyPlayerOne);
-}
-else {
-	progressPlayer1 = 0;
-}
-}
-\end{lstlisting}
-\textit{Method readyPlayerOne} digunakan untuk proses membuat animasi didalam permainan. Pada \textit{method} ini akan dilakukan pengecekan pada variabel \textit{progresPlayer1}, apabila masih bernilai kurang dari 40, maka \textit{method requestAnimationFrame()} masih akan dieksekusi.
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk melakukan animasi dengan interaksi dari pemain. Apabila pemain menekan tombol yang ada pada \textit{smartphone}, maka \textit{method} ini akan dieksekusi untuk melakukan proses animasi pada permainan. Pada saat aplikasi dijalankan, \textit{client} akan menggerakan karakter yang ada di layar \textit{PC} dengan menggunakan \textit{smartphone}. Karakter tersebut membutuhkan suatu cara agar dapat bergerak melalui lintasan lari yang ada di layar \textit{PC}. Oleh karena itu, \textit{method} ini dibutuhkan agar proses tersebut dapat ditangani. 
+			
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method requestAnimationFrame()}}]
+%function readyPlayerOne(){
+%ctx.globalCompositeOperation = 'destination-over';
+%ctx.clearRect(0, 0, 900, 600);
+%ctx.save();
+%
+%progressPlayer1 += 1;
+%
+%ctx.restore();
+%ctx.drawImage(track, 0, 0);
+%
+%if (progressPlayer1 < 40) {
+%	aniFrame = requestAnimationFrame(readyPlayerOne);
+%}
+%else {
+%	progressPlayer1 = 0;
+%}
+%}
+%\end{lstlisting}
+%\textit{Method readyPlayerOne} digunakan untuk proses membuat animasi didalam permainan. Pada \textit{method} ini akan dilakukan pengecekan pada variabel \textit{progresPlayer1}, apabila masih bernilai kurang dari 40, maka \textit{method requestAnimationFrame()} masih akan dieksekusi.
 		\end{itemize}
 		
 		\item \textbf{canvasRenderingContext2D} \\
 		Beberapa properti yang dimiliki oleh kelas ini adalah sebagai berikut:
 		\begin{itemize}
 			\item \textbf{CanvasRenderingContext2D.globalCompositeOperation} \\
-			Pada pengembangan Finger For Life, properti ini digunakan untuk membuat animasi, dengan cara menimpa gambar sebelumnya dengan gambar baru. Salah satu properti yang digunakan dalam proses implementasi adalah sebagai berikut:
+			Pada pengembangan aplikasi Finger For Life, properti ini digunakan untuk membuat animasi dengan cara menaruh gambar yang baru dibelakang gambar yang sudah ada sebelumnya. Salah satu properti yang digunakan dalam proses implementasi adalah sebagai berikut:
 			\begin{itemize}
 				\item \textbf{destination-over} \\
-				Contoh implementasi dari \textit{properti} ini adalah sebagai berikut:
-				
-\begin{lstlisting}[caption={Implementasi properti \textit{globalCompositeOperation}}]
-ctx.globalCompositeOperation = 'destination-over';
-\end{lstlisting}
+%				Contoh implementasi dari \textit{properti} ini adalah sebagai berikut:
+%				
+%\begin{lstlisting}[caption={Implementasi properti \textit{globalCompositeOperation}}]
+%ctx.globalCompositeOperation = 'destination-over';
+%\end{lstlisting}
 Properti ini akan menetapkan nilai \textit{globalCompositeOperation} menjadi \textit{destination-over}. Nilai tersebut akan memberikan efek seperti berikut:
 
 \begin{figure}[H]
@@ -672,98 +717,110 @@ Properti ini akan menetapkan nilai \textit{globalCompositeOperation} menjadi \te
 		Beberapa \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut:
 		\begin{itemize}
 			\item \textbf{CanvasRenderingContext2D.clearRect(x, y, width, height)} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menghilangkan gambar tertentu dari layar dengan tujuan untuk menampilkan gambar baru kelayar. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method clearRect()}}]
-ctx.clearRect(0, 0, 900, 600);
-\end{lstlisting}
-\textit{Method} ini akan menghilangkan seluruh isi dari \textit{rectangle} pada \textit{canvas}, yang dimulai dari posisi (0,0), dengan lebar 600, dan panjang 900.			
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk menghilangkan gambar tertentu dari layar dengan tujuan untuk menampilkan gambar baru kelayar. Pada saat permainan dimainkan dibutuhkan cara agar karakter yang ada di layar \textit{PC} bergerak melalui lintasan lari. Proses tersebut dilakukan dengan cara menghapus gambar lama dan menggambar gambar yang sama di layar dengan posisi yang berbeda secara berulang kali. Oleh karena itu, \textit{method} ini dibutuhkan agar proses tersebut dapat terpenuhi.
+			
+%			 Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method clearRect()}}]
+%ctx.clearRect(0, 0, 900, 600);
+%\end{lstlisting}
+%\textit{Method} ini akan menghilangkan seluruh isi dari \textit{rectangle} pada \textit{canvas}, yang dimulai dari posisi (0,0), dengan lebar 600, dan panjang 900.			
 			
 			\item \textbf{CanvasRenderingContext2D.drawImage(image, dx, dy)} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menggambar suatu grafis yang dibutuhkan didalam pengembangan aplikasi. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method drawImage()}}]
-ctx.drawImage(image, 100, 100);
-\end{lstlisting}
-\textit{Method} ini akan menggambar variabel \textit{image} pada posisi (100,100).
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk menggambar suatu grafis yang dibutuhkan di dalam pengembangan aplikasi. Pada saat permainan dimainkan dibutuhkan cara untuk menampilkan karakter serta elemen grafis lainnya yang dibutuhkan ke layar \textit{PC}. Proses tersebut bertujuan untuk menunjukan interaksi yang sedang dilakukan oleh \textit{client} saat memainkan aplikasi permainan. Oleh karena itu, \textit{method} ini dibutuhkan agar proses tersebut terpenuhi.
+			
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method drawImage()}}]
+%ctx.drawImage(image, 100, 100);
+%\end{lstlisting}
+%\textit{Method} ini akan menggambar variabel \textit{image} pada posisi (100,100).
 
 			\item \textbf{CanvasRenderingContext2D.save()} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk menyimpan \textit{state} dari \textit{canvas} saat ini, sebelum \textit{state} tersebut dihilangkan untuk menaruh gambar yang baru. Tujuan dari proses ini adalah untuk membuat animasi pada permainan. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting} [caption={Implementasi \textit{method save()}}]
-ctx.save();
-\end{lstlisting}	
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk menyimpan \textit{state} dari \textit{canvas} saat ini, sebelum \textit{state} tersebut dihilangkan untuk menaruh gambar yang baru. Tujuan dari proses ini adalah untuk membuat animasi pada permainan. 
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting} [caption={Implementasi \textit{method save()}}]
+%ctx.save();
+%\end{lstlisting}	
 
 			\item \textbf{CanvasRenderingContext2D.restore()} \\
-			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk mengembalikan \textit{state} dari \textit{canvas} saat ini menjadi \textit{state} sebelumnya. \textit{Method} ini digunakan didalam proses animasi permainan. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method save()}}]
-ctx.restore();
-\end{lstlisting}
+			Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk mengembalikan \textit{state} dari \textit{canvas} saat ini menjadi \textit{state} sebelumnya. \textit{Method} ini digunakan didalam proses animasi permainan. 
+%			Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method save()}}]
+%ctx.restore();
+%\end{lstlisting}
 		\end{itemize}
 	\end{enumerate}
 	
 	\item \textbf{jQuery} 
 	\begin{enumerate}
 		\item \textbf{submit(handler)} \\
-		Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk mengirimkan data kode \textit{room} yang sudah diisi oleh pengguna kedalam kolom. \textit{Method} ini akan digunakan pada tahap permintaan bergabung bagi pengguna. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method .submit()}}]
-$('form').submit(function(e){
-	e.preventDefault();
-	socket.emit('requestToJoin', {
-		id: socket.id,
-		room: $('#code').val()
-	});
-});
-\end{lstlisting}
-\textit{Method} ini akan mengambil elemen \textit{form} dari berkas HTML, untuk mengambil data yang telah diisi oleh pengguna yang kemudian dikirimkan ke \textit{server}. Pada saat pengguna \textit{smartphone} menekan tombol \textit{send} pada layar, maka \textit{method} ini akan dieksekusi.
+		Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk mengirimkan data kode \textit{room} yang sudah diisi oleh pengguna kedalam kolom. \textit{Method} ini akan digunakan pada tahap permintaan bergabung bagi pengguna. 
+%		Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method .submit()}}]
+%$('form').submit(function(e){
+%	e.preventDefault();
+%	socket.emit('requestToJoin', {
+%		id: socket.id,
+%		room: $('#code').val()
+%	});
+%});
+%\end{lstlisting}
+%\textit{Method} ini akan mengambil elemen \textit{form} dari berkas HTML, untuk mengambil data yang telah diisi oleh pengguna yang kemudian dikirimkan ke \textit{server}. Pada saat pengguna \textit{smartphone} menekan tombol \textit{send} pada layar, maka \textit{method} ini akan dieksekusi.
 		
 		\item \textbf{val()} \\
-		Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk mengambil nilai dari data yang telah diisi oleh pengguna kedalam kolom. \textit{Method} ini akan digunakan pada tahap permintaan bergabung bagi pengguna. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method val()}}]
-var code = $('#code').val()
-\end{lstlisting}
-		\textit{Method} ini akan mengakses elemen HTML dengan \textit{id code}, kemudia mengambil data yang ada didalamnya untuk disimpan ke variabel \textit{code}.
+		Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk mengambil nilai dari data yang telah diisi oleh pengguna kedalam kolom. \textit{Method} ini akan digunakan pada tahap permintaan bergabung bagi pengguna. 
+%		Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method val()}}]
+%var code = $('#code').val()
+%\end{lstlisting}
+%		\textit{Method} ini akan mengakses elemen HTML dengan \textit{id code}, kemudia mengambil data yang ada didalamnya untuk disimpan ke variabel \textit{code}.
 		
 		\item \textbf{html()} \\
-		Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk mengambil seluruh isi dari elemen HTML. \textit{Method} ini digunakan pada proses menampilkan seluruh halaman yang tersedia pada aplikasi web yang akan dibangun. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:		
-\begin{lstlisting}[caption={Implementasi \textit{method .html()}}]
-var charMobileHtml = $("#charMobile").html();
-\end{lstlisting}
-		\textit{Method} ini akan mengakses elemen HTML yang memiliki \textit{id charMobile}, yang kemudian akan mengambil seluruh isi dari elemen tersebut untuk disimpan ke variabel \textit{charMobileHtml}.
+		Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk mengambil seluruh isi dari elemen HTML. \textit{Method} ini digunakan pada proses menampilkan seluruh halaman yang tersedia pada aplikasi web yang akan dibangun. 
+%		Contoh implementasi dari \textit{method} ini adalah sebagai berikut:		
+%\begin{lstlisting}[caption={Implementasi \textit{method .html()}}]
+%var charMobileHtml = $("#charMobile").html();
+%\end{lstlisting}
+%		\textit{Method} ini akan mengakses elemen HTML yang memiliki \textit{id charMobile}, yang kemudian akan mengambil seluruh isi dari elemen tersebut untuk disimpan ke variabel \textit{charMobileHtml}.
 		
 		\item \textbf{preventDefault()} \\
-		Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk mencegah aksi \textit{default} yang akan dilakukan \textit{method submit()}, pada saat mengirim \textit{form} ke \textit{server}. \textit{Method} ini dieksekusi pada saat pengguna mengirimkan data kode \textit{room} untuk melakukan proses permintaan bergabung. Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi \textit{method preventDefault()}}]
-$('form').submit(function(e){
-	e.preventDefault();
-});
-\end{lstlisting}
-		\textit{Method} ini akan mengakses elemen \textit{form} dari HTML, dan mencegah aksi \textit{default} dari \textit{method submit()} dilakukan. Aksi \textit{default} yang dilakukan adalah melakukan \textit{reload} pada halaman web.
+		Pada pengembangan aplikasi Finger For Life, \textit{method} ini digunakan untuk mencegah aksi \textit{default} yang akan dilakukan \textit{method submit()}, pada saat mengirim \textit{form} ke \textit{server}. Aksi \textit{default} tersebut adalah melakukan \textit{reload} pada halaman web setelah mengirimkan data \textit{form} ke \textit{server}. \textit{Method} ini dieksekusi pada saat pengguna mengirimkan data kode \textit{room} untuk melakukan proses permintaan bergabung. 
+%		Contoh implementasi dari \textit{method} ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi \textit{method preventDefault()}}]
+%$('form').submit(function(e){
+%	e.preventDefault();
+%});
+%\end{lstlisting}
+%		\textit{Method} ini akan mengakses elemen \textit{form} dari HTML, dan mencegah aksi \textit{default} dari \textit{method submit()} dilakukan. Aksi \textit{default} yang dilakukan adalah melakukan \textit{reload} pada halaman web.
 	\end{enumerate}
 	
-	\item \textbf{The Content Template element} \\
-	Pada pengembangan Finger For Life, <template> digunakan untuk menyimpan seluruh halaman-halaman yang diperlukan untuk pengembangan aplikasi permainan berbasis web ini. Pada proses implementasi, terdapat banyak <template> yang menyimpan halaman web yang berbeda-beda. Contoh implementasi dari elemen ini adalah sebagai berikut:
-\begin{lstlisting}[caption={Implementasi elemen <template>}]
-<template id="homePage">
-<div class="titleContainer">
-<div class="leftFing">
-<img src="images/finga.png" id="leftFingImg">
-</div>
+	\item \textbf{HTML Content Template (<template>)} \\
+	Pada pengembangan aplikasi Finger For Life, <template> digunakan untuk menyimpan seluruh halaman-halaman yang diperlukan untuk pengembangan aplikasi permainan berbasis web. Pada proses implementasi, terdapat banyak <template> yang menyimpan halaman web yang berbeda-beda. Proses menyimpan beberapa halaman web dengan menggunakan elemen <template> bertujuan untuk mencegah terjadinya perpindahan berkas HTML pada saat perpindahan halaman di layar \textit{PC}. Hal tersebut akan menyebabkan koneksi Socket.io terputus. Oleh karena itu, elemen <template> dibutuhkan untuk memenuhi kebutuhan tersebut.
 	
-<div class="wordContainer">
-<div class="word">
-<p>FINGER <br> FOR <br> LIFE</p>
-</div>
-	
-<button id="startButton" onclick="startClicked()">START</button>
-<button id="joinButton" onclick="joinClicked()">JOIN</button>
-	
-</div>
-	
-<div class="rightFing">
-<img src="images/finga.png" id="rightFingImg">
-</div>
-</div>
-</template>
-\end{lstlisting}
-Elemen ini memiliki \textit{id} dengan nama \textit{homePage}, dimana elemen ini dapat diakses dengan menggunakan jQuery, apabila perlu ditampilkan kelayar pengguna.
+%	Contoh implementasi dari elemen ini adalah sebagai berikut:
+%\begin{lstlisting}[caption={Implementasi elemen <template>}]
+%<template id="homePage">
+%<div class="titleContainer">
+%<div class="leftFing">
+%<img src="images/finga.png" id="leftFingImg">
+%</div>
+%	
+%<div class="wordContainer">
+%<div class="word">
+%<p>FINGER <br> FOR <br> LIFE</p>
+%</div>
+%	
+%<button id="startButton" onclick="startClicked()">START</button>
+%<button id="joinButton" onclick="joinClicked()">JOIN</button>
+%	
+%</div>
+%	
+%<div class="rightFing">
+%<img src="images/finga.png" id="rightFingImg">
+%</div>
+%</div>
+%</template>
+%\end{lstlisting}
+%Elemen ini memiliki \textit{id} dengan nama \textit{homePage}, dimana elemen ini dapat diakses dengan menggunakan jQuery, apabila perlu ditampilkan kelayar pengguna.
 
 \end{enumerate}
 
@@ -900,19 +957,7 @@ Berdasarkan hasil analisis pada subbab \ref{sec:alur}, akan dibentuk empat \text
 \end{enumerate}
 
 
-\section{Analisis Arsitektur Finger For Life}
-Arsitektur Finger For Life dapat dilihat pada Gambar \ref{fig:ars_fingerforlife} . Jumlah \textit{Client} dalam permainan ini adalah tiga. \textit{Client} tersebut antara lain \textit{host}, \textit{player 1}, dan \textit{player 2}. Apabila \textit{player 1} akan mengirimkan data untuk diproses oleh \textit{host}, maka data tersebut akan dikirimkan terlebih dahulu kepada \textit{server}, kemudian dilanjutkan kepada \textit{host}.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.45]{Gambar/ars_fingerforlife}
-	\caption{Arsitektur Finger For Life}
-	\label{fig:ars_fingerforlife}
-\end{figure}
-
-Komunikasi antara \textit{client} dengan \textit{client} tidak dapat dilakukan secara langsung. Komunikasi tersebut harus melewati \textit{server} terlebih dahulu. 
-
-Finger For Life dibangun diatas Node.js. Seluruh berkas serta direktori yang dibutuhkan untuk membangun aplikasi permainan ini diatur dengan menggunakan Express.js. Proses pengiriman dan penerimaan data secara \textit{realtime} dilakukan menggunakan Socket.io. Dalam permainan ini, animasi akan dilakukan dengan menggunakan Canvas API. Seluruh proses memodifikasi elemen HTML akan dilakukan dengan menggunakan jQuery. Halaman-halaman yang dibutuhkan untuk ditampilkan kelayar akan diatur dengan menggunakan The Content Template element.
 
 \section{Analisis Socket.io}
 Pada pengembangan Finger For Life digunakan banyak fitur yang telah disediakan oleh Socket.io. Teknologi ini digunakan untuk proses sinkronisasi antara \textit{smartphone} dengan \textit{PC} dan komunikasi secara \textit{real-time} antara \textit{client} dan \textit{server}. Seperti yang sudah dijelaskan pada subbab \ref{sec:alur}, ada beberapa tahap yang harus dilakukan sebelum dapat memainkan aplikasi permainan berbasis web ini. Tahap tersebut banyak menggunakan pustaka Socket.io dalam proses implementasinya.
