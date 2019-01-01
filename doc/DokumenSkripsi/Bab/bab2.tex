@@ -383,52 +383,48 @@ Express.js adalah suatu \textit{framework} untuk membangun aplikasi web yang ber
 
 \begin{itemize}
 	\item \textbf{Middleware} \\ 
-	\textit{Middleware} adalah fungsi yang memiliki akses terhadap seluruh permintaan dari \textit{client}, yang dapat memodifikasi permintaan tersebut sebelum mengirimkan respon kembali kepada \textit{client}. Fungsi \textit{middleware} bertugas untuk melakukan beberapa hal sebagai berikut:
+	\textit{Middleware} adalah fungsi yang memiliki akses terhadap seluruh permintaan dari \textit{client}, yang dapat memodifikasi permintaan tersebut sebelum mengirimkan respon kembali kepada \textit{client}. Beberapa hal yang dapat dilakukan oleh \textit{middleware} adalah sebagai berikut:
 	\begin{itemize}
-		\item Mengeksekusi perintah kode yang ada didalam fungsi.
+		\item Mengeksekusi perintah kode yang ada di dalam fungsi.
 		\item Memodifikasi objek \textit{request} yang didapat dari \textit{client} dan \textit{response} yang akan diberikan kepada \textit{client}.
-		\item Mengakhiri siklus \textit{request-response}, yang artinya sudah tidak akan ada lagi permintaan dari \textit{client} dan respon dari \textit{server}.
-		\item Memanggil fungsi \textit{next()}, dimana fungsi tersebut akan memanggil fungsi \textit{middleware} selanjutnya yang ada didalam program.
+		\item Mengakhiri siklus \textit{request-response} yang artinya sudah tidak akan ada lagi permintaan dari \textit{client} dan respon dari \textit{server}.
+		\item Memanggil fungsi \textit{next()} dimana fungsi tersebut akan memanggil fungsi \textit{middleware} selanjutnya yang ada di dalam program.
 	\end{itemize}
-
-	Contoh bentuk fungsi \textit{middleware} akan dijelaskan sebagai berikut:
-\begin{lstlisting}[caption={Contoh fungsi \textit{middleware}}, label={lst:contohMiddleware}, captionpos=b]
-var express = require('express');
-var app = express();
-
-app.get('/', function(req, res, next){
-	next();
-})
-\end{lstlisting}
-
-	\textit{Middleware} adalah fungsi yang memiliki parameter \textit{req, res}, dan \textit{next}. Bagian-bagian parameter akan dijelaskan sebagai berikut:
-	\begin{itemize}
-		\item \textbf{req}, argumen yang merepresentasikan \textit{request} HTTP. Argumen ini dinamakan \textit{req} berdasarkan konvensi.
-		
-		\item \textbf{res}, argumen yang merepresentasikan \textit{response} HTTP. Argumen ini dinamakan \textit{res} berdasarkan konvensi.
-		
-		\item \textbf{next}, argumen \textit{callback} yang akan dieksekusi berdasarkan kondisi tertentu yang dapat ditentukan. \textit{Callback} adalah fungsi yang berperan sebagai argumen pada parameter fungsi lain. Argumen ini dinamakan \textit{next} berdasarkan konvensi.
-	\end{itemize}
-	
+%	Contoh bentuk fungsi \textit{middleware} akan dijelaskan sebagai berikut:
+%\begin{lstlisting}[caption={Contoh fungsi \textit{middleware}}, label={lst:contohMiddleware}, captionpos=b]
+%var express = require('express');
+%var app = express();
+%
+%app.get('/', function(req, res, next){
+%	next();
+%})
+%\end{lstlisting}
+%	\textit{Middleware} adalah fungsi yang memiliki parameter \textit{req, res}, dan \textit{next}. Bagian-bagian parameter akan dijelaskan sebagai berikut:
+%	\begin{itemize}
+%		\item \textbf{req}, argumen yang merepresentasikan \textit{request} HTTP. Argumen ini dinamakan \textit{req} berdasarkan konvensi.
+%		
+%		\item \textbf{res}, argumen yang merepresentasikan \textit{response} HTTP. Argumen ini dinamakan \textit{res} berdasarkan konvensi.
+%		
+%		\item \textbf{next}, argumen \textit{callback} yang akan dieksekusi berdasarkan kondisi tertentu yang dapat ditentukan. \textit{Callback} adalah fungsi yang berperan sebagai argumen pada parameter fungsi lain. Argumen ini dinamakan \textit{next} berdasarkan konvensi.
+%	\end{itemize}
 	\item \textbf{Routing} \\
-	\textit{Routing} adalah proses yang menentukan bagaimana suatu aplikasi akan memberikan respon pada saat \textit{client} mengakses \textit{URI} milik aplikasi. Proses ini dapat dilakukan dengan menggunakan \textit{method} milik kelas \textit{Application} \ref{subsec:application} yang sesuai dengan \textit{method} dari protokol HTTP. Berikut merupakan contoh penggunaan proses \textit{routing}:
-	
-	\begin{lstlisting}[caption={Contoh penggunaan proses \textit{routing}}, label={lst:routingEx}, captionpos=b]
-		var express = require('express');
-		var app = express();
-		
-		app.get('/', function(req, res){
-			res.send('GET request to the homepage');
-		});
-		
-		app.post('/', function(req, res){
-			res.send('POST request to the homepage');
-		});
-	\end{lstlisting}
-	
-	Proses \textit{routing} dilakukan pada saat ada permintaan dari \textit{client} yang menggunakan \textit{method} \textit{GET} dan \textit{POST}. Apabila menggunakan \textit{GET}, maka \textit{server} akan memberi respon dengan menampilkan teks \textit{'GET request to the homepage'}. Apabila menggunakan \textit{POST}, maka \textit{server} akan memberi respon dengan menampilkan teks \textit{'POST request to the homepage'}.
-	
-	Dengan adanya proses \textit{routing}, maka aplikasi dapat menentukan respon yang sesuai dengan permintaan yang dilakukan oleh \textit{client}.
+	\textit{Routing} adalah proses yang menentukan bagaimana suatu aplikasi akan memberikan respon pada saat \textit{client} mengakses \textit{URI(Unifor Resource Identifier)} milik aplikasi. Proses ini dapat dilakukan dengan menggunakan \textit{method} milik kelas \textit{Application} yang sesuai dengan \textit{method} dari protokol HTTP. Dengan adanya proses \textit{routing} maka aplikasi dapat menentukan respon yang sesuai dengan permintaan yang dilakukan oleh \textit{client}.
+%	Berikut merupakan contoh penggunaan proses \textit{routing}:
+%	
+%	\begin{lstlisting}[caption={Contoh penggunaan proses \textit{routing}}, label={lst:routingEx}, captionpos=b]
+%		var express = require('express');
+%		var app = express();
+%		
+%		app.get('/', function(req, res){
+%			res.send('GET request to the homepage');
+%		});
+%		
+%		app.post('/', function(req, res){
+%			res.send('POST request to the homepage');
+%		});
+%	\end{lstlisting}
+%	
+%	Proses \textit{routing} dilakukan pada saat ada permintaan dari \textit{client} yang menggunakan \textit{method} \textit{GET} dan \textit{POST}. Apabila menggunakan \textit{GET}, maka \textit{server} akan memberi respon dengan menampilkan teks \textit{'GET request to the homepage'}. Apabila menggunakan \textit{POST}, maka \textit{server} akan memberi respon dengan menampilkan teks \textit{'POST request to the homepage'}.
 \end{itemize}
 
 Subbab-subbab berikut akan menjelaskan kelas-kelas yang terdapat pada Express.js
@@ -471,13 +467,13 @@ Beberapa \textit{method} yang dimiliki oleh kelas \textit{express()} adalah seba
 	\item \textbf{express.Router([options])} \\
 	\textbf{Parameter:}
 	\begin{itemize}
-		\item \textbf{options} merupakan parameter pilihan yang akan menentukan perilaku dari \textit{server} pada saat diakses oleh \textit{client}. Parameter dapat berupa objek sebagai berikut:
+		\item \textbf{options} merupakan parameter pilihan yang akan menentukan perilaku dari \textit{server} pada saat diakses oleh \textit{client}. Parameter dapat berupa objek berikut ini:
 		\begin{itemize}
 			\item \textbf{caseSensitive} membedakan huruf besar dan huruf kecil.
 		\end{itemize}
 	\end{itemize}
 
-	\textit{Method} ini akan membuat objek \textit{router} \ref{subsec:router} yang dapat digunakan untuk menangani permintaan dari \textit{client} pada saat \textit{client} mengakses \textit{URI} tertentu.
+	\textit{Method} ini akan membuat objek \textit{router} yang dapat digunakan untuk menangani permintaan dari \textit{client} pada saat \textit{client} mengakses \textit{URI} tertentu.
 	 
 	
 \end{itemize}
@@ -638,7 +634,7 @@ Kelas ini memiliki beberapa \textit{method} sebagai berikut:
 %\end{itemize}
 
 \subsection{Response}
-Sebuah objek dari kelas \textit{Response} akan merepresentasikan respon HTTP yang dikirim oleh Express pada saat menerima permintaan HTTP. Didalam pengembangan aplikasi web, objek dari kelas \textit{Response} cenderung direpresentasikan dengan variabel \textit{res}.
+Objek dari kelas \textit{Response} akan merepresentasikan respon HTTP yang dikirim oleh Express pada saat menerima permintaan HTTP. Didalam pengembangan aplikasi web objek dari kelas \textit{Response} direpresentasikan dengan variabel \textit{res} berdasarkan konvensi.
 
 %Salah satu properti yang dimiliki oleh kelas ini adalah sebagai berikut:
 %
@@ -646,9 +642,7 @@ Sebuah objek dari kelas \textit{Response} akan merepresentasikan respon HTTP yan
 %	\item \textbf{res.locals} \\
 %	Objek yang berisi variabel lokal milik kelas \textit{Response} yang berada dalam lingkup suatu permintaan tertentu. Objek ini hanya tersedia selama siklus \textit{request-response} sedang berjalan.
 %\end{itemize}
-
 Salah satu \textit{method} yang terdapat pada kelas \textit{Response} adalah sebagai berikut : 
-
 \begin{itemize}
 %	\item \textbf{res.send([body])} \\ \textbf{Parameter:} \textit{body} dapat berupa berbagai jenis objek seperti \textit{Buffer}, \textit{String}, dan \textit{Array}.
 %	
@@ -742,7 +736,7 @@ Salah satu \textit{method} yang terdapat pada kelas \textit{Response} adalah seb
 \subsection{Router}
 \label{subsec:router}
 
-\textit{Router} adalah kelas yang memiliki suatu objek yang dapat mengatur bagaimana \textit{URI (Uniform Resource Identifier)}, yang merupakan alamat suatu aplikasi melakukan respon pada saat \textit{client} mengakses \textit{URI} tersebut. Proses tersebut dapat disebut sebagai \textit{routing}.
+\textit{Router} adalah kelas yang memiliki suatu objek yang dapat mengatur bagaimana \textit{URI (Uniform Resource Identifier)}, yang merupakan alamat suatu aplikasi melakukan respon pada saat \textit{client} mengakses \textit{URI} tersebut. Proses tersebut disebut sebagai \textit{routing}.
 
 Proses \textit{routing} akan menentukan fungsi \textit{callback} yang akan menangani permintaan dari \textit{client}. Fungsi tersebut akan dipanggil saat ada permintaan dari \textit{client} atau ada pemanggilan dari suatu \textit{method} milik HTTP. Dengan kata lain, suatu aplikasi akan selalu melakukan proses \textit{listen}, yang berarti menunggu apabila ada permintaan dari \textit{client} yang kemudian dicocokan dengan \textit{route} yang sesuai. Apabila permintaan \textit{client} dengan \textit{route} yang ada telah cocok, maka fungsi \textit{callback} yang telah ditetapkan akan dieksekusi.
 
@@ -750,9 +744,9 @@ Salah satu \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut:
 
 \begin{itemize}
 	\item \textbf{router.METHOD()} \\
-	\textit{Method} ini akan menyediakan fungsionalitas proses \textit{routing} pada aplikasi Express. \textit{METHOD} merupakan fungsi-fungsi yang merepresentasikan permintaan HTTP, seperti \textit{GET} dan \textit{POST}. Contoh penggunaan dari \textit{method} tersebut adalah sebagai berikut:
+	\textit{Method} ini menyediakan fungsionalitas proses \textit{routing} pada aplikasi Express. \textit{METHOD} merupakan fungsi-fungsi yang merepresentasikan permintaan HTTP, seperti \textit{GET} dan \textit{POST}. Contoh penggunaan dari \textit{method} tersebut dapat dilihat pada Listing \ref{lst:routerMethod}.
 	
-	\begin{lstlisting}[caption={Contoh penggunaan \textit{method .get()} dan \textit{post}}, label={lst:routerMethod}, captionpos=b]
+	\begin{lstlisting}[caption={Contoh penggunaan \textit{method get()} dan \textit{post()}}, label={lst:routerMethod}, captionpos=b]
 		var express = require('express');
 		var router = express.Router();
 		
@@ -1006,21 +1000,22 @@ Salah satu \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut:
 \section{Socket.io}
 \label{sec:Socket.io}
 
-Socket.io adalah teknologi yang memungkinkan sebuah aplikasi untuk melakukan komunikasi dua arah secara \textit{real-time} \cite{damien:11:socketiodocs}. Socket.io dapat berjalan di setiap \textit{platform, browser}, dan gawai.
+Socket.io adalah pustaka yang memungkinkan sebuah aplikasi untuk melakukan komunikasi dua arah secara \textit{real-time} \cite{damien:11:socketiodocs}. Socket.io dapat berjalan di setiap \textit{platform, browser}, dan gawai.
 
-Teknologi Socket.io memanfaatkan teknologi \textit{socket} dalam proses implementasinya. \textit{Socket} merupakan suatu \textit{endpoint} didalam hubungan komunikasi dua arah antara dua program yang berjalan didalam jaringan tertentu.\textit{Endpoint} adalah suatu entitas yang merupakan titik akhir dari suatu komunikasi, dimana entitas tersebut terdiri dari kombinasi alamat \textit{IP (Internet Protocol)} dan nomor \textit{port}. \textit{Socket} akan terikat dengan nomor \textit{port} agar \textit{TCP (Transmission Control Protocol)}, yang mengatur koneksi internet, dapat mengidentifikasi suatu aplikasi untuk data yang akan dikirimkan.
+Teknologi Socket.io memanfaatkan konsep \textit{socket} dalam proses implementasinya. \textit{Socket} merupakan suatu \textit{endpoint} di dalam hubungan komunikasi dua arah antara dua program yang berjalan didalam jaringan tertentu.\textit{Endpoint} adalah suatu entitas yang merupakan titik akhir dari suatu komunikasi, dimana entitas tersebut terdiri dari kombinasi alamat \textit{IP (Internet Protocol)} dan nomor \textit{port}. \textit{Socket} akan terikat dengan nomor \textit{port} agar \textit{TCP (Transmission Control Protocol)}, yang mengatur koneksi internet, dapat mengidentifikasi suatu aplikasi untuk data yang akan dikirimkan.
 
-Sebelum dapat menggunakan Socket.io, Node.js harus sudah tersedia pada sistem komputer. Apabila hal tersebut sudah dilakukan, maka proses \textit{install} Socket.io dapat dilakukan dengan menggunakan \textit{command line tools} atau sejenisnya. Langkah tersebut adalah sebagai berikut:
-\begin{lstlisting}[caption={install Socket.io}, label={lst:installSocketio}, captionpos=b]
-npm install socket.io
-\end{lstlisting}
-
-Dengan melakukan proses tersebut, aplikasi yang akan dibuat sudah dapat mengakses fitur-fitur yang dimiliki oleh Socket.io.
+Sebelum dapat menggunakan Socket.io, Node.js dan NPM (Node Package Manager) harus sudah tersedia pada komputer. Apabila hal tersebut sudah dilakukan maka proses instalasi Socket.io dapat dilakukan dengan menggunakan \textit{command line tools} atau sejenisnya. 
+%Langkah tersebut adalah sebagai berikut:
+%\begin{lstlisting}[caption={instalasi Socket.io}, label={lst:installSocketio}, captionpos=b]
+%npm install socket.io
+%\end{lstlisting}
+%
+%Dengan melakukan proses tersebut, aplikasi yang akan dibuat sudah dapat mengakses fitur-fitur yang dimiliki oleh Socket.io.
 
 Socket.io dibagi menjadi dua \textit{API}, yaitu \textit{Server API} dan \textit{Client API}. Subbab-subbab berikut akan menjelaskan dua \textit{API} yang dimiliki oleh Socket.io
 
 \subsection{Server API}
-Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi didalam \textit{server}. Berikut akan dijelaskan kelas-kelas yang dimiliki oleh \textit{Server API}.
+Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses yang terjadi didalam \textit{server}. Berikut adalah kelas-kelas yang dimiliki oleh \textit{Server API}:
 
 \begin{enumerate}
 	\item \textbf{Server} \\ 
@@ -1163,10 +1158,10 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 			\item \textbf{server.listen(port[, options])} \\
 			\textbf{Parameter:} 
 			\begin{itemize}
-				\item \textbf{port} \\tipe: \textbf{Integer} \\ Nomor yang akan digunakan untuk melakukan koneksi kepada \textit{server}.
+				\item \textbf{port} \\tipe: \textbf{Integer} \\ Nomor port yang akan digunakan untuk melakukan koneksi kepada \textit{server}.
 				\item \textbf{options} \\tipe: \textbf{Object} \\ Parameter ini dapat berupa berbagai jenis objek. Salah satu objek yang dapat dimasukan adalah sebagai berikut:
 				\begin{itemize}
-					\item \textbf{serveClient}, parameter ini memiliki tipe \textit{boolean}, dengan nilai \textit{default} yaitu \textit{true}.
+					\item \textbf{serveClient}, parameter ini memiliki tipe \textit{boolean}, dengan nilai \textit{default} yaitu \textit{true}. Hal tersebut berarti \textit{server} akan melayani permintaan dari \textit{client}.
 				\end{itemize}
 			\end{itemize}
 			\textit{Method} ini akan melakukan koneksi kepada \textit{server} dengan menuju nilai \textit{port} yang terdapat pada parameter.
@@ -1213,7 +1208,9 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 		\end{itemize}
 
 	\item \textbf{Namespace} \\ 
-	Kelas ini merepresentasikan kumpulan \textit{socket} yang terkoneksi satu sama lain didalam lingkup yang diidentifikasi oleh nama \textit{path}. \textit{Namespace} merupakan suatu \textit{endpoint} atau \textit{path} yang ditetapkan kepada suatu \textit{socket} tertentu. \textit{Client} akan selalu terhubung ke \textit{/}, yang merupakan \textit{namespace} utama, kemudian dapat terhubung ke \textit{namespace} lain saat berada dalam koneksi yang sama (contoh: \textit{/chat}).
+	Kelas ini merepresentasikan kumpulan \textit{socket} yang terkoneksi satu sama lain di dalam lingkup yang diidentifikasi oleh nama \textit{path}. \textit{Namespace} merupakan suatu \textit{endpoint} atau \textit{path} yang ditetapkan kepada suatu \textit{socket} tertentu. 
+	
+	\textit{Client} akan selalu terhubung ke \textit{/}, yang merupakan \textit{namespace} utama, kemudian dapat terhubung ke \textit{namespace} lain saat berada dalam koneksi yang sama (contoh: \textit{/chat}).
 	
 %	Beberapa properti yang dimiliki oleh kelas ini yaitu sebagai berikut:
 %	\begin{itemize}
@@ -1239,7 +1236,7 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 %\end{lstlisting}
 		
 		\item \textbf{namespace.to(room)} \\ 
-		Berfungsi untuk memancarkan \textit{event} hanya kepada \textit{client} yang berada didalam \textit{room} tertentu. \\ 
+		Berfungsi untuk memancarkan \textit{event} hanya kepada \textit{client} yang berada di dalam \textit{room} tertentu. \\ 
 		\textbf{Parameter:}
 		\begin{itemize}
 			\item \textbf{room} \\tipe: \textbf{String} \\ kode suatu \textit{room} milik beberapa \textit{client} yang terkoneksi ke Socket.io.
@@ -1282,14 +1279,14 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 	\begin{itemize}
 		\item \textbf{socket.id} \\ Tanda pengenal unik milik \textit{client} yang terkoneksi ke Socket.io. 
 %		untuk sesi saat ini, yang didapatkan dari kelas \textit{Client}.
-		\item \textbf{socket.rooms} \\ Suatu \textit{String} yang menjadi identifikasi dimana \textit{client} berada didalamnya.
+		\item \textbf{socket.rooms} \\ Suatu \textit{String} yang menjadi identitas \textit{room} yang dapat menampung beberapa \textit{client}.
 %		Objek yang menandakan \textit{room} dari \textit{client} saat ini.
 	\end{itemize}
 
 	Salah satu \textit{method} yang dimiliki oleh kelas ini adalah sebagai berikut:
 	\begin{itemize}
 		\item \textbf{socket.join(room[, callback])} \\
-		Berfungsi untuk menambah \textit{client} kedalam \textit{room}. \\
+		Berfungsi untuk menambah \textit{client} ke dalam \textit{room}. \\
 		\textbf{Parameter:}
 		\begin{itemize}
 			\item \textbf{room} \\tipe: \textbf{String} \\ Nama \textit{room} yang dapat memasukan beberapa \textit{client}.
@@ -1337,12 +1334,12 @@ Kelas-kelas yang ada pada \textit{Server API} digunakan untuk menangani proses y
 \end{enumerate}
 
 \subsection{Client API}
-\textit{Client API} digunakan untuk menangani proses pengaturan koneksi yang terjadi pada bagian \textit{client}. Agar dapat menggunakan fitur-fitur yang tersedia, \textit{client} harus menambahkan \textit{URL} pada JavaScript didalam HTML yang bersangkutan. Hal tersebut dapat dilakukan seperti berikut:
-
-\begin{lstlisting}[caption={Mengakses fitur Socket.io untuk \textit{client}}, label={lst:socketioClient}, captionpos=b]
-	<script src="/socket.io/socket.io.js"></script>
-\end{lstlisting}
-
+\textit{Client API} digunakan untuk menangani proses pengaturan koneksi yang terjadi pada bagian \textit{client}. Agar dapat menggunakan fitur-fitur yang tersedia, \textit{client} harus menambahkan \textit{URL} pada JavaScript di dalam HTML yang bersangkutan. Proses implementasi \textit{URL} akan dilakukan dengan menggunakan salah satu kelas yang ada di dalam \textit{Client API}.
+%Hal tersebut dapat dilakukan seperti berikut:
+%
+%\begin{lstlisting}[caption={Mengakses fitur Socket.io untuk \textit{client}}, label={lst:socketioClient}, captionpos=b]
+%	<script src="/socket.io/socket.io.js"></script>
+%\end{lstlisting}
 Kelas-kelas yang ada pada \textit{Client API} adalah sebagai berikut:
 \begin{enumerate}
 	\item \textbf{IO} \\
@@ -1419,9 +1416,8 @@ Dengan melakukan langkah tersebut, maka bagian \textit{client} akan dapat mengak
 	Kelas ini digunakan untuk membuat objek \textit{Socket} yang akan digunakan untuk melakukan koneksi ke Socket.io pada bagian \textit{client}.
 	
 	Salah satu properti yang dimiliki oleh kelas ini adalah:
-	
 	\begin{itemize}
-		\item \textbf{socket.id} \\ Identifikasi unik yang dimiliki oleh satu \textit{client} untuk satu sesi. Properti ini akan mempunyai nilai segera setelah koneksi terhubung, dan akan diperbarui setelah melakukan koneksi ulang.
+		\item \textbf{socket.id} \\ Identifikasi unik yang dimiliki oleh satu \textit{client} untuk satu sesi. Properti ini akan mempunyai nilai segera setelah koneksi terhubung dan akan diperbarui setelah melakukan koneksi ulang.
 	\end{itemize}
 	
 	Beberapa \textit{method} yang dimiliki oleh kelas ini adalah:
@@ -1446,7 +1442,7 @@ Dengan melakukan langkah tersebut, maka bagian \textit{client} akan dapat mengak
 		\item \textbf{eventName}, nama \textit{event} yang dipancarkan.
 		\item \textbf{callback}, fungsi yang akan menangani \textit{event} yang dipancarkan.
 	\end{itemize}
-	\textit{Method} ini akan menangkap \textit{event} yang dipancarkan oleh \textit{server}, yang kemudian akan mengeksekusi fungsi \textit{callback} untuk melakukan perintah tertentu.
+	\textit{Method} ini akan menangkap \textit{event} yang dipancarkan oleh \textit{server} yang kemudian akan mengeksekusi fungsi \textit{callback} untuk melakukan perintah tertentu.
 	
 	\item \textbf{socket.emit(eventName[, ..args][, ack])} \\  
 	\textbf{Parameter:}
@@ -1475,25 +1471,22 @@ Dengan melakukan langkah tersebut, maka bagian \textit{client} akan dapat mengak
  
 Canvas API merupakan salah satu elemen HTML5 yang digunakan untuk membuat gambar grafis dalam aplikasi web \cite{moz:04:canvasapi}. Teknologi ini memiliki fitur untuk membuat komposisi foto dan membuat animasi. Untuk dapat menggunakan fitur-fitur yang ada pada Canvas API, langkah yang harus dilakukan adalah sebagai berikut:
 \begin{enumerate}
-	\item Menambahkan \textit{tag <canvas>} pada berkas HTML, dan menambahkan \textit{id} yang akan digunakan pada berkas JavaScript.
-\begin{lstlisting}[caption={\textit{tag} \textit{Canvas API} pada JavaScript}, label={lst:canvasTag}, captionpos=b]
-<canvas id="canvas"></canvas>
-\end{lstlisting}
+	\item Menambahkan \textit{tag <canvas>} pada berkas HTML, dan menambahkan \textit{id} pada elemen \textit{canvas} tersebut yang akan digunakan pada berkas JavaScript.
+%\begin{lstlisting}[caption={\textit{tag} \textit{Canvas API} pada JavaScript}, label={lst:canvasTag}, captionpos=b]
+%<canvas id="canvas"></canvas>
+%\end{lstlisting}
 	
-	\item Membuat variabel untuk mendapatkan konteks \textit{rendering} yang berguna untuk memodifikasi elemen didalam \textit{canvas} dan fungsi-fungsi menggambar agar dapat menampilkan sesuatu pada \textit{<canvas>}.
-\begin{lstlisting}[caption={Membuat objek \textit{canvas}}, label={lst:canvasObjek}, captionpos=b]
-// Variabel yang akan menampilkan sesuatu 
-// pada <canvas> dengan id='canvas'
-var canvas = document.getElementById('canvas'); 
-	
-// Variabel yang akan mendapatkan fungsi-fungsi menggambar 
-var ctx = canvas.getContext('2d');
-\end{lstlisting}
+	\item Membuat variabel untuk mendapatkan konteks \textit{rendering} yang berguna untuk memodifikasi elemen di dalam \textit{canvas} dan fungsi-fungsi menggambar agar dapat menampilkan sesuatu pada \textit{<canvas>}.
+%\begin{lstlisting}[caption={Membuat objek \textit{canvas}}, label={lst:canvasObjek}, captionpos=b]
+%// Variabel yang akan menampilkan sesuatu 
+%// pada <canvas> dengan id='canvas'
+%var canvas = document.getElementById('canvas'); 
+%	
+%// Variabel yang akan mendapatkan fungsi-fungsi menggambar 
+%var ctx = canvas.getContext('2d');
+%\end{lstlisting}
 \end{enumerate}
-
-Dengan melakukan langkah-langkah tersebut, maka fungsi-fungsi yang dimiliki Canvas API dapat digunakan.
-
-Subbab-subbab berikut akan menjelaskan tentang beberapa elemen yang tersedia didalam Canvas API.
+Subbab-subbab berikut akan menjelaskan tentang beberapa elemen yang tersedia di dalam Canvas API.
 
 %\subsection{HTMLCanvasElement}
 %\textit{Interface} ini menyediakan beberapa properti dan \textit{method} untuk memanipulasi tata letak dan tampilan dari elemen \textit{canvas}.
@@ -1769,26 +1762,24 @@ Subbab-subbab berikut akan menjelaskan tentang beberapa elemen yang tersedia did
 %\end{enumerate}
 
 \subsection{Animation}
-Dengan menggunakan JavaScript untuk mengontrol elemen \textit{<canvas>}, hal tersebut akan sangat membantu dalam membuat animasi yang interaktif. Subbab ini akan membahas tentang pembuatan animasi didalam Canvas API.
+Penggunaan JavaScript untuk mengontrol elemen \textit{<canvas>} membantu dalam membuat animasi yang interaktif. Subbab ini akan membahas tentang pembuatan animasi didalam Canvas API.
 
 \textbf{Langkah Dasar Animasi}
 
-Ada beberapa langkah yang dibutuhkan untuk menggambar suatu \textit{frame}.
+Ada beberapa langkah yang dibutuhkan untuk menggambar suatu \textit{frame}. Langkah-langkah tersebut akan dijelaskan sebagai berikut:
 
 \begin{enumerate}
 	\item \textbf{Menghapus isi \textit{canvas}} \\
-	Untuk memulai animasi, langkah pertama yang harus dilakukan adalah menghapus seluruh elemen yang berada di dalam \textit{canvas}. Langkah tersebut dilakukan untuk menghilangkan bentuk atau elemen lain yang sudah digambar sebelumnya didalam \textit{canvas}, sehingga dapat menggambar suatu \textit{frame}, yang merupakan tempat dimana animasi akan berlangsung.
+	Untuk memulai animasi, langkah pertama yang harus dilakukan adalah menghapus seluruh elemen yang berada di dalam \textit{canvas}. Langkah tersebut dilakukan untuk menghilangkan bentuk atau elemen lain yang sudah digambar sebelumnya di dalam \textit{canvas}. Dengan begitu suatu \textit{frame} yang merupakan tempat dimana animasi akan berlangsung dapat digambar.
 	
 	\item \textbf{Menyimpan \textit{state} milik \textit{canvas}} \\
-	\textit{State} adalah kondisi saat ini dari objek \textit{canvas}. Apabila akan dilakukan perubahan seperti merubah warna bentuk, transformasi bentuk, atau hal lainnya yang akan menyebabkan perubahan pada \textit{state} dari \textit{canvas}, maka \textit{state} harus disimpan setiap ada perubahan.
+	\textit{State} adalah kondisi saat ini dari objek \textit{canvas}. Apabila akan dilakukan perubahan seperti merubah warna bentuk, transformasi bentuk, atau hal lainnya yang akan menyebabkan perubahan pada \textit{state} dari \textit{canvas} maka \textit{state} harus disimpan setiap ada perubahan.
 	
 	\item \textbf{Menggambar elemen untuk animasi} \\
-	Pada langkah ini, elemen yang akan diproses untuk animasi akan digambar kedalam \textit{canvas}. Elemen yang digambar dapat berupa bentuk bangunan, gambar, maupun tulisan.
+	Pada langkah ini, elemen yang akan diproses untuk animasi akan digambar ke dalam \textit{canvas}. Elemen yang digambar dapat berupa bentuk dasar geometri, gambar, maupun tulisan.
 	
 	\item \textbf{Mengembalikan \textit{state} dari \textit{canvas}} \\
-	Beberapa \textit{state} dari \textit{canvas} yang sudah disimpan, harus dikembalikan seluruhnya agar kembali ke \textit{state} pertama sebelum ada perubahan apapun. Hal tersebut dilakukan sebelum menggambar \textit{frame} baru untuk proses animasi selanjutnya. Proses animasi akan diulang kembali mulai dari langkah pertama.
-	
-	
+	Beberapa \textit{state} dari \textit{canvas} yang sudah disimpan, harus dikembalikan seluruhnya agar kembali ke \textit{state} pertama sebelum ada perubahan apapun. Hal tersebut dilakukan sebelum menggambar \textit{frame} baru untuk proses animasi selanjutnya. Setelah seluruh \textit{state} yang disimpan sudah dikembalikan maka proses animasi akan diulang kembali mulai dari langkah pertama.
 	
 %	\item \textit{Clear the canvas} \\
 %	Gambar atau bentuk yang berada dalam \textit{canvas} pada \textit{state} sebelumnya harus dihapus terlebih dahulu. Cara yang paling mudah untuk melakukan hal tersebut adalah menggunakan \textit{method} \textit{clearRect()}.
@@ -1802,26 +1793,24 @@ Ada beberapa langkah yang dibutuhkan untuk menggambar suatu \textit{frame}.
 %	\item \textit{Restore the canvas state} \\
 %	Apabila kondisi \textit{canvas} telah disimpan sebelumnya, maka kondisi tersebut harus dikembalikan lagi sebelum menggambar \textit{frame} baru.
 \end{enumerate}
-
-Untuk dapat melihat suatu gambar atau bentuk yang bergerak didalam \textit{canvas}, diperlukan cara menjalankan fungsi menggambar selama periode waktu tertentu. Berikut merupakan beberapa cara yang dapat dilakukan:
+Untuk dapat melihat suatu gambar atau bentuk yang bergerak di dalam \textit{canvas} diperlukan cara menjalankan fungsi menggambar dengan periode waktu tertentu. Cara tersebut dilakukan dengan menggunakan beberapa \textit{method} yang telah disediakan oleh Canvas API. Berikut merupakan beberapa \textit{method} yang tersedia:
 
 \begin{itemize}
 	\item \textbf{setInterval(func, delay[, param1, param2, ...])} \\
 	\textbf{Parameter:}
 	\begin{itemize}
 		\item \textbf{func} \\
-		Suatu fungsi yang akan dieksekusi setiap penundaan milidetik.
+		Suatu fungsi yang akan dieksekusi setiap satuan jumlah milidetik yang telah ditentukan sebelumnya.
 		
 		\item \textbf{delay} \\
 		Waktu dalam milidetik. 
 %		\textit{Timer} akan melakukan \textit{delay} diantara waktu selama menjalankan fungsi tertentu.
-		
 		\item \textbf{param1,...,paramN} \\
 		Parameter tambahan untuk fungsi apabila waktu telah habis.
 	\end{itemize}
 	
 	\textbf{Kembalian:} \\ 
-	\textbf{intervalID} identifikasi unik milik suatu interval.
+	\textbf{intervalID} identitas unik milik suatu interval.
 
 	\textit{Method} ini akan memanggil suatu fungsi atau mengeksekusi kode tertentu selama rentang waktu yang telah ditentukan. Pemanggilan fungsi atau eksekusi kode dilakukan dengan penundaan selama waktu \textit{delay} tertentu.
 	
@@ -1831,7 +1820,7 @@ Untuk dapat melihat suatu gambar atau bentuk yang bergerak didalam \textit{canva
 		\item \textbf{intervalID} identifikasi milik suatu interval yang akan diberhentikan.
 	\end{itemize}
 
-	\textit{Method} ini akan memberhentikan suatu fungsi yang berjalan berulang-ulang selama rentang waktu tertentu, yang dipanggil oleh \textit{method} \textit{setInterval()}.
+	\textit{Method} ini akan menghentikan suatu fungsi yang berjalan berulang-ulang setiap rentang waktu tertentu yang dipanggil oleh \textit{method} \textit{setInterval()}.
 	
 	
 	\item \textbf{requestAnimationFrame(callback)} \\
@@ -1841,18 +1830,19 @@ Untuk dapat melihat suatu gambar atau bentuk yang bergerak didalam \textit{canva
 		Fungsi yang akan dipanggil saat harus memperbarui animasi dan menggambar \textit{frame} selanjutnya.
 	\end{itemize}
 
-	\textit{Method} ini akan memberitahu \textit{browser} bahwa akan dilakukan suatu animasi, dan melakukan permintaan kepada \textit{browser} untuk memanggil fungsi tertentu untuk memperbarui animasi sebelum melakukan gambar ulang selanjutnya.
+	\textit{Method} ini akan memberitahu \textit{browser} bahwa akan dilakukan suatu animasi dan melakukan permintaan kepada \textit{browser} untuk memanggil fungsi tertentu. Proses tersebut dilakukan untuk memperbarui animasi sebelum melakukan gambar ulang selanjutnya.
 \end{itemize} 
 
 
 \subsection{canvasRenderingContext2D} 
 
-\textit{canvasRenderingContext2D} adalah {interface} yang digunakan untuk menggambar persegi panjang, teks, gambar, dan objek-objek lain kedalam elemen \textit{canvas}. \textit{CanvasRenderingContext2D} menyediakan konteks \textit{2D rendering} untuk suatu elemen \textit{<canvas>}, yang berguna untuk memodifikasi objek dua dimensi didalam \textit{canvas}. Untuk mendapatkan objek dari \textit{interface} ini, harus memanggil \textit{getContext()} didalam elemen \textit{<canvas>}, dengan memberi \textit{'2d'} sebagai argumen. Berikut merupakan contoh penggunaannya:
+\textit{canvasRenderingContext2D} adalah {interface} yang digunakan untuk menggambar persegi panjang, teks, gambar, dan objek-objek lain kedalam elemen \textit{canvas}. \textit{CanvasRenderingContext2D} menyediakan konteks \textit{2D rendering} untuk suatu elemen \textit{<canvas>}, yang berguna untuk menggambar objek dua dimensi di dalam \textit{canvas}. Untuk mendapatkan objek dari \textit{interface} ini \textit{method} \textit{getContext()} harus dipanggil di dalam elemen \textit{<canvas>} kemudian memberi \textit{'2d'} sebagai argumen. 
 
-\begin{lstlisting}[caption={mendapatkan konteks \textit{canvas}}]
-var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d');
-\end{lstlisting}
+%Berikut merupakan contoh penggunaannya:
+%\begin{lstlisting}[caption={mendapatkan konteks \textit{canvas}}]
+%var canvas = document.getElementById('myCanvas');
+%var ctx = canvas.getContext('2d');
+%\end{lstlisting}
 
 Salah satu properti yang dimiliki oleh \textit{interface} ini adalah:
 \begin{itemize}
@@ -1894,7 +1884,7 @@ Beberapa \textit{method} yang dimiliki oleh \textit{interface} ini adalah sebaga
 	\item \textbf{CanvasRenderingContext2D.drawImage(image, dx, dy)} \\
 	\textbf{Parameter:}
 	\begin{itemize}
-		\item \textbf{image} elemen yang akan digambar kedalam \textit{context} tertentu.
+		\item \textbf{image} elemen yang akan digambar ke dalam \textit{context} tertentu.
 		\item \textbf{dx} koordinat \textit{x} pada \textit{canvas} untuk menempatkan \textit{image} di pojok kiri atas.
 		\item \textbf{dy} koordinat \textit{y} pada \textit{canvas} untuk menempatkan \textit{image} di pojok kiri atas.
 	\end{itemize}
@@ -1902,10 +1892,11 @@ Beberapa \textit{method} yang dimiliki oleh \textit{interface} ini adalah sebaga
 	\textit{Method} ini akan menyediakan cara untuk menggambar suatu elemen \textit{image} atau gambar pada \textit{canvas}.
 	
 	\item \textbf{CanvasRenderingContext2D.save()} \\ 
-	\textit{Method} ini akan menyimpan seluruh \textit{state} dari \textit{canvas} dengan menaruh \textit{state} tersebut kedalam suatu \textit{stack} yang sudah diatur didalam elemen \textit{<canvas>}. Proses ini dilakukan apabila telah terjadi perubahan bentuk atau komposisi yang menyebabkan \textit{state} dari \textit{canvas} berubah, sehingga \textit{state} sebelumnya tetap akan tersimpan.
+	\textit{Method} ini akan menyimpan seluruh \textit{state} dari \textit{canvas} dengan menaruh \textit{state} tersebut ke dalam suatu \textit{stack} yang sudah diatur di dalam elemen \textit{<canvas>}. Proses ini dilakukan apabila telah terjadi perubahan bentuk atau komposisi yang menyebabkan \textit{state} dari \textit{canvas} berubah, sehingga \textit{state} sebelumnya tetap akan tersimpan.
 	
 	\item \textbf{CanvasRenderingContext2D.restore()} \\
-	\textit{Method} ini akan mengembalikan \textit{state} yang baru saja disimpan saat menggunakan \textit{method save()} dengan mengeluarkannya dari tumpukan paling atas suatu \textit{stack}. Apabila \textit{stack} tersebut kosong, maka \textit{method} ini tidak melakukan apapun.
+	\textit{Method} ini akan mengembalikan \textit{state} yang baru saja disimpan saat menggunakan \textit{method save()}.
+%	 dengan mengeluarkannya dari tumpukan paling atas suatu \textit{stack}. Apabila \textit{stack} tersebut kosong, maka \textit{method} ini tidak melakukan apapun.
 \end{itemize}
 
 \section{jQuery}
@@ -1920,7 +1911,7 @@ Subbab-subbab berikut akan menjelaskan beberapa \textit{method} yang dimiliki ol
 \begin{itemize}
 	\item \textbf{handler}, Fungsi yang akan dieksekusi setiap suatu \textit{event} dipancarkan.
 \end{itemize}
-\textit{Method} ini akan menyambungkan fungsi yang mengatasi suatu \textit{event} yang memiliki nama \textit{"submit"} yang merupakan \textit{event} dari JavaScript, atau memancarkan \textit{event} tersebut kepada elemen tertentu. 
+\textit{Method} ini menyambungkan fungsi yang mengatasi suatu \textit{event} yang memiliki nama \textit{"submit"} yang merupakan \textit{event} dari JavaScript, atau memancarkan \textit{event} tersebut kepada elemen tertentu. 
 
 %Berikut merupakan contoh penggunaan dari \textit{method} ini:
 %
@@ -1940,11 +1931,11 @@ Subbab-subbab berikut akan menjelaskan beberapa \textit{method} yang dimiliki ol
 
 \subsection{.val()}
 \textbf{Kembalian:} \textit{String, Number, Array}. \\
-\textit{Method} ini akan mendapatkan nilai dari elemen-elemen \textit{form} seperti \textbf{input}, \textit{select}, dan \textit{textarea}. \\
+\textit{Method} ini berguna untuk mendapatkan nilai dari elemen-elemen \textit{form} seperti \textbf{input}, \textit{select}, dan \textit{textarea}. \\
 
 \subsection{.html()}
 \textbf{Kembalian:} \textit{String} \\
-\textit{Method} ini akan mendapatkan konten HTML dari elemen pertama yang ada didalam kumpulan elemen-elemen yang sesuai.
+\textit{Method} ini akan mendapatkan konten HTML dari elemen pertama yang ada di dalam kumpulan elemen-elemen yang sesuai.
 
 \subsection{.preventDefault()}
 Apabila \textit{method} ini dieksekusi, maka aksi \textit{default} dari suatu \textit{event} tidak akan dieksekusi. Aksi \textit{default} yang dilakukan adalah melakukan \textit{reload} pada halaman web.
@@ -1954,42 +1945,57 @@ Apabila \textit{method} ini dieksekusi, maka aksi \textit{default} dari suatu \t
 
 HTML Content Template (<template>) adalah suatu mekanisme untuk menyimpan konten milik \textit{client} agar konten tersebut tidak ditampilkan pada saat memuat halaman \cite{moz:05:template}. Konten tersebut dapat dipakai pada saat web dijalankan dengan menggunakan JavaScript. 
 
-Berikut merupakan contoh penggunaan dari elemen <template>:
+Pada saat proses pengembangan web, seluruh elemen yang ada di dalam HTML akan ditampilkan ke layar \textit{browser}. Apabila di dalam HTML terdapat \textit{tag} <template>, dimana \textit{tag} tersebut berisi kumpulan elemen tertentu seperti \textit{form}, gambar, maupun video maka seluruh elemen tersebut tidak akan ditampilkan ke layar \textit{browser}. 
 
-\begin{lstlisting}[caption={Contoh penggunaan elemen <template>}]
-<html>
-<head>
-<title>Home</title>
-</head>
-<body>
-<p>Hello World!</p>
+Hal tersebut terjadi karena \textit{tag} <template> akan menyimpan isi elemen di dalam HTML. Untuk dapat menampilkan seluruh isi konten yang ada pada \textit{tag} <template> maka dibutuhkan JavaScript. Berikut akan dijelaskan beberapa langkah agar dapat menampilkan isi konten dari \textit{tag} <template> ke layar \textit{browser}.
 
-<template id="stage">
+\begin{itemize}
+	\item \textit{Tag} <template> yang berada di dalam berkas HTML harus diberi nama \textit{id} tertentu.
+	
+	\item Di dalam JavaScript harus terdapat variabel yang mendapatkan seluruh elemen berkas HTML yang berisi \textit{tag} <template>. Proses tersebut memerlukan jQuery di dalam proses implementasinya.
+	
+	\item Pada JavaScript harus terdapat variabel yang mendapatkan seluruh isi konten milik \textit{tag} <template> dengan nama \textit{id} tertentu.
+	
+	\item Untuk dapat menampilkan seluruh isi konten dari <template> yang telah disimpan di variabel tertentu maka diperlukan jQuery dalam proses implementasinya.
+\end{itemize}
 
-</template>
 
-<template id="home_page">
-<p>Hello from template element!</p>
-</template>
-
-</body>
-</html>
-\end{lstlisting}
-
-Apabila halaman HTML ini dimuat, maka yang akan ditunjukan dihalaman adalah teks \textit{"Hello World!"}. Seluruh elemen yang ada didalam elemen <template> tidak akan ditampilkan dihalaman web. Agar seluruh isi dari elemen <template> ditampilkan, maka diperlukan JavaScript. Berikut merupakan contoh kode JavaScript untuk memuat elemen <template>.
-
-\begin{lstlisting}[caption={Memuat elemen <template>}]
-<script>
-// variabel yang menyimpan elemen dari <template> stage
-var bg = $("#stage");
-
-// variable ini menyimpan seluruh isi dari template home_page
-var home = $("#home_page").html();
-
-// variable bg akan memuat template dari home_page
-bg.html(home);
-
-</script>
-\end{lstlisting}
-Agar dapat menampilkan konten yang berada didalam <template>, maka \textit{method .html()} milik jQuery akan digunakan. \textit{Method} tersebut digunakan pada bagian \textit{bg.html(home)}, dimana \textit{method} tersebut akan memuat seluruh isi variabel \textit{home}.
+%Berikut merupakan contoh penggunaan dari elemen <template>:
+%
+%\begin{lstlisting}[caption={Contoh penggunaan elemen <template>}]
+%<html>
+%<head>
+%<title>Home</title>
+%</head>
+%<body>
+%<p>Hello World!</p>
+%
+%<template id="stage">
+%
+%</template>
+%
+%<template id="home_page">
+%<p>Hello from template element!</p>
+%</template>
+%
+%</body>
+%</html>
+%\end{lstlisting}
+%
+%Apabila halaman HTML ini dimuat, maka yang akan ditunjukan dihalaman adalah teks \textit{"Hello World!"}. Seluruh elemen yang ada didalam elemen <template> tidak akan ditampilkan dihalaman web. Agar seluruh isi dari elemen <template> ditampilkan, maka diperlukan JavaScript. Berikut merupakan contoh kode JavaScript untuk memuat elemen <template>.
+%
+%\begin{lstlisting}[caption={Memuat elemen <template>}]
+%<script>
+%// variabel yang menyimpan elemen dari <template> stage
+%var bg = $("#stage");
+%
+%// variable ini menyimpan seluruh isi dari template home_page
+%var home = $("#home_page").html();
+%
+%// variable bg akan memuat template dari home_page
+%bg.html(home);
+%
+%</script>
+%\end{lstlisting}
+%Agar dapat menampilkan konten yang berada didalam <template>, maka \textit{method .html()} milik jQuery akan digunakan. \textit{Method} tersebut digunakan pada bagian \textit{bg.html(home)}, dimana \textit{method} tersebut akan memuat seluruh isi variabel \textit{home}.
 
