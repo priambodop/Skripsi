@@ -3,6 +3,20 @@
 
 Pada bab ini akan dijelaskan mengenai analisis aplikasi sejenis, analisis alur permainan Finger For Life, analisis pengembangan web, analisis \textit{use case}, analisis arsitektur Finger For Life, dan analisis Socket.io.
 
+\section{Analisis Arsitektur Aplikasi Finger For Life}
+Web yang akan dikembangkan merupakan aplikasi permainan berbasis web yang bernama Finger For Life. Arsitektur aplikasi Finger For Life dapat dilihat pada Gambar \ref{fig:ars_fingerforlife} . Jumlah \textit{client} dalam permainan ini adalah tiga. \textit{Client} tersebut adalah \textit{host}, \textit{player 1}, dan \textit{player 2}. \textit{Host} merupakan \textit{PC} yang berfungsi sebagai penyedia permainan yang dapat dimainkan oleh kedua pemain. Apabila \textit{player 1} akan mengirimkan data untuk diproses oleh \textit{host}, maka data tersebut akan dikirimkan terlebih dahulu kepada \textit{server}, kemudian dilanjutkan kepada \textit{host}. Proses tersebut dilakukan juga oleh \textit{player 2} apabila akan mengirimkan data kepada \textit{host}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{Gambar/ars_fingerforlife}
+	\caption{Arsitektur Finger For Life}
+	\label{fig:ars_fingerforlife}
+\end{figure}
+
+Komunikasi antara \textit{client} dengan \textit{client} tidak dapat dilakukan secara langsung. Komunikasi tersebut harus melewati \textit{server} terlebih dahulu. 
+
+Aplikasi Finger For Life dibangun berdasarkan Node.js. Seluruh berkas serta direktori yang dibutuhkan untuk membangun aplikasi permainan ini diatur dengan menggunakan Express.js. Proses pengiriman dan penerimaan data secara \textit{realtime} dilakukan menggunakan Socket.io. Dalam permainan ini, animasi akan dilakukan dengan menggunakan Canvas API. Seluruh proses modifikasi elemen HTML akan dilakukan dengan menggunakan jQuery. Halaman-halaman yang dibutuhkan untuk ditampilkan kelayar akan diatur dengan menggunakan HTML Content Template (<template>).
+
 \section{Analisis Aplikasi Sejenis}
 \label{sec:AirConsole}
 
@@ -20,7 +34,7 @@ Analisis dilakukan dengan cara berikut:
 	\item Keluar dari \textit{browser} pada \textit{PC} pada saat permainan berlangsung.
 	\item Keluar dari \textit{browser} pada \textit{smartphone} pada saat permainan berlangsung.
 \end{enumerate}
-Pada halaman awal web di \textit{PC}, pemain diminta untuk menekan tombol \textit{start} yang ada pada gambar berikut: 
+Pada halaman awal web di \textit{PC}, pemain diminta untuk menekan tombol \textit{start} seperti yang dapat dilihat pada Gambar \ref{fig:16_con1_home1}: 
 
 \begin{figure}[H]
 	\centering
@@ -29,7 +43,7 @@ Pada halaman awal web di \textit{PC}, pemain diminta untuk menekan tombol \texti
 	\label{fig:16_con1_home1}
 \end{figure}
 
-Setelah tombol \textit{start} ditekan, maka akan muncul halaman berikutnya yang menunjukan kode yang harus dimasukan oleh pemain pada \textit{browser} di \textit{smarthone}. 
+Setelah tombol \textit{start} ditekan, maka akan muncul halaman berikutnya yang menunjukan kode yang harus dimasukkan oleh pemain pada \textit{browser} di \textit{smarthone}. Tampilan halaman tersebut dapat dilihat pada Gambar \ref{fig:17_con2_code1}
 
 \begin{figure}[H]
 	\centering
@@ -38,7 +52,7 @@ Setelah tombol \textit{start} ditekan, maka akan muncul halaman berikutnya yang 
 	\label{fig:17_con2_code1}
 \end{figure}
 
-Pemain harus mengakses alamat web yang sama pada \textit{smartphone}. Pada halaman awal, pemain akan diminta untuk memilih apakah akan bermain dengan menggunakan aplikasi, atau bermain dengan menggunakan \textit{browser}. 
+Pemain harus mengakses alamat web yang sama pada \textit{smartphone}. Pada halaman awal, pemain akan diminta untuk memilih apakah akan bermain dengan menggunakan aplikasi, atau bermain dengan menggunakan \textit{browser}. Tampilan halaman pada \textit{smartphone} dapat dilihat pada Gambar \ref{fig:18_air1_home}.
 
 \begin{figure}[H]
 	\centering
@@ -49,17 +63,17 @@ Pemain harus mengakses alamat web yang sama pada \textit{smartphone}. Pada halam
 
 %\vspace{-3cm}
 
-Dalam analisis ini, penulis memilih untuk bermain menggunakan \textit{browser}. Setelah itu, pemain diminta untuk menekan tombol \textit{'i got the connect code'} untuk memasukan kode yang sudah didapatkan pada \textit{PC}.
+Dalam analisis ini, penulis memilih untuk bermain menggunakan \textit{browser}. Setelah itu, pemain diminta untuk menekan tombol \textit{'i got the connect code'} untuk memasukan kode yang sudah didapatkan pada \textit{PC}. Tampilan halaman tersebut dapat dilihat pada Gambar \ref{fig:19_air2_code1}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.2]{Gambar/air2_code1}
-	\caption{Pemain diminta untuk memasukan kode yang sudah didapatkan pada \textit{PC}.}
+	\caption{Pemain diminta untuk memasukkan kode yang sudah didapatkan pada \textit{PC}.}
 	\label{fig:19_air2_code1}
 \end{figure}
 
 
-Setelah menekan tombol tersebut, pemain dapat mulai memasukan kode yang sudah didapatkan. Kode ini bertujuan untuk proses verifikasi, sehingga para pemain yang dapat bermain dalam satu sesi yang sama, hanya para pemain yang mengetahui kode tersebut.
+Setelah menekan tombol tersebut, pemain dapat mulai memasukan kode yang sudah didapatkan. Kode ini digunakan pada proses verifikasi. Dengan begitu, para pemain yang dapat bermain dalam satu sesi yang sama hanya para pemain yang mengetahui kode tersebut. Tampilan halaman tersebut dapat dilihat pada Gambar \ref{fig:20_air3_code2}.
 
 \begin{figure}[H]
 	
@@ -72,12 +86,12 @@ Setelah menekan tombol tersebut, pemain dapat mulai memasukan kode yang sudah di
 \end{figure}
 
 
-Setelah pemain memasukan kode, maka halaman web di \textit{PC} dan \textit{smartphone} akan berubah. Pada \textit{PC}, halaman akan menunjukan berbagai jenis permainan yang dapat dipilih. Pada \textit{smartphone}, halaman akan berubah menjadi pengendali permainan, dimana pemain dapat menggerakan halaman yang ada di \textit{PC} dengan menggunakan \textit{smartphone}.
+Setelah pemain memasukkan kode, maka halaman web di \textit{PC} dan \textit{smartphone} akan berubah. Pada \textit{PC}, halaman akan menunjukan berbagai jenis permainan yang dapat dipilih. Pada layar \textit{smartphone} halaman akan berubah menjadi pengendali permainan sehingga pemain dapat menggerakkan halaman yang ada di \textit{PC} dengan menggunakan \textit{smartphone}. Tampilah halaman tersebut dapat dilihat pada Gambar \ref{fig:22_air4_play1}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.2]{Gambar/con3_play1}
-	\caption{Halaman pada \textit{PC} yang menunjukan berbagai permainan yang dapat dipilih.}
+	\caption{Halaman pada \textit{PC} yang menunjukkan berbagai permainan yang dapat dipilih.}
 	\label{fig:21_con3_play1}
 \end{figure}
 
@@ -88,7 +102,7 @@ Setelah pemain memasukan kode, maka halaman web di \textit{PC} dan \textit{smart
 	\label{fig:22_air4_play1}
 \end{figure}
 
-Dalam analisis ini, penulis memilih untuk memainkan permainan yang bernama The Neighborhood. Permainan ini sejenis permainan Angry Birds. Permainan ini bercerita tentang dua kelompok yang bertetangga, dimana kelompok tersebut bermusuhan dan berusaha untuk saling menghancurkan satu sama lain. Tujuan dari permainan ini yaitu lebih dulu menghancurkan anggota kelompok tetangga. Setelah memilih permainan tersebut, halaman pada \textit{PC} dan \textit{smartphone} akan berubah. Pada \textit{smartphone}, pemain akan diminta untuk merubah mode tampilan \textit{smartphone} menjadi \textit{landscape}.
+Halaman pada \textit{PC} yang menunjukan berbagai permainan dapat dilihat pada Gambar \ref{fig:21_con3_play1}. Dalam analisis ini, penulis memilih untuk memainkan permainan yang bernama The Neighborhood. Permainan ini sejenis permainan Angry Birds. Permainan ini bercerita tentang dua kelompok yang bertetangga. Kelompok tersebut bermusuhan dan berusaha untuk saling menghancurkan satu sama lain. Tujuan dari permainan ini adalah untuk lebih dulu menghancurkan anggota kelompok tetangga. Setelah memilih permainan tersebut, halaman pada \textit{PC} dan \textit{smartphone} akan berubah. Pada \textit{smartphone}, pemain akan diminta untuk merubah mode tampilan \textit{smartphone} menjadi \textit{landscape}. Tampilan halaman pada \textit{PC} dapat dilihat pada Gambar \ref{fig:23_con5_play3}. Tampilan halaman pada \textit{smartphone} dapat dilihat pada Gambar \ref{fig:24_air6_play3}. 
 
 \begin{figure}[H]
 	\centering
@@ -104,7 +118,7 @@ Dalam analisis ini, penulis memilih untuk memainkan permainan yang bernama The N
 	\label{fig:24_air6_play3}
 \end{figure}
 
-Cara bermain dari permainan tersebut yaitu dengan menggunakan \textit{smartphone}, dimana pemain harus menekan layar \textit{smartphone}, kemudian menariknya sesuai dengan arah yang berlawanan dengan lawan, lalu melepas jari dari layar \textit{smartphone} dengan tujuan untuk melempar suatu benda dari ketapel. Semakin jauh pemain menarik, maka lontaran benda tersebut akan semakin kencang mengenai lawan.
+Cara bermain dari permainan tersebut adalah dengan menggunakan \textit{smartphone}. Pemain harus menekan layar \textit{smartphone} lalu menariknya sesuai dengan arah yang berlawanan dengan lawan. Pemain kemudian melepas jari dari layar \textit{smartphone} dengan tujuan untuk melempar suatu benda dari ketapel. Semakin jauh pemain menarik, maka lontaran benda tersebut akan semakin kencang mengenai lawan. Tampilan halaman bermain pada \textit{PC} dapat dilihat pada Gambar \ref{fig:25_con7_play5}. Tampilan halaman bermain pada \textit{smartphone} dapat dilihat pada Gambar \ref{fig:26_air7_play4}.
 
 \begin{figure}[H]
 	\centering
@@ -120,7 +134,7 @@ Cara bermain dari permainan tersebut yaitu dengan menggunakan \textit{smartphone
 	\label{fig:26_air7_play4}
 \end{figure}
 
-Pemain dapat memilih untuk keluar dari permainan atau melanjutkan permainanannya kembali setelah menyelesaikan satu level permainan.
+Pemain dapat memilih untuk keluar dari permainan atau melanjutkan permainan kembali setelah menyelesaikan satu level permainan. Tampilan halaman permainan selesai pada \textit{PC} dapat dilihat pada Gambar \ref{fig:27_con8_play6}. Tampilan halaman permainan selesai pada \textit{smartphone} dapat dilihat pada Gambar \ref{fig:28_air8_finish}.
 
 \begin{figure}[H]
 	\centering
@@ -136,7 +150,7 @@ Pemain dapat memilih untuk keluar dari permainan atau melanjutkan permainanannya
 	\label{fig:28_air8_finish}
 \end{figure}
 
-Dari ketiga percobaan yang sudah dilakukan, ada beberapa hal yang dapat diperbaiki dari permainan berbasis web tersebut. Percobaan pertama menunjukan hasil yang bagus, dimana koneksi antara \textit{smartphone} dan \textit{PC} tidak putus saat permainan berlangsung, dan juga tidak ada keterlambatan antara gerakan pada \textit{smartphone} dan \textit{PC}. Pada percobaan kedua, apabila \textit{browser} pada \textit{PC} ditutup pada saat permainan berlangsung, maka koneksi akan terputus. Tetapi, tampilan pada \textit{smartphone} tidak menunjukan bahwa adanya koneksi yang terputus, sehingga pemain tidak mengetahui apakah permainan masih dapat berlangsung atau tidak. Tampilan hanya akan langsung kembali pada halaman awal permainan. Begitupun dengan percobaan ketiga, apabila \textit{browser} pada \textit{smartphone} ditutup pada saat permainan sedang berlangsung, maka koneksi akan terputus. Tampilan pada \textit{PC} hanya menunjukan tanda kecil bahwa telah terjadi pemutusan koneksi pada \textit{smartphone}, yaitu tanda x pada bagian atas tampilan yang ditunjukan seperti gambar berikut:
+Dari ketiga percobaan yang sudah dilakukan terdapat beberapa hal yang dapat diperbaiki dari permainan berbasis web tersebut. Percobaan pertama menunjukan hasil yang bagus dimana koneksi antara \textit{smartphone} dan \textit{PC} tidak putus saat permainan berlangsung. Hasil tersebut juga menunjukan tidak ada jeda antara gerakan pada \textit{smartphone} dan \textit{PC}. Pada percobaan kedua, apabila \textit{browser} pada \textit{PC} ditutup pada saat permainan berlangsung, maka koneksi akan terputus. Tetapi tampilan pada \textit{smartphone} tidak menunjukan bahwa adanya koneksi yang terputus, sehingga pemain tidak mengetahui apakah permainan masih dapat berlangsung atau tidak. Tampilan hanya akan langsung kembali pada halaman awal permainan. Begitupun dengan percobaan ketiga. Apabila \textit{browser} pada \textit{smartphone} ditutup pada saat permainan sedang berlangsung, maka koneksi akan terputus. Tampilan pada \textit{PC} hanya menunjukan tanda kecil bahwa telah terjadi pemutusan koneksi pada \textit{smartphone}, yaitu tanda x pada bagian atas tampilan yang menunjukan pemutusan koneksi pada \textit{PC} dapat dilihat pada Gambar \ref{fig:29_con9_play7}.
 
 \begin{figure}[H]
 	\centering
@@ -200,7 +214,7 @@ Dari ketiga percobaan yang sudah dilakukan, ada beberapa hal yang dapat diperbai
 \section{Analisis Alur Permainan Finger For Life}
 \label{sec:alur}
 
-Web yang akan dikembangkan merupakan aplikasi permainan berbasis web yang bernama Finger For Life. Jenis permainan ini adalah kompetisi balap lari yang dilakukan oleh dua pemain. Tujuan dari permainan ini adalah mencapai garis akhir lintasan lari lebih dulu untuk menjadi pemenang. Untuk dapat memainkan permainan ini, para pemain harus menyiapkan beberapa hal seperti berikut:
+Web yang akan dikembangkan merupakan aplikasi permainan berbasis web yang bernama Finger For Life. Jenis permainan ini adalah kompetisi balap lari yang dilakukan oleh dua pemain. Tujuan dari permainan ini adalah mencapai garis akhir lintasan lari lebih dulu dibandingkan dengan lawan main. Untuk dapat memainkan permainan ini, para pemain harus menyiapkan beberapa hal seperti berikut:
 
 \begin{itemize}
 	\item \textbf{Satu Komputer \textit{PC}}.
@@ -208,7 +222,7 @@ Web yang akan dikembangkan merupakan aplikasi permainan berbasis web yang bernam
 	\item \textbf{Jaringan Internet}.
 \end{itemize}
 
-Para pemain harus menyediakan satu perangkat komputer \textit{PC}, dimana \textit{PC} tersebut akan berfungsi sebagai \textit{console}, dan dua \textit{smartphone} yang akan berfungsi sebagai \textit{controller}. \textit{PC} akan memiliki peran sebagai \textit{host} yang menciptakan suatu \textit{room}, dimana \textit{room} tersebut merupakan sebuah kode ruang permainan dimana kedua pemain dapat bergabung kedalamnya. Ketiga perangkat tersebut membutuhkan jaringan internet untuk dapat mengakses alamat aplikasi web yang dibangun. 
+Para pemain harus menyediakan satu perangkat komputer \textit{PC}, di mana \textit{PC} tersebut akan berfungsi sebagai \textit{console}, dan dua \textit{smartphone} yang akan berfungsi sebagai \textit{controller}. \textit{PC} akan memiliki peran sebagai \textit{host} yang menciptakan suatu \textit{room}, di mana \textit{room} tersebut merupakan sebuah kode ruang permainan di mana kedua pemain dapat bergabung ke dalamnya. Ketiga perangkat tersebut membutuhkan jaringan internet untuk dapat mengakses alamat aplikasi web yang dibangun. 
 
 Alamat aplikasi permainan Finger For Life adalah \url{http://fingerforlife.herokuapp.com/}. Agar para pemain dapat mulai memainkan permainan ini, ada beberapa tahap yang harus dilakukan. Tahap-tahap yang dilakukan akan dibagi menjadi dua, yaitu yang terjadi pada bagian \textit{PC}, dan pada \textit{smartphone}. Tahap-tahap tersebut akan dijelaskan sebagai berikut:
 
@@ -228,10 +242,10 @@ Alamat aplikasi permainan Finger For Life adalah \url{http://fingerforlife.herok
 	
 	\textbf{Smartphone}
 	\begin{enumerate}
-		\item Saat \textit{client} mengakses alamat web Finger For Life pada \textit{smarthone}, \textit{client} akan diarahkan ke halaman utama yang terdapat tombol \textit{join}.
+		\item Saat \textit{client} mengakses alamat web Finger For Life pada \textit{smarthone} \textit{client} akan diarahkan ke halaman utama yang terdapat tombol \textit{join}.
 		\item Tekan tombol \textit{join} untuk mengarah ke halaman permintaan bergabung.
 		\item Isi form yang tersedia dengan kode \textit{room} dari \textit{PC}.
-		\item Setelah kode dikirimkan maka \textit{client} akan segera mendapatkan pesan yang menandakan apakah sudah berhasil bergabung kedalam \textit{room} atau tidak
+		\item Setelah kode dikirimkan maka \textit{client} akan segera mendapatkan pesan yang menandakan apakah sudah berhasil bergabung ke dalam \textit{room} atau tidak
 		\item \textit{Room} akan ditutup apabila pemain yang bergabung sudah berjumlah dua pemain dan halaman pada layar \textit{smartphone} dan \textit{PC} akan diarahkan ke halaman lain untuk tahap berikutnya.
 	\end{enumerate}
 %	Saat \textit{client} mengakses alamat web Finger For Life pada \textit{smarthone}, \textit{client} akan diarahkan ke halaman utama. Halaman ini terdapat tombol \textit{join} yang harus ditekan oleh \textit{client} agar dapat bergabung kedalam permainan. Setelah tombol \textit{join} ditekan, \textit{client} akan ditujukan kehalaman permintaan bergabung.
@@ -242,17 +256,17 @@ Alamat aplikasi permainan Finger For Life adalah \url{http://fingerforlife.herok
 	
 	\textbf{PC}
 	\begin{enumerate}
-		\item Halaman ini akan menampilkan karakter yang telah dipilih oleh para pemain.
+		\item Halaman ini menampilkan karakter yang telah dipilih oleh para pemain.
 		\item Halaman pada layar \textit{PC} tidak akan mengarah ke halaman selanjutnya apabila kedua pemain belum menetapkan karakter. 
 	\end{enumerate}
 %	Para pemain yang telah bergabung akan segera ditujukan kehalaman memilih karakter. Pada halaman ini, akan muncul karakter yang telah dipilih oleh para pemain. Pada tahap ini, kedua pemain harus menetapkan karakter yang merepresentasikan para pemain dalam permainan. Apabila kedua pemain belum menetapkan karakter, maka tidak dapat menuju ke tahap selanjutnya.
 	
 	\textbf{Smartphone}
 	\begin{enumerate}
-		\item Halaman ini akan menunjukan daftar karakter yang dapat dipilih oleh para pemain.
+		\item Halaman ini menunjukan daftar karakter yang dapat dipilih oleh para pemain.
 		\item Tekan salah satu karakter untuk dipilih dan karakter akan muncul di halaman layar \textit{PC}.
 		\item Tekan tombol \textit{choose} untuk menetapkan karakter yang telah dipilih.
-		\item Setelah kedua pemain menetapkan karakter masing-masing, maka halaman pada layar \textit{smartphone} dan \textit{PC} akan diarahkan ke halaman lain untuk tahap berikutnya.
+		\item Setelah kedua pemain menetapkan karakter masing-masing maka halaman pada layar \textit{smartphone} dan \textit{PC} akan diarahkan ke halaman lain untuk tahap berikutnya.
 	\end{enumerate}
 %	Halaman ini akan menunjukan daftar karakter yang dapat dipilih oleh para pemain. Karakter yang dipilih akan ditunjukan dilayar \textit{PC}. Apabila pemain akan menetapkan karakter yang dipilih, maka pemain dapat menekan tombol \textit{choose}. Setelah kedua pemain menetapkan karakter masing-masing, maka akan dituju kehalaman selanjutnya.
 	
@@ -260,7 +274,7 @@ Alamat aplikasi permainan Finger For Life adalah \url{http://fingerforlife.herok
 
 	\textbf{PC}
 	\begin{enumerate}
-		\item Halaman ini akan menampilkan hitungan mundul selama tiga detik sebelum permainan dimulai.
+		\item Halaman ini menampilkan hitungan mundur selama tiga detik sebelum permainan dimulai.
 		\item Lintasan lari dan dua karakter milik para pemain akan ditampilkan.
 		\item Pemain harus menggerakan karakter melalui lintasan untuk mencapai garis akhir.
 		\item Apabila salah satu karakter telah menyentuh garis akhir maka halaman pada \textit{PC} akan diarahkan ke halaman selanjutnya.
@@ -269,7 +283,7 @@ Alamat aplikasi permainan Finger For Life adalah \url{http://fingerforlife.herok
 	
 	\textbf{Smartphone}
 	\begin{enumerate}
-		\item Halaman ini akan menampilkan instruksi untuk memainkan permainan ini.
+		\item Halaman ini menampilkan instruksi untuk memainkan permainan ini.
 		\item Tombol telapak kaki kanan dan kiri akan ditampilkan.
 		\item Tekan tombol telapak kaki berulang kali untuk menggerakan karakter yang ada di halaman layar \textit{PC}.
 		\item Halaman pada \textit{smartphone} akan diarahkan ke halaman selanjutnya apabila salah satu karakter telah menyentuh garis akhir.
@@ -280,37 +294,155 @@ Alamat aplikasi permainan Finger For Life adalah \url{http://fingerforlife.herok
 	
 	\textbf{PC}
 	\begin{enumerate}
-		\item Halaman pada \textit{PC} akan menampilkan para pemain yang telah menyelesaikan permainan.
+		\item Halaman pada \textit{PC} menampilkan para pemain yang telah menyelesaikan permainan.
 		\item Podium yang menempatkan para pemenang sesuai posisi nomor urut masing-masing akan ditampilkan.
 		\item Karakter milik pemenang akan ditampilkan di podium nomor satu, dan pemain yang kalah di podium nomor dua.
-		\item Tekan tombol \textit{exit} untuk keluar dari permainan dan halaman akan diarahkan kembali ke halaman utama.
+		\item Tekan tombol \textit{exit} untuk keluar dari permainan maka halaman pada layar \textit{PC} dan \textit{smartphone} akan diarahkan kembali ke halaman utama.
 	\end{enumerate}
 %	Halaman ini akan menampilkan pemenang yang berhasil mencapai garis akhir lebih dulu. Halaman ini menampilkan podium yang menempatkan para pemenang sesuai posisi nomor urut masing-masing. Pada tahap ini, karakter milik pemenang akan ditampilkan di podium nomor satu, dan pemain selanjutnya dinomor dua. Untuk mengakhiri permainan, pemain harus menekan tombol \textit{exit} yang terdapat dihalaman ini. Apabila tombol tersebut ditekan, maka halaman akan menuju kembali ke halaman utama dan koneksi Socket.io pun akan terputus.
 	
 	\textbf{Smartphone}
 	\begin{enumerate}
-		\item Pada halaman ini akan ditampilkan teks yang menunjukan posisi pemenang.
-		\item Pemain yang lebih dulu mencapai garis akhir akan ditampilkan teks \textit{YOU WIN}.
-		\item Pemain yang kalah akan ditampilkan teks \textit{YOU LOSE}.
-		\item Setelah tombol \textit{exit} di halaman layar \textit{PC} ditekan, maka permainan akan berakhir dan halaman akan diarahkan kembali ke halaman utama.
+		\item Pada halaman ini ditampilkan teks yang menunjukan posisi pemenang.
+		\item Pemain yang lebih dulu mencapai garis akhir akan ditampilkan teks \textit{YOU WIN} pada layar \textit{smartphone}.
+		\item Pemain yang kalah akan ditampilkan teks \textit{YOU LOSE} pada layar \textit{smartphone}.
+		\item Setelah tombol \textit{exit} di halaman layar \textit{PC} ditekan maka permainan akan berakhir dan tampilan pada layar \textit{PC} dan \textit{smartphone} akan diarahkan kembali ke halaman utama.
 	\end{enumerate}
 %	Pada halaman ini akan ditampilkan teks yang menunjukan posisi pemenang. Apabila pemain lebih dulu mencapai garis akhir, maka akan ditampilkan teks \textit{YOU WIN}. Pemain yang kalah akan ditampilkan teks \textit{YOU LOSE}. Setelah tombol \textit{exit} dilayar \textit{PC} ditekan, maka permainan telah berakhir, dan halaman akan menuju kembali kehalaman utama.
 	
 \end{enumerate}
 
-\section{Analisis Arsitektur Aplikasi Finger For Life}
-Arsitektur Finger For Life dapat dilihat pada Gambar \ref{fig:ars_fingerforlife} . Jumlah \textit{Client} dalam permainan ini adalah tiga. \textit{Client} tersebut antara lain \textit{host}, \textit{player 1}, dan \textit{player 2}. Apabila \textit{player 1} akan mengirimkan data untuk diproses oleh \textit{host}, maka data tersebut akan dikirimkan terlebih dahulu kepada \textit{server}, kemudian dilanjutkan kepada \textit{host}.
+\section{Analisis \textit{Use Case}}
+\label{sec:usecase}
+
+\subsection{Diagram \textit{Use Case}}
+\label{subsec:diagram_usecase}
+
+Diagram \textit{use case} pada permainan berbasis web yang akan dibangun hanya mengandung satu aktor, yaitu pemain. Diagram \textit{use case} dapat dilihat pada Gambar \ref{fig:usecase_pemain}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.45]{Gambar/ars_fingerforlife}
-	\caption{Arsitektur Finger For Life}
-	\label{fig:ars_fingerforlife}
+	\includegraphics[scale=0.4]{Gambar/usecase_pemain}
+	\caption{Diagram \textit{use case} pemain}
+	\label{fig:usecase_pemain}
 \end{figure}
 
-Komunikasi antara \textit{client} dengan \textit{client} tidak dapat dilakukan secara langsung. Komunikasi tersebut harus melewati \textit{server} terlebih dahulu. 
+Berdasarkan hasil analisis pada subbab \ref{sec:alur}, akan dibentuk empat \textit{use case} seperti berikut:
 
-Finger For Life dibangun diatas Node.js. Seluruh berkas serta direktori yang dibutuhkan untuk membangun aplikasi permainan ini diatur dengan menggunakan Express.js. Proses pengiriman dan penerimaan data secara \textit{realtime} dilakukan menggunakan Socket.io. Dalam permainan ini, animasi akan dilakukan dengan menggunakan Canvas API. Seluruh proses memodifikasi elemen HTML akan dilakukan dengan menggunakan jQuery. Halaman-halaman yang dibutuhkan untuk ditampilkan kelayar akan diatur dengan menggunakan The Content Template element.
+\begin{itemize}
+	\item \textbf{Melakukan permintaan untuk bergabung}, pemain dapat bergabung dalam permainan dengan mengirimkan kode yang sudah disediakan \textit{browser PC} dengan menggunakan \textit{browser smartphone}.
+	
+	\item \textbf{Memilih karakter}, pemain dapat memilih karakter yang tersedia di \textit{browser smartphone}.
+	
+	\item \textbf{Memainkan permainan}, pemain dapat memainkan permainan dengan menekan tombol-tombol yang ada di \textit{smartphone}.
+	
+	\item \textbf{Mengakhiri permainan}, pemain dapat mengakhiri permainan dengan memutus koneksi Socket.io.
+\end{itemize}
+
+\subsection{Skenario \textit{Use Case}}
+
+\begin{enumerate}
+	\item \textbf{Melakukan Permintaan Untuk Bergabung}
+	
+	\begin{itemize}
+		\item Nama: Melakukan permintaan untuk bergabung
+		
+		\item Aktor: Pemain
+		
+		\item Deskripsi: Melakukan permintaan untuk bergabung dengan \textit{room} yang sudah tersedia
+		
+		\item Kondisi awal: Pemain telah membuka halaman permintaan bergabung pada \textit{browser smartphone} dan mengisi \textit{form} dengan kode yang telah disediakan
+		
+		\item Kondisi akhir: Pemain bergabung kedalam \textit{room}
+		
+		\item Skenario utama: 
+		
+		
+		\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
+			\hline
+			No & Aksi Aktor & Reaksi Sistem \\ \hline
+			1 & Pemain mengisi \textit{form} dengan kode \textit{room} dan menekan tombol \textit{send} & Sistem mendapatkan kode \textit{room} dan memproses kode tersebut, kemudian memberikan \textit{feedback} kepada pemain. \\ \hline
+		\end{tabular}
+		
+		\item Ekspektasi: Pemain bergabung kedalam \textit{room}.
+		
+		
+	\end{itemize}
+	
+	\item \textbf{Memilih Karakter}
+	
+	\begin{itemize}
+		\item Nama: Memilih karakter
+		
+		\item Aktor: Pemain
+		
+		\item Deskripsi: Memilih karakter yang ditampilkan pada \textit{browser smartphone}
+		
+		\item Kondisi awal: Pemain telah bergabung kedalam \textit{room}
+		
+		\item Kondisi akhir: Pemain menetapkan karakter yang akan dimainkan
+		
+		\item Skenario utama:
+		
+		\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
+			\hline
+			No & Aksi Aktor & Reaksi Sistem \\ \hline
+			1 & Pemain memilih karakter yang tersedia dan menetapkan karakter tersebut. & Sistem menerima karakter yang dipilih dan menetapkan karakter yang dipilih oleh pemain \\ \hline
+		\end{tabular}
+		
+		\item Ekspektasi: Karakter muncul dilayar \textit{PC}.
+		
+	\end{itemize}
+	
+	\item \textbf{Memainkan Permainan}
+	
+	\begin{itemize}
+		\item Nama: Memainkan permainan
+		
+		\item Aktor: Pemain
+		
+		\item Deskripsi: Memainkan permainan dengan menekan tombol-tombol pada \textit{browser smartphone} untuk menggerakan karakter
+		
+		\item Kondisi awal: Pemain telah menetapkan karakter permainan
+		
+		\item Kondisi akhir: Pemain memainkan permainan dengan menggerakan karakter
+		
+		\item Skenario utama:
+		
+		\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
+			\hline
+			No & Aksi Aktor & Reaksi Sistem \\ \hline
+			1 & Pemain menekan tombol telapak kaki berulang-ulang & Sistem menangkap \textit{event} menekan tombol telapak kaki dan menggerakan karakter milik pemain \\ \hline
+		\end{tabular}
+		
+		\item Ekspektasi: Karakter bergerak dari garis awal hingga akhir.	
+		
+	\end{itemize}
+	
+	\item \textbf{Memutus Koneksi}
+	
+	\begin{itemize}
+		\item Nama: Memutus koneksi
+		
+		\item Aktor: Pemain
+		
+		\item Deskripsi: Memutus koneksi dengan keluar dari \textit{browser} atau menekan tombol \textit{exit} saat telah selesai bermain
+		
+		\item Kondisi awal: Pemain telah selesai bermain
+		
+		\item Kondisi akhir: Pemain keluar dari permainan dan koneksi terputus
+		
+		\item Skenario utama:
+		
+		\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
+			\hline
+			No & Aksi Aktor & Reaksi Sistem \\ \hline
+			1 & Pemain menekan tombol \textit{exit} pada halaman terakhir atau menutup \textit{browser} & Sistem akan menangkap \textit{event} tombol \textit{exit} ditekan dan memutus koneksi pemain \\ \hline
+		\end{tabular}
+		
+		\item Ekspektasi: Seluruh \textit{client} keluar dari permainan.
+	\end{itemize}
+\end{enumerate}
 
 \section{Analisis Kebutuhan Perangkat Lunak}
 \label{sec:pengembangan}
@@ -321,7 +453,7 @@ Penjelasan pustaka-pustaka yang dibutuhkan untuk pengembangan Finger For Life su
 	\item \textbf{Node.js}
 	\begin{enumerate}
 		\item \textbf{HTTP} \\
-		\textit{Interface} HTTP digunakan pada bagian \textit{server}. Web yang akan dikembangkan akan menggunakan \textit{server} HTTP untuk menyediakan akses ke alamat web yang dapat diakses oleh \textit{client}. HTTP \textit{server} akan diintegrasikan dengan Socket.io dimana HTTP \textit{server} akan menjadi masukan parameter pada saat \textit{server} Socket.io diinisialisasi.
+		\textit{Interface} HTTP digunakan pada bagian \textit{server}. Web yang akan dikembangkan akan menggunakan \textit{server} HTTP untuk menyediakan akses ke alamat web yang dapat diakses oleh \textit{client}. HTTP \textit{server} akan diintegrasikan dengan Socket.io di mana HTTP \textit{server} akan menjadi masukan parameter pada saat \textit{server} Socket.io diinisialisasi.
 		
 %		Contoh penggunaan HTTP \textit{server} akan dijelaskan sebagai berikut:
 %\begin{lstlisting}[caption={Contoh penggunaan \textit{interface} \textit{HTTP}}, label={lst:nodeHTTP}, captionpos=b]
@@ -824,137 +956,7 @@ Properti ini akan menetapkan nilai \textit{globalCompositeOperation} menjadi \te
 
 \end{enumerate}
 
-\section{Analisis \textit{Use Case}}
-\label{sec:usecase}
 
-\subsection{Diagram \textit{Use Case}}
-\label{subsec:diagram_usecase}
-
-Diagram \textit{use case} pada permainan berbasis web yang akan dibangun hanya mengandung satu aktor, yaitu pemain. Diagram \textit{use case} dapat dilihat pada Gambar \ref{fig:usecase_pemain}.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.4]{Gambar/usecase_pemain}
-	\caption{Diagram \textit{use case} pemain}
-	\label{fig:usecase_pemain}
-\end{figure}
-
-Berdasarkan hasil analisis pada subbab \ref{sec:alur}, akan dibentuk empat \textit{use case} seperti berikut:
-
-\begin{itemize}
-	\item \textbf{Melakukan permintaan untuk bergabung}, pemain dapat bergabung dalam permainan dengan mengirimkan kode yang sudah disediakan \textit{browser PC} dengan menggunakan \textit{browser smartphone}.
-	
-	\item \textbf{Memilih karakter}, pemain dapat memilih karakter yang tersedia di \textit{browser smartphone}.
-	
-	\item \textbf{Memainkan permainan}, pemain dapat memainkan permainan dengan menekan tombol-tombol yang ada di \textit{smartphone}.
-	
-	\item \textbf{Mengakhiri permainan}, pemain dapat mengakhiri permainan dengan memutus koneksi Socket.io.
-\end{itemize}
-
-\subsection{Skenario \textit{Use Case}}
-
-\begin{enumerate}
-	\item \textbf{Melakukan Permintaan Untuk Bergabung}
-	
-	\begin{itemize}
-		\item Nama: Melakukan permintaan untuk bergabung
-		
-		\item Aktor: Pemain
-		
-		\item Deskripsi: Melakukan permintaan untuk bergabung dengan \textit{room} yang sudah tersedia
-		
-		\item Kondisi awal: Pemain telah membuka halaman permintaan bergabung pada \textit{browser smartphone} dan mengisi \textit{form} dengan kode yang telah disediakan
-		
-		\item Kondisi akhir: Pemain bergabung kedalam \textit{room}
-		
-		\item Skenario utama: 
-		
-
-\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
-	\hline
-	No & Aksi Aktor & Reaksi Sistem \\ \hline
-	1 & Pemain mengisi \textit{form} dengan kode \textit{room} dan menekan tombol \textit{send} & Sistem mendapatkan kode \textit{room} dan memproses kode tersebut, kemudian memberikan \textit{feedback} kepada pemain. \\ \hline
-\end{tabular}
-
-		\item Eksepsi: Pemain bergabung kedalam \textit{room}.
-
-		
-	\end{itemize}
-	
-	\item \textbf{Memilih Karakter}
-	
-	\begin{itemize}
-		\item Nama: Memilih karakter
-		
-		\item Aktor: Pemain
-		
-		\item Deskripsi: Memilih karakter yang ditampilkan pada \textit{browser smartphone}
-		
-		\item Kondisi awal: Pemain telah bergabung kedalam \textit{room}
-		
-		\item Kondisi akhir: Pemain menetapkan karakter yang akan dimainkan
-		
-		\item Skenario utama:
-		
-\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
-	\hline
-	No & Aksi Aktor & Reaksi Sistem \\ \hline
-	1 & Pemain memilih karakter yang tersedia dan menetapkan karakter tersebut. & Sistem menerima karakter yang dipilih dan menetapkan karakter yang dipilih oleh pemain \\ \hline
-\end{tabular}
-
-	\item Eksepsi: Karakter muncul dilayar \textit{PC}.
-		
-	\end{itemize}
-	
-	\item \textbf{Memainkan Permainan}
-		
-		\begin{itemize}
-			\item Nama: Memainkan permainan
-			
-			\item Aktor: Pemain
-			
-			\item Deskripsi: Memainkan permainan dengan menekan tombol-tombol pada \textit{browser smartphone} untuk menggerakan karakter
-			
-			\item Kondisi awal: Pemain telah menetapkan karakter permainan
-			
-			\item Kondisi akhir: Pemain memainkan permainan dengan menggerakan karakter
-			
-			\item Skenario utama:
-
-\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
-	\hline
-	No & Aksi Aktor & Reaksi Sistem \\ \hline
-	1 & Pemain menekan tombol telapak kaki berulang-ulang & Sistem menangkap \textit{event} menekan tombol telapak kaki dan menggerakan karakter milik pemain \\ \hline
-\end{tabular}
-			
-			\item Karakter bergerak dari garis awal hingga akhir.	
-			
-		\end{itemize}
-	
-	\item \textbf{Memutus Koneksi}
-	
-		\begin{itemize}
-			\item Nama: Memutus koneksi
-			
-			\item Aktor: Pemain
-			
-			\item Deskripsi: Memutus koneksi dengan keluar dari \textit{browser} atau menekan tombol \textit{exit} saat telah selesai bermain
-			
-			\item Kondisi awal: Pemain telah selesai bermain
-			
-			\item Kondisi akhir: Pemain keluar dari permainan dan koneksi terputus
-			
-			\item Skenario utama:
-			
-\begin{tabular}{ |p{1cm}|p{4cm}|p{4cm}|}
-	\hline
-	No & Aksi Aktor & Reaksi Sistem \\ \hline
-	1 & Pemain menekan tombol \textit{exit} pada halaman terakhir atau menutup \textit{browser} & Sistem akan menangkap \textit{event} tombol \textit{exit} ditekan dan memutus koneksi pemain \\ \hline
-\end{tabular}
-			
-			\item Eksepsi: Seluruh \textit{client} keluar dari permainan.
-		\end{itemize}
-\end{enumerate}
 
 
 
@@ -965,63 +967,63 @@ Pada pengembangan Finger For Life digunakan banyak fitur yang telah disediakan o
 Subbab-subbab ini akan menjelaskan bagaimana teknologi Socket.io digunakan dalam implementasi Finger For Life pada tahap-tahap yang harus dilakukan.
 \begin{enumerate}
 	\item \textbf{Komunikasi antara \textit{client} dan \textit{server}} \\
-	Pada aplikasi permainan berbasis web ini, akan banyak dibutuhkan proses komunikasi antara sesama \textit{client} maupun dengan \textit{server}. Komunikasi yang dilakukan harus secara \textit{real-time}, agar interaksi didalam permainan dapat berjalan pada saat permainan dimainkan.
+	Pada aplikasi permainan berbasis web ini, akan banyak dibutuhkan proses komunikasi antara sesama \textit{client} maupun dengan \textit{server}. Komunikasi yang dilakukan harus secara \textit{real-time}, agar interaksi di dalam permainan dapat berjalan pada saat permainan dimainkan.
 	
-	Interaksi tersebut akan dilakukan berdasarkan \textit{event}. Suatu \textit{event} akan dipancarkan kedalam suatu \textit{stream}, dimana \textit{stream} akan berisi berbagai \textit{event} yang telah dipancarkan, yang menunggu untuk ditangkap oleh fungsi tertentu. Pada saat \textit{client} akan berkomunikasi dengan \textit{client} lain, maka \textit{event} yang dipancarkan akan ditangkap oleh \textit{server} sebelum kemudian dilanjutkan kepada \textit{client} lain. Arsitektur interaksi antara \textit{client} dan \textit{server} dapat dilihat pada Gambar \ref{fig:ars_socketio}.
+	Interaksi tersebut akan dilakukan berdasarkan \textit{event}. Suatu \textit{event} akan dipancarkan ke dalam suatu \textit{stream}, di mana \textit{stream} akan berisi berbagai \textit{event} yang telah dipancarkan, yang menunggu untuk ditangkap oleh fungsi tertentu. Pada saat \textit{client} akan berkomunikasi dengan \textit{client} lain, maka \textit{event} yang dipancarkan akan ditangkap oleh \textit{server} sebelum kemudian dilanjutkan kepada \textit{client} lain. Arsitektur interaksi antara \textit{client} dan \textit{server} dapat dilihat pada Gambar \ref{fig:ars_socketio}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.2]{Gambar/ars_socketio}
 	\caption{Arsitektur interaksi \textit{client} dan \textit{server}}
 	\label{fig:ars_socketio}
 \end{figure}	
-	Agar proses tersebut dapat dilakukan, maka fitur yang dimiliki oleh Socket.io akan digunakan. Fitur-fitur tersebut adalah sebagai berikut:
+	Proses tersebut dilakukan dengan menggunakan fitur yang dimiliki oleh Socket.io. Fitur-fitur tersebut adalah sebagai berikut:
 	
 	\begin{itemize}
 		\item \textbf{socket.emit(eventName[, ...args][, ack])} \\ 
-		\textit{Method} ini akan memancarkan \textit{event} dengan nama \textit{eventName}, dimana \textit{event} tersebut dapat ditangkap oleh \textit{client} maupun \textit{server} dengan menggunakan fungsi tertentu. Apabila \textit{event} yang telah dipancarkan tidak ditangkap oleh siapapun, maka \textit{event} tersebut akan disimpan oleh \textit{stream} hingga suatu sesi selesai yang kemudian akan dihancurkan.
+		\textit{Method} ini akan memancarkan \textit{event} dengan nama \textit{eventName} di mana \textit{event} tersebut dapat ditangkap oleh \textit{client} maupun \textit{server} dengan menggunakan fungsi tertentu. Apabila \textit{event} yang telah dipancarkan tidak ditangkap oleh siapapun maka \textit{event} tersebut akan disimpan oleh \textit{stream} hingga suatu sesi selesai yang kemudian akan dihancurkan.
 		
 		\item \textbf{socket.on(eventName, callback)} \\
 		\textit{Method} ini akan menangkap \textit{event} yang namanya sesuai dengan parameter \textit{eventName}. \textit{Method} ini yang akan menangkap suatu \textit{event} yang telah dipancarkan kedalam \textit{stream}. Setelah \textit{event} tersebut ditangkap, maka fungsi \textit{callback} akan dieksekusi.
 	\end{itemize}
-Contoh implementasi dari proses interaksi antara \textit{client} dan \textit{server} adalah sebagai berikut:
-\begin{lstlisting}[caption={Potongan kode pada bagian \textit{client}}, label={lst:interaksi_client}, captionpos=b]
-socket.emit('requestToJoin', {
-	id: socket.id,
-	room: $('#code').val()
-});
-
-socket.on('joinSucceed', function(msg){
-	var messages = document.getElementById("joined");
-	messages.innerHTML = msg;
-});
-
-socket.on('joinRejected', function(msg){
-	var messages = document.getElementById("joined");
-	messages.innerHTML = msg;
-});
-\end{lstlisting}
-Potongan kode ini menunjukan suatu \textit{client} yang memancarkan \textit{event requestToJoin} dengan data-data yang dikirimkan. \textit{Event} tersebut akan ditangkap oleh \textit{server} untuk dilakukan pengecekan terhadap data yang dikirimkan. Selain itu, \textit{client} memiliki \textit{event handler} yang akan menangkap \textit{event joinRejected} dan \textit{joinSucceed}.
-
-
-\begin{lstlisting}[caption={Potongan kode pada bagian \textit{server}}, label={lst:interaksi_server}, captionpos=b]
-socket.on('requestToJoin', function(msg){
-var check = users.isRoomExist(msg.room);
-
-if (check === 1) {
-io.to(msg.room).emit('requestAccepted', 'Client has joined the room.');
-}else{
-socket.emit('joinRejected', 'The room is not exist');
-}
-});
-\end{lstlisting}
-Pada potongan kode ini, \textit{server} akan menangkap \textit{event requestToJoin} yang dipancarkan oleh \textit{client}. Apabila \textit{client} telah memancarkan \textit{event} tersebut, maka \textit{server} akan menangkap \textit{event} dan mengeksekusi fungsi \textit{callback}. \textit{Server} kemudian akan melakukan pengecekan terhadap data \textit{msg} yang diterima. Apabila pengecekan menghasilkan angka satu, maka \textit{server} akan memancarkan \textit{event requestAccepted} kepada \textit{client} lain yang berada didalam \textit{room}. Apabila pengecekan tidak menghasilkan angka satu, maka \textit{server} akan memancarkan \textit{event joinRejected} kepada satu \textit{socket} yang sedang melakukan koneksi kepada \textit{server}.
-
-\begin{lstlisting}[caption={Proses \textit{event} diterima}, label={lst:req_accepted}, captionpos=b]
-socket.on('requestAccepted', function(msg){
-	showMessage(msg);
-});
-\end{lstlisting}
-Potongan kode ini menunjukan suatu \textit{client} yang akan menangkap \textit{event requestAccepted} yang dikirimkan oleh \textit{server}. \textit{Client} kemudian akan mengeksekusi fungsi \textit{callback} untuk mengolah data yang dikirimkan.
+%Contoh implementasi dari proses interaksi antara \textit{client} dan \textit{server} adalah sebagai berikut:
+%\begin{lstlisting}[caption={Potongan kode pada bagian \textit{client}}, label={lst:interaksi_client}, captionpos=b]
+%socket.emit('requestToJoin', {
+%	id: socket.id,
+%	room: $('#code').val()
+%});
+%
+%socket.on('joinSucceed', function(msg){
+%	var messages = document.getElementById("joined");
+%	messages.innerHTML = msg;
+%});
+%
+%socket.on('joinRejected', function(msg){
+%	var messages = document.getElementById("joined");
+%	messages.innerHTML = msg;
+%});
+%\end{lstlisting}
+%Potongan kode ini menunjukan suatu \textit{client} yang memancarkan \textit{event requestToJoin} dengan data-data yang dikirimkan. \textit{Event} tersebut akan ditangkap oleh \textit{server} untuk dilakukan pengecekan terhadap data yang dikirimkan. Selain itu, \textit{client} memiliki \textit{event handler} yang akan menangkap \textit{event joinRejected} dan \textit{joinSucceed}.
+%
+%
+%\begin{lstlisting}[caption={Potongan kode pada bagian \textit{server}}, label={lst:interaksi_server}, captionpos=b]
+%socket.on('requestToJoin', function(msg){
+%var check = users.isRoomExist(msg.room);
+%
+%if (check === 1) {
+%io.to(msg.room).emit('requestAccepted', 'Client has joined the room.');
+%}else{
+%socket.emit('joinRejected', 'The room does not exist');
+%}
+%});
+%\end{lstlisting}
+%Pada potongan kode ini, \textit{server} akan menangkap \textit{event requestToJoin} yang dipancarkan oleh \textit{client}. Apabila \textit{client} telah memancarkan \textit{event} tersebut, maka \textit{server} akan menangkap \textit{event} dan mengeksekusi fungsi \textit{callback}. \textit{Server} kemudian akan melakukan pengecekan terhadap data \textit{msg} yang diterima. Apabila pengecekan menghasilkan angka satu, maka \textit{server} akan memancarkan \textit{event requestAccepted} kepada \textit{client} lain yang berada didalam \textit{room}. Apabila pengecekan tidak menghasilkan angka satu, maka \textit{server} akan memancarkan \textit{event joinRejected} kepada satu \textit{socket} yang sedang melakukan koneksi kepada \textit{server}.
+%
+%\begin{lstlisting}[caption={Proses \textit{event} diterima}, label={lst:req_accepted}, captionpos=b]
+%socket.on('requestAccepted', function(msg){
+%	showMessage(msg);
+%});
+%\end{lstlisting}
+%Potongan kode ini menunjukan suatu \textit{client} yang akan menangkap \textit{event requestAccepted} yang dikirimkan oleh \textit{server}. \textit{Client} kemudian akan mengeksekusi fungsi \textit{callback} untuk mengolah data yang dikirimkan.
 	
 	\item \textbf{Sinkronisasi \textit{PC} dan \textit{Smartphone}} \\
 	Pada permainan Finger For Life terdapat tahap permintaan bergabung yang dilakukan oleh \textit{PC} dan \textit{smartphone}. Tahap tersebut merupakan proses sinkronisasi yang harus dilakukan agar \textit{smartphone} dan \textit{PC} dapat tersambung dan dapat berkomunikasi satu sama lain. Kedua gawai tersebut dapat tersambung dengan menggunakan Socket.io. Ada beberapa langkah yang harus dilakukan, langkah-langkah tersebut antara lain:
@@ -1029,7 +1031,7 @@ Potongan kode ini menunjukan suatu \textit{client} yang akan menangkap \textit{e
 		\item \textbf{Koneksi Socket.io} \\
 		Sebelum \textit{PC} dan \textit{smartphone} tersambung, kedua gawai tersebut harus terkoneksi dengan Socket.io. Proses melakukan koneksi terhadap Socket.io dilakukan pada saat halaman web mengakses halaman permintaan bergabung. Pada saat kedua gawai mengakses halaman tersebut, proses yang terjadi adalah sebagai berikut:
 		\begin{itemize}
-			\item Didalam berkas \textit{syncScript.js} \ref{sec:direktori} dan \textit{mobileScript.js} \ref{sec:direktori}, terdapat variabel yang memulai \textit{client} untuk melakukan koneksi kepada Socket.io. Variabel tersebut adalah sebagai berikut:
+			\item Pada bagian \textit{client} terdapat variabel yang memulai \textit{client} untuk melakukan koneksi kepada Socket.io. Variabel tersebut adalah sebagai berikut:
 \begin{lstlisting}[caption={Potongan kode untuk mendapatkan fungsi Socket.io pada \textit{client}}]
 var socket = io();
 \end{lstlisting}
@@ -1044,7 +1046,7 @@ text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
 document.getElementById("roomId").innerHTML = text;
 }
 \end{lstlisting}
-		Kode yang akan dibangkitkan secara acak berjumlah enam dijit angka, dimana angka tersebut berada didalam rentang 000000 hingga 999999. Pada saat kode \textit{room} telah dibangkitkan, \textit{PC} secara otomatis akan langsung bergabung kedalam \textit{room} tersebut. Langkah tersebut dapat dilakukan seperti berikut:
+		Kode yang akan dibangkitkan secara acak berjumlah enam dijit angka. Angka tersebut berada di dalam rentang 111111 hingga 999999. Pada saat kode \textit{room} telah dibangkitkan, \textit{PC} secara otomatis akan langsung bergabung kedalam \textit{room} tersebut. Langkah tersebut dapat dilakukan seperti berikut:
 \begin{lstlisting}[caption={Proses \textit{host} bergabung kedalam room}, label={host_gabung}, captionpos=b]
 function getRandInt(){
 	text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
@@ -1066,7 +1068,7 @@ socket.on('hostJoinRoom', (msg) => {
 	users.addUser(msg.id, msg.room);
 });
 \end{lstlisting}
-		\textit{Event hostJoinRoom} akan ditangkap oleh \textit{server} kemudian akan mengeksekusi fungsi yang ada didalamnya. \textit{Server} akan menambahkan \textit{host} kedalam \textit{room} dengan menggunakan \textit{socket.join(msg.room)}. Kemudian \textit{host} akan ditambahkan kedalam \textit{array} yang berada didalam kelas Users. Array tersebut berisi daftar \textit{client} yang telah memiliki \textit{room}. Proses tersebut dilakukan dengan menggunakan \textit{users.addUser(msg.id, msg.room)}. Dengan melakukan proses ini, maka \textit{room} telah dibangkitkan, dan \textit{host} telah tergabung didalamnya.
+		\textit{Event hostJoinRoom} akan ditangkap oleh \textit{server} kemudian akan mengeksekusi fungsi yang ada di dalamnya. \textit{Server} akan menambahkan \textit{host} kedalam \textit{room} dengan menggunakan \textit{socket.join(msg.room)}. Kemudian \textit{host} akan ditambahkan ke dalam \textit{array} yang berada di dalam kelas Users. Array tersebut berisi daftar \textit{client} yang telah memiliki \textit{room}. Proses tersebut dilakukan dengan menggunakan \textit{users.addUser(msg.id, msg.room)}. Dengan melakukan proses ini, maka \textit{room} telah dibangkitkan, dan \textit{host} telah tergabung didalamnya.
 		
 		Setelah kode \textit{room} dibangkitkan, maka akan ditampilkan kelayar \textit{PC}. Pengguna akan memasukan kode tersebut ke kolom yang berada dihalaman \textit{smartphone} untuk dikirimkan ke \textit{server}. Proses ini merupakan proses sinkronisasi yang dibutuhkan antara \textit{PC} dan \textit{smartphone}. Proses pengiriman kode \textit{room} akan dilakukan dengan cara berikut:
 \begin{lstlisting}[caption={Proses permintaan bergabung pada \textit{client}}, label={lst:client_req}, captionpos=b]
