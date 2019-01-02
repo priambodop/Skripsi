@@ -312,6 +312,19 @@ Alamat aplikasi permainan Finger For Life adalah \url{http://fingerforlife.herok
 	
 \end{enumerate}
 
+\section{Analisis \textit{State} aplikasi Finger For Life}
+\label{sec:state}
+
+Diagram \textit{state} pada aplikasi permainan Finger For Life menunjukan bagaimana proses yang terjadi pada saat aplikasi dijalankan dari awal hingga akhir. Berdasarkan analisis pada subbab \ref{sec:alur}, dibentuk suatu diagram \textit{state}Diagram \textit{state} dapat dilihat pada Gambar 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{Gambar/state_ffl}
+	\caption{Diagram \textit{state} aplikasi Finger For Life}
+	\label{fig:state_ffl}
+\end{figure}
+
+
 \section{Analisis \textit{Use Case}}
 \label{sec:usecase}
 
@@ -322,12 +335,12 @@ Diagram \textit{use case} pada permainan berbasis web yang akan dibangun hanya m
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{Gambar/usecase_pemain}
+	\includegraphics[scale=0.4]{Gambar/diagram_useCaseRev}
 	\caption{Diagram \textit{use case} pemain}
 	\label{fig:usecase_pemain}
 \end{figure}
 
-Berdasarkan hasil analisis pada subbab \ref{sec:alur}, akan dibentuk empat \textit{use case} seperti berikut:
+Berdasarkan hasil analisis pada subbab \ref{sec:alur}, dibentuk satu \textit{use case} yaitu Bermain. \textit{Use case} tersebut memiliki beberapa tahap yang harus dilakukan selanjutnya. Tahap-tahap tersebut dijelaskan sebagai berikut:
 
 \begin{itemize}
 	\item \textbf{Melakukan permintaan untuk bergabung}, pemain dapat bergabung dalam permainan dengan mengirimkan kode yang sudah disediakan \textit{browser PC} dengan menggunakan \textit{browser smartphone}.
@@ -835,7 +848,7 @@ Penjelasan pustaka-pustaka yang dibutuhkan untuk pengembangan Finger For Life su
 %\begin{lstlisting}[caption={Implementasi properti \textit{globalCompositeOperation}}]
 %ctx.globalCompositeOperation = 'destination-over';
 %\end{lstlisting}
-Properti ini akan menetapkan nilai \textit{globalCompositeOperation} menjadi \textit{destination-over}. Nilai tersebut akan memberikan efek seperti berikut:
+Properti ini akan menetapkan nilai \textit{globalCompositeOperation} menjadi \textit{destination-over}. Nilai tersebut akan memberikan efek seperti pada Gambar \ref{fig:canvas_destination}.
 
 \begin{figure}[H]
 	\centering
@@ -1104,3 +1117,31 @@ socket.on('requestToJoin', function(msg){
 		
 	\end{itemize}
 \end{enumerate}
+
+\section{Analisis \textit{event}}
+\label{sec:event}
+
+Berdasarkan analisis yang dilakukan pada subbab \ref{sec:alur}, dibutuhkan beberapa \textit{event} yang dipakai pada saat aplikasi dijalankan dari awal hingga akhir. Beberapa \textit{event} yang dibutuhkan di dalam proses implementasi aplikasi Finger For Life dapat dilihat pada Tabel \ref{table:analisis_event}.
+
+\begin{table}[H]
+	\centering
+	\caption{Tabel daftar \textit{event} yang terdapat pada berkas \textit{www}}
+	\begin{tabular}{|p{0.35cm}|p{3cm}|p{3cm}|p{7cm}|}
+		\hline
+		No & Event & Parameter & Penjelasan \\ \hline
+		1 & connection & socket & Berfungsi untuk menangani suatu koneksi Socket.io yang baru tersambung. \\ \hline
+		2 & hostJoinRoom & id, room & Berfungsi untuk menangkap \textit{event} \textbf{hostJoinRoom} yang dipancarkan oleh \textit{host} pada saat akan masuk kedalam room. \\ \hline
+		3 & sendingTheWinner & playerWin, playerCharArr & Berfungsi untuk menangkap \textit{event} \textbf{sendingTheWinner} yang dipancarkan oleh \textit{client} setelah ada pemenang permainan \\ \hline
+		4 & getTheMessage & theWinnerId & Berfungsi untuk menangkap \textit{event} \textbf{getTheMessage} yang dipancarkan oleh \textit{client} pada saat ada salah satu pemain yang telah menyentuh garis akhir dari permainan. \\ \hline
+		5 & goBackHome & - & Berfungsi untuk menangkap \textit{event} \textbf{goBackHome} yang dipancarkan oleh \textit{client} pada saat pemain menekan tombol \textit{exit} untuk kembali kehalaman utama. \\ \hline
+		6 & ping & message & Berfungsi untuk menangkap \textit{event} \textbf{ping} yang dipancarkan oleh \textit{client} untuk menghitung \textit{latency} pada saat pemain menekan tombol telapak kaki pada layar \textit{smartphone}, dan karakter digerakan pada layar \textit{PC}. \\ \hline
+		7 & pong & message & Berfungsi untuk memancarkan \textit{event} \textbf{pong} yang digunakan untuk memberi informasi kepada \textit{host} agar menghitung \textit{latency} pada saat \textit{client} menekan tombol telapak kaki pada layar \textit{smartphone} \\ \hline
+		8 & roomFull & room & Berfungsi untuk menangkap \textit{event} \textbf{roomFull} yang dipancarkan oleh \textit{client} pada saat \textit{room} telah terisi penuh. \\ \hline
+		9 & selectingChar & val, id & Berfungsi untuk menangkap \textit{event} \textbf{selectingChar} yang dipancarkan oleh \textit{client} pada saat karakter telah dipilih oleh pemain untuk menampilkan karakter kelayar \textit{PC}. \\ \hline
+		10 & sendingChar & val, id, marker & Berfungsi untuk menangkap \textit{event} \textbf{sendingChar} yang dipancarkan oleh \textit{client} pada saat karakter telah ditetapkan oleh pemain. \\ \hline
+		11 & charIsReady & playerData & Berfungsi untuk menangkap \textit{event} \textbf{charIsReady} yang dipancarkan oleh \textit{client} pada saat kedua karakter telah ditetapkan oleh kedua pemain. \\ \hline
+		12 & stepClicked & id & Berfungsi untuk menangkap \textit{event} \textbf{stepClicked} yang dipancarkan oleh \textit{client} pada saat tombol telapak kaki ditekan oleh pemain. \\ \hline
+		13 & requestToJoin & id, room & Berfungsi untuk menangkap \textit{event} \textbf{requestToJoin} yang dipancarkan oleh \textit{client} pada saat melakukan proses permintaan bergabung. \\ \hline
+	\end{tabular}
+	\label{table:analisis_event}
+\end{table}
