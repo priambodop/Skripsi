@@ -236,7 +236,7 @@ Pengujian fungsional dilakukan untuk mengetahui kesesuaian reaksi perangkat luna
 		\item \textbf{Solusi:} \\
 		Solusi dari masalah ini adalah dengan menggunakan fitur dari CSS yaitu \textit{@media querry}. Fitur ini dapat mengatur pada resolusi berapakah suatu elemen ditampilkan kelayar. Berikut merupakan potongan kode solusi dari masalah ini:
 		
-\begin{lstlisting}[caption={Fitur CSS \textit{@media querry}}, label={lst:mediaQuerry},captionpos=b]
+\begin{lstlisting}[caption=Fitur CSS \textit{@media querry}, label=lst:mediaQuerry,captionpos=b, frame=single]
 @media (max-width:1260px){
 	#left, #right, #startButton{
 		display: none;
@@ -261,7 +261,7 @@ Pengujian fungsional dilakukan untuk mengetahui kesesuaian reaksi perangkat luna
 		\item \textbf{Solusi:} \\
 		Solusi dari masalah ini adalah dengan menghilangkan elemen \textit{submit()}, kemudian diganti dengan menggunakan Socket.io untuk memancarkan \textit{event} pada saat tombol \textit{send} ditekan. Berikut merupakan potongan kode dari solusi masalah ini.
 		
-\begin{lstlisting}[caption={Proses memancarkan \textit{event}}, label={lst:emitEvent}, captionpos=b]
+\begin{lstlisting}[caption={Proses memancarkan \textit{event}}, label={lst:emitEvent}, captionpos=b, frame=single]
 function requestToJoin(){
 	socket.emit('requestToJoin', {
 		id: socket.id,
@@ -281,7 +281,7 @@ function requestToJoin(){
 		\item \textbf{Solusi:} \\
 		Solusi untuk masalah ini adalah dengan menggunakan JavaScript untuk menangani tombol \textit{choose}, sehingga pemain tidak dapat mengirimkan data apabila belum memilih karakter. Setelah itu, tombol \textit{choose}  milik pemain yang telah memilih karakter akan dinonaktifkan, sehingga tidak dapat ditekan dua kali. Berikut merupakan potongan kode dari solusi masalah ini:
 		
-\begin{lstlisting}[caption={Proses menangani tombol \textit{choose}}, label={lst:tombolChoose},captionpos=b]
+\begin{lstlisting}[caption={Proses menangani tombol \textit{choose}}, label={lst:tombolChoose},captionpos=b, frame=single]
 var valButton = $('input[name="radioChar"]:checked').val();
 	if (valButton === undefined) {
 	alert("You have not choose a character.");
@@ -307,7 +307,7 @@ document.getElementById("nextButton").disabled = true;
 		\item \textbf{Solusi:} \\
 		Solusi dari masalah ini adalah dengan menggunakan JavaScript, untuk menangani proses permintaan bergabung agar kedua pemain dapat masuk kedalam room. Berikut merupakan potongan kode dari solusi masalah ini:
 		
-\begin{lstlisting}[caption={Proses menangani memancarkan \textit{event}}, label={lst:submitEvent},captionpos=b]
+\begin{lstlisting}[caption={Proses menangani memancarkan \textit{event}}, label={lst:submitEvent},captionpos=b, frame=single]
 function requestToJoin(){
 	socket.emit('requestToJoin', {
 		id: socket.id,
@@ -358,203 +358,222 @@ Pengujian fungsional yang dilakukan terbagi menjadi dua, yaitu pengujian fungsio
 \end{table}
 \end{itemize} 
 \subsection{Pengujian Eksperimental}
-Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{smartphone} dan \textit{PC} yang berbeda-beda. Setiap responden diminta untuk mengakses URL yang diberikan melalui \textit{smartphone} dan \textit{PC} milik masing-masing dan memastikan apakah fungsi dari setiap halaman yang ditampilkan sudah berjalan. Pengujian eksperimental terbagi menjadi dua, yaitu pengujian \textit{cross-platform} dan pengujian \textit{latency}.
+Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{smartphone} dan \textit{PC} yang berbeda-beda. Pengujian eksperimental dilakukan untuk mengetahui ukuran \textit{latency} yang dihasilkan pada saat aplikasi dijalankan. Satuan yang digunakan untuk ukuran \textit{latency} adalah milidetik. Setiap responden diminta untuk mengakses URL yang diberikan melalui \textit{smartphone} dan \textit{PC} milik masing-masing. Pengujian eksperimental terbagi menjadi dua, yaitu pengujian jaringan internet dan pengujian \textit{cross-platform}.
 
 \begin{enumerate}
 	\item \textbf{Pengujian \textit{Cross-Platform}} \\
-	Pengujian \textit{cross-platform} merupakan pengujian yang dilakukan terhadap jenis \textit{smartphone} dan jenis \textit{PC} yang berbeda-beda. Pengujian ini dilakukan untuk memastikan setiap fungsi dari setiap halaman yang ditampilkan sudah berjalan diseluruh \textit{platform}. Dari beberapa responden yang sudah melakukan pengujian, didapatkan hasil sebagai berikut:
+	Pengujian \textit{cross-platform} dilakukan untuk menguji aplikasi yang dijalankan pada jaringan internet yang sama tetapi pada gawai dan \textit{browser} yang berbeda-beda. Pengujian ini dilakukan untuk mengetahui ukuran \textit{latency} yang dihasilkan dengan menggunakan gawai dan \textit{browser} yang berbeda-beda. Jaringan internet yang akan digunakan dalam pengujian ini adalah Telkomsel. Daftar hasil pengujian jaringan internet dapat dilihat pada Gambar \ref{fig:pengujian_crossplatform}.
 	
-	\begin{enumerate}
-		\item \textbf{Pengujian pertama} \\
-		Jenis \textit{smartphone} pemain 1: iPhone 7 \\
-		Jenis \textit{browser} pemain 1: Safari\\
-		Jaringan internet pemain 1: Telkomsel\\
-		
-		Jenis \textit{smartphone} pemain 2: iPhone 7 Plus\\
-		Jenis \textit{browser} pemain 2: Google Chrome\\
-		Jaringan internet pemain 2: Telkomsel\\
-		
-		Jenis \textit{PC}: Macbook 13" mid 2014\\
-		Jenis \textit{browser PC}: Google Chrome\\
-		Jaringan internet \textit{PC}: Wifi UNPAR9\\
-		
-		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada subbab \ref{subsec:fungsional}, seluruh fungsi telah berjalan dengan baik.
-		
-		\item \textbf{Pengujian kedua} \\
-		Jenis \textit{smartphone} pemain 1: Samsung Galaxy S4\\
-		Jenis \textit{browser} pemain 1: Google Chrome\\
-		Jaringan internet pemain 1: Wifi Megavision\\
-		
-		Jenis \textit{smartphone} pemain 2: Motorola Moto G (5S Plus)\\
-		Jenis \textit{browser} pemain 2: Dolphin Browser\\
-		Jaringan internet pemain 2: Wifi Megavision\\
-		
-		Jenis \textit{PC}: Asus A450L\\
-		Jenis \textit{browser PC}: Google Chrome\\
-		Jaringan internet \textit{PC}: Wifi Megavision\\
-		
-		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada subbab \ref{subsec:fungsional}, seluruh fungsi telah berjalan dengan baik.
-		
-		\item \textbf{Pengujian ketiga} \\
-		Jenis \textit{smartphone} pemain 1: iPhone 7 Plus\\
-		Jenis \textit{browser} pemain 1: Google Chrome\\
-		Jaringan internet pemain 1: Telkomsel\\
-		
-		Jenis \textit{smartphone} pemain 2: iPhone 7 Plus\\
-		Jenis \textit{browser} pemain 2: Safari\\
-		Jaringan internet pemain 2: Telkomsel\\
-		
-		Jenis \textit{PC}: Asus ROG FX\\
-		Jenis \textit{browser PC}: Google Chrome\\
-		Jaringan internet \textit{PC}: Wifi UNPAR9\\
-		
-		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada subbab \ref{subsec:fungsional}, seluruh fungsi telah berjalan dengan baik.
-		
-		\item \textbf{Pengujian keempat} \\
-		Jenis \textit{smartphone} pemain 1: iPhone 7\\
-		Jenis \textit{browser} pemain 1: Google Chrome\\
-		Jaringan internet pemain 1: Telkomsel\\
-		
-		Jenis \textit{smartphone} pemain 2: Xiaomi mi note 3\\
-		Jenis \textit{browser} pemain 2: Google Chrome\\
-		Jaringan internet pemain 2: Telkomsel\\
-		
-		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
-		Jenis \textit{browser PC}: Google Chrome\\
-		Jaringan internet \textit{PC}: Wifi The Kiosk\\
-		
-		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada subbab \ref{subsec:fungsional}, seluruh fungsi telah berjalan dengan baik.
-		
-		\item \textbf{Pengujian kelima} \\
-		Jenis \textit{smartphone} pemain 1: Samsung J7 Pro\\
-		Jenis \textit{browser} pemain 1: Google Chrome\\
-		Jaringan internet pemain 1: Telkomsel\\
-		
-		Jenis \textit{smartphone} pemain 2: iPhone 7 Plus\\
-		Jenis \textit{browser} pemain 2: Google Chrome\\
-		Jaringan internet pemain 2: Telkomsel\\
-		
-		Jenis \textit{PC}: Asus ROG FX\\
-		Jenis \textit{browser PC}: Google Chrome\\
-		Jaringan internet \textit{PC}: Wifi UNPAR9\\
-		
-		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada subbab \ref{subsec:fungsional}, seluruh fungsi telah berjalan dengan baik.
-	\end{enumerate}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.4]{Gambar/pengujian_crossplatform}
+		\caption{Grafik pengujian \textit{cross-platform}.}
+		\label{fig:pengujian_crossplatform}
+	\end{figure}
 
-	Dari beberapa pengujian yang dilakukan, dapat disimpulkan bahwa aplikasi telah berjalan dengan baik di beberapa \textit{platform} yang berbeda.
+	Berdasarkan hasil pengujian \textit{cross-platform} yang telah dilakukan, didapatkan rata-rata ukuran \textit{latency} yang dihasilkan pada saat aplikasi dijalankan. Rata-rata ukuran \textit{latency} yang didapatkan adalah 0.273.
+	
+	Ukuran tersebut memiliki arti bahwa aplikasi telah memberikan respon yang cepat pada saat aplikasi permainan dijalankan. Pada saat pemain menekan tombol yang ada pada layar \textit{smartphone}, karakter yang berada pada layar \textit{PC} langsung bergerak.
+	
+%	\begin{table}[H]
+%		\centering
+%		\caption{Tabel hasil pengujian \textit{cross-platform}.}
+%		\begin{adjustbox}{width=\textwidth}
+%			\begin{tabular}{|p{0.35cm}|p{3cm}|p{2cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+%				\hline
+%				No & Smartphone 1 & Browser 1 & Smartphone 2 & Browser 2 & PC & Browser PC & Latency 1 & Latency 2 \\ \hline
+%				1 & iPhone 7 & Chrome & Xiaomi mi note 3 & mi Browser & Macbook Pro 13" mid 2014 & Chrome & 183 ms & 183 ms \\ \hline
+%				2 & Samsung Galaxy S4 & Chrome & Opppo F7 & Chrome & Macbook Pro 13" mid 2014 & Chrome & 556 ms & 567 ms \\ \hline	
+%				3 & Coolpad e502 & Chrome & Motorola Moto G (5S Plus) & Dolphin & Macbook Pro 13" mid 2014 & Chrome & 147 ms & 146 ms \\ \hline
+%				4 & iPhone 7 Plus & Chrome & iPhone 7 Plus & Safari & Macbook Pro 13" mid 2014 & Chrome & 203 ms & 203 ms \\ \hline	
+%			\end{tabular}
+%		\end{adjustbox}
+%		\label{table:pengujian_crossplatform}
+%	\end{table}
+	
+%	Pengujian \textit{cross-platform} merupakan pengujian yang dilakukan terhadap jenis \textit{smartphone} dan jenis \textit{PC} yang berbeda-beda. Pengujian ini dilakukan untuk memastikan setiap fungsi dari setiap halaman yang ditampilkan sudah berjalan diseluruh \textit{platform}. Dari beberapa responden yang sudah melakukan pengujian, didapatkan hasil sebagai berikut:
+%	
+%	\begin{enumerate}
+%		\item \textbf{Pengujian pertama} \\
+%		Jenis \textit{smartphone} pemain 1: iPhone 7 \\
+%		Jenis \textit{browser} pemain 1: Safari\\
+%		Jaringan internet pemain 1: Telkomsel\\
+%		
+%		Jenis \textit{smartphone} pemain 2: iPhone 7 Plus\\
+%		Jenis \textit{browser} pemain 2: Google Chrome\\
+%		Jaringan internet pemain 2: Telkomsel\\
+%		
+%		Jenis \textit{PC}: Macbook 13" mid 2014\\
+%		Jenis \textit{browser PC}: Google Chrome\\
+%		Jaringan internet \textit{PC}: Wifi UNPAR9\\
+%		
+%		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada subbab \ref{subsec:fungsional}, seluruh fungsi telah berjalan dengan baik.
+%		
+%		\item \textbf{Pengujian kedua} \\
+%		Jenis \textit{smartphone} pemain 1: Samsung Galaxy S4\\
+%		Jenis \textit{browser} pemain 1: Google Chrome\\
+%		Jaringan internet pemain 1: Wifi Megavision\\
+%		
+%		Jenis \textit{smartphone} pemain 2: Motorola Moto G (5S Plus)\\
+%		Jenis \textit{browser} pemain 2: Dolphin Browser\\
+%		Jaringan internet pemain 2: Wifi Megavision\\
+%		
+%		Jenis \textit{PC}: Asus A450L\\
+%		Jenis \textit{browser PC}: Google Chrome\\
+%		Jaringan internet \textit{PC}: Wifi Megavision\\
+%		
+%		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada subbab \ref{subsec:fungsional}, seluruh fungsi telah berjalan dengan baik.
+%		
+%		\item \textbf{Pengujian ketiga} \\
+%		Jenis \textit{smartphone} pemain 1: iPhone 7 Plus\\
+%		Jenis \textit{browser} pemain 1: Google Chrome\\
+%		Jaringan internet pemain 1: Telkomsel\\
+%		
+%		Jenis \textit{smartphone} pemain 2: iPhone 7 Plus\\
+%		Jenis \textit{browser} pemain 2: Safari\\
+%		Jaringan internet pemain 2: Telkomsel\\
+%		
+%		Jenis \textit{PC}: Asus ROG FX\\
+%		Jenis \textit{browser PC}: Google Chrome\\
+%		Jaringan internet \textit{PC}: Wifi UNPAR9\\
+%		
+%		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada subbab \ref{subsec:fungsional}, seluruh fungsi telah berjalan dengan baik.
+%		
+%		\item \textbf{Pengujian keempat} \\
+%		Jenis \textit{smartphone} pemain 1: iPhone 7\\
+%		Jenis \textit{browser} pemain 1: Google Chrome\\
+%		Jaringan internet pemain 1: Telkomsel\\
+%		
+%		Jenis \textit{smartphone} pemain 2: Xiaomi mi note 3\\
+%		Jenis \textit{browser} pemain 2: Google Chrome\\
+%		Jaringan internet pemain 2: Telkomsel\\
+%		
+%		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
+%		Jenis \textit{browser PC}: Google Chrome\\
+%		Jaringan internet \textit{PC}: Wifi The Kiosk\\
+%		
+%		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada subbab \ref{subsec:fungsional}, seluruh fungsi telah berjalan dengan baik.
+%		
+%		\item \textbf{Pengujian kelima} \\
+%		Jenis \textit{smartphone} pemain 1: Samsung J7 Pro\\
+%		Jenis \textit{browser} pemain 1: Google Chrome\\
+%		Jaringan internet pemain 1: Telkomsel\\
+%		
+%		Jenis \textit{smartphone} pemain 2: iPhone 7 Plus\\
+%		Jenis \textit{browser} pemain 2: Google Chrome\\
+%		Jaringan internet pemain 2: Telkomsel\\
+%		
+%		Jenis \textit{PC}: Asus ROG FX\\
+%		Jenis \textit{browser PC}: Google Chrome\\
+%		Jaringan internet \textit{PC}: Wifi UNPAR9\\
+%		
+%		Hasil: Berdasarkan tabel \ref{table:fungsionalPC} dan \ref{table:fungsionalSmartphone} yang ada pada subbab \ref{subsec:fungsional}, seluruh fungsi telah berjalan dengan baik.
+%	\end{enumerate}
+%
+%	Dari beberapa pengujian yang dilakukan, dapat disimpulkan bahwa aplikasi telah berjalan dengan baik di beberapa \textit{platform} yang berbeda.
 	
 	
-	\item \textbf{Pengujian \textit{latency}} \\
-	\textit{Latency} merupakan kecepatan yang dihasilkan pada saat pengiriman data dari \textit{client} menuju \textit{server} maupun sebaliknya. Pengujian ini dilakukan untuk meneliti jumlah \textit{latency} yang dihasilkan dari implementasi Socket.io. Pengujian \textit{latency} yang dilakukan berfokus pada halaman memulai permainan, saat kedua pemain memainkan permainan Finger For Life. \textit{Latency} yang dihitung adalah perbandingan waktu antara pemain menekan tombol kaki pada layar \textit{smartphone} hingga karakter pada layar \textit{PC} bergerak. 
+	\item \textbf{Pengujian Jaringan Internet} \\
+	Pengujian jaringan internet dilakukan untuk menguji aplikasi yang dijalankan pada gawai dan \textit{browser} yang sama tetapi jaringan internet yang berbeda-beda. Pengujian ini dilakukan untuk mengetahui ukuran \textit{latency} yang dihasilkan dengan menggunakan jaringan internet yang berbeda-beda. 
 	
-	Dari beberapa responden yang melakukan pengujian, didapatkan beberapa hasil seperti berikut:
+	\textit{Smartphone} pemain pertama yang digunakan pada pengujian ini adalah iPhone 7. \textit{Smartphone} pemain kedua yang digunakan pada pengujian ini adalah Xiaomi mi note 3. \textit{PC} yang digunakan pada pengujian ini adalah MacBook Pro 13" Mid 2014.
 	
-	\begin{enumerate}
-		\item \textbf{Pengujian Pertama} \\ 
-		Jenis \textit{smartphone} pemain 1: Samsung J7\\
-		Jenis \textit{browser} pemain 1: Internet (Default Browser Android)\\
-		Jaringan internet pemain 1: Wifi UNPAR2\\
-		
-		Jenis \textit{smartphone} pemain 2: LG Q6+\\
-		Jenis \textit{browser} pemain 2: Google Chrome\\
-		Jaringan internet pemain 2: Wifi UNPAR2\\
-		
-		Jenis \textit{PC}: HP Pavilion G4\\
-		Jenis \textit{browser PC} : Mozilla Firefox\\
-		Jaringan internet \textit{PC}: Wifi UNPAR2\\
-		
-		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 203 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 203 milidetik.
-		
-		\item \textbf{Pengujian Kedua} \\ 
-		Jenis \textit{smartphone} pemain 1: iPhone 7\\
-		Jenis \textit{browser} pemain 1: Google Chrome\\
-		Jaringan internet pemain 1: Telkomsel\\
-		
-		Jenis \textit{smartphone} pemain 2: Xiaomi Mi Note 3\\
-		Jenis \textit{browser} pemain 2: Google Chrome\\
-		Jaringan internet pemain 2: Telkomsel\\
-		
-		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
-		Jenis \textit{browser PC} : Google Chrome\\
-		Jaringan internet \textit{PC}: Wifi Telkomsel\\
-		
-		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 277 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 298 milidetik.
-		
-		\item \textbf{Pengujian Ketiga} \\ 
-		Jenis \textit{smartphone} pemain 1: coolpad e502\\
-		Jenis \textit{browser} pemain 1: Google Chrome\\
-		Jaringan internet pemain 1: Telkomsel\\
-		
-		Jenis \textit{smartphone} pemain 2: Oppo F7\\
-		Jenis \textit{browser} pemain 2: Google Chrome\\
-		Jaringan internet pemain 2: Telkomsel\\
-		
-		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
-		Jenis \textit{browser PC} : Google Chrome\\
-		Jaringan internet \textit{PC}: Wifi Telkomsel\\
-		
-		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 556 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 567 milidetik.
-		
-		\item \textbf{Pengujian Keempat} \\ 
-		Jenis \textit{smartphone} pemain 1: Sony Xperia M5\\
-		Jenis \textit{browser} pemain 1: Google Chrome\\
-		Jaringan internet pemain 1: Wifi UNPAR2\\
-		
-		Jenis \textit{smartphone} pemain 2: Oppo F3\\
-		Jenis \textit{browser} pemain 2: Google Chrome\\
-		Jaringan internet pemain 2: Wifi UNPAR2\\
-		
-		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
-		Jenis \textit{browser PC} : Google Chrome\\
-		Jaringan internet \textit{PC}: Wifi UNPAR2\\
-		
-		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 398 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 396 milidetik.
-		
-%		\item \textbf{Pengujian Kelima} \\ 
-%		Jenis \textit{smartphone} pemain 1: \\
-%		Jenis \textit{browser} pemain 1: \\
-%		Jaringan internet pemain 1: \\
-%		
-%		Jenis \textit{smartphone} pemain 2: \\
-%		Jenis \textit{browser} pemain 2: \\
-%		Jaringan internet pemain 2: \\
-%		
-%		Jenis \textit{PC}: \\
-%		Jenis \textit{browser PC} : \\
-%		Jaringan internet \textit{PC}: \\
-%		
-%		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah <latency>, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah <latency>.
-%		
-%		\item \textbf{Pengujian Keenam} \\
-%		Jenis \textit{smartphone} pemain 1: \\
-%		Jenis \textit{browser} pemain 1: \\
-%		Jaringan internet pemain 1: \\
-%		
-%		Jenis \textit{smartphone} pemain 2: \\
-%		Jenis \textit{browser} pemain 2: \\
-%		Jaringan internet pemain 2: \\
-%		
-%		Jenis \textit{PC}: \\
-%		Jenis \textit{browser PC} : \\
-%		Jaringan internet \textit{PC}: \\
-%		
-%		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah <latency>, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah <latency>.
-%		
-%		\item \textbf{Pengujian Ketujuh} \\ 
-%		Jenis \textit{smartphone} pemain 1: \\
-%		Jenis \textit{browser} pemain 1: \\
-%		Jaringan internet pemain 1: \\
-%		
-%		Jenis \textit{smartphone} pemain 2: \\
-%		Jenis \textit{browser} pemain 2: \\
-%		Jaringan internet pemain 2: \\
-%		
-%		Jenis \textit{PC}: \\
-%		Jenis \textit{browser PC} : \\
-%		Jaringan internet \textit{PC}: \\
-%		
-%		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah <latency>, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah <latency>.
-	\end{enumerate}
+	Hasil pengujian yang telah dilakukan dapat dilihat pada Gambar \ref{fig:pengujian_internet}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.4]{Gambar/pengujian_internet}
+		\caption{Grafik pengujian jaringan internet.}
+		\label{fig:pengujian_internet}
+	\end{figure}
 
-	Dari beberapa pengujian yang dilakukan, dapat disimpulkan bahwa rata-rata \textit{latency} yang dihasilkan oleh aplikasi adalah 362 milidetik.
+	Berdasarkan hasil pengujian yang telah dilakukan, didapatkan ukuran rata-rata \textit{latency} yang dihasilkan berdasarkan penggunaan jaringan internet yang berbeda-beda. Rata-rata ukuran \textit{latency} yang dihasilkan adalah 0.215 milidetik.
+	
+	Ukuran tersebut memiliki arti bahwa aplikasi telah memberikan respon yang cepat pada saat aplikasi permainan dijalankan. Pada saat pemain menekan tombol yang ada pada layar \textit{smartphone}, karakter yang berada pada layar \textit{PC} langsung bergerak.
+	
+%	\begin{table}[H]
+%		\centering
+%		\caption{Tabel hasil pengujian jaringan internet.}
+%		\begin{adjustbox}{width=\textwidth}
+%			\begin{tabular}{|p{0.35cm}|p{4cm}|p{4cm}|p{3cm}|p{2cm}|p{2cm}|}
+%				\hline
+%				No & Internet Smartphone 1 & Internet Smartphone 2 & Internet PC & Latency 1 & Latency 2 \\ \hline
+%				1 & UNPAR9 & Telkomsel & UNPAR9 & 437 & 437 \\ \hline
+%				2 & Telkomsel & UNPAR9 & UNPAR9 & 121 & 156 \\ \hline
+%				3 & Telkomsel & UNPAR9 & Telkomsel & 183 & 183 \\ \hline
+%				3 & Telkomsel & Telkomsel & UNPAR9 & 102 & 137 \\ \hline
+%			\end{tabular}
+%		\end{adjustbox}
+%		
+%		\label{table:pengujian_internet}
+%	\end{table}
+	
+%	\textit{Latency} merupakan kecepatan yang dihasilkan pada saat pengiriman data dari \textit{client} menuju \textit{server} maupun sebaliknya. Pengujian ini dilakukan untuk meneliti jumlah \textit{latency} yang dihasilkan dari implementasi Socket.io. Pengujian \textit{latency} yang dilakukan berfokus pada halaman memulai permainan, saat kedua pemain memainkan permainan Finger For Life. \textit{Latency} yang dihitung adalah perbandingan waktu antara pemain menekan tombol kaki pada layar \textit{smartphone} hingga karakter pada layar \textit{PC} bergerak. 
+	
+%	Dari beberapa responden yang melakukan pengujian, didapatkan beberapa hasil seperti berikut:
+	
+%	\begin{enumerate}
+%		\item \textbf{Pengujian Pertama} \\ 
+%		Jenis \textit{smartphone} pemain 1: Samsung J7\\
+%		Jenis \textit{browser} pemain 1: Internet (Default Browser Android)\\
+%		Jaringan internet pemain 1: Wifi UNPAR2\\
+%		
+%		Jenis \textit{smartphone} pemain 2: LG Q6+\\
+%		Jenis \textit{browser} pemain 2: Google Chrome\\
+%		Jaringan internet pemain 2: Wifi UNPAR2\\
+%		
+%		Jenis \textit{PC}: HP Pavilion G4\\
+%		Jenis \textit{browser PC} : Mozilla Firefox\\
+%		Jaringan internet \textit{PC}: Wifi UNPAR2\\
+%		
+%		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 203 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 203 milidetik.
+%		
+%		\item \textbf{Pengujian Kedua} \\ 
+%		Jenis \textit{smartphone} pemain 1: iPhone 7\\
+%		Jenis \textit{browser} pemain 1: Google Chrome\\
+%		Jaringan internet pemain 1: Telkomsel\\
+%		
+%		Jenis \textit{smartphone} pemain 2: Xiaomi Mi Note 3\\
+%		Jenis \textit{browser} pemain 2: Google Chrome\\
+%		Jaringan internet pemain 2: Telkomsel\\
+%		
+%		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
+%		Jenis \textit{browser PC} : Google Chrome\\
+%		Jaringan internet \textit{PC}: Wifi Telkomsel\\
+%		
+%		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 277 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 298 milidetik.
+%		
+%		\item \textbf{Pengujian Ketiga} \\ 
+%		Jenis \textit{smartphone} pemain 1: coolpad e502\\
+%		Jenis \textit{browser} pemain 1: Google Chrome\\
+%		Jaringan internet pemain 1: Telkomsel\\
+%		
+%		Jenis \textit{smartphone} pemain 2: Oppo F7\\
+%		Jenis \textit{browser} pemain 2: Google Chrome\\
+%		Jaringan internet pemain 2: Telkomsel\\
+%		
+%		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
+%		Jenis \textit{browser PC} : Google Chrome\\
+%		Jaringan internet \textit{PC}: Wifi Telkomsel\\
+%		
+%		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 556 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 567 milidetik.
+%		
+%		\item \textbf{Pengujian Keempat} \\ 
+%		Jenis \textit{smartphone} pemain 1: Sony Xperia M5\\
+%		Jenis \textit{browser} pemain 1: Google Chrome\\
+%		Jaringan internet pemain 1: Wifi UNPAR2\\
+%		
+%		Jenis \textit{smartphone} pemain 2: Oppo F3\\
+%		Jenis \textit{browser} pemain 2: Google Chrome\\
+%		Jaringan internet pemain 2: Wifi UNPAR2\\
+%		
+%		Jenis \textit{PC}: Macbook Pro 13" Mid 2014\\
+%		Jenis \textit{browser PC} : Google Chrome\\
+%		Jaringan internet \textit{PC}: Wifi UNPAR2\\
+%		
+%		Hasil: Berdasarkan percobaan yang telah dilakukan, jumlah \textit{latency} yang dihasilkan oleh pemain 1 adalah 398 milidetik, dan jumlah \textit{latency} yang dihasilkan oleh pemain 2 adalah 396 milidetik.
+%		
+%	\end{enumerate}
+
+%	Dari beberapa pengujian yang dilakukan, dapat disimpulkan bahwa rata-rata \textit{latency} yang dihasilkan oleh aplikasi adalah 362 milidetik.
 \end{enumerate}

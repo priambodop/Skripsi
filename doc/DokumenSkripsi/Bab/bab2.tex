@@ -28,7 +28,7 @@ Komunikasi yang ada di dalam Node.js dilakukan dengan memancarkan suatu \textit{
 	\item Apabila \textit{event} yang telah dipancarkan oleh \textit{client} tidak ditangkap oleh \textit{server} maka \textit{event} tersebut akan dihancurkan secara otomatis setelah satu sesi komunikasi selesai.
 \end{itemize}
 
-Subbab-subbab berikut akan menjelaskan beberapa modul yang dimiliki oleh Node.js.
+Subbab-subbab berikut menjelaskan beberapa modul yang dimiliki oleh Node.js.
 
 \subsection{HTTP}
 \textit{HTTP} merupakan suatu modul pada Node.js yang digunakan untuk menangani permintaan dari protokol HTTP. Modul ini akan menangani protokol HTTP dengan tidak melakukan \textit{buffer}. Hal tersebut berarti menyimpan sementara seluruh data yang akan dikirimkan pada seluruh permintaan atau respon.
@@ -447,19 +447,17 @@ Express.js adalah suatu \textit{framework} untuk membangun aplikasi web yang ber
 %	
 %	Proses \textit{routing} dilakukan pada saat ada permintaan dari \textit{client} yang menggunakan \textit{method} \textit{GET} dan \textit{POST}. Apabila menggunakan \textit{GET}, maka \textit{server} akan memberi respon dengan menampilkan teks \textit{'GET request to the homepage'}. Apabila menggunakan \textit{POST}, maka \textit{server} akan memberi respon dengan menampilkan teks \textit{'POST request to the homepage'}.
 \end{itemize}
-
-Subbab-subbab berikut akan menjelaskan kelas-kelas yang terdapat pada Express.js
+Express.js memiliki Beberapa kelas dengan fitur yang berbeda-beda untuk membantu pengembangan aplikasi web berbasis Node.js. Subbab-subbab berikut akan menjelaskan kelas-kelas yang terdapat pada Express.js.
 
 \subsection{express()}
 \label{subsec:express()}
-Kelas ini dibutuhkan untuk mengakses seluruh fitur yang disediakan oleh Express.js. Beberapa \textit{method} yang dimiliki oleh kelas \textit{express()} adalah sebagai berikut:
+Kelas ini dibutuhkan untuk mengakses seluruh fitur yang disediakan oleh Express.js. Untuk dapat mengakses seluruh fitur Express.js, langkah yang harus dilakukan adalah sebagai berikut: 
+\begin{lstlisting}[caption={Mengakses fitur \textit{express()}}, label={lst:express()}, captionpos=b, frame=single]
+var express = require('express');
+\end{lstlisting}
+Variabel \textit{express} digunakan untuk memuat seluruh fitur yang dimiliki oleh modul \textit{'express'}, sehingga variabel tersebut dapat menggunakan seluruh fitur yang tersedia. Dengan melakukan langkah tersebut, fitur-fitur yang terdapat pada Express.js sudah dapat digunakan untuk pengembangan aplikasi web.
 
-%Untuk dapat mengakses seluruh fitur Express.js, langkah yang harus dilakukan adalah sebagai berikut: 
-%\begin{lstlisting}[caption={Mengakses fitur \textit{express()}}, label={lst:express()}, captionpos=b]
-%var express = require('express');
-%\end{lstlisting}
-%
-%Variabel \textit{express} digunakan untuk memuat seluruh fitur yang dimiliki oleh modul \textit{'express'}, sehingga variabel tersebut dapat menggunakan seluruh fitur yang tersedia. Dengan melakukan langkah tersebut, fitur-fitur yang terdapat pada Express.js sudah dapat digunakan untuk pengembangan aplikasi web.
+Beberapa \textit{method} yang dimiliki oleh kelas \textit{express()} adalah sebagai berikut:
 %Variabel \textit{app} akan melakukan proses instansiasi objek dari variabel \textit{express} dengan menetapkan fungsi \textit{express()}.
 
 \begin{itemize}

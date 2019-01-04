@@ -466,7 +466,7 @@ Penjelasan pustaka-pustaka yang dibutuhkan untuk pengembangan Finger For Life su
 	\item \textbf{Node.js}
 	\begin{enumerate}
 		\item \textbf{HTTP} \\
-		\textit{Interface} HTTP digunakan pada bagian \textit{server}. Web yang akan dikembangkan akan menggunakan \textit{server} HTTP untuk menyediakan akses ke alamat web yang dapat diakses oleh \textit{client}. HTTP \textit{server} akan diintegrasikan dengan Socket.io di mana HTTP \textit{server} akan menjadi masukan parameter pada saat \textit{server} Socket.io diinisialisasi.
+		Modul HTTP digunakan pada bagian \textit{server}. Web yang akan dikembangkan akan menggunakan \textit{server} HTTP untuk menyediakan akses ke alamat web yang dapat diakses oleh \textit{client}. HTTP \textit{server} akan diintegrasikan dengan Socket.io di mana HTTP \textit{server} akan menjadi masukan parameter pada saat \textit{server} Socket.io diinisialisasi.
 		
 %		Contoh penggunaan HTTP \textit{server} akan dijelaskan sebagai berikut:
 %\begin{lstlisting}[caption={Contoh penggunaan \textit{interface} \textit{HTTP}}, label={lst:nodeHTTP}, captionpos=b]
@@ -484,7 +484,7 @@ Penjelasan pustaka-pustaka yang dibutuhkan untuk pengembangan Finger For Life su
 %Variabel \textit{app} menginisialisasi Express.js yang akan menjadi fungsi \textit{handler}, yang merupakan fungsi yang menjadi masukan suatu parameter fungsi lain. Variabel \textit{httpServer} akan menginisialisasi objek \textit{server} HTTP dengan menggunakan fungsi \textit{createServer()}, dimana fungsi tersebut akan memiliki masukan yang berupa variabel \textit{app}. Agar aplikasi dapat melakukan koneksi kepada Socket.io, maka \textit{server} HTTP harus terintegrasi dengan Socket.io. Proses tersebut dilakukan dengan cara menginisialisasi variabel \textit{io} dengan memberi masukan variabel \textit{httpServer} kedalam fungsi \textit{socketIO()}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.
 
 %Variabel tersebut akan disambungkan dengan HTTP \textit{server}, dengan menggunakan variabel \textit{httpServer}. Setelah variabel \textit{httpServer} diinisialisasi, variabel \textit{io} dapat diintegrasikan dengan HTTP \textit{server} agar dapat menggunakan Socket.io sebagai \textit{server}. Dengan melakukan proses ini, maka \textit{client} dapat terkoneksi dengan Socket.io.		
-		Salah satu \textit{method} yang dimiliki oleh \textit{interface HTTP} adalah sebagai berikut:
+		Salah satu \textit{method} yang dimiliki oleh modul \textit{HTTP} adalah sebagai berikut:
 		\begin{itemize}
 			\item \textbf{http.createServer([options][,requestListener])} \\
 			Pada pengembangan Finger For Life, \textit{method} ini digunakan untuk membangun \textit{server} HTTP. \textit{Server} ini akan diintegrasikan dengan Socket.io sehingga aplikasi Finger For Life dapat melakukan koneksi antara \textit{smartphone} dan \textit{PC}. Dengan begitu, \textit{method} ini diperlukan di dalam proses implementasi agar koneksi Socket.io dapat dibangun pada aplikasi permainan tersebut.
@@ -509,7 +509,7 @@ Penjelasan pustaka-pustaka yang dibutuhkan untuk pengembangan Finger For Life su
 				\item \textbf{server.listen()} \\
 				\textit{Method} ini akan memulai \textit{server} HTTP untuk melakukan proses \textit{listening}, yang berarti \textit{server} akan mencari suatu \textit{event} yang dikirimkan oleh \textit{client} kepada \textit{server}. 
 				
-				Pada pengembangan Finger For Life, \textit{method} yang digunakan adalah \textit{method} yang berasal dari \textit{interface} \textit{Net} \footnote{\url{https://nodejs.org/dist/latest-v10.x/docs/api/net.html\#net\_server\_listen\_options\_callback}, diakses 14 November 2018} yang masih dimiliki Node.js. \textit{Method} yang digunakan memiliki sifat yang sama dengan \textit{method} \textit{server.listen()}, namun ada tambahan masukan pada parameternya. 
+				Pada pengembangan Finger For Life, \textit{method} yang digunakan adalah \textit{method} yang berasal dari modul \textit{Net} \footnote{\url{https://nodejs.org/dist/latest-v10.x/docs/api/net.html\#net\_server\_listen\_options\_callback}, diakses 14 November 2018} yang masih dimiliki Node.js. \textit{Method} yang digunakan memiliki sifat yang sama dengan \textit{method} \textit{server.listen()}, namun ada tambahan masukan pada parameternya. 
 				
 				Tambahan parameter tersebut adalah suatu nomor \textit{port} berupa \textit{String} yang akan dituju oleh \textit{server} untuk melakukan koneksi. Berikut merupakan \textit{method server.listen()} yang dipakai di dalam pengembangan Finger For Life:
 				
@@ -1042,78 +1042,105 @@ Subbab-subbab ini akan menjelaskan bagaimana teknologi Socket.io digunakan dalam
 	Pada permainan Finger For Life terdapat tahap permintaan bergabung yang dilakukan oleh \textit{PC} dan \textit{smartphone}. Tahap tersebut merupakan proses sinkronisasi yang harus dilakukan agar \textit{smartphone} dan \textit{PC} dapat tersambung dan dapat berkomunikasi satu sama lain. Kedua gawai tersebut dapat tersambung dengan menggunakan Socket.io. Ada beberapa langkah yang harus dilakukan, langkah-langkah tersebut antara lain:
 	\begin{itemize}
 		\item \textbf{Koneksi Socket.io} \\
-		Sebelum \textit{PC} dan \textit{smartphone} tersambung, kedua gawai tersebut harus terkoneksi dengan Socket.io. Proses melakukan koneksi terhadap Socket.io dilakukan pada saat halaman web mengakses halaman permintaan bergabung. Pada saat kedua gawai mengakses halaman tersebut, proses yang terjadi adalah sebagai berikut:
-		\begin{itemize}
-			\item Pada bagian \textit{client} terdapat variabel yang memulai \textit{client} untuk melakukan koneksi kepada Socket.io. Variabel tersebut adalah sebagai berikut:
-\begin{lstlisting}[caption={Potongan kode untuk mendapatkan fungsi Socket.io pada \textit{client}}]
-var socket = io();
-\end{lstlisting}
-			Variabel \textit{socket} akan mendapatkan fungsi-fungsi milik Socket.io yang telah tersedia, yang dapat dipakai pada bagian \textit{client}. Apabila \textit{PC} dan \textit{smartphone} telah mengakses halaman permintaan bergabung, maka kedua gawai tersebut telah terkoneksi dengan Socket.io. Walaupun sudah terkoneksi, kedua gawai tersebut belum dapat berkomunikasi satu sama lain.
-		\end{itemize}
+		Sebelum \textit{PC} dan \textit{smartphone} tersambung, kedua gawai tersebut harus terkoneksi dengan Socket.io. Proses melakukan koneksi terhadap Socket.io dilakukan pada saat halaman web mengakses halaman permintaan bergabung. 
+%		Pada saat kedua gawai mengakses halaman tersebut, proses yang terjadi adalah sebagai berikut:
+%		\begin{itemize}
+%			\item Pada bagian \textit{client} terdapat variabel yang memulai \textit{client} untuk melakukan koneksi kepada Socket.io. Variabel tersebut adalah sebagai berikut:
+%\begin{lstlisting}[caption={Potongan kode untuk mendapatkan fungsi Socket.io pada \textit{client}}, frame=single]
+%var socket = io();
+%\end{lstlisting}
+%			Variabel \textit{socket} akan mendapatkan fungsi-fungsi milik Socket.io yang telah tersedia, yang dapat dipakai pada bagian \textit{client}. Apabila \textit{PC} dan \textit{smartphone} telah mengakses halaman permintaan bergabung, maka kedua gawai tersebut telah terkoneksi dengan Socket.io. Walaupun sudah terkoneksi, kedua gawai tersebut belum dapat berkomunikasi satu sama lain.
+%		\end{itemize}
 	
-		\item \textbf{Sinkronisasi \textit{PC} dan \textit{Smartphone}} \\
-		\textit{PC} akan menyediakan kode yang harus dikirimkan oleh \textit{smartphone}. Kode tersebut merupakan kode \textit{room} yang dibutuhkan untuk proses sinkronisasi antara \textit{PC} dan \textit{smartphone}. Kode \textit{room} akan dibangkitkan secara acak pada halaman \textit{sync}. Kode tersebut dibangkitkan dengan cara seperti berikut:
-\begin{lstlisting}[caption={Proses membangkitkan kode \textit{room}}, label={lst:bangkit_kode}, captionpos=b]
-function getRandInt(){
-text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
-document.getElementById("roomId").innerHTML = text;
-}
-\end{lstlisting}
-		Kode yang akan dibangkitkan secara acak berjumlah enam dijit angka. Angka tersebut berada di dalam rentang 111111 hingga 999999. Pada saat kode \textit{room} telah dibangkitkan, \textit{PC} secara otomatis akan langsung bergabung kedalam \textit{room} tersebut. Langkah tersebut dapat dilakukan seperti berikut:
-\begin{lstlisting}[caption={Proses \textit{host} bergabung kedalam room}, label={host_gabung}, captionpos=b]
-function getRandInt(){
-	text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
-	document.getElementById("roomId").innerHTML = text;
-
-	var roomString = text.toString();
-
-	socket.emit('hostJoinRoom', {
-		id: socket.id,
-		room: roomString
-	});
-}
-\end{lstlisting}
-		\textit{PC} akan memancarkan \textit{event hostJoinRoom} yang akan ditangkap oleh \textit{server}. \textit{Event} tersebut mengirimkan data berupa identifikasi unik milik \textit{client}, dan kode \textit{room} yang telah dibangkitkan. \textit{Server} akan menangkap \textit{event} tersebut dan menambahkan \textit{host} kedalam \textit{room} yang telah dibangun. Proses tersebut dilakukan sebagai berikut:
-\begin{lstlisting}[caption={\textit{Server} menerima \textit{event} dari \textit{host}}, label={lst:server_acc_host}, captionpos=b]
-socket.on('hostJoinRoom', (msg) => {
-	socket.join(msg.room);
-	users.removeUser(msg.id);
-	users.addUser(msg.id, msg.room);
-});
-\end{lstlisting}
-		\textit{Event hostJoinRoom} akan ditangkap oleh \textit{server} kemudian akan mengeksekusi fungsi yang ada di dalamnya. \textit{Server} akan menambahkan \textit{host} kedalam \textit{room} dengan menggunakan \textit{socket.join(msg.room)}. Kemudian \textit{host} akan ditambahkan ke dalam \textit{array} yang berada di dalam kelas Users. Array tersebut berisi daftar \textit{client} yang telah memiliki \textit{room}. Proses tersebut dilakukan dengan menggunakan \textit{users.addUser(msg.id, msg.room)}. Dengan melakukan proses ini, maka \textit{room} telah dibangkitkan, dan \textit{host} telah tergabung didalamnya.
+		\item \textbf{Sinkronisasi \textit{PC} dan \textit{Smartphone}}
+		\begin{itemize}
+			\item \textit{PC} akan menyediakan kode yang harus dikirimkan oleh \textit{smartphone}. Kode tersebut merupakan kode \textit{room} yang dibutuhkan untuk proses sinkronisasi antara \textit{PC} dan \textit{smartphone}.
+			
+			\item Kode yang dibangkitkan secara acak berjumlah enam dijit angka. Angka tersebut berada di dalam rentang 111111 hingga 999999. Pada saat kode \textit{room} telah dibangkitkan, \textit{PC} secara otomatis akan langsung bergabung ke dalam \textit{room} tersebut.
+			
+			\item \textit{PC} akan memancarkan \textit{event hostJoinRoom} yang akan ditangkap oleh \textit{server}.
+			
+			\item \textit{Server} akan menangkap \textit{event} tersebut dan menambahkan \textit{host} ke dalam \textit{room} yang telah dibangun. 
+			
+			\item Pengguna akan memasukan kode tersebut ke kolom yang berada dihalaman \textit{smartphone} untuk dikirimkan ke \textit{server}. Proses ini merupakan proses sinkronisasi yang dibutuhkan antara \textit{PC} dan \textit{smartphone}.
+			
+			\item \textit{Smartphone} akan mengirimkan kode \textit{room} dengan memancarkan \textit{event requestToJoin}.
+			
+			\item \textit{Server} akan menangkap \textit{event} tersebut kemudian melakukan pengecekan terhadap kode yang dikirimkan oleh \textit{client}. Apabila kode sesuai maka \textit{client} dapat bergabung kedalam \textit{room}.
+			
+			\item Dengan bergabungnya \textit{smartphone} kedalam \textit{room} maka proses sinkronisasi antara \textit{smartphone} dan \textit{PC} telah terpenuhi. Dengan begitu, kedua gawai tersebut dapat melakukan komunikasi satu sama lain.
+		\end{itemize}
 		
-		Setelah kode \textit{room} dibangkitkan, maka akan ditampilkan kelayar \textit{PC}. Pengguna akan memasukan kode tersebut ke kolom yang berada dihalaman \textit{smartphone} untuk dikirimkan ke \textit{server}. Proses ini merupakan proses sinkronisasi yang dibutuhkan antara \textit{PC} dan \textit{smartphone}. Proses pengiriman kode \textit{room} akan dilakukan dengan cara berikut:
-\begin{lstlisting}[caption={Proses permintaan bergabung pada \textit{client}}, label={lst:client_req}, captionpos=b]
-function requestToJoin(){
-	$('form').submit(function(e){
-		e.preventDefault();
-		socket.emit('requestToJoin', {
-			id: socket.id,
-			room: $('#code').val()
-		});
-	});
-}
-\end{lstlisting}
-		\textit{Smartphone} akan mengirimkan kode \textit{room} dengan memancarkan \textit{event requestToJoin}. Kode \textit{room} yang telah diisi didalam kolom akan diambil dengan menggunakan jQuery. Proses tersebut dilakukan dengan menggunakan \textit{jQuery('\#code').val()}. \textit{Event requestToJoin} akan mengirim data identifikasi unik Socket.io milik \textit{client} dan kode \textit{room}. \textit{Event} tersebut akan ditangkap oleh \textit{server} yang kemudian akan dilakukan proses verifikasi. Proses tersebut akan dilakukan seperti berikut:
-\begin{lstlisting}[caption={Proses verifikasi}, label={lst:prosesVerifikasi},captionpos=b]
-socket.on('requestToJoin', function(msg){
-	var check = users.isRoomExist(msg.room);
+%		\textit{PC} akan menyediakan kode yang harus dikirimkan oleh \textit{smartphone}. Kode tersebut merupakan kode \textit{room} yang dibutuhkan untuk proses sinkronisasi antara \textit{PC} dan \textit{smartphone}. Kode \textit{room} akan dibangkitkan secara acak pada halaman permintaan bergabung. 
+		
+%		Kode tersebut dibangkitkan dengan cara seperti berikut:
+%\begin{lstlisting}[caption={Proses membangkitkan kode \textit{room}}, label={lst:bangkit_kode}, captionpos=b, frame=single]
+%function getRandInt(){
+%text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
+%document.getElementById("roomId").innerHTML = text;
+%}
+%\end{lstlisting}
 
-	if (check === 1) {
-		socket.join(msg.room);
-		users.removeUser(msg.id);
-		users.addUser(msg.id, msg.room);
-
-		io.to(user.room).emit('requestAccepted', msg);
-		socket.emit('joinSucceed', 'Welcome to the game :)');
-
-	}else{
-		socket.emit('joinRejected', 'The room is not exist');
-	}
-})
-\end{lstlisting}
-		\textit{Event} ini akan memeriksa apakah kode yang dikirimkan oleh \textit{smartphone} sesuai dengan data \textit{room} yang ada didalam \textit{array}. Pengecekan tersebut dilakukan dengan menggunakan \textit{var check = users.isRoomExist(msg.room)}. Apabila \textit{room} sesuai, maka \textit{smartphone} dapat bergabung kedalam \textit{room}, apabila tidak sesuai, maka \textit{smartphone} tidak dapat bergabung. Dengan bergabungnya \textit{smartphone} kedalam \textit{room}, maka proses sinkronisasi antara \textit{smartphone} dan \textit{PC} telah terpenuhi. Dengan begitu, kedua gawai tersebut dapat melakukan komunikasi satu sama lain.
+%		Kode yang dibangkitkan secara acak berjumlah enam dijit angka. Angka tersebut berada di dalam rentang 111111 hingga 999999. Pada saat kode \textit{room} telah dibangkitkan, \textit{PC} secara otomatis akan langsung bergabung kedalam \textit{room} tersebut. Langkah tersebut dapat dilakukan seperti berikut:
+%\begin{lstlisting}[caption=Proses \textit{host} bergabung kedalam room, label=host_gabung, captionpos=b, frame=single]
+%function getRandInt(){
+%	text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
+%	document.getElementById("roomId").innerHTML = text;
+%
+%	var roomString = text.toString();
+%
+%	socket.emit('hostJoinRoom', {
+%		id: socket.id,
+%		room: roomString
+%	});
+%}
+%\end{lstlisting}
+%		\textit{PC} akan memancarkan \textit{event hostJoinRoom} yang akan ditangkap oleh \textit{server}. \textit{Event} tersebut mengirimkan data berupa identifikasi unik milik \textit{client}, dan kode \textit{room} yang telah dibangkitkan. \textit{Server} akan menangkap \textit{event} tersebut dan menambahkan \textit{host} kedalam \textit{room} yang telah dibangun. 
+%		Proses tersebut dilakukan sebagai berikut:
+%\begin{lstlisting}[caption={\textit{Server} menerima \textit{event} dari \textit{host}}, label={lst:server_acc_host}, captionpos=b, frame=single]
+%socket.on('hostJoinRoom', (msg) => {
+%	socket.join(msg.room);
+%	users.removeUser(msg.id);
+%	users.addUser(msg.id, msg.room);
+%});
+%\end{lstlisting}
+%		\textit{Event hostJoinRoom} akan ditangkap oleh \textit{server} kemudian akan mengeksekusi fungsi yang ada di dalamnya. \textit{Server} akan menambahkan \textit{host} kedalam \textit{room} dengan menggunakan \textit{socket.join(msg.room)}. Kemudian \textit{host} akan ditambahkan ke dalam \textit{array} yang berada di dalam kelas Users. Array tersebut berisi daftar \textit{client} yang telah memiliki \textit{room}. Proses tersebut dilakukan dengan menggunakan \textit{users.addUser(msg.id, msg.room)}. Dengan melakukan proses ini, maka \textit{room} telah dibangkitkan, dan \textit{host} telah tergabung didalamnya.
+%		
+%		Setelah kode \textit{room} dibangkitkan maka akan ditampilkan kelayar \textit{PC}. Pengguna akan memasukan kode tersebut ke kolom yang berada dihalaman \textit{smartphone} untuk dikirimkan ke \textit{server}. Proses ini merupakan proses sinkronisasi yang dibutuhkan antara \textit{PC} dan \textit{smartphone}. 
+		
+%		Proses pengiriman kode \textit{room} akan dilakukan dengan cara berikut:
+%\begin{lstlisting}[caption={Proses permintaan bergabung pada \textit{client}}, label={lst:client_req}, captionpos=b, frame=single]
+%function requestToJoin(){
+%	$('form').submit(function(e){
+%		e.preventDefault();
+%		socket.emit('requestToJoin', {
+%			id: socket.id,
+%			room: $('#code').val()
+%		});
+%	});
+%}
+%\end{lstlisting}
+%		\textit{Smartphone} akan mengirimkan kode \textit{room} dengan memancarkan \textit{event requestToJoin}. Kode \textit{room} yang telah diisi didalam kolom akan diambil dengan menggunakan jQuery. Proses tersebut dilakukan dengan menggunakan \textit{jQuery('\#code').val()}. \textit{Event requestToJoin} akan mengirim data identifikasi unik Socket.io milik \textit{client} dan kode \textit{room}. \textit{Event} tersebut akan ditangkap oleh \textit{server} yang kemudian akan dilakukan proses verifikasi. 
+		
+%		Proses tersebut akan dilakukan seperti berikut:
+%\begin{lstlisting}[caption={Proses verifikasi}, label={lst:prosesVerifikasi},captionpos=b, frame=single]
+%socket.on('requestToJoin', function(msg){
+%	var check = users.isRoomExist(msg.room);
+%
+%	if (check === 1) {
+%		socket.join(msg.room);
+%		users.removeUser(msg.id);
+%		users.addUser(msg.id, msg.room);
+%
+%		io.to(user.room).emit('requestAccepted', msg);
+%		socket.emit('joinSucceed', 'Welcome to the game :)');
+%
+%	}else{
+%		socket.emit('joinRejected', 'The room is not exist');
+%	}
+%})
+%\end{lstlisting}
+%		\textit{Event requestToJoin} akan memeriksa apakah kode yang dikirimkan oleh \textit{smartphone} sesuai dengan data \textit{room} yang ada didalam \textit{array}. Pengecekan tersebut dilakukan dengan menggunakan \textit{var check = users.isRoomExist(msg.room)}. Apabila \textit{room} sesuai maka \textit{smartphone} dapat bergabung kedalam \textit{room}. Apabila tidak sesuai maka \textit{smartphone} tidak dapat bergabung. Dengan bergabungnya \textit{smartphone} kedalam \textit{room} maka proses sinkronisasi antara \textit{smartphone} dan \textit{PC} telah terpenuhi. Dengan begitu, kedua gawai tersebut dapat melakukan komunikasi satu sama lain.
 		
 	\end{itemize}
 \end{enumerate}
