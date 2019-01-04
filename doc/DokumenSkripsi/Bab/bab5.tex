@@ -358,7 +358,20 @@ Pengujian fungsional yang dilakukan terbagi menjadi dua, yaitu pengujian fungsio
 \end{table}
 \end{itemize} 
 \subsection{Pengujian Eksperimental}
-Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{smartphone} dan \textit{PC} yang berbeda-beda. Pengujian eksperimental dilakukan untuk mengetahui ukuran \textit{latency} yang dihasilkan pada saat aplikasi dijalankan. Satuan yang digunakan untuk ukuran \textit{latency} adalah milidetik. Setiap responden diminta untuk mengakses URL yang diberikan melalui \textit{smartphone} dan \textit{PC} milik masing-masing. Pengujian eksperimental terbagi menjadi dua, yaitu pengujian jaringan internet dan pengujian \textit{cross-platform}.
+Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{smartphone} dan \textit{PC} yang berbeda-beda. Pengujian eksperimental dilakukan untuk mengetahui ukuran \textit{latency} yang dihasilkan pada saat aplikasi dijalankan. Satuan yang digunakan untuk ukuran \textit{latency} adalah milidetik. Setiap responden diminta untuk mengakses URL yang diberikan melalui \textit{smartphone} dan \textit{PC} milik masing-masing. 
+
+
+Pengujian \textit{latency} dilakukan dengan cara sebagai berikut:
+
+\begin{itemize}
+	\item Pemain menekan tombol kaki yang ada pada halaman \textit{smartphone}. \textit{Event ping} dikirimkan kepada \textit{server}.
+	
+	\item \textit{Event} tersebut diterima oleh \textit{server} kemudian \textit{server} akan mengirim \textit{event} kembali kepada \textit{client}. \textit{Event} tersebut bernama \textit{pong}.
+	
+	\item \textit{Event pong} akan diterima oleh \textit{PC}. \textit{PC} akan menghitung selisih waktu mulai pada saat \textit{client} menekan tombol kaki pada \textit{smartphone} dengan waktu saat ini pada \textit{PC}.
+\end{itemize}
+
+Pengujian eksperimental terbagi menjadi dua, yaitu pengujian jaringan internet dan pengujian \textit{cross-platform}.
 
 \begin{enumerate}
 	\item \textbf{Pengujian \textit{Cross-Platform}} \\
@@ -366,7 +379,7 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.4]{Gambar/pengujian_crossplatform}
+		\includegraphics[scale=0.4]{Gambar/grafik_cross_bar}
 		\caption{Grafik pengujian \textit{cross-platform}.}
 		\label{fig:pengujian_crossplatform}
 	\end{figure}
@@ -482,7 +495,7 @@ Pengujian eksperimental dilakukan terhadap beberapa responden dengan \textit{sma
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.4]{Gambar/pengujian_internet}
+		\includegraphics[scale=0.4]{Gambar/grafik_internet_bar}
 		\caption{Grafik pengujian jaringan internet.}
 		\label{fig:pengujian_internet}
 	\end{figure}

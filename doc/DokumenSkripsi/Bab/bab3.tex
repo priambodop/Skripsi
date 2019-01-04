@@ -1,7 +1,7 @@
 \chapter{Analisis}
 \label{chap:analisis}
 
-Pada bab ini akan dijelaskan mengenai analisis aplikasi sejenis, analisis alur permainan Finger For Life, analisis pengembangan web, analisis \textit{use case}, analisis arsitektur Finger For Life, dan analisis Socket.io.
+Pada bab ini akan dijelaskan mengenai analisis aplikasi sejenis, analisis alur permainan Finger For Life, analisis kebutuhan perangkat lunak, analisis \textit{use case}, analisis \textit{state} aplikasi Finger For Life, analisis arsitektur aplikasi Finger For Life, analisis \textit{event} dan analisis Socket.io.
 
 \section{Analisis Arsitektur Aplikasi Finger For Life}
 Web yang akan dikembangkan merupakan aplikasi permainan berbasis web yang bernama Finger For Life. Arsitektur aplikasi Finger For Life dapat dilihat pada Gambar \ref{fig:ars_fingerforlife} . Jumlah \textit{client} dalam permainan ini adalah tiga. \textit{Client} tersebut adalah \textit{host}, \textit{player 1}, dan \textit{player 2}. \textit{Host} merupakan \textit{PC} yang berfungsi sebagai penyedia permainan yang dapat dimainkan oleh kedua pemain. Apabila \textit{player 1} akan mengirimkan data untuk diproses oleh \textit{host}, maka data tersebut akan dikirimkan terlebih dahulu kepada \textit{server}, kemudian dilanjutkan kepada \textit{host}. Proses tersebut dilakukan juga oleh \textit{player 2} apabila akan mengirimkan data kepada \textit{host}.
@@ -312,17 +312,7 @@ Alamat aplikasi permainan Finger For Life adalah \url{http://fingerforlife.herok
 	
 \end{enumerate}
 
-\section{Analisis \textit{State} aplikasi Finger For Life}
-\label{sec:state}
 
-Diagram \textit{state} pada aplikasi permainan Finger For Life menunjukan bagaimana proses yang terjadi pada saat aplikasi dijalankan dari awal hingga akhir. Berdasarkan analisis pada subbab \ref{sec:alur}, dibentuk suatu diagram \textit{state}Diagram \textit{state} dapat dilihat pada Gambar 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.4]{Gambar/state_ffl}
-	\caption{Diagram \textit{state} aplikasi Finger For Life}
-	\label{fig:state_ffl}
-\end{figure}
 
 
 \section{Analisis \textit{Use Case}}
@@ -331,13 +321,13 @@ Diagram \textit{state} pada aplikasi permainan Finger For Life menunjukan bagaim
 \subsection{Diagram \textit{Use Case}}
 \label{subsec:diagram_usecase}
 
-Diagram \textit{use case} pada permainan berbasis web yang akan dibangun hanya mengandung satu aktor, yaitu pemain. Diagram \textit{use case} dapat dilihat pada Gambar \ref{fig:usecase_pemain}.
+Diagram \textit{use case} pada permainan berbasis web yang akan dibangun hanya mengandung satu aktor, yaitu pemain. Diagram \textit{use case} dapat dilihat pada Gambar \ref{fig:usecase_bermain}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{Gambar/diagram_useCaseRev}
+	\includegraphics[scale=0.4]{Gambar/usecase_bermain}
 	\caption{Diagram \textit{use case} pemain}
-	\label{fig:usecase_pemain}
+	\label{fig:usecase_bermain}
 \end{figure}
 
 Berdasarkan hasil analisis pada subbab \ref{sec:alur}, dibentuk satu \textit{use case} yaitu Bermain. \textit{Use case} tersebut memiliki beberapa tahap yang harus dilakukan selanjutnya. Tahap-tahap tersebut dijelaskan sebagai berikut:
@@ -456,6 +446,18 @@ Berdasarkan hasil analisis pada subbab \ref{sec:alur}, dibentuk satu \textit{use
 		\item Ekspektasi: Seluruh \textit{client} keluar dari permainan.
 	\end{itemize}
 \end{enumerate}
+
+\section{Analisis \textit{State} aplikasi Finger For Life}
+\label{sec:state}
+
+Diagram \textit{state} pada aplikasi permainan Finger For Life menunjukan bagaimana proses yang terjadi pada saat aplikasi dijalankan dari awal hingga akhir. Berdasarkan analisis pada subbab \ref{sec:alur}, dibentuk suatu diagram \textit{state}Diagram \textit{state} dapat dilihat pada Gambar 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{Gambar/state_ffl}
+	\caption{Diagram \textit{state} aplikasi Finger For Life}
+	\label{fig:state_ffl}
+\end{figure}
 
 \section{Analisis Kebutuhan Perangkat Lunak}
 \label{sec:pengembangan}
@@ -1145,7 +1147,7 @@ Subbab-subbab ini akan menjelaskan bagaimana teknologi Socket.io digunakan dalam
 	\end{itemize}
 \end{enumerate}
 
-\section{Analisis \textit{event}}
+\section{Analisis \textit{Event}}
 \label{sec:event}
 
 Berdasarkan analisis yang dilakukan pada subbab \ref{sec:alur}, dibutuhkan beberapa \textit{event} yang dipakai pada saat aplikasi dijalankan dari awal hingga akhir. Beberapa \textit{event} yang dibutuhkan di dalam proses implementasi aplikasi Finger For Life dapat dilihat pada Tabel \ref{table:analisis_event}.
